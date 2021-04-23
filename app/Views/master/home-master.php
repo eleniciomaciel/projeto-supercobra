@@ -2,152 +2,63 @@
 
 <?= $this->section('content') ?>
 <!-- Left col -->
-<section class="col-lg-6 connectedSortable">
-  <!-- TO DO List -->
-  <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">
-        <i class="ion ion-clipboard mr-1"></i>
-        Obras
-      </h3>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body p-0">
-      <table class="table table-sm">
-        <thead>
-          <tr>
-            <th style="width: 10px">Estado</th>
-            <th>Local</th>
-            <th>Cidade</th>
-            <th style="width: 40px">Início</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1.</td>
-            <td>Update software</td>
-            <td>
-              <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-danger">55%</span></td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Clean database</td>
-            <td>
-              <div class="progress progress-xs">
-                <div class="progress-bar bg-warning" style="width: 70%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-warning">70%</span></td>
-          </tr>
-          <tr>
-            <td>3.</td>
-            <td>Cron job running</td>
-            <td>
-              <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar bg-primary" style="width: 30%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-primary">30%</span></td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Fix and squish bugs</td>
-            <td>
-              <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar bg-success" style="width: 90%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-success">90%</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <!-- /.card-body -->
-    <div class="card-footer clearfix">
-      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#obras_right_modal">
-          <i class="fas fa-plus"></i> Cdastrar
-      </button>
-    </div>
-  </div>
-  <!-- /.card -->
-</section>
-<!-- /.Left col -->
-<!-- right col (We are only adding the ID to make the widgets sortable)-->
-<section class="col-lg-6 connectedSortable">
 
-  <!-- TO DO List -->
-  <div class="card">
+<div class="col-md-12">
+  <div class="card card-outline card-warning">
     <div class="card-header">
-      <h3 class="card-title">
-        <i class="ion ion-clipboard mr-1"></i>
-        Cento de custo
-      </h3>
+      <h3 class="card-title">Gestão de Atividades</h3>
+
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+          <i class="fas fa-minus"></i>
+        </button>
+      </div>
+      <!-- /.card-tools -->
     </div>
     <!-- /.card-header -->
-    <div class="card-body p-0">
-      <table class="table table-sm">
-        <thead>
-          <tr>
-            <th style="width: 10px">Data</th>
-            <th>Número</th>
-            <th>Descrição</th>
-            <th style="width: 40px">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1.</td>
-            <td>Update software</td>
-            <td>
-              <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-danger">55%</span></td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Clean database</td>
-            <td>
-              <div class="progress progress-xs">
-                <div class="progress-bar bg-warning" style="width: 70%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-warning">70%</span></td>
-          </tr>
-          <tr>
-            <td>3.</td>
-            <td>Cron job running</td>
-            <td>
-              <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar bg-primary" style="width: 30%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-primary">30%</span></td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Fix and squish bugs</td>
-            <td>
-              <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar bg-success" style="width: 90%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-success">90%</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="card-body" style="display: block;">
+
+
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Dados do Clinete</a>
+          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Obras/Frente</a>
+          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Licenças</a>
+          <a class="nav-item nav-link" id="nav-cento_custo-tab" data-toggle="tab" href="#nav-cento_custo" role="tab" aria-controls="nav-contact" aria-selected="false">Cento Custo</a>
+          <a class="nav-item nav-link" id="nav-contratos-tab" data-toggle="tab" href="#nav-contratos" role="tab" aria-controls="nav-contratos" aria-selected="false">Contratos</a>
+          <a class="nav-item nav-link" id="nav-usuarios-tab" data-toggle="tab" href="#nav-usuarios" role="tab" aria-controls="nav-usuarios" aria-selected="false">Usuários</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+           <?= $this->include('master\layout\includes\tab-obras') ?>
+        </div>
+
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <?= $this->include('master\layout\includes\tab-frentes') ?>
+        </div>
+
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+          <?= $this->include('master\layout\includes\tab-licencas') ?>
+        </div>
+
+        <div class="tab-pane fade" id="nav-cento_custo" role="tabpanel" aria-labelledby="nav-cento_custo-tab">
+          <?= $this->include('master\layout\includes\tab-cento_custo') ?>
+        </div>
+
+        <div class="tab-pane fade" id="nav-contratos" role="tabpanel" aria-labelledby="nav-contratos-tab">
+        <?= $this->include('master\layout\includes\tab-contratos') ?>
+        </div>
+
+        <div class="tab-pane fade" id="nav-usuarios" role="tabpanel" aria-labelledby="nav-usuarios-tab">
+          <?= $this->include('master\layout\includes\tab-users') ?>
+        </div>
+      </div>
+
     </div>
     <!-- /.card-body -->
-    <div class="card-footer clearfix">
-      <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Cadastrar</button>
-    </div>
   </div>
   <!-- /.card -->
-</section>
-<!-- right col -->
+</div>
 <?= $this->endSection() ?>

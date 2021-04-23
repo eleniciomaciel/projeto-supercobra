@@ -31,20 +31,19 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-envelope-open-text"></i>
                         <p>
-                            Widgets
+                            Mensagens
                             <span class="right badge badge-danger">New</span>
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
+                        <i class="nav-icon fas fa-shopping-basket"></i>
                         <p>
-                            Gestão
+                            Compras
                             <i class="fas fa-angle-left right"></i>
-                            <span class="badge badge-info right">6</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -101,9 +100,9 @@
      
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-edit"></i>
+                        <i class="nav-icon fas fa-shipping-fast"></i>
                         <p>
-                            Forms
+                            Logistica
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -134,11 +133,12 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-table"></i>
+                        <i class="nav-icon fas fa-store-alt"></i>
                         <p>
-                            Tables
+                            Depósito
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -163,21 +163,42 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-header">EXAMPLES</li>
-                <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
-                        <i class="nav-icon far fa-calendar-alt"></i>
-                        <p>
-                            Calendar
-                            <span class="badge badge-info right">2</span>
-                        </p>
-                    </a>
-                </li>
+                
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon far fa-envelope"></i>
+                        <i class="nav-icon fas fa-user-check"></i>
                         <p>
-                            Mailbox
+                            Recursos Humanos
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="pages/mailbox/mailbox.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Inbox</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/mailbox/compose.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Compose</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/mailbox/read-mail.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Read</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tree"></i>
+                        <p>
+                            Meio Ambiente
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -205,9 +226,9 @@
                 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon far fa-plus-square"></i>
+                        <i class="nav-icon fas fa-calculator"></i>
                         <p>
-                            Extras
+                            Finanaceiro
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -328,6 +349,196 @@
                             <a href="starter.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Starter Page</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cart-arrow-down"></i>
+                        <p>
+                            Suprimento
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Login & Register v1
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="pages/examples/login.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Login v1</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/examples/register.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Register v1</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/examples/forgot-password.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Forgot Password v1</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/examples/recover-password.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Recover Password v1</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Login & Register v2
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="pages/examples/login-v2.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Login v2</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/examples/register-v2.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Register v2</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/examples/forgot-password-v2.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Forgot Password v2</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/examples/recover-password-v2.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Recover Password v2</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/examples/lockscreen.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Lockscreen</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/examples/legacy-user-menu.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Legacy User Menu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/examples/language-menu.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Language Menu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/examples/404.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Error 404</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/examples/500.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Error 500</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/examples/pace.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pace</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/examples/blank.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Blank Page</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="starter.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Starter Page</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cubes"></i>
+                        <p>
+                            Técnica
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="pages/tables/simple.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Simple Tables</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/tables/data.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>DataTables</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/tables/jsgrid.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>jsGrid</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-truck"></i>
+                        <p>
+                            Transportes
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="pages/tables/simple.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Simple Tables</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/tables/data.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>DataTables</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/tables/jsgrid.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>jsGrid</p>
                             </a>
                         </li>
                     </ul>

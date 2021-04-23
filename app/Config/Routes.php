@@ -35,6 +35,8 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 
 $routes->get('admin-panel','Home::adminPanel');
+$routes->post('cadastro_obras','Obras::index');
+
 
 /*
  * --------------------------------------------------------------------

@@ -13,4 +13,6 @@ class Home extends BaseController
 	{
 		return view('master/home-master');
 	}
+
+	
 }
