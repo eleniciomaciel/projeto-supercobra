@@ -68,7 +68,9 @@
     </div>
     <!-- /.card-body -->
     <div class="card-footer clearfix">
-      <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Cdastrar</button>
+      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#obras_right_modal">
+          <i class="fas fa-plus"></i> Cdastrar
+      </button>
     </div>
   </div>
   <!-- /.card -->

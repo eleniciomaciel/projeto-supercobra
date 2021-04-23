@@ -26,6 +26,8 @@
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <!-- modal -->
+  <link rel="stylesheet" href="bootstrap-side-modals.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -136,5 +138,10 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+
+<!-- inclusão componente modal -->
+<?= $this->include('master\layout\components\001_components-supply') ?>
+<!-- inclusão js-->
+<?= $this->include('master\layout\js\js_001_components_supply') ?>
 </body>
 </html>
