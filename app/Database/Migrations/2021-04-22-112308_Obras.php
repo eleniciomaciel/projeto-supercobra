@@ -67,9 +67,9 @@ class Obras extends Migration
 				'null'          => true,
 			],
 			'status'      => [
-				'type'           => 'ENUM',
-                'constraint'     => ['ativo', 'pendente', 'concluido'],
-                'default'        => 'pendente',
+				'type'       	=> 'INT',
+				'constraint' 	=> '11',
+				'unsigned'      => true,
 			],
 			'obras_description' => [
 				'type' => 'TEXT',

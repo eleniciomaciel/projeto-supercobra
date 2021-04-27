@@ -158,6 +158,7 @@
   <?= $this->include('master\layout\components\001_components-supply') ?>
   <!-- inclusão js-->
   <?= $this->include('master\layout\js\js_001_components_supply') ?>
+  <?= $this->include('master\layout\js\js_002_components_clienteObra') ?>
 </body>
 
 </html>

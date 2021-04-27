@@ -1,20 +1,22 @@
 <script>
 $(document).ready(function() {
-    $('#cep_input').inputmask('99.999-999', {
+    $('#cli_o_cep').inputmask('99.999-999', {
         'placeholder': '00.000-000'
-    })
+    });
+    $('#cli_o_cnpj').inputmask('99.999.999/9999-99', {
+        'placeholder': '00.000.000/0001-00'
+    });
 
     function limpa_formulário_cep() {
         // Limpa valores do formulário de cep.
-        $("#int_rua").val("");
-        $("#int_bairro").val("");
-        $("#input_cidade").val("");
-        $("#input_state_uf").val("");
-        $("#ibge").val("");
+        $("#cli_o_address").val("");
+        $("#cli_o_neighborhood").val("");
+        $("#cli_o_city").val("");
+        $("#cli_o_uf").val("");
     }
 
     //Quando o campo cep perde o foco.
-    $("#cep_input").blur(function() {
+    $("#cli_o_cep").blur(function() {
 
         //Nova variável "cep" somente com dígitos.
         var cep = $(this).val().replace(/\D/g, '');
@@ -29,22 +31,20 @@ $(document).ready(function() {
             if (validacep.test(cep)) {
 
                 //Preenche os campos com "..." enquanto consulta webservice.
-                $("#int_rua").val("...");
-                $("#int_bairro").val("...");
-                $("#input_cidade").val("...");
-                $("#input_state_uf").val("...");
-                $("#ibge").val("...");
+                $("#cli_o_address").val("...");
+                $("#cli_o_neighborhood").val("...");
+                $("#cli_o_city").val("...");
+                $("#cli_o_uf").val("...");
 
                 //Consulta o webservice viacep.com.br/
                 $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(dados) {
 
                     if (!("erro" in dados)) {
                         //Atualiza os campos com os valores da consulta.
-                        $("#int_rua").val(dados.logradouro);
-                        $("#int_bairro").val(dados.bairro);
-                        $("#input_cidade").val(dados.localidade);
-                        $("#input_state_uf").val(dados.uf);
-                        $("#ibge").val(dados.ibge);
+                        $("#cli_o_address").val(dados.logradouro);
+                        $("#cli_o_neighborhood").val(dados.bairro);
+                        $("#cli_o_city").val(dados.localidade);
+                        $("#cli_o_uf").val(dados.uf);
                     } //end if.
                     else {
                         //CEP pesquisado não foi encontrado.
@@ -78,28 +78,26 @@ $(document).ready(function() {
     });
 
     //cadastrando obras
-    $('#adiciona_obra').on('submit', function(event) {
+    $('#form_cadastro_cliente').on('submit', function(event) {
         event.preventDefault();
 
         $.ajax({
-            url: "<?php echo site_url('obras/index'); ?>",
-            method: "POST",
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            },
+            url: $(this).closest('form').attr('action'),
+            method: $(this).closest('form').attr('method'),
+            headers: {'X-Requested-With': 'XMLHttpRequest'},
             data: $(this).serialize(),
             dataType: "JSON",
 
             beforeSend: function() {
-                $('.submit_button_cls').html(
+                $('.submit_cli_add_cls').html(
                     '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> aguarde...'
                     );
-                $('#submit_button').attr('disabled', 'disabled');
+                $('#submit_id_cli_add').attr('disabled', 'disabled');
             },
 
             success: function(data) {
-                $('.submit_button_cls').html('<i class="fa fa-save"></i> Salvar');
-                $('#submit_button').attr('disabled', false);
+                $('.submit_cli_add_cls').html('<i class="fa fa-save"></i> Salvar');
+                $('#submit_id_cli_add').attr('disabled', false);
 
                 if (data.error == 'yes') {
                     Swal.fire({
@@ -109,18 +107,17 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    $('#local_input_error').text(data.local_input_error);
-                    $('#data_inicio_error').text(data.data_inicio_error);
-                    $('#data_encerra_error').text(data.data_encerra_error);
-                    $('#cep_input_error').text(data.cep_input_error);
-                    $('#input_state_uf_error').text(data.input_state_uf_error);
-                    $('#input_cidade_error').text(data.input_cidade_error);
-                    $('#int_rua_error').text(data.int_rua_error);
-                    $('#int_numero_error').text(data.int_numero_error);
-                    $('#int_bairro_error').text(data.int_bairro_error);
-                    $('#int_cliente_error').text(data.int_cliente_error);
-                    $('#obra_status_error').text(data.obra_status_error);
-                    $('#obs_obra_error').text(data.obs_obra_error);
+                    $('#cli_o_nome_obra_error').text(data.cli_o_nome_obra_error);
+                    $('#cli_o_cnpj_error').text(data.cli_o_cnpj_error);
+                    $('#cli_o_datainicial_error').text(data.cli_o_datainicial_error);
+                    $('#cli_o_datafinal_error').text(data.cli_o_datafinal_error);
+                    $('#cli_o_cep_error').text(data.cli_o_cep_error);
+                    $('#cli_o_uf_error').text(data.cli_o_uf_error);
+                    $('#cli_o_city_error').text(data.cli_o_city_error);
+                    $('#cli_o_address_error').text(data.cli_o_address_error);
+                    $('#cli_o_number_error').text(data.cli_o_number_error);
+                    $('#cli_o_neighborhood_error').text(data.cli_o_neighborhood_error);
+                    $('#objeto_ob_error').text(data.objeto_ob_error);
 
                 } else {
                     $('#message').html(data.message);

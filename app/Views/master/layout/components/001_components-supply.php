@@ -66,6 +66,12 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group col-sm-12">
+                                    <label for="int_bairro">Bairro:</label>
+                                    <input type="text" class="form-control" name="int_bairro" id="int_bairro" placeholder="Ex.: Centro">
+                                    <span id="int_bairro_error" class="text-danger"></span>
+                                </div>
+                                
                                 <div class="form-group col-sm-8">
                                     <label for="int_rua">Rua/Endereço:</label>
                                     <input type="text" class="form-control" name="int_rua" id="int_rua" placeholder="Ex.: Centro">
@@ -76,13 +82,6 @@
                                     <label for="int_numero">Número:</label>
                                     <input type="number" class="form-control" name="int_numero" id="int_numero" placeholder="Ex.: Centro">
                                     <span id="int_numero_error" class="text-danger"></span>
-                                </div>
-
-
-                                <div class="form-group col-sm-12">
-                                    <label for="int_bairro">Bairro:</label>
-                                    <input type="text" class="form-control" name="int_bairro" id="int_bairro" placeholder="Ex.: Centro">
-                                    <span id="int_bairro_error" class="text-danger"></span>
                                 </div>
 
                                 <div class="form-group col-sm-12">
@@ -114,16 +113,17 @@
                                 </div>
                             </div>
 
-
                         </div>
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary" id="submit_button">
+                            <button type="submit" class="submit_button_cls btn btn-primary" id="submit_button">
                             <i class="fa fa-save"></i> Salvar
                             </button>
                         </div>
                     </form>
+                    <br>
+                    <span id="message"></span>
                 </div>
 
 

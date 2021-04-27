@@ -3,11 +3,16 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
-use App\Controllers\BaseController;
 use App\Models\ObrasModel;
 
 class Obras extends Controller
 {
+	protected $request;
+	public function __construct(){
+		header('Access-Control-Allow-Origin: *');
+		header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+		header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+	}
 
 	public function index()
 	{
@@ -30,18 +35,19 @@ class Obras extends Controller
 		$message = '';
 
 		$error = $this->validate([
-			'local_input'     		=> 'required|alpha_numeric_space|min_length[3]|max_length[100]|is_unique[obras.obras_local]',
-			'data_inicio'        	=> 'required|valid_date',
-			'data_encerra'     		=> 'required|valid_date',
-			'cep_input'     		=> 'required|exact_length[10]',
-			'input_state_uf'     	=> 'required|exact_length[2]',
-			'input_cidade'     		=> 'required',
-			'int_rua'     		    => 'required|min_length[2]|max_length[80]',
-			'int_numero'     		=> 'required|min_length[1]|max_length[3]|integer',
-			'int_bairro'     		=> 'required|min_length[2]|max_length[50]',
-			'int_cliente' 	        => 'required',
-			'obra_status' 			=> 'required',
-			'obs_obra' 				=> 'required',
+			
+			'local_input' 	=> ['label' => 'Local', 'rules' => 'required|alpha_numeric_space|min_length[3]|max_length[100]|is_unique[obras.obras_local]'],
+			'data_inicio' 	=> ['label' => 'data inicial', 'rules' => 'required|valid_date'],
+			'data_encerra' 	=> ['label' => 'data final', 'rules' => 'required|valid_date'],
+			'cep_input' 	=> ['label' => 'CEP', 'rules' => 'required|exact_length[10]'],
+			'input_state_uf'=> ['label' => 'UF', 'rules' => 'required|exact_length[2]'],
+			'input_cidade' 	=> ['label' => 'Cidade', 'rules' => 'required'],
+			'int_rua' 		=> ['label' => 'Rua', 'rules' => 'required|min_length[2]|max_length[80]'],
+			'int_numero' 	=> ['label' => 'Número', 'rules' => 'required|min_length[1]|max_length[3]|integer'],
+			'int_bairro' 	=> ['label' => 'Bairro', 'rules' => 'required|min_length[2]|max_length[50]'],
+			'int_cliente' 	=> ['label' => 'Cliente', 'rules' => 'required'],
+			'obra_status' 	=> ['label' => 'Status', 'rules' => 'required'],
+			'obs_obra' 		=> ['label' => 'Observações', 'rules' => 'required'],
 		]);
 
 		if (!$error) {
@@ -93,21 +99,20 @@ class Obras extends Controller
 			
 			$ObrasModel->save([
 				'obras_local'		=>	$this->request->getVar('local_input'),
-				'data_fim'			=>	$this->request->getVar('email'),
-				'obras_cep'			=>	$this->request->getPost('gender'),
-				'obras_estado'		=>	$this->request->getPost('gender'),
-				'obras_cidade'		=>	$this->request->getPost('gender'),
-				'obras_endereco'	=>	$this->request->getPost('gender'),
-				'obras_numero'		=>	$this->request->getPost('gender'),
-				'obras_bairro'		=>	$this->request->getPost('gender'),
-				'obras_cliente'		=>	$this->request->getPost('gender'),
-				'obras_description'	=>	$this->request->getPost('gender'),
-				'datetime'			=>	$this->request->getPost('gender'),
-				'gender'			=>	$this->request->getPost('gender'),
-				'gender'			=>	$this->request->getPost('gender'),
+				'data_inicio'			=>	$this->request->getVar('data_inicio'),
+				'data_fim'			=>	$this->request->getPost('data_encerra'),
+				'obras_cep'		=>	$this->request->getPost('cep_input'),
+				'obras_estado'		=>	$this->request->getPost('input_state_uf'),
+				'obras_cidade'	=>	$this->request->getPost('input_cidade'),
+				'obras_endereco'		=>	$this->request->getPost('int_rua'),
+				'obras_numero'		=>	$this->request->getPost('int_numero'),
+				'obras_bairro'		=>	$this->request->getPost('int_bairro'),
+				'obras_cliente'	=>	$this->request->getPost('int_cliente'),
+				'status'			=>	$this->request->getPost('obra_status'),
+				'obras_description'			=>	$this->request->getPost('obs_obra'),
 			]);
 
-				$message = '<div class="alert alert-success">User Data Added</div>';
+				$message = '<div class="alert alert-success">Obra criada com sucesso!</div>';
 		}
 		$output = array(
 			'local_input_error'		=>	$local_input_error,
