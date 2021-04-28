@@ -36,6 +36,7 @@ $routes->get('/', 'Home::index');
 
 $routes->get('/admin-panel','Home::adminPanel');
 $routes->post('cadastro_obras','Obras::index');
+$routes->get('ver-obra/(:num)','Obras::verObra/$1');
 
 $routes->match(['get', 'post'], 'clientes/cadastrar', 'Clientes::cadastrar');
 $routes->get('visualizar-cliente/(:num)','Clientes::verAlterar/$1');

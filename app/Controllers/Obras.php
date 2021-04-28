@@ -154,9 +154,8 @@ class Obras extends Controller
 				  Opções
 				</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="'.$obraLista['id'].'">Visualizar</a>
+						<a class="dropdown-item" href="/ver-obra/'.esc($obraLista['id']).'">Visualizar</a>
 						<a class="dropdown-item" href="'.$obraLista['id'].'">Status</a>
-						<a class="dropdown-item" href="'.$obraLista['id'].'">Alterar</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="'.$obraLista['id'].'">Deletar</a>
 					</div>
@@ -168,6 +167,18 @@ class Obras extends Controller
 			'data' => $listaResultados
 		];
 		echo json_encode($todasObras);
+	}
+
+	/**informção da obra */
+	public function verObra($id = NULL)
+	{
+		$model = new ObrasModel();
+		$data['info'] = $model->getObras($id);
+		if (empty($data['info'])) {
+			throw new \CodeIgniter\Exceptions\PageNotFoundException('Obra não encontrado: ' . $id);
+		}
+		$data['info'];
+		echo view('master/layout/pages/obras/cadastrar_obras', $data);
 	}
 }
 

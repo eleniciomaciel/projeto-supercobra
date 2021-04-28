@@ -164,7 +164,7 @@
                     $('select[name="int_cliente"]').append('<option selected disabled>Selecione aqui...</option>');
 
                     $.each(response, function(index, data) {
-                        $('#int_cliente').append('<option value="' + data['id'] + '">' + data['nome_cli'] + '</option>');
+                        $('#int_cliente').append('<option value="' + data['id_cli'] + '">' + data['nome_cli'] + '</option>');
                     });
                 }
             });

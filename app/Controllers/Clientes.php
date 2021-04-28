@@ -169,7 +169,7 @@ class Clientes extends BaseController
 			throw new \CodeIgniter\Exceptions\PageNotFoundException('Usuário não encontrado: ' . $id);
 		}
 		$data['info'];
-		echo view('master/layout/pages/obras/visualizaCliente', $data);
+		echo view('master/layout/pages/clientes/visualizaCliente', $data);
 	}
 	/**altera dados do cliente */
 	public function atualizarCliente()
