@@ -7,6 +7,16 @@ $(document).ready(function() {
         'placeholder': '00.000.000/0001-00'
     });
 
+    var datatale_clientes = $('#todos_clientes').DataTable({
+        "language":{
+            "url":"//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+        },
+        "order":[
+            [0, "desc"]
+        ],
+        "ajax": "Clientes/getCustomers"
+    });
+
     function limpa_formulário_cep() {
         // Limpa valores do formulário de cep.
         $("#cli_o_address").val("");
@@ -128,6 +138,7 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    datatale_clientes.ajax.reload();
                     //$('#sample_table').DataTable().ajax.reload();
                     setTimeout(function() {
                         $('#message').html('');

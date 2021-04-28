@@ -28,14 +28,14 @@ class ClientesModel extends Model
 	protected $skipValidation       = false;
 	protected $cleanValidationRules = true;
 
-	// Callbacks
-	protected $allowCallbacks       = true;
-	protected $beforeInsert         = [];
-	protected $afterInsert          = [];
-	protected $beforeUpdate         = [];
-	protected $afterUpdate          = [];
-	protected $beforeFind           = [];
-	protected $afterFind            = [];
-	protected $beforeDelete         = [];
-	protected $afterDelete          = [];
+	public function getUsers($id = false)
+	{
+		if ($id === false) {
+			return $this->findAll();
+		}
+
+		return $this->asArray()
+			->where(['id_cli' => $id])
+			->first();
+	}
 }

@@ -134,5 +134,40 @@ class Obras extends Controller
 
 		echo json_encode($output);
 	}
+
+	/**lista todas as obras */
+	public function listaObras()
+	{
+		$list = new ObrasModel();
+		$todasObras = $list->getObras();
+		foreach ($todasObras as $obraLista) {
+			$listaResultados[] = [
+
+				$obraLista['obras_local'],
+				date('d/m/Y', strtotime($obraLista['data_inicio'])),
+				date('d/m/Y', strtotime($obraLista['data_fim'])),
+				$obraLista['obras_estado'],
+				$obraLista['obras_cidade'],
+				$obraLista['status'],
+				'<div class="btn-group dropleft">
+				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  Opções
+				</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="'.$obraLista['id'].'">Visualizar</a>
+						<a class="dropdown-item" href="'.$obraLista['id'].'">Status</a>
+						<a class="dropdown-item" href="'.$obraLista['id'].'">Alterar</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="'.$obraLista['id'].'">Deletar</a>
+					</div>
+				</div>'
+			];
+			
+		}
+		$todasObras = [
+			'data' => $listaResultados
+		];
+		echo json_encode($todasObras);
+	}
 }
 

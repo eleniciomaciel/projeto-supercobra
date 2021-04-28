@@ -21,4 +21,15 @@ class ObrasModel extends Model
 	protected $createdField         = 'created_at';
 	protected $updatedField         = 'updated_at';
 	protected $deletedField         = 'deleted_at';
+
+	public function getObras($id = false)
+	{
+		if ($id === false) {
+			return $this->findAll();
+		}
+
+		return $this->asArray()
+			->where(['id' => $id])
+			->first();
+	}
 }

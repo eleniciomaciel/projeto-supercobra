@@ -38,6 +38,8 @@ $routes->get('/admin-panel','Home::adminPanel');
 $routes->post('cadastro_obras','Obras::index');
 
 $routes->match(['get', 'post'], 'clientes/cadastrar', 'Clientes::cadastrar');
+$routes->get('visualizar-cliente/(:num)','Clientes::verAlterar/$1');
+$routes->get('lista-clientes','Clientes::listaClientes');
 
 
 /*

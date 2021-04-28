@@ -71,7 +71,7 @@
                                     <input type="text" class="form-control" name="int_bairro" id="int_bairro" placeholder="Ex.: Centro">
                                     <span id="int_bairro_error" class="text-danger"></span>
                                 </div>
-                                
+
                                 <div class="form-group col-sm-8">
                                     <label for="int_rua">Rua/Endereço:</label>
                                     <input type="text" class="form-control" name="int_rua" id="int_rua" placeholder="Ex.: Centro">
@@ -86,7 +86,7 @@
 
                                 <div class="form-group col-sm-12">
                                     <label for="int_cliente">Cliente:</label>
-                                    <input type="text" class="form-control" name="int_cliente" id="int_cliente" placeholder="Ex.: Mantiqueira">
+                                    <select class="custom-select rounded-0" name="int_cliente" id="int_cliente"></select>
                                     <span id="int_cliente_error" class="text-danger"></span>
                                 </div>
 
@@ -118,7 +118,7 @@
 
                         <div class="card-footer">
                             <button type="submit" class="submit_button_cls btn btn-primary" id="submit_button">
-                            <i class="fa fa-save"></i> Salvar
+                                <i class="fa fa-save"></i> Salvar
                             </button>
                         </div>
                     </form>
