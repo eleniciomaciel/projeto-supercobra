@@ -1,9 +1,14 @@
 <script>
     $(document).ready(function() {
         todosClientes();
+        todosClientesCadastroFrentes();
 
         $('#cep_input').inputmask('99.999-999', {
             'placeholder': '00.000-000'
+        });
+
+        $('#cnpj_input').inputmask('99.999.999/9991-99', {
+            'placeholder': '00.000.000/0001-00'
         })
 
         var datatale_obras = $('#list_todas_obras').DataTable({
@@ -125,6 +130,7 @@
                         $('#data_inicio_error').text(data.data_inicio_error);
                         $('#data_encerra_error').text(data.data_encerra_error);
                         $('#cep_input_error').text(data.cep_input_error);
+                        $('#cnpj_input_error').text(data.cnpj_input_error);
                         $('#input_state_uf_error').text(data.input_state_uf_error);
                         $('#input_cidade_error').text(data.input_cidade_error);
                         $('#int_rua_error').text(data.int_rua_error);
@@ -144,6 +150,8 @@
                             timer: 1500
                         });
                         datatale_obras.ajax.reload();
+                        todosClientes();
+                        todosClientesCadastroFrentes();
                         $('#adiciona_obra')[0].reset();
                     }
                 }
@@ -165,6 +173,24 @@
 
                     $.each(response, function(index, data) {
                         $('#int_cliente').append('<option value="' + data['id_cli'] + '">' + data['nome_cli'] + '</option>');
+                    });
+                }
+            });
+        }
+        function todosClientesCadastroFrentes() {
+            $.ajax({
+                url: '<?= site_url('/lista-clientes') ?>',
+                method: 'get',
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    $('select[name="frt_cliente"]').empty();
+                    $('select[name="frt_cliente"]').append('<option selected disabled>Selecione aqui...</option>');
+
+                    $.each(response, function(index, data) {
+                        $('#frt_cliente').append('<option value="' + data['id_cli'] + '">' + data['nome_cli'] + '</option>');
                     });
                 }
             });

@@ -87,7 +87,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="new_data_inicial">Cliente</label>
-                        <input type="text" class="form-control" name="new_data_inicial" value="<?= esc($info['status']) ?>">
+                        <input type="text" class="form-control" name="new_data_inicial" value="<?= esc($info['nome_cli']) ?>">
                     </div>
 
                     <div class="form-group col-md-6">

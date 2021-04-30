@@ -21,6 +21,12 @@ class Obras extends Migration
 				'unique'        => true,
 				'null'          => true,
 			],
+			'obras_cnpj'       => [
+				'type'       	=> 'VARCHAR',
+				'constraint' 	=> '30',
+				'unique'        => true,
+				'null'          => true,
+			],
 			'data_inicio'       => [
 				'type'           => 'DATETIME',
 				'null'         => true,

@@ -21,6 +21,7 @@ class Obras extends Controller
 		$local_input_error = '';
 		$data_inicio_error = '';
 		$data_encerra_error = '';
+		$cnpj_input_error = '';
 		$cep_input_error = '';
 		$input_state_uf_error = '';
 		$input_cidade_error = '';
@@ -39,6 +40,7 @@ class Obras extends Controller
 			'local_input' 	=> ['label' => 'Local', 'rules' => 'required|alpha_numeric_space|min_length[3]|max_length[100]|is_unique[obras.obras_local]'],
 			'data_inicio' 	=> ['label' => 'data inicial', 'rules' => 'required|valid_date'],
 			'data_encerra' 	=> ['label' => 'data final', 'rules' => 'required|valid_date'],
+			'cnpj_input' 	=> ['label' => 'CNPJ', 'rules' => 'required|exact_length[18]'],
 			'cep_input' 	=> ['label' => 'CEP', 'rules' => 'required|exact_length[10]'],
 			'input_state_uf'=> ['label' => 'UF', 'rules' => 'required|exact_length[2]'],
 			'input_cidade' 	=> ['label' => 'Cidade', 'rules' => 'required'],
@@ -66,9 +68,14 @@ class Obras extends Controller
 				$data_encerra_error = $validation->getError('data_encerra');
 			}
 
+			if ($validation->getError('cnpj_input')) {
+				$cnpj_input_error = $validation->getError('cnpj_input');
+			}
+
 			if ($validation->getError('cep_input')) {
 				$cep_input_error = $validation->getError('cep_input');
 			}
+
 			if ($validation->getError('input_state_uf')) {
 				$input_state_uf_error = $validation->getError('input_state_uf');
 			}
@@ -101,6 +108,7 @@ class Obras extends Controller
 				'obras_local'		=>	$this->request->getVar('local_input'),
 				'data_inicio'			=>	$this->request->getVar('data_inicio'),
 				'data_fim'			=>	$this->request->getPost('data_encerra'),
+				'obras_cnpj'		=>	$this->request->getPost('cnpj_input'),
 				'obras_cep'		=>	$this->request->getPost('cep_input'),
 				'obras_estado'		=>	$this->request->getPost('input_state_uf'),
 				'obras_cidade'	=>	$this->request->getPost('input_cidade'),
@@ -118,7 +126,7 @@ class Obras extends Controller
 			'local_input_error'		=>	$local_input_error,
 			'data_inicio_error'		=>	$data_inicio_error,
 			'data_encerra_error'	=>	$data_encerra_error,
-			'cep_input_error'		=>	$cep_input_error,
+			'cnpj_input_error'		=>	$cnpj_input_error,
 			'input_state_uf_error'	=>	$input_state_uf_error,
 			'input_cidade_error'	=>	$input_cidade_error,
 			'int_rua_error'			=>	$int_rua_error,
@@ -179,6 +187,13 @@ class Obras extends Controller
 		}
 		$data['info'];
 		echo view('master/layout/pages/obras/cadastrar_obras', $data);
+	}
+
+	public function listaObrasSelect()
+	{
+		$list = new ObrasModel();
+		$todasObras = $list->getObras();
+		echo json_encode($todasObras);
 	}
 }
 

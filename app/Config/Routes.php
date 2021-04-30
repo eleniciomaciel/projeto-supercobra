@@ -37,10 +37,15 @@ $routes->get('/', 'Home::index');
 $routes->get('/admin-panel','Home::adminPanel');
 $routes->post('cadastro_obras','Obras::index');
 $routes->get('ver-obra/(:num)','Obras::verObra/$1');
+$routes->get('lista-obras','Obras::listaObrasSelect');
 
 $routes->match(['get', 'post'], 'clientes/cadastrar', 'Clientes::cadastrar');
 $routes->get('visualizar-cliente/(:num)','Clientes::verAlterar/$1');
 $routes->get('lista-clientes','Clientes::listaClientes');
+
+$routes->post('criar_frentes','Frentes::cadastroFrentes');
+$routes->get('lista-frentes','Frentes::listaFrentes');
+
 
 
 /*

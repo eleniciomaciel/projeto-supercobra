@@ -29,6 +29,7 @@ class ObrasModel extends Model
 		}
 
 		return $this->asArray()
+			->join('clientes', 'clientes.id_cli = obras.id')
 			->where(['id' => $id])
 			->first();
 	}

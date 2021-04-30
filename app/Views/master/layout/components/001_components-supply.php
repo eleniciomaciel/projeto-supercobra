@@ -42,6 +42,13 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="cnpj_input">CNPJ</label>
+                                <input type="text" class="form-control" name="cnpj_input" id="cnpj_input" >
+                                <span id="cnpj_input_error" class="text-danger"></span>
+                            </div>
+
                             <div class="form-group">
                                 <label for="cep_input">CEP</label>
                                 <input type="text" class="form-control" name="cep_input" id="cep_input" placeholder="00.000-000">
