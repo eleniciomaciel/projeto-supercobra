@@ -46,6 +46,12 @@ $routes->get('lista-clientes','Clientes::listaClientes');
 $routes->post('criar_frentes','Frentes::cadastroFrentes');
 $routes->get('lista-frentes','Frentes::listaFrentes');
 
+$routes->group('centocusto', function($routes)
+{
+    $routes->get('add-cento-custo', 'Centocusto::index');
+    $routes->post('save-cento-custo', 'Centocusto::adicionaCentoCusto');
+});
+
 
 
 /*
