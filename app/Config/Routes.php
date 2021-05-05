@@ -50,6 +50,12 @@ $routes->group('centocusto', function($routes)
 {
     $routes->get('add-cento-custo', 'Centocusto::index');
     $routes->post('save-cento-custo', 'Centocusto::adicionaCentoCusto');
+    $routes->get('lista_todos_cc', 'Centocusto::listaCentoCusto');
+    $routes->get('ver-cento-custo/(:num)', 'Centocusto::visualizaCentoCusto/$1');
+    $routes->post('altera-cento-custo', 'Centocusto::alteraCentoCusto');
+    $routes->get('status-cento-custo/(:num)', 'Centocusto::visualizaStatusCentoCusto/$1');
+    $routes->post('altera-status_cento-custo/(:num)', 'Centocusto::alterarStatusCentoCusto/$1');
+    $routes->post('deleta_cc', 'Centocusto::deleteCentoCusto');
 });
 
 

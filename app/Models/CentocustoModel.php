@@ -23,4 +23,17 @@ class CentocustoModel extends Model
 	protected $updatedField         = 'updated_at';
 	protected $deletedField         = 'deleted_at';
 
+	public function getCentocusto($id = false)
+	{
+		if ($id === false) {
+			return $this->asArray()
+			->join('obras', 'obras.id = cento_custo.fk_obra_cc')
+			->findAll();
+		}
+
+		return $this->asArray()
+			->join('obras', 'obras.id = cento_custo.fk_obra_cc')
+			->where(['id_cc' => $id])
+			->first();
+	}
 }

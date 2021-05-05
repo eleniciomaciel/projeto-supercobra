@@ -33,4 +33,12 @@ class ObrasModel extends Model
 			->where(['id' => $id])
 			->first();
 	}
+
+	public function getObrasId($id)
+	{
+		return $this->asArray()
+			->join('clientes', 'clientes.id_cli = obras.id')
+			->where(['id' => $id])
+			->first();
+	}
 }

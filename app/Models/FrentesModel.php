@@ -24,7 +24,6 @@ class FrentesModel extends Model
 	public function getFrentes($id = false)
 	{
 		if ($id === false) {
-			
 			return $this->asArray()
 			->join('clientes', 'clientes.id_cli = frentes.id_ft')
 			->join('obras', 'obras.id = frentes.id_ft')
