@@ -25,12 +25,20 @@
 			</div>
 			<div class="card-body">
 				<p class="login-box-msg">Sign in to start your session</p>
+				<?php $validation = \Config\Services::validation(); ?>
+				<?php if (isset($validation)) : ?>
+					<div class="col-12">
+						<div class="alert alert-danger" role="alert">
+							<?= $validation->listErrors() ?>
+						</div>
+					</div>
+				<?php endif; ?>
 
-				<form action="index3.html" method="post">
-
-					<label for="email">Login do usuário:</label>
+				<form action="/valida-acesso" method="post">
+				<?= csrf_field() ?>
+					<label for="email" class="text-danger">Login do usuário:</label>
 					<div class="input-group mb-3">
-						<input type="email" class="form-control" placeholder="login pessoal">
+						<input type="email" name="email" class="form-control" placeholder="login pessoal">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-envelope"></span>
@@ -38,9 +46,9 @@
 						</div>
 					</div>
 
-					<label for="senha">Senha de acesso:</label>
+					<label for="senha" class="text-danger">Senha de acesso:</label>
 					<div class="input-group mb-3">
-						<input type="password" class="form-control" placeholder="Senha pessoal">
+						<input type="password" name="password" class="form-control" placeholder="Senha pessoal">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-lock"></span>
@@ -49,11 +57,15 @@
 					</div>
 
 					<div class="form-group">
-						<label for="exampleSelectBorderWidth2">Sua filial</label>
+						<label for="filial" class="text-danger">Sua filial:</label>
 						<select class="custom-select form-control-border border-width-2" id="exampleSelectBorderWidth2">
 							<option selected disabled>Selecione aqui...</option>
-							<option>Value 2</option>
-							<option>Value 3</option>
+							<?php if (!empty($frentes) && is_array($frentes)) : ?>
+								<?php foreach ($frentes as $frentes_tb) : ?>
+									<option value="<?= esc($frentes_tb['id_ft']) ?>"><?= esc($frentes_tb['nome_ft']) ?></option>
+								<?php endforeach; ?>
+							<?php else : ?>
+							<?php endif ?>
 						</select>
 					</div>
 

@@ -20,6 +20,24 @@ class Funcionarios extends Migration
 				'constraint' => '100',
 				'null'       => true,
 			],
+			'f_cargo'          => [
+				'type'           => 'INT',
+				'constraint'     => 11,
+				'unsigned'       => true,
+				'null'       	 => true,
+			],
+			'f_fk_obra'          => [
+				'type'           => 'INT',
+				'constraint'     => 11,
+				'unsigned'       => true,
+				'null'       	 => true,
+			],
+			'f_Fk_frente'          => [
+				'type'           => 'INT',
+				'constraint'     => 11,
+				'unsigned'       => true,
+				'null'       	 => true,
+			],
 			'f_email_pessoal'       => [
 				'type'       => 'VARCHAR',
 				'constraint' => '50',
@@ -255,6 +273,9 @@ class Funcionarios extends Migration
 			],
 		]);
 		$this->forge->addKey('f_id', true);
+		$this->forge->addForeignKey('f_cargo','cargos','id_cargo');
+		$this->forge->addForeignKey('f_fk_obra','obras','id');
+		$this->forge->addForeignKey('f_Fk_frente','frentes','id_ft');
 		$this->forge->createTable('funcionarios');
 	}
 

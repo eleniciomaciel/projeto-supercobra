@@ -148,7 +148,7 @@ class Frentes extends BaseController
 				  Opções
 				</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="/ver-obra/'.esc($frentesList['id_ft']).'"><i class="fa fa-eye"></i> Visualizar</a>
+						<a class="dropdown-item" href="/cadastros/ver-obra/'.esc($frentesList['id_ft']).'"><i class="fa fa-eye"></i> Visualizar</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="'.$frentesList['id_ft'].'"><i class="fa fa-trash"></i> Deletar</a>
 					</div>

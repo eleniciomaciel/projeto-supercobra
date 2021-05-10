@@ -28,7 +28,7 @@
         ?>
 
 
-        <form action="/clientes/atualizarCliente" method="post">
+        <form action="/clientes/atualizar-dados-Cliente" method="post">
             <div class="card-body">
 
                 <div class="form-row">
@@ -114,7 +114,7 @@
                 <button type="submit" class="btn btn-danger">
                     <i class="fas fa-sync-alt"></i> Alterar
                 </button>
-                <a href="/admin-panel" class="btn btn-warning">
+                <a href="/admin_master/gestao_master" class="btn btn-warning">
                     <i class="fas fa-reply-all"></i> Voltar
                 </a>
             </div>

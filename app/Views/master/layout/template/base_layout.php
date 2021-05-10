@@ -183,6 +183,7 @@
   <?= $this->include('master\layout\js\js_002_components_clienteObra') ?>
   <?= $this->include('master\layout\js\js_003_components_frentes') ?>
   <?= $this->include('master\layout\js\js_004_components_cc') ?>
+  <?= $this->include('master\layout\js\js_005_components_usuarios') ?>
 </body>
 
 </html>

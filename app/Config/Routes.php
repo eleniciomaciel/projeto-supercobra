@@ -32,21 +32,37 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+//$routes->get('/', 'Home::index');
+$routes->match(['get', 'post'], '/', 'Home::index', ["filter" => "noauth"]);
+$routes->match(['get', 'post'], 'valida-acesso', 'Home::login', ["filter" => "noauth"]);
+// Admin routes
 
-$routes->get('/admin-panel','Home::adminPanel');
-$routes->post('cadastro_obras','Obras::index');
-$routes->get('ver-obra/(:num)','Obras::verObra/$1');
-$routes->get('lista-obras','Obras::listaObrasSelect');
 
-$routes->match(['get', 'post'], 'clientes/cadastrar', 'Clientes::cadastrar');
-$routes->get('visualizar-cliente/(:num)','Clientes::verAlterar/$1');
-$routes->get('lista-clientes','Clientes::listaClientes');
+$routes->group("cadastros", ["filter" => "auth"], function ($routes) {
+    $routes->post('cadastro_obras', 'Obras::index');
+    $routes->get('ver-obra/(:num)', 'Obras::verObra/$1');
+    $routes->get('lista-obras', 'Obras::listaObrasSelect');
+});
 
-$routes->post('criar_frentes','Frentes::cadastroFrentes');
-$routes->get('lista-frentes','Frentes::listaFrentes');
 
-$routes->group('centocusto', function($routes)
+$routes->group("clientes", ["filter" => "auth"], function ($routes) {
+    $routes->match(['get', 'post'], 'lista_todos_clientes_mt', 'Clientes::getCustomers');
+    $routes->match(['get', 'post'], 'cadastrar', 'Clientes::cadastrar');
+    $routes->get('visualizar-cliente/(:num)', 'Clientes::verAlterar/$1');
+    $routes->get('lista-clientes', 'Clientes::listaClientes');
+    $routes->post('atualizar-dados-Cliente', 'Clientes::atualizarCliente');
+});
+
+
+$routes->group("frentes", ["filter" => "auth"], function ($routes) {
+    $routes->post('criar_frentes','Frentes::cadastroFrentes');
+    $routes->get('lista-frentes','Frentes::listaFrentes');
+    $routes->get('lista_todas_frentes_obras','Obras::listaObras');
+});
+
+
+
+$routes->group('centocusto', ["filter" => "auth"], function($routes)
 {
     $routes->get('add-cento-custo', 'Centocusto::index');
     $routes->post('save-cento-custo', 'Centocusto::adicionaCentoCusto');
@@ -58,8 +74,31 @@ $routes->group('centocusto', function($routes)
     $routes->post('deleta_cc', 'Centocusto::deleteCentoCusto');
 });
 
+$routes->group('usuario_admin', ["filter" => "auth"], function($routes)
+{
+    $routes->get('add', 'FuncionarioController::index');
+    $routes->post('salva_usuarios', 'FuncionarioController::createUsuario');
+    $routes->get('lista_usuarios', 'FuncionarioController::listaUsuarios');
+});
 
 
+$routes->group('usuario_acesso', ["filter" => "auth"], function($routes)
+{
+    $routes->get('criar-login_usuario/(:num)', 'AcessorestritoController::geraAcesso/$1');
+    $routes->post('altera_usuario/(:num)', 'AcessorestritoController::updateUsuario/$1');
+    $routes->get('login_usuario/(:num)', 'AcessorestritoController::viewDadosLogin/$1');
+    $routes->post('gera_acesso_usuarios/(:num)', 'AcessorestritoController::criaUsuarioLogin/$1');
+    $routes->post('altera-status-login/(:num)', 'AcessorestritoController::alteraStatusUsuario/$1');
+});
+
+$routes->group("admin_master", ["filter" => "auth"], function ($routes) {
+    $routes->get("gestao_master", "Home::adminPanel");
+});
+// Editor routes
+$routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
+    $routes->get("gestao_rh", "Rh/RhController::index");
+});
+$routes->get('logout', 'Home::logout');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

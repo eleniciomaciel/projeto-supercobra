@@ -97,7 +97,7 @@
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-save"></i> Salvar
                 </button>
-                <a href="/admin-panel" class="btn btn-warning">
+                <a href="/admin_master/gestao_master" class="btn btn-warning">
                     <i class="fas fa-reply-all"></i> Voltar
                 </a>
             </div>

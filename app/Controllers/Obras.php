@@ -7,11 +7,17 @@ use App\Models\ObrasModel;
 
 class Obras extends Controller
 {
+
 	protected $request;
 	public function __construct(){
 		header('Access-Control-Allow-Origin: *');
 		header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
 		header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+
+		if (session()->get('role') != "ADMIN") {
+            echo 'Acesso negado';
+            exit;
+        }
 	}
 
 	public function index()
@@ -162,7 +168,7 @@ class Obras extends Controller
 				  Opções
 				</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="/ver-obra/'.esc($obraLista['id']).'">Visualizar</a>
+						<a class="dropdown-item" href="/cadastros/ver-obra/'.esc($obraLista['id']).'">Visualizar</a>
 						<a class="dropdown-item" href="'.$obraLista['id'].'">Status</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="'.$obraLista['id'].'">Deletar</a>

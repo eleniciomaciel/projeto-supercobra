@@ -52,24 +52,27 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body p-0">
-                                <table class="table table-striped" id="todos_frentes" style="width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th>Clientes</th>
-                                            <th>Obras</th>
-                                            <th>Nome da frente</th>
-                                            <th>Data Inicial</th>
-                                            <th>Data Final</th>
-                                            <th>UF</th>
-                                            <th>Cidade</th>
-                                            <th>Cep</th>
-                                            <th>Opções</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                <div class="table table-responsive">
+                                    <table class="table table-striped" id="todos_frentes" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Clientes</th>
+                                                <th>Obras</th>
+                                                <th>Nome da frente</th>
+                                                <th>Data Inicial</th>
+                                                <th>Data Final</th>
+                                                <th>UF</th>
+                                                <th>Cidade</th>
+                                                <th>Cep</th>
+                                                <th>Opções</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -93,7 +96,7 @@
                                             <select name="frt_cliente" id="frt_cliente" class="form-control"></select>
                                             <span id="frt_cliente_error" class="text-danger"></span>
                                         </div>
-                                        
+
                                         <div class="form-group col-md-6">
                                             <label for="frt_obra">Obra:</label>
                                             <select name="frt_obra" id="frt_obra" class="form-control"></select>

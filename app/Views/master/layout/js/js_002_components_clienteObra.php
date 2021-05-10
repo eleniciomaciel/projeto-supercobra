@@ -15,7 +15,7 @@
             "order": [
                 [0, "desc"]
             ],
-            "ajax": "Clientes/getCustomers"
+            "ajax": "/clientes/lista_todos_clientes_mt"
         });
 
         function limpa_formulário_cep() {

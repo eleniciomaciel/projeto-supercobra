@@ -139,14 +139,14 @@ class Clientes extends BaseController
 					<i class="fas fa-layer-group"></i>  Opções
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="/visualizar-cliente/' . esc($key['id_cli']) . '">
+					<a class="dropdown-item" href="/clientes/visualizar-cliente/' . esc($key['id_cli']) . '">
 						<i class="fas fa-eye"></i> Visualizar
 					</a>
-					<a class="dropdown-item" href="/status-cliente/' . esc($key['id_cli']) . '">
+					<a class="dropdown-item" href="/clientes/status-cliente/' . esc($key['id_cli']) . '">
 						<i class="fas fa-unlock-alt"></i>  Status
 					</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="/deletar-cliente/' . esc($key['id_cli']) . '">
+					<a class="dropdown-item" href="/clientes/deletar-cliente/' . esc($key['id_cli']) . '">
 						<i class="fas fa-power-off"></i> Deletar
 					</a>
 				</div>
@@ -198,7 +198,7 @@ class Clientes extends BaseController
 		$model->update($id, $data);
 		$session = session();
 		$session->setFlashdata("success", "Cliente atualizado com sucesso!");
-		return redirect()->to(base_url('visualizar-cliente/'.$id));
+		return redirect()->to(base_url('clientes/visualizar-cliente/'.$id));
 	}
 	/**lista todos os clientes */
 	public function listaClientes()

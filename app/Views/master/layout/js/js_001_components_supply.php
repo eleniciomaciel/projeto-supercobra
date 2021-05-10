@@ -18,7 +18,7 @@
             "order": [
                 [0, "desc"]
             ],
-            "ajax": "Obras/listaObras"
+            "ajax": "/frentes/lista_todas_frentes_obras"
         });
 
         function limpa_formulário_cep() {
