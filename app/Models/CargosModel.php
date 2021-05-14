@@ -12,32 +12,47 @@ class CargosModel extends Model
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
 	protected $returnType           = 'array';
-	protected $useSoftDelete        = false;
+	protected $useSoftDelete        = true;
 	protected $protectFields        = true;
-	protected $allowedFields        = [];
+	protected $allowedFields        = ['cargo_nome','cargo_description','datetime','created_at','updated_at','deleted_at'];
 
 	// Dates
-	protected $useTimestamps        = false;
+	protected $useTimestamps        = true;
 	protected $dateFormat           = 'datetime';
 	protected $createdField         = 'created_at';
 	protected $updatedField         = 'updated_at';
 	protected $deletedField         = 'deleted_at';
 
-	// Validation
-	protected $validationRules      = [];
-	protected $validationMessages   = [];
-	protected $skipValidation       = false;
-	protected $cleanValidationRules = true;
-
 	public function getCargos($id = false)
 	{
-		if ($id === false)
-		{
+		if ($id === false) {
 			return $this->findAll();
 		}
-	
+
 		return $this->asArray()
-					->where(['id_cargo' => $id])
-					->first();
+			->where(['id_cargo' => $id])
+			->first();
+	}
+
+	public function noticeTable()
+	{
+		$builder = $this->db->table('cargos');
+		return $builder;
+	}
+	public function button()
+	{
+		$action_button = function($row){
+			return '
+			<div class="btn-group btn-group-sm">
+				<a href="#" class="visualizarFuncao btn btn-info" data-id="'.$row['id_cargo'].'">
+					<i class="fas fa-eye"></i>
+				</a>
+				<a href="#" class="deleteFuncao btn btn-danger" data-id="'.$row['id_cargo'].'">
+					<i class="fas fa-trash"></i>
+				</a>
+			</div>
+				';
+		};
+		return $action_button;
 	}
 }

@@ -15,6 +15,12 @@ class Cargos extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
+			'cargo_fk_usuario' => [
+				'type'           => 'INT',
+				'constraint'     => 11,
+				'unsigned'       => true,
+				'null' => true,
+			],
 			'cargo_nome'       => [
 				'type'       => 'VARCHAR',
 				'constraint' => '100',

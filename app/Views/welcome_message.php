@@ -26,16 +26,9 @@
 			<div class="card-body">
 				<p class="login-box-msg">Sign in to start your session</p>
 				<?php $validation = \Config\Services::validation(); ?>
-				<?php if (isset($validation)) : ?>
-					<div class="col-12">
-						<div class="alert alert-danger" role="alert">
-							<?= $validation->listErrors() ?>
-						</div>
-					</div>
-				<?php endif; ?>
 
 				<form action="/valida-acesso" method="post">
-				<?= csrf_field() ?>
+					<?= csrf_field() ?>
 					<label for="email" class="text-danger">Login do usuário:</label>
 					<div class="input-group mb-3">
 						<input type="email" name="email" class="form-control" placeholder="login pessoal">
@@ -45,6 +38,11 @@
 							</div>
 						</div>
 					</div>
+					<?php if ($validation->getError('email')) { ?>
+						<div class='alert alert-danger mt-2'>
+							<?= $error = $validation->getError('email'); ?>
+						</div>
+					<?php } ?>
 
 					<label for="senha" class="text-danger">Senha de acesso:</label>
 					<div class="input-group mb-3">
@@ -55,10 +53,15 @@
 							</div>
 						</div>
 					</div>
+					<?php if ($validation->getError('password')) { ?>
+						<div class='alert alert-danger mt-2'>
+							<?= $error = $validation->getError('password'); ?>
+						</div>
+					<?php } ?>
 
 					<div class="form-group">
 						<label for="filial" class="text-danger">Sua filial:</label>
-						<select class="custom-select form-control-border border-width-2" id="exampleSelectBorderWidth2">
+						<select name="my_employer" class="custom-select form-control-border border-width-2">
 							<option selected disabled>Selecione aqui...</option>
 							<?php if (!empty($frentes) && is_array($frentes)) : ?>
 								<?php foreach ($frentes as $frentes_tb) : ?>
@@ -67,6 +70,11 @@
 							<?php else : ?>
 							<?php endif ?>
 						</select>
+						<?php if ($validation->getError('my_employer')) { ?>
+							<div class='alert alert-danger mt-2'>
+								<?= $error = $validation->getError('my_employer'); ?>
+							</div>
+						<?php } ?>
 					</div>
 
 

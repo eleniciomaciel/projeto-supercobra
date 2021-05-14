@@ -3,6 +3,8 @@
 namespace App\Controllers;
 use App\Models\FrentesModel;
 use App\Models\AcessousuariosModel;
+use App\Models\FuncionarioModel;
+
 class Home extends BaseController
 {
 	public function index()
@@ -25,18 +27,27 @@ class Home extends BaseController
 				'errors' => [
 					'required' => 'Ops! Digite um email válido.'
 				]],
-				'password' => ['label' => 'Senha de Acesso', 'rules' => 'required|regex_match[/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/]|validateUser[email,password]',
+				
+                'my_employer' => ['label' => 'Local de trabalho', 'rules' => 'required|validateLocal[my_employer,email]',
+				'errors' => [
+					'required' => 'Ops! Identifique seu local de trabalho.',
+					'validateLocal' => 'Ops! filial não encontrada.',
+				]],
+                'password' => ['label' => 'Senha de Acesso', 'rules' => 'required|regex_match[/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/]|validateUser[email,password]',
 				'errors' => [
 					'required' => 'Ops! Digite uma senha.',
-					'validateUser' => 'Ops! Senha não encontrada.',
+					'validateUser' => 'Ops! Senha não encontrada ou atividade suspensa.',
 					'regex_match' => 'Ops! Senha fora do padrão.',
-				]]
+				]],
 
             ];
 
             $errors = [
                 'password' => [
                     'validateUser' => "Email ou senha não coincidem",
+                ],
+                'my_employer' => [
+                    'validateLocal' => "Filial não identificada pelo servidor.",
                 ],
             ];
 
@@ -51,23 +62,19 @@ class Home extends BaseController
 				]);
 
             } else {
+                $usuario = new FuncionarioModel();
                 $model = new AcessousuariosModel();
 
-                $user = $model->where('au_login_corp', $this->request->getVar('email'))
-                    ->first();
+                $user = $model->where('au_login_corp', $this->request->getVar('email'))->first();
 
                 // Stroing session values
                 $this->setUserSession($user);
 
                 // Redirecting to dashboard after login
                 if($user['role'] == "ADMIN"){
-
-                    //return redirect()->to(base_url('admin_master'));
                     return redirect()->route('admin_master/gestao_master');
-
                 }elseif($user['role'] == "RH"){
-
-                    return redirect()->to(base_url('admin_rh'));
+                    return redirect()->route('admin_rh/gestao_rh');
                 }
             }
         }

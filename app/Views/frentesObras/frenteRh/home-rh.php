@@ -1,151 +1,141 @@
-<?= $this->extend('master/layout/template/base_layout') ?>
+<?= $this->extend('frentesObras/frenteRh/layout/template/base_layout') ?>
 
 <?= $this->section('content') ?>
 <!-- Left col -->
-<section class="col-lg-6 connectedSortable">
+<section class="col-lg-12 connectedSortable">
   <!-- TO DO List -->
   <div class="card">
-    <div class="card-header">
+    <div class="card-header ui-sortable-handle" style="cursor: move;">
       <h3 class="card-title">
         <i class="ion ion-clipboard mr-1"></i>
-        Obras
+        Avisos periódicos de exames
       </h3>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body p-0">
-      <table class="table table-sm">
-        <thead>
-          <tr>
-            <th style="width: 10px">Estado</th>
-            <th>Local</th>
-            <th>Cidade</th>
-            <th style="width: 40px">Início</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1.</td>
-            <td>Update software</td>
-            <td>
-              <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-danger">55%</span></td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Clean database</td>
-            <td>
-              <div class="progress progress-xs">
-                <div class="progress-bar bg-warning" style="width: 70%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-warning">70%</span></td>
-          </tr>
-          <tr>
-            <td>3.</td>
-            <td>Cron job running</td>
-            <td>
-              <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar bg-primary" style="width: 30%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-primary">30%</span></td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Fix and squish bugs</td>
-            <td>
-              <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar bg-success" style="width: 90%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-success">90%</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <!-- /.card-body -->
-    <div class="card-footer clearfix">
-      <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Cdastrar</button>
-    </div>
-  </div>
-  <!-- /.card -->
-</section>
-<!-- /.Left col -->
-<!-- right col (We are only adding the ID to make the widgets sortable)-->
-<section class="col-lg-6 connectedSortable">
 
-  <!-- TO DO List -->
-  <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">
-        <i class="ion ion-clipboard mr-1"></i>
-        Cento de custo
-      </h3>
+      <div class="card-tools">
+        <ul class="pagination pagination-sm">
+          <li class="page-item"><a href="#" class="page-link">«</a></li>
+          <li class="page-item"><a href="#" class="page-link">1</a></li>
+          <li class="page-item"><a href="#" class="page-link">2</a></li>
+          <li class="page-item"><a href="#" class="page-link">3</a></li>
+          <li class="page-item"><a href="#" class="page-link">»</a></li>
+        </ul>
+      </div>
     </div>
     <!-- /.card-header -->
-    <div class="card-body p-0">
-      <table class="table table-sm">
-        <thead>
-          <tr>
-            <th style="width: 10px">Data</th>
-            <th>Número</th>
-            <th>Descrição</th>
-            <th style="width: 40px">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1.</td>
-            <td>Update software</td>
-            <td>
-              <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-danger">55%</span></td>
-          </tr>
-          <tr>
-            <td>2.</td>
-            <td>Clean database</td>
-            <td>
-              <div class="progress progress-xs">
-                <div class="progress-bar bg-warning" style="width: 70%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-warning">70%</span></td>
-          </tr>
-          <tr>
-            <td>3.</td>
-            <td>Cron job running</td>
-            <td>
-              <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar bg-primary" style="width: 30%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-primary">30%</span></td>
-          </tr>
-          <tr>
-            <td>4.</td>
-            <td>Fix and squish bugs</td>
-            <td>
-              <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar bg-success" style="width: 90%"></div>
-              </div>
-            </td>
-            <td><span class="badge bg-success">90%</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="card-body">
+      <ul class="todo-list ui-sortable" data-widget="todo-list">
+        <li class="done" style="">
+          <span class="handle ui-sortable-handle">
+            <i class="fas fa-ellipsis-v"></i>
+            <i class="fas fa-ellipsis-v"></i>
+          </span>
+          <div class="icheck-primary d-inline ml-2">
+            <input type="checkbox" value="" name="todo2" id="todoCheck2" checked="">
+            <label for="todoCheck2"></label>
+          </div>
+          <span class="text">Make the theme responsive</span>
+          <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
+          <div class="tools">
+            <i class="fas fa-edit"></i>
+            <i class="fas fa-trash-o"></i>
+          </div>
+        </li>
+        <li class="" style="">
+          <span class="handle ui-sortable-handle">
+            <i class="fas fa-ellipsis-v"></i>
+            <i class="fas fa-ellipsis-v"></i>
+          </span>
+          <div class="icheck-primary d-inline ml-2">
+            <input type="checkbox" value="" name="todo3" id="todoCheck3">
+            <label for="todoCheck3"></label>
+          </div>
+          <span class="text">Let theme shine like a star</span>
+          <small class="badge badge-warning"><i class="far fa-clock"></i> 1 day</small>
+          <div class="tools">
+            <i class="fas fa-edit"></i>
+            <i class="fas fa-trash-o"></i>
+          </div>
+        </li>
+        <li class="" style="">
+          <span class="handle ui-sortable-handle">
+            <i class="fas fa-ellipsis-v"></i>
+            <i class="fas fa-ellipsis-v"></i>
+          </span>
+          <div class="icheck-primary d-inline ml-2">
+            <input type="checkbox" value="" name="todo4" id="todoCheck4">
+            <label for="todoCheck4"></label>
+          </div>
+          <span class="text">Let theme shine like a star</span>
+          <small class="badge badge-success"><i class="far fa-clock"></i> 3 days</small>
+          <div class="tools">
+            <i class="fas fa-edit"></i>
+            <i class="fas fa-trash-o"></i>
+          </div>
+        </li>
+        <li class="" style="">
+          <span class="handle ui-sortable-handle">
+            <i class="fas fa-ellipsis-v"></i>
+            <i class="fas fa-ellipsis-v"></i>
+          </span>
+          <div class="icheck-primary d-inline ml-2">
+            <input type="checkbox" value="" name="todo5" id="todoCheck5">
+            <label for="todoCheck5"></label>
+          </div>
+          <span class="text">Check your messages and notifications</span>
+          <small class="badge badge-primary"><i class="far fa-clock"></i> 1 week</small>
+          <div class="tools">
+            <i class="fas fa-edit"></i>
+            <i class="fas fa-trash-o"></i>
+          </div>
+        </li>
+        <li class="" style="">
+          <!-- drag handle -->
+          <span class="handle ui-sortable-handle">
+            <i class="fas fa-ellipsis-v"></i>
+            <i class="fas fa-ellipsis-v"></i>
+          </span>
+          <!-- checkbox -->
+          <div class="icheck-primary d-inline ml-2">
+            <input type="checkbox" value="" name="todo1" id="todoCheck1">
+            <label for="todoCheck1"></label>
+          </div>
+          <!-- todo text -->
+          <span class="text">Design a nice theme</span>
+          <!-- Emphasis label -->
+          <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
+          <!-- General tools such as edit or delete-->
+          <div class="tools">
+            <i class="fas fa-edit"></i>
+            <i class="fas fa-trash-o"></i>
+          </div>
+        </li>
+
+
+
+
+        <li>
+          <span class="handle ui-sortable-handle">
+            <i class="fas fa-ellipsis-v"></i>
+            <i class="fas fa-ellipsis-v"></i>
+          </span>
+          <div class="icheck-primary d-inline ml-2">
+            <input type="checkbox" value="" name="todo6" id="todoCheck6">
+            <label for="todoCheck6"></label>
+          </div>
+          <span class="text">Let theme shine like a star</span>
+          <small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>
+          <div class="tools">
+            <i class="fas fa-edit"></i>
+            <i class="fas fa-trash-o"></i>
+          </div>
+        </li>
+      </ul>
     </div>
     <!-- /.card-body -->
     <div class="card-footer clearfix">
-      <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Cadastrar</button>
+      <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
     </div>
   </div>
   <!-- /.card -->
 </section>
-<!-- right col -->
 <?= $this->endSection() ?>

@@ -11,7 +11,9 @@ class Userrules
 	public function validateUser(string $str, string $fields, array $data)
     {
         $model = new AcessousuariosModel();
-        $user = $model->where('au_login_corp', $data['email'])
+        
+        $array = ['au_login_corp' => $data['email'], 'au_status' => '1'];
+        $user = $model->where( $array)
             ->first();
 
         if (!$user) {

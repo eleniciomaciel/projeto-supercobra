@@ -94,9 +94,22 @@ $routes->group('usuario_acesso', ["filter" => "auth"], function($routes)
 $routes->group("admin_master", ["filter" => "auth"], function ($routes) {
     $routes->get("gestao_master", "Home::adminPanel");
 });
-// Editor routes
+// RH routes
 $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
     $routes->get("gestao_rh", "Rh/RhController::index");
+    //cadastro-colaborador
+    $routes->get("cadastro-colaboradores", "Rh/CadastrocolaboradorController::index");
+    $routes->get("cadastrar-dados", "Rh/CadastrocolaboradorController::cadastro");
+    //cargos
+    $routes->get("cargos-rh", "Rh/CargosrhController::index");
+    $routes->get("cadastrar-cargo", "Rh/CargosrhController::cadastroCargo");
+    $routes->get("lista_funcoes_cadastradas", "Rh/CargosrhController::list_funcoesCargos");
+    $routes->post("cadastra_funcao", "Rh/CargosrhController::cadastroFuncaoCargos");
+    $routes->get("verDadosFuncao", "Rh/CargosrhController::visualizaUmaFuncao");
+    $routes->post("altera_funcao", "Rh/CargosrhController::alteraUmaFuncao");
+    $routes->get("deleta_funcao", "Rh/CargosrhController::deletaUmaFuncao");
+    $routes->get("lista-funcoes_select", "Rh/CargosrhController::listaCargosSelect");
+
 });
 $routes->get('logout', 'Home::logout');
 /*
