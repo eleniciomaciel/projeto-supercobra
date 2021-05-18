@@ -109,7 +109,14 @@ $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
     $routes->post("altera_funcao", "Rh/CargosrhController::alteraUmaFuncao");
     $routes->get("deleta_funcao", "Rh/CargosrhController::deletaUmaFuncao");
     $routes->get("lista-funcoes_select", "Rh/CargosrhController::listaCargosSelect");
+    $routes->post("cadastra_cargos_e_funcoes", "Rh/CargosrhController::cadastraCarfosEfuncoes");
+    $routes->get("lista_cargos_e_funcoes", "Rh/CargosrhController::list_funcoesCargosGeral");
+    $routes->get("lista_um_cargos", "Rh/CargosrhController::visualizaUmaCargoEfuncao");
+    $routes->post("altera_cargo_funcao", "Rh/CargosrhController::alteraUmCargoEfuncao");
+    $routes->get("deleteCursoRh", "Rh/CargosrhController::deletaUmCargoEfuncao");
+    $routes->get("todoCargosFuncRh", "Rh/CargosrhController::list_funcoesCargosGeralTodos");
 
+    
 });
 $routes->get('logout', 'Home::logout');
 /*

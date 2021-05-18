@@ -1,6 +1,6 @@
 <div class="row">
     <!-- left column -->
-    <div class="col-md-6">
+    <div class="col-md-4">
 
         <!-- general form elements -->
         <div class="card card-primary">
@@ -8,27 +8,39 @@
                 <h3 class="card-title">Cargos</h3>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
+            <form action="/admin_rh/cadastra_cargos_e_funcoes" method="post" id="formAddCargoWithFunction">
+            <?= csrf_field() ?>
+                <div class="card-body">
 
-                <div class="form-group">
-                    <label for="func_select">Selecione a função</label>
-                    <select class="custom-select form-control-border border-width-2 select2FuncaoTodas" name="func_select" id="func_select">
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label for="func_select">Selecione a função</label>
+                        <select class="custom-select form-control-border border-width-2 select2FuncaoTodas" name="func_select" id="func_select">
+                        </select>
+                        <span id="func_select_error" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group">
-                    <label for="exampleInputBorder">Cadastrar cargos </label>
-                    <input type="text" class="form-control form-control-border" id="exampleInputBorder" placeholder="Digite aqui...">
-                </div>
+                    <div class="form-group">
+                        <label for="cargo_new_nome">Cadastrar cargos </label>
+                        <input type="text" class="form-control form-control-border" name="cargo_new_nome" id="cargo_new_nome" placeholder="Digite aqui...">
+                        <span id="cargo_new_nome_error" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group">
-                    <label for="exampleInputBorderWidth2">Descrição do cargo</label>
-                    <input type="text" class="form-control form-control-border border-width-2" id="exampleInputBorderWidth2" placeholder="Digite aqui...">
-                </div>
+                    <div class="form-group">
+                        <label for="cargo_new_descricao">Descrição do cargo</label>
+                        <input type="text" class="form-control form-control-border border-width-2" name="cargo_new_descricao" id="cargo_new_descricao" placeholder="Digite aqui...">
+                        <span id="cargo_new_descricao_error" class="text-danger"></span>
+                    </div>
 
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Salvar</button>
+                    <div class="card-footer">
+                        <button type="submit" class="cls_func_cargo_add btn btn-primary" id="id_func_cargo_add">
+                            <i class="fa fa-save"></i> Salvar
+                        </button>
+                    </div>
                 </div>
+            </form>
+            <br>
+            <div class="col-12">
+                <span id="message_cargo"></span>
             </div>
             <!-- /.card-body -->
         </div>
@@ -37,7 +49,7 @@
     </div>
     <!--/.col (left) -->
     <!-- right column -->
-    <div class="col-md-6">
+    <div class="col-md-8">
         <!-- Form Element sizes -->
         <div class="card card-primary">
 
@@ -46,58 +58,22 @@
             </div>
             <div class="card-body">
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px">Data</th>
-                            <th>Nome</th>
-                            <th>Descrição</th>
-                            <th style="width: 40px">Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>Update software</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-danger">55%</span></td>
-                        </tr>
-                        <tr>
-                            <td>2.</td>
-                            <td>Clean database</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar bg-warning" style="width: 70%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-warning">70%</span></td>
-                        </tr>
-                        <tr>
-                            <td>3.</td>
-                            <td>Cron job running</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar bg-primary" style="width: 30%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-primary">30%</span></td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Fix and squish bugs</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar bg-success" style="width: 90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-success">90%</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table table-responsive">
+                    <table class="table" id="lista_funcoes_e_cargos" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Função</th>
+                                <th>Cargo</th>
+                                <th>Descrição</th>
+                                <th style="width: 40px">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                  
+                        </tbody>
+                    </table>
+                </div>
+
 
             </div>
 

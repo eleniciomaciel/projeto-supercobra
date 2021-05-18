@@ -12,6 +12,37 @@
             }
         });
 
+        $('#lista_funcoes_e_cargos').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+            },
+            "order": [],
+            "serverSide": true,
+            "ajax": {
+                url: "<?php echo site_url("/admin_rh/lista_cargos_e_funcoes"); ?>",
+                type: "GET",
+            }
+        });
+
+        /**lista todos cargos e funções */
+        $('#lista_funcoes_e_cargos_geral').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+            },
+            "order": [0, "desc"],
+            columnDefs:[{
+                targets: 0,
+                render: function(data){
+                    return moment(data).format('L');
+                }
+            }],
+            "serverSide": true,
+            "ajax": {
+                url: "<?php echo site_url("/admin_rh/todoCargosFuncRh"); ?>",
+                type: "GET",
+            }
+        });
+
 
         $('#for_add_funco_cargo').on('submit', function(event) {
             event.preventDefault();
@@ -137,7 +168,7 @@
                         },
                         success: function(data) {
                             Swal.fire(
-                                'Deleted!',
+                                'Deletado!',
                                 data,
                                 'success'
                             )
@@ -149,6 +180,7 @@
             });
         });
         todasFuncoesSelect();
+
         function todasFuncoesSelect() {
             $.ajax({
                 url: '<?= site_url('/admin_rh/lista-funcoes_select') ?>',
@@ -167,6 +199,167 @@
                 }
             });
         }
+
+        todasCargoSelect();
+
+        function todasCargoSelect() {
+            $.ajax({
+                url: '<?= site_url('/admin_rh/lista-funcoes_select') ?>',
+                method: 'get',
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    $('select[name="cargos_select"]').empty();
+                    $.each(response, function(index, data) {
+                        $('#cargos_select').append('<option value="' + data['id_cargo'] + '">' + data['cargo_nome'] + '</option>');
+                    });
+                }
+            });
+        }
+
+        /**salvando os cagos com funções */
+        $('#formAddCargoWithFunction').on('submit', function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: $(this).serialize(),
+                dataType: "JSON",
+                beforeSend: function() {
+                    $('#id_func_cargo_add').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde... </button>');
+                    $('.cls_func_cargo_add').attr('disabled', 'disabled');
+                },
+
+                success: function(data) {
+                    $('#id_func_cargo_add').html('<i class="fa fa-save"></i> Salvar');
+                    $('.cls_func_cargo_add').attr('disabled', false);
+                    if (data.error == 'yes') {
+
+                        $('#func_select_error').text(data.func_select_error);
+                        $('#cargo_new_nome_error').text(data.cargo_new_nome_error);
+                        $('#cargo_new_descricao_error').text(data.cargo_new_descricao_error);
+
+                    } else {
+
+                        $('#func_select_error').text('');
+                        $('#cargo_new_nome_error').text('');
+                        $('#cargo_new_descricao_error').text('');
+
+                        $('#message_cargo').html(data.message);
+                        $('#lista_funcoes_e_cargos').DataTable().ajax.reload();
+                        $('#lista_funcoes_e_cargos_geral').DataTable().ajax.reload();
+                        $('#formAddCargoWithFunction')[0].reset();
+                        setTimeout(function() {
+                            $('#message_cargo').html('');
+                        }, 3000);
+                    }
+                }
+            })
+        });
+
+        /** *********************************** carrega ******************************/
+        $(document).on('click', '.visualizarCargosAjax', function(event) {
+            event.preventDefault();
+            var id = $(this).data('id');
+            $.ajax({
+                url: "<?php echo site_url('/admin_rh/lista_um_cargos'); ?>",
+                method: "GET",
+                data: {
+                    id: id
+                },
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                dataType: 'JSON',
+
+                success: function(data) {
+                    $('#cargos_select').val(data.cf_fk_funcao);
+                    $('#fc_cargo_up').val(data.cf_nome_cargo_funcao);
+                    $('#fc_descricao_up').val(data.cf_description_cargo_funcao);
+                    $('#modalCargoComFuncao').modal('show');
+                    $('#hidden_id_cargo').val(id);
+                }
+            })
+        });
+
+
+        /**altera cargo */
+        $('#formAlteraCargo').on('submit', function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: $(this).serialize(),
+                dataType: "JSON",
+                beforeSend: function() {
+                    $('#id_up_cargo_func').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde... </button>');
+                    $('.cls_up_cargo_func').attr('disabled', 'disabled');
+                },
+
+                success: function(data) {
+                    $('#id_up_cargo_func').html('<i class="fa fa-save"></i> Alterar');
+                    $('.cls_up_cargo_func').attr('disabled', false);
+                    if (data.error == 'yes') {
+
+                        $('#cargos_select_error').text(data.cargos_select_error);
+                        $('#fc_cargo_up_error').text(data.fc_cargo_up_error);
+                        $('#fc_descricao_up_error').text(data.fc_descricao_up_error);
+
+                    } else {
+
+                        $('#message_cargo_up').html(data.message);
+                        $('#lista_funcoes_e_cargos').DataTable().ajax.reload();
+                        $('#lista_funcoes_e_cargos_geral').DataTable().ajax.reload();
+                        setTimeout(function() {
+                            $('#message_cargo_up').html('');
+                        }, 3000);
+                    }
+                }
+            })
+        });
+
+
+        /**deleta cargo */
+        $(document).on('click', '.deleteCargosAjax', function(event) {
+            event.preventDefault();
+            let id_dl = $(this).data('id');
+
+            Swal.fire({
+                title: 'Deletar?',
+                text: "Ao confirmar essa ação será permanaente!",
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, deletar!',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url: "<?php echo site_url('/admin_rh/deleteCursoRh'); ?>",
+                        method: "GET",
+                        data: {
+                            id_dl: id_dl
+                        },
+                        success: function(data) {
+                            Swal.fire(
+                                'Deletado!',
+                                data,
+                                'success'
+                            );
+                            $('#lista_funcoes_e_cargos').DataTable().ajax.reload();
+                            $('#lista_funcoes_e_cargos_geral').DataTable().ajax.reload();
+                        }
+                    })
+                }
+            });
+        });
+
     });
 </script>
 
@@ -205,4 +398,7 @@
 
     document.getElementById("fun_funcao_up").addEventListener("keypress", forceKeyPressUppercase_alterar, false);
     document.getElementById("fun_descricao_up").addEventListener("keypress", forceKeyPressUppercase_alterar, false);
+    /**cargos das funcoes */
+    document.getElementById("cargo_new_nome").addEventListener("keypress", forceKeyPressUppercase_alterar, false);
+    document.getElementById("cargo_new_descricao").addEventListener("keypress", forceKeyPressUppercase_alterar, false);
 </script>

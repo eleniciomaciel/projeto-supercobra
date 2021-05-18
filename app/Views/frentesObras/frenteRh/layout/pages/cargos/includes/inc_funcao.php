@@ -35,7 +35,7 @@
             <div class="col-12">
                 <span id="message"></span>
             </div>
-            
+
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
@@ -51,20 +51,22 @@
                 <h3 class="card-title">Funções cadastradas</h3>
             </div>
             <div class="card-body">
+                <div class="table table-responsive">
+                    <table class="table" id="lista_funcoes" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">Data</th>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th style="width: 40px">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                <table class="table" id="lista_funcoes" style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px">Data</th>
-                            <th>Nome</th>
-                            <th>Descrição</th>
-                            <th style="width: 40px">Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                        </tbody>
+                    </table>
+                </div>
 
-                    </tbody>
-                </table>
 
             </div>
 

@@ -4,6 +4,9 @@ namespace App\Controllers\Rh;
 
 use App\Controllers\BaseController;
 use App\Models\Estados\EstadosModel;
+use App\Models\CargofuncoesModel;
+use App\Models\CargosModel;
+
 class CadastrocolaboradorController extends BaseController
 {
 	public function __construct()
@@ -27,11 +30,15 @@ class CadastrocolaboradorController extends BaseController
 	public function cadastro($page = 'cadastrar-dados')
 	{
 		$estados = new EstadosModel();
+		$funcao = new CargosModel();
+
 		if (!is_file(APPPATH . 'Views/frentesObras/frenteRh/layout/pages/colaborador/' . $page . '.php')) {
-			// Whoops, we don't have a page for that!
 			throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
 		}
-		$data['estados'] = $estados->getEstados(); 
+		$data = [
+			'estados' => $estados->getEstados(),
+			'funcao'  => $funcao->findAll()
+		]; 
 		echo view('frentesObras/frenteRh/layout/pages/colaborador/' . $page, $data);
 	}
 }

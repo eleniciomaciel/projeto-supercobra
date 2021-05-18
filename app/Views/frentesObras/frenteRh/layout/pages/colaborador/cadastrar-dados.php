@@ -358,12 +358,12 @@
                             <label for="add_colab_fgts_categoria">Categoria do FGTS:</label>
                             <select name="add_colab_fgts_categoria" class="form-control select2CTPScategoria">
                                 <option selected>Selecione aqui...</option>
-                                <?php for ($i=1; $i <= 27; $i++) { 
-                                   ?>
-                                   <option value="<?php echo $i?>"><?php echo $i?></option>
-                                   <?php
-                                }?>
-                                
+                                <?php for ($i = 1; $i <= 27; $i++) {
+                                ?>
+                                    <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                                <?php
+                                } ?>
+
                             </select>
                         </div>
                         <div class="form-group col-md-6">
@@ -429,9 +429,15 @@
 
                         <div class="form-group col-md-8">
                             <label for="add_colab_funcao_cargo">Função:</label>
-                            <select name="add_colab_funcao_cargo" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
+                            <select name="add_colab_funcao_cargo" class="form-control select2CargoTrocaFuncaoTodas">
+                            <option selected disabled>Selecione aqui...</option>
+                                <?php if (!empty($funcao) && is_array($funcao)) : ?>
+                                    <?php foreach ($funcao as $func_dd) : ?>
+                                        <option value="<?= esc($func_dd['id_cargo']) ?>"><?= esc($func_dd['cargo_nome']) ?></option>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <option>...</option>
+                                <?php endif ?>
                             </select>
                         </div>
 
@@ -500,8 +506,9 @@
                         <div class="form-group col-md-2">
                             <label for="add_colab_funcao_hora_extras">Horas trabalhadas:</label>
                             <select name="add_colab_funcao_hora_extras" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
+                                <option selected disabled>Selecione aqui...</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Nao">Não</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
@@ -515,29 +522,33 @@
                         <div class="form-group col-md-3">
                             <label for="add_colab_funcao_periculosidade">Periculosidade:</label>
                             <select name="add_colab_funcao_periculosidade" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
+                                <option selected disabled>Selecione aqui...</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Nao">Não</option>
                             </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_funcao_insalubridade">Insalubridade:</label>
                             <select name="add_colab_funcao_insalubridade" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
+                                <option selected disabled>Selecione aqui...</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Nao">Não</option>
                             </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_funcao_desconto_sindical">Desc.: Sindical:</label>
                             <select name="add_colab_funcao_desconto_sindical" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
+                                <option selected disabled>Selecione aqui...</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Nao">Não</option>
                             </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_funcao_ps">PS.:</label>
                             <select name="add_colab_funcao_ps" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
+                                <option selected disabled>Selecione aqui...</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Nao">Não</option>
                             </select>
                         </div>
 
