@@ -11,6 +11,10 @@ class CargosrhController extends BaseController
 {
 	public function __construct() {
         $this->security =  \Config\Services::security();
+		if (session()->get('role') != "RH") {
+            echo view('/');
+            exit;
+        }
 	}
 	public function index($page = 'lista-cargos')
 	{

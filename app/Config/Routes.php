@@ -118,6 +118,13 @@ $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
 
     
 });
+
+/**departamentos */
+$routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
+    $routes->get("lista_departamentos", "Rh/DepartamentosController::index");
+});
+
+
 $routes->get('logout', 'Home::logout');
 /*
  * --------------------------------------------------------------------

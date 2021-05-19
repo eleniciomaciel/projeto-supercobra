@@ -253,6 +253,7 @@
   <!-- js -->
   <?= $this->include('frentesObras/frenteRh/layout/js/001_viacep') ?>
   <?= $this->include('frentesObras/frenteRh/layout/js/002_funcao') ?>
+  <?= $this->include('frentesObras/frenteRh/layout/js/003_departamento') ?>
 
 </body>
 

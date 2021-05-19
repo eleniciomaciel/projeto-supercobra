@@ -27,6 +27,9 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#menu2">Cargos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#menu3">Departamentos</a>
+                    </li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -40,6 +43,10 @@
 
                     <div id="menu2" class="container tab-pane fade"><br>
                         <?= $this->include('frentesObras/frenteRh/layout/pages/cargos/includes/inc_cargos') ?>
+                    </div>
+
+                    <div id="menu3" class="container tab-pane fade"><br>
+                        <?= $this->include('frentesObras/frenteRh/layout/pages/cargos/includes/inc_departamento') ?>
                     </div>
                 </div>
 

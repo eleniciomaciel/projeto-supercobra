@@ -91,7 +91,7 @@
 				<!-- /.social-auth-links -->
 
 				<p class="mb-1">
-					<a href="/admin-panel">Recuperar senha de acesso</a>
+					<a href="#">Recuperar senha de acesso</a>
 				</p>
 			</div>
 			<!-- /.card-body -->
