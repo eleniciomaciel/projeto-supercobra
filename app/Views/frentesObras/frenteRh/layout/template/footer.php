@@ -104,6 +104,9 @@
       $('.select2CargoTrocaFuncaoTodas').select2({
         theme: 'bootstrap4',
       });
+      $('.select2DepartamentosTodas').select2({
+        theme: 'bootstrap4',
+      });
       //mask
       $('#add_colab_cep_moradia').mask("00.000-000", {
         placeholder: "00.000-000"

@@ -430,7 +430,7 @@
                         <div class="form-group col-md-8">
                             <label for="add_colab_funcao_cargo">Função:</label>
                             <select name="add_colab_funcao_cargo" class="form-control select2CargoTrocaFuncaoTodas">
-                            <option selected disabled>Selecione aqui...</option>
+                                <option selected disabled>Selecione aqui...</option>
                                 <?php if (!empty($funcao) && is_array($funcao)) : ?>
                                     <?php foreach ($funcao as $func_dd) : ?>
                                         <option value="<?= esc($func_dd['id_cargo']) ?>"><?= esc($func_dd['cargo_nome']) ?></option>
@@ -491,9 +491,15 @@
 
                         <div class="form-group col-md-4">
                             <label for="add_colab_funcao_departamento">Departamento:</label>
-                            <select name="add_colab_funcao_departamento" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
+                            <select name="add_colab_funcao_departamento" class="form-control select2DepartamentosTodas">
+                            <option selected disabled>Selecione aqui...</option>
+                                <?php if (!empty($departamento) && is_array($departamento)) : ?>
+                                    <?php foreach ($departamento as $ver_dep) : ?>
+                                     <option value="<?= esc($ver_dep['id']) ?>"><?= esc($ver_dep['dep_name']) ?></option>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <option selected>Sem departamento cadastrados</option>
+                                <?php endif ?>
                             </select>
                         </div>
                         <div class="form-group col-md-4">

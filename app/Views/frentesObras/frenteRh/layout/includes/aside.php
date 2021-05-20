@@ -49,15 +49,9 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/admin_rh/cadastro-colaboradores" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Colaborador</p>
-                            </a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a href="/admin_rh/cargos-rh" class="nav-link">
+                    <li class="nav-item">
+                            <a href="/admin_rh/cadastrar-cargo" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Funcionais</p>
                             </a>
@@ -67,6 +61,13 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Cento de Custo</p>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="/admin_rh/cadastro-colaboradores" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Colaborador</p>
                             </a>
                         </li>
 

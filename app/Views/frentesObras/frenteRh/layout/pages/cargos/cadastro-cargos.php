@@ -3,9 +3,9 @@
 <?= $this->section('content') ?>
 <section class="col-md-12 content">
 
-    <a href="/admin_rh/cargos-rh" class="btn btn-warning btn-flat">
+    <!-- <a href="/admin_rh/cargos-rh" class="btn btn-warning btn-flat">
         <i class="fa fa-reply-all"></i> Voltar
-    </a><br><br>
+    </a><br><br> -->
 
     <div class="">
         <div class="card card-primary card-outline">

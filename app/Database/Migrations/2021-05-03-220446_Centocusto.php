@@ -31,6 +31,11 @@ class Centocusto extends Migration
 				'constraint' 	 => 11,
 				'null'           => true,
 			],
+			'fk_frente_cc'       => [
+				'type'           => 'INT',
+				'constraint' 	 => 11,
+				'null'           => true,
+			],
 			'status_cc'       => [
 				'type' => 'ENUM',
 				'constraint' 	=> "'active','inactive','deleted'",
@@ -52,6 +57,7 @@ class Centocusto extends Migration
 		]);
 		$this->forge->addKey('id_cc', true);
 		$this->forge->addForeignKey('fk_obra_cc','obras','id');
+		$this->forge->addForeignKey('fk_frente_cc','frentes','id_ft');
 		$this->forge->createTable('cento_custo');
 	}
 

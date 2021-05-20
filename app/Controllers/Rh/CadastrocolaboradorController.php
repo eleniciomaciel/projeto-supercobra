@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\Estados\EstadosModel;
 use App\Models\CargofuncoesModel;
 use App\Models\CargosModel;
+use App\Models\DepartamentosModel;
 
 class CadastrocolaboradorController extends BaseController
 {
@@ -29,15 +30,17 @@ class CadastrocolaboradorController extends BaseController
 
 	public function cadastro($page = 'cadastrar-dados')
 	{
-		$estados = new EstadosModel();
-		$funcao = new CargosModel();
+		$estados 		= new EstadosModel();
+		$funcao 		= new CargosModel();
+		$departamento  	= new DepartamentosModel();
 
 		if (!is_file(APPPATH . 'Views/frentesObras/frenteRh/layout/pages/colaborador/' . $page . '.php')) {
 			throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
 		}
 		$data = [
-			'estados' => $estados->getEstados(),
-			'funcao'  => $funcao->findAll()
+			'estados' 		=> $estados->getEstados(),
+			'funcao'  		=> $funcao->findAll(),
+			'departamento'  => $departamento->findAll(),
 		]; 
 		echo view('frentesObras/frenteRh/layout/pages/colaborador/' . $page, $data);
 	}

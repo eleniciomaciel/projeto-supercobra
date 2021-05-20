@@ -39,7 +39,7 @@
                                 <td><?= date('d/m/Y', strtotime(esc($lst_cargos['created_at']))) ?></td>
                                 <td><?= esc($lst_cargos['cargo_nome']) ?></td>
                                 <td><?= esc($lst_cargos['cargo_description']) ?> </td>
-                                <td><a class="btn btn-block btn-warning btn-flat" href="/Deletar/<?= esc($lst_cargos['id_cargo'], 'url') ?>"><i class="fa fa-trash"></i> Deletar</a></td>
+                                <td><button type="button" class=" deleteFakeCargos btn btn-block btn-warning btn-flat" id="<?= esc($lst_cargos['id_cargo'], 'url') ?>"><i class="fa fa-trash"></i> Deletar</button></td>
                             </tr>
                         <?php endforeach; ?>
 
