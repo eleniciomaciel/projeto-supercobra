@@ -8,24 +8,24 @@
                 <h3 class="card-title">Departamentos</h3>
             </div>
             <!-- /.card-header -->
-            <form action="/admin_rh/cadastra_cargos_e_funcoes" method="post" id="formAddCargoWithFunction">
-            <?= csrf_field() ?>
+            <form action="/admin_rh/cadastra_departamentos" method="post" id="formAddNovosDepartamentos">
+                <?= csrf_field() ?>
                 <div class="card-body">
 
                     <div class="form-group">
-                        <label for="cargo_new_nome">Nome do departamento </label>
-                        <input type="text" class="form-control form-control-border" name="cargo_new_nome" id="cargo_new_nome" placeholder="Digite aqui...">
-                        <span id="cargo_new_nome_error" class="text-danger"></span>
+                        <label for="dep_new_nome_departamento">Nome do departamento </label>
+                        <input type="text" class="form-control form-control-border" name="dep_new_nome_departamento" id="dep_new_nome_departamento" placeholder="Digite aqui...">
+                        <span id="dep_new_nome_departamento_error" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label for="cargo_new_descricao">Descrição</label>
-                        <input type="text" class="form-control form-control-border border-width-2" name="cargo_new_descricao" id="cargo_new_descricao" placeholder="Digite aqui...">
-                        <span id="cargo_new_descricao_error" class="text-danger"></span>
+                        <label for="dep_new_descricao_departamento">Descrição</label>
+                        <input type="text" class="form-control form-control-border border-width-2" name="dep_new_descricao_departamento" id="dep_new_descricao_departamento" placeholder="Digite aqui...">
+                        <span id="dep_new_descricao_departamento_error" class="text-danger"></span>
                     </div>
 
                     <div class="card-footer">
-                        <button type="submit" class="cls_func_cargo_add btn btn-warning" id="id_func_cargo_add">
+                        <button type="submit" class="cls_dep_add btn btn-warning" id="id_dep_add">
                             <i class="fa fa-save"></i> Salvar
                         </button>
                     </div>
@@ -33,7 +33,7 @@
             </form>
             <br>
             <div class="col-12">
-                <span id="message_cargo"></span>
+                <span id="message_dep"></span>
             </div>
             <!-- /.card-body -->
         </div>
@@ -62,7 +62,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                  
+
                         </tbody>
                     </table>
                 </div>

@@ -1,7 +1,7 @@
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
         <img src="<?= base_url() ?>/dist/img/AdminLTELogo.png" alt="Snake system" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">snake system</span>
+        <span class="brand-text font-weight-light">SYS-IO</span>
     </a>
 
     <!-- Sidebar -->

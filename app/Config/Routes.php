@@ -122,6 +122,10 @@ $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
 /**departamentos */
 $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
     $routes->get("lista_departamentos", "Rh/DepartamentosController::index");
+    $routes->post("cadastra_departamentos", "Rh/DepartamentosController::addDepartamento");
+    $routes->get("get_departamento_dados", "Rh/DepartamentosController::DadosDepartamento");
+    $routes->post("altera_depatamento", "Rh/DepartamentosController::alteraDadosDepartamento");
+    $routes->get("deleta_depatamento", "Rh/DepartamentosController::deletaDadosDepartamento");
 });
 
 
