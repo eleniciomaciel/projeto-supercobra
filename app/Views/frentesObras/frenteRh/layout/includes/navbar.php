@@ -114,9 +114,5 @@
                 <i class="fas fa-power-off mr-2"></i> Sair do sistema</a>
             </div>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                <i class="fas fa-expand-arrows-alt"></i>
-            </a>
-        </li>
+        
     </ul>
