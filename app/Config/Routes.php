@@ -128,6 +128,17 @@ $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
     $routes->get("deleta_depatamento", "Rh/DepartamentosController::deletaDadosDepartamento");
 });
 
+/**cc */
+$routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
+    $routes->get("lista-cento-custo", "Rh/RhccController::index");
+    $routes->post("adiciona_rh_cc", "Rh/RhccController::addNewCc");
+    $routes->get("lista_cc_da_frente", "Rh/RhccController::lista_cc_rh_frente");
+    $routes->get("getListDados_cc", "Rh/RhccController::lista_info_cc");
+    $routes->post("altera_novo_rh_cc", "Rh/RhccController::alteraDados_cc");
+    $routes->get("altera_status_do_cc", "Rh/RhccController::alteraStatusDoCc");
+    
+});
+
 
 $routes->get('logout', 'Home::logout');
 /*

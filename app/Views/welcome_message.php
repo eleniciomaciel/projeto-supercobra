@@ -5,7 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>LOGIN | IO</title>
-
+	<link rel="manifest" href="<?= base_url() ?>/manifest.webmanifest">
+	<link rel="shortcut icon" href="<?= base_url() ?>/dist/img/eletricidade.png" type="image/x-icon">
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Font Awesome -->
@@ -21,10 +22,12 @@
 		<!-- /.login-logo -->
 		<div class="card card-outline card-primary">
 			<div class="card-header text-center">
-				<a href="index2.html" class="h1"><b>System</b>SNAKE</a>
+			<img class="profile-user-img img-fluid img-circle" src="<?= base_url() ?>/dist/img/eletricidade.png" alt="" srcset="">
 			</div>
 			<div class="card-body">
-				<p class="login-box-msg">Sign in to start your session</p>
+				<p class="login-box-msg">
+				Login - Obras e Eletricidade
+				</p>
 				<?php $validation = \Config\Services::validation(); ?>
 
 				<form action="/valida-acesso" method="post">

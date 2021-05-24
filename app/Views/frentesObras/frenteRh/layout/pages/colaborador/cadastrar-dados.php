@@ -16,25 +16,29 @@
                     <legend class="scheduler-border">Dados pessoal</legend>
 
                     <div class="form-group">
-                        <label for="add_colab_nome">Nome Completo do colaborador(a):</label>
-                        <input type="text" class="form-control" name="add_colab_nome" placeholder="Ex.: Ana Silva">
+                        <label for="x_add_colab_nome">Nome Completo do colaborador(a):</label>
+                        <input type="text" class="form-control" name="x_add_colab_nome" name="x_add_colab_nome" placeholder="Ex.: Ana Silva">
+                        <span id="x_add_colab_nome_error" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label for="add_colab_conjuge">Nome do Cônjuge:</label>
-                        <input type="text" class="form-control" name="add_colab_conjuge" placeholder="Ex.: Pedro Silva">
+                        <label for="x_add_colab_conjuge">Nome do Cônjuge:</label>
+                        <input type="text" class="form-control" name="x_add_colab_conjuge" id="x_add_colab_conjuge" placeholder="Ex.: Pedro Silva">
+                        <span id="x_add_colab_conjuge_nome_error" class="text-danger"></span>
                     </div>
 
                     <div class="form-row">
 
                         <div class="form-group col-md-3">
-                            <label for="add_colab_codigo">Código:</label>
-                            <input type="text" class="form-control" name="add_colab_codigo" placeholder="Ex.: 12345">
+                            <label for="x_add_colab_codigo">Código:</label>
+                            <input type="text" class="form-control" name="x_add_colab_codigo" id="x_add_colab_codigo" placeholder="Ex.: 12345">
+                            <span id="x_add_colab_codigo_error" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label for="add_colab_matricula">Matrícula:</label>
-                            <input type="text" class="form-control" name="add_colab_matricula" placeholder="Ex.: 12345">
+                            <label for="x_add_colab_matricula">Matrícula:</label>
+                            <input type="text" class="form-control" name="x_add_colab_matricula" id="x_add_colab_matricula" placeholder="Ex.: 12345">
+                            <span id="x_add_colab_matricula_error" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -44,6 +48,7 @@
                                 <option>Sim</option>
                                 <option>Não</option>
                             </select>
+                            <span id="x_add_colab_nome_error" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -55,6 +60,7 @@
                                 <option>Divorciado(a)</option>
                                 <option>Viúvo(a)</option>
                             </select>
+                            <span id="x_add_colab_nome_error" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -74,6 +80,7 @@
                                 <option>Doutorado</option>
                                 <option>Pós-Doutorado</option>
                             </select>
+                            <span id="x_add_colab_nome_error" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -83,11 +90,13 @@
                                 <option>Brasileira</option>
                                 <option>Estrangeira</option>
                             </select>
+                            <span id="x_add_colab_nome_error" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
                             <label for="add_colab_naturalidade">Naturalidade:</label>
                             <input type="text" class="form-control" name="add_colab_naturalidade" placeholder="Ex.: Salvador">
+                            <span id="x_add_colab_nome_error" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -102,19 +111,23 @@
                                     <option selected disabled>Sem estados cadastrados</option>
                                 <?php endif ?>
                             </select>
+                            <span id="x_add_colab_nome_error" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="add_colab_data_nacimento">Data de nascimento:</label>
                             <input type="date" class="form-control" name="add_colab_data_nacimento">
+                            <span id="x_add_colab_nome_error" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="add_colab_nome_mae">Nome da Mãe:</label>
                             <input type="text" class="form-control" name="add_colab_nome_mae" placeholder="Ex.: Maria Silva">
+                            <span id="x_add_colab_nome_error" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="add_colab_do_pai">Nome do Pai:</label>
                             <input type="text" class="form-control" name="add_colab_do_pai" placeholder="Ex.: Paulo Silva">
+                            <span id="x_add_colab_nome_error" class="text-danger"></span>
                         </div>
 
                     </div>
@@ -504,9 +517,15 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="add_colab_cento_de_custo">Cento de Custo:</label>
-                            <select name="add_colab_cento_de_custo" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
+                            <select name="add_colab_cento_de_custo" class="form-control select2FuncionarioCC" name="colab_form_nome" id="colab_form_nome">
+                            <option selected disabled>Selecione aqui...</option>
+                            <?php if (!empty($list_c_custo) && is_array($list_c_custo)) : ?>
+                                    <?php foreach ($list_c_custo as $ver_cc) : ?>
+                                     <option value="<?= esc($ver_cc['id_cc']) ?>"><?= esc($ver_cc['numero_cc']) ?></option>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <option selected disabled>Não há CC registrado para sua frente.</option>
+                                <?php endif ?>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
@@ -565,20 +584,19 @@
                     <legend class="scheduler-border">Aeroporto</legend>
                     <div class="form-row">
 
-                        <div class="form-group col-md-6">
-                            <label for="add_colab_aeroporto_cidade">Cidade:</label>
-                            <select name="add_colab_aeroporto_cidade" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
+                        <div class="form-group col-md-3">
+                            <label for="add_colab_cep_aeroporto">Cep:</label>
+                            <input type="text" class="form-control" name="add_colab_cep_aeroporto" id="add_colab_cep_aeroporto">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="add_colab_uf_eroporto">UF:</label>
+                            <input type="text" class="form-control" name="add_colab_uf_eroporto" id="add_colab_uf_eroporto" placeholder="Ex.: SP" readonly>
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="add_colab_aeroporto_uf">UF:</label>
-                            <select name="add_colab_aeroporto_uf" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
+                            <label for="add_colab_cidade_aeroporto">Cidade:</label>
+                            <input type="text" class="form-control" name="add_colab_cidade_aeroporto" id="add_colab_cidade_aeroporto" placeholder="Ex.: São Paulo" readonly>
                         </div>
 
                     </div>

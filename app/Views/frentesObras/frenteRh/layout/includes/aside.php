@@ -58,12 +58,12 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/admin_rh/lista-cento-custo" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Cento de Custo</p>
                             </a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a href="/admin_rh/cadastro-colaboradores" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -71,12 +71,13 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Cargos</p>
                             </a>
-                        </li>
+                        </li> -->
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
