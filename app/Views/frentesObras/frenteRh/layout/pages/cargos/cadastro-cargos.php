@@ -30,6 +30,9 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#menu3">Departamentos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#menu4">Atividades</a>
+                    </li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -47,6 +50,9 @@
 
                     <div id="menu3" class="container tab-pane fade"><br>
                         <?= $this->include('frentesObras/frenteRh/layout/pages/cargos/includes/inc_departamento') ?>
+                    </div>
+                    <div id="menu4" class="container tab-pane fade"><br>
+                        <?= $this->include('frentesObras/frenteRh/layout/pages/cargos/includes/inc_atividades') ?>
                     </div>
                 </div>
 

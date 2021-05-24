@@ -97,9 +97,6 @@ $routes->group("admin_master", ["filter" => "auth"], function ($routes) {
 // RH routes
 $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
     $routes->get("gestao_rh", "Rh/RhController::index");
-    //cadastro-colaborador
-    $routes->get("cadastro-colaboradores", "Rh/CadastrocolaboradorController::index");
-    $routes->get("cadastrar-dados", "Rh/CadastrocolaboradorController::cadastro");
     //cargos
     $routes->get("cargos-rh", "Rh/CargosrhController::index");
     $routes->get("cadastrar-cargo", "Rh/CargosrhController::cadastroCargo");
@@ -136,7 +133,21 @@ $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
     $routes->get("getListDados_cc", "Rh/RhccController::lista_info_cc");
     $routes->post("altera_novo_rh_cc", "Rh/RhccController::alteraDados_cc");
     $routes->get("altera_status_do_cc", "Rh/RhccController::alteraStatusDoCc");
-    
+});
+
+/**cadastro do colaborador */
+$routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
+  $routes->get("cadastro-colaboradores", "Rh/CadastrocolaboradorController::index");
+  $routes->get("cadastrar-dados", "Rh/CadastrocolaboradorController::cadastro");
+});
+
+/**dados de atividades do rh */
+$routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
+    $routes->get("lista_atividades", "Rh/AtividadesController::index");
+    $routes->post("add_atividade", "Rh/AtividadesController::adicionaAtividade");
+    $routes->get("dados_atividade", "Rh/AtividadesController::dadosDaAtividade");
+    $routes->post("altera_atividade", "Rh/AtividadesController::alteraDadosAtividade");
+    $routes->get("delete_atividade", "Rh/AtividadesController::deletaDadosAtividade");
 });
 
 

@@ -130,12 +130,15 @@
   
   <?= $this->include('frentesObras/frenteRh/layout/components/001_popap_departamentos') ?>
   <?= $this->include('frentesObras/frenteRh/layout/components/002_popap_cc_rh') ?>
+  <?= $this->include('frentesObras/frenteRh/layout/components/003_popap_atividade') ?>
   <!-- popups -->
   <!-- js -->
   <?= $this->include('frentesObras/frenteRh/layout/js/001_viacep') ?>
   <?= $this->include('frentesObras/frenteRh/layout/js/002_funcao') ?>
   <?= $this->include('frentesObras/frenteRh/layout/js/003_departamento') ?>
   <?= $this->include('frentesObras/frenteRh/layout/js/004_js_cento_custo_rh') ?>
+  <?= $this->include('frentesObras/frenteRh/layout/js/005_js_funcionarios') ?>
+  <?= $this->include('frentesObras/frenteRh/layout/js/006_atividades') ?>
 
 </body>
 

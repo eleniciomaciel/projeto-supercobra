@@ -9,11 +9,11 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form>
+        <form action="/admin_rh/cadastro-funcionario">
             <div class="card-body">
 
                 <fieldset class="scheduler-border">
-                    <legend class="scheduler-border">Dados pessoal</legend>
+                    <legend class="scheduler-border">Dados Pessoais</legend>
 
                     <div class="form-group">
                         <label for="x_add_colab_nome">Nome Completo do colaborador(a):</label>
