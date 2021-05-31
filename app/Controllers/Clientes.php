@@ -7,6 +7,14 @@ use App\Models\ClientesModel;
 
 class Clientes extends BaseController
 {
+	public function __construct()
+    {
+        if (session()->get('role') != "ADMIN") {
+            echo 'Access denied';
+            exit;
+        }
+    }
+	
 	public function cadastrar()
 	{
 		$cli_o_nome_obra_error = '';

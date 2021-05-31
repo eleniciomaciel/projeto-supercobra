@@ -117,21 +117,26 @@
       $('#add_colab_cep_moradia').mask("00.000-000", {
         placeholder: "00.000-000"
       });
-      $('#add_colab_cpf_numero').mask("000.000.00-00", {
-        placeholder: "000.000.00-00"
+      $('#add_colab_cpf_numero').mask("000.000.000-00", {
+        placeholder: "000.000.000-00"
       });
-      $('#add_colab_cep_aeroporto').mask("000.000.00-00", {
-        placeholder: "000.000.00-00"
+      $('#add_colab_cep_aeroporto').mask("00.000-000", {
+        placeholder: "00.000-000"
       });
     });
   </script>
   <?= $this->include('frentesObras/frenteRh/layout/pages/cargos/popups/001_popups_funcao') ?>
   <?= $this->include('frentesObras/frenteRh/layout/pages/cargos/popups/002_popups_cargo') ?>
+  <?= $this->include('frentesObras/frenteRh/layout/pages/cargos/popups/003_popap_resultados') ?>
   
   <?= $this->include('frentesObras/frenteRh/layout/components/001_popap_departamentos') ?>
   <?= $this->include('frentesObras/frenteRh/layout/components/002_popap_cc_rh') ?>
   <?= $this->include('frentesObras/frenteRh/layout/components/003_popap_atividade') ?>
+  <?= $this->include('frentesObras/frenteRh/layout/components/004_popap_funcionario') ?>
   <!-- popups -->
+
+
+
   <!-- js -->
   <?= $this->include('frentesObras/frenteRh/layout/js/001_viacep') ?>
   <?= $this->include('frentesObras/frenteRh/layout/js/002_funcao') ?>

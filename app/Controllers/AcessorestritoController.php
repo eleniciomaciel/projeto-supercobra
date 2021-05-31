@@ -19,6 +19,7 @@ class AcessorestritoController extends BaseController
             exit;
         }
     }
+	
 	public function index()
 	{
 		$model_frentes = new FrentesModel();

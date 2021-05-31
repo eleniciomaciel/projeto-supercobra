@@ -1,6 +1,6 @@
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-        <img src="<?= base_url() ?>/dist/img/eletricidade.png" alt="Snake system" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="<?= base_url() ?>/dist/img/eletricidade.png" alt="sys-io" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">SYS-IO</span>
     </a>
 
@@ -111,7 +111,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
-                            Forms
+                            Controles
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>

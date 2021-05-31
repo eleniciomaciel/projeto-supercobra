@@ -16,6 +16,7 @@ class CargosrhController extends BaseController
             exit;
         }
 	}
+	
 	public function index($page = 'lista-cargos')
 	{
 		if (!is_file(APPPATH . '/Views/frentesObras/frenteRh/layout/pages/cargos/' . $page . '.php')) {

@@ -8,6 +8,14 @@ use App\Models\CargosModel;
 
 class FuncionarioController extends BaseController
 {
+	public function __construct()
+    {
+        if (session()->get('role') != "ADMIN") {
+            echo 'Access denied';
+            exit;
+        }
+    }
+	
 	public function index($page = 'novos-usuarios')
 	{
 		if (!is_file(APPPATH . '/Views/master/layout/pages/usuarios/' . $page . '.php')) {

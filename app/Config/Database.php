@@ -32,11 +32,11 @@ class Database extends Config
 	 */
 	public $default = [
 		'DSN'      => '',
-		'hostname' => '',
-		'username' => '',
+		'hostname' => 'localhost',
+		'username' => 'root',
 		'password' => '',
-		'database' => WRITEPATH.'database/snak_db.db',
-		'DBDriver' => 'SQLite3',
+		'database' => 'sys_obras_eletricidade',
+		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,
 		'DBDebug'  => (ENVIRONMENT !== 'production'),

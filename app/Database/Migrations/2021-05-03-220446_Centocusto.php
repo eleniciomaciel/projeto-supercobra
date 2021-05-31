@@ -29,16 +29,19 @@ class Centocusto extends Migration
 			'fk_obra_cc'       => [
 				'type'           => 'INT',
 				'constraint' 	 => 11,
+				'unsigned'       => true,
 				'null'           => true,
 			],
 			'fk_frente_cc'       => [
 				'type'           => 'INT',
 				'constraint' 	 => 11,
+				'unsigned'       => true,
 				'null'           => true,
 			],
-			'fk_departamento'       => [
+			'fk_departamento' => [
 				'type'           => 'INT',
 				'constraint' 	 => 11,
+				'unsigned'       => true,
 				'null'           => true,
 			],
 			'observacao_cc'       => [
@@ -47,8 +50,8 @@ class Centocusto extends Migration
 			],
 			'status_cc'       => [
 				'type' => 'ENUM',
-				'constraint' 	=> "'active','inactive','deleted'",
-				'default' 		=> 'active',
+				'constraint'     => ['active','inactive','deleted'],
+                'default'        => 'active',
 				'null' 			=> true,
 			],
 			'created_at'       => [

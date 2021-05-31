@@ -1,15 +1,22 @@
-<?= $this->extend('frentesObras/frenteRh/layout/template/base_layout') ?>
+<!-- Modal -->
+<div class="modal fade" id="usuariosFuncionarioModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Dados do colaborador</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
-<?= $this->section('content') ?>
-<section class="col-lg-12 connectedSortable">
-    <!-- TO DO List -->
-    <div class="card card-primary">
-        <div class="card-header">
-            <h3 class="card-title">Pré Cadastro</h3>
-        </div>
-        <!-- /.card-header -->
-        <!-- form start -->
-        <form action="/admin_rh/inserir-funcionario" method="POST" id="form_novo_colaborador">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Informações do cadastro</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form action="/admin_rh/inserir-funcionario" method="POST" id="form_novo_colaborador">
             <?= csrf_field() ?>
 
             <div class="card-body">
@@ -108,7 +115,7 @@
                                 <option selected disabled>Selecione aqui...</option>
                                 <?php if (!empty($estados) && is_array($estados)) : ?>
                                     <?php foreach ($estados as $uf) : ?>
-                                        <option value="<?= esc($uf['id']) ?>"><?= esc($uf['nome']) ?></option>
+                                        <option id="<?= esc($uf['id']) ?>"><?= esc($uf['nome']) ?></option>
                                     <?php endforeach; ?>
                                 <?php else : ?>
                                     <option selected disabled>Sem estados cadastrados</option>
@@ -299,7 +306,7 @@
                                 <option selected disabled>Selecione aqui...</option>
                                 <?php if (!empty($estados) && is_array($estados)) : ?>
                                     <?php foreach ($estados as $uf) : ?>
-                                        <option value="<?= esc($uf['id']) ?>"><?= esc($uf['nome']) ?></option>
+                                        <option id="<?= esc($uf['id']) ?>"><?= esc($uf['nome']) ?></option>
                                     <?php endforeach; ?>
                                 <?php else : ?>
                                     <option selected disabled>Sem estados cadastrados</option>
@@ -334,7 +341,7 @@
                                 <option selected disabled>Selecione aqui...</option>
                                 <?php if (!empty($estados) && is_array($estados)) : ?>
                                     <?php foreach ($estados as $uf) : ?>
-                                        <option value="<?= esc($uf['id']) ?>"><?= esc($uf['nome']) ?></option>
+                                        <option id="<?= esc($uf['id']) ?>"><?= esc($uf['nome']) ?></option>
                                     <?php endforeach; ?>
                                 <?php else : ?>
                                     <option selected disabled>Sem estados cadastrados</option>
@@ -392,7 +399,7 @@
                                 <option selected disabled>Selecione aqui...</option>
                                 <?php if (!empty($estados) && is_array($estados)) : ?>
                                     <?php foreach ($estados as $uf) : ?>
-                                        <option value="<?= esc($uf['id']) ?>"><?= esc($uf['nome']) ?></option>
+                                        <option id="<?= esc($uf['id']) ?>"><?= esc($uf['nome']) ?></option>
                                     <?php endforeach; ?>
                                 <?php else : ?>
                                     <option selected disabled>Sem estados cadastrados</option>
@@ -479,23 +486,8 @@
                     <legend class="scheduler-border">Funcionais</legend>
                     <div class="form-row">
 
-                        <div class="form-group col-md-4">
-                            <label for="add_colab_funcao_cargo">Cargo:</label>
-                            <select name="add_colab_funcao_cargo" id="add_colab_funcao_cargo" class="form-control select2CargoTrocaFuncaoTodas">
-                                <option selected disabled>Selecione aqui...</option>
-                                <?php if (!empty($funcao) && is_array($funcao)) : ?>
-                                    <?php foreach ($funcao as $func_dd) : ?>
-                                        <option value="<?= esc($func_dd['id_cargo']) ?>"><?= esc($func_dd['cargo_nome']) ?></option>
-                                    <?php endforeach; ?>
-                                <?php else : ?>
-                                    <option>...</option>
-                                <?php endif ?>
-                            </select>
-                            <span id="add_colab_funcao_cargo_error" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="add_colab_funcao_cargo">Encarregado:</label>
+                        <div class="form-group col-md-8">
+                            <label for="add_colab_funcao_cargo">Função:</label>
                             <select name="add_colab_funcao_cargo" id="add_colab_funcao_cargo" class="form-control select2CargoTrocaFuncaoTodas">
                                 <option selected disabled>Selecione aqui...</option>
                                 <?php if (!empty($funcao) && is_array($funcao)) : ?>
@@ -534,8 +526,8 @@
                             <label for="add_colab_funcao_hora_extra_fixa">Hor. Ext. Fix.:</label>
                             <select name="add_colab_funcao_hora_extra_fixa" class="form-control">
                                 <option selected disabled>Selecione aqui...</option>
-                                <option value="sin">Sim</option>
-                                <option value="nao">Não</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Não">Não</option>
                             </select>
                             <span id="add_colab_funcao_hora_extra_fixa_error" class="text-danger"></span>
                         </div>
@@ -566,7 +558,7 @@
 
                         <div class="form-group col-md-4">
                             <label for="add_colab_funcao_departamento">Departamento:</label>
-                            <select name="add_colab_funcao_departamento" id="add_colab_funcao_departamento" class="form-control">
+                            <select name="add_colab_funcao_departamento" class="form-control select2DepartamentosTodas">
                                 <option selected disabled>Selecione aqui...</option>
                                 <?php if (!empty($departamento) && is_array($departamento)) : ?>
                                     <?php foreach ($departamento as $ver_dep) : ?>
@@ -596,8 +588,8 @@
                             <label for="add_colab_funcao_hora_extras">Horas trabalhadas:</label>
                             <select name="add_colab_funcao_hora_extras" class="form-control">
                                 <option selected disabled>Selecione aqui...</option>
-                                <option value="sim">Sim</option>
-                                <option value="nao">Não</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Nao">Não</option>
                             </select>
                             <span id="add_colab_funcao_hora_extras_error" class="text-danger"></span>
                         </div>
@@ -615,17 +607,17 @@
                             <label for="add_colab_funcao_periculosidade">Periculosidade:</label>
                             <select name="add_colab_funcao_periculosidade" class="form-control">
                                 <option selected disabled>Selecione aqui...</option>
-                                <option value="sim">Sim</option>
-                                <option value="nao">Não</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Nao">Não</option>
                             </select>
                             <span id="add_colab_funcao_periculosidade_error" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_funcao_insalubridade">Insalubridade:</label>
-                            <select name="add_colab_funcao_insalubridade" id="add_colab_funcao_insalubridade" class="form-control">
+                            <select name="add_colab_funcao_insalubridade" class="form-control">
                                 <option selected disabled>Selecione aqui...</option>
-                                <option value="sim">Sim</option>
-                                <option value="nao">Não</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Nao">Não</option>
                             </select>
                             <span id="add_colab_funcao_insalubridade_error" class="text-danger"></span>
                         </div>
@@ -633,8 +625,8 @@
                             <label for="add_colab_funcao_desconto_sindical">Desc.: Sindical:</label>
                             <select name="add_colab_funcao_desconto_sindical" class="form-control">
                                 <option selected disabled>Selecione aqui...</option>
-                                <option value="sim">Sim</option>
-                                <option value="nao">Não</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Nao">Não</option>
                             </select>
                             <span id="add_colab_funcao_desconto_sindical_error" class="text-danger"></span>
                         </div>
@@ -642,8 +634,8 @@
                             <label for="add_colab_funcao_ps">PS.:</label>
                             <select name="add_colab_funcao_ps" class="form-control">
                                 <option selected disabled>Selecione aqui...</option>
-                                <option value="sim">Sim</option>
-                                <option value="nao">Não</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Nao">Não</option>
                             </select>
                             <span id="add_colab_funcao_ps_error" class="text-danger"></span>
                         </div>
@@ -728,11 +720,13 @@
                 <a href="/admin_rh/cadastro-colaboradores" class="btn btn-success"><i class="fa fa-reply-all"></i> Voltar</a>
             </div>
         </form>
-        <br>
-        <div class="col-12">
-            <span id="message_add_funcionario"></span>
+                    <!-- fim form-->
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
         </div>
     </div>
-    <!-- /.card -->
-</section>
-<?= $this->endSection() ?>
+</div>

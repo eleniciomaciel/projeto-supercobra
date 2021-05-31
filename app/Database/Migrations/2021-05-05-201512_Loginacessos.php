@@ -11,11 +11,11 @@ class Loginacessos extends Migration
 		$this->forge->addField([
 			'au_id'          => [
 				'type'           => 'INT',
-				'constraint'     => 1,
+				'constraint'     => 11,
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
-			'au_fk_usuario_corp'       => [
+			'au_fk_usuario_corp'   => [
 				'type'           => 'INT',
 				'constraint'     => 11,
 				'unsigned'       => true,

@@ -139,6 +139,10 @@ $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
 $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
   $routes->get("cadastro-colaboradores", "Rh/CadastrocolaboradorController::index");
   $routes->get("cadastrar-dados", "Rh/CadastrocolaboradorController::cadastro");
+  $routes->post("inserir-funcionario", "Rh/CadastrocolaboradorController::addNovoFuncionario");
+  $routes->get("ler_funcionarios_por_frente", "Rh/CadastrocolaboradorController::listFuncionarios");
+  $routes->get("atualiza-cadastro-do-funcionario/(:num)", "Rh/CadastrocolaboradorController::visualizaDadosCadastrado/$1");
+  
 });
 
 /**dados de atividades do rh */

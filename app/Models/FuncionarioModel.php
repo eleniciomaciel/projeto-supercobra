@@ -12,45 +12,73 @@ class FuncionarioModel extends Model
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
 	protected $returnType           = 'array';
-	protected $useSoftDelete        = false;
+	protected $useSoftDelete        = true;
 	protected $protectFields        = true;
 	protected $allowedFields        = [
 		'f_nome',
-		'f_cargo',
-		'f_email_pessoal',
+		'f_conjugue',
 		'f_codigo',
-		'f_fk_obra',
-		'f_Fk_frente',
 		'f_matricula',
-		'f_cpf',
-		'f_rg_numero',
-		'f_rg_emissor',
-		'f_rg_uf',
-		'f_rg_data_emissao',
 		'f_sexo',
-		'f_data_nascimento',
-		'f_nacionalidade',
-		'f_naturalidade_cidade',
-		'f_nacionalidade_uf',
 		'f_estado_civil',
+		'f_grau_instrucao',
+		'f_nacionalidade',
+		'f_nacionalidade_uf',
+		'f_naturalidade_cidade',
+		'f_data_nascimento',
 		'f_mae',
 		'f_pai',
-		'f_numero_reservista',
-		'f_numero_cartao_sus',
+		'f_telefone_pessoal',
+		'f_contato_alternativo',
+		'f_telefone_contato',
+		'f_email_pessoal',
 		'f_cep',
 		'f_estado',
 		'f_cidade',
 		'f_bairro',
+		'f_numero_casa',
 		'f_endereco',
 		'f_endereco_complemento',
-		'f_numero_casa',
-		'f_telefone_pessoal',
-		'f_telefone_contato',
+		'f_rg_numero',
+		'f_rg_uf',
+		'f_rg_data_emissao',
+		'f_rg_emissor',
 		'f_titulo_eleitor_numero',
 		'f_titulo_eleitor_nona',
 		'f_titulo_eleitor_sessao',
 		'f_titulo_eleitor_uf',
 		'f_titulo_eleitor_data_emissao',
+		'f_cpf',
+		'f_pis',
+		'f_numero_reservista',
+		'f_numero_cartao_sus',
+		'f_ctps_numero',
+		'f_ctps_numero_serie',
+		'f_ctps_data_emissao',
+		'f_ctps_uf',
+		'f_fgts_categoria',
+		'f_fgts_codigo',
+		'f_uniforme_camisa',
+		'f_uniforme_calca',
+		'f_tipo_sangue',
+		'f_cargo',
+		'f_fk_obra',
+		'f_Fk_frente',
+		'f_fk_cento_custo',
+		'f_horas_trabalho',
+		'f_fk_id_departamento',
+		'f_fk_encarregado',
+		'f_situacao',
+		'f_admissao',
+		'f_desligamento',
+		'f_salario',
+		'f_tipo_pagamento',
+		'f_tipo_salario',
+		'f_insalubridade',
+		'f_periculosidade',
+		'f_desconto_sindical',
+		'f_ps',
+		'f_funcao',
 		'f_cnh_numero',
 		'f_cnh_categoria',
 		'f_cnh_emissor',
@@ -58,16 +86,20 @@ class FuncionarioModel extends Model
 		'f_cnh_data_emissao',
 		'f_cnh_data_vencimento',
 		'f_cnh_data_primeira',
-		'f_ctps_numero',
-		'f_ctps_numero_serie',
-		'f_ctps_uf',
 		'f_status',
-		'f_ctps_data_emissao',
-		'f_description'
+		'f_fk_local_trabalho',
+		'f_tipo_moradia',
+		'f_description',
+		'f_aeroporto_cep',
+		'f_aeroporto_uf',
+		'f_aeroporto_cidade',
+		'created_at',
+		'updated_at',
+		'deleted_at',
 	];
 
 	// Dates
-	protected $useTimestamps        = false;
+	protected $useTimestamps        = true;
 	protected $dateFormat           = 'datetime';
 	protected $createdField         = 'created_at';
 	protected $updatedField         = 'updated_at';
@@ -91,4 +123,43 @@ class FuncionarioModel extends Model
 			->where(['f_id' => $slug])
 			->first();
 	}
+
+	/**lista funcionarios do rh */
+	public function getFuncionariosId($id)
+	{
+		return $this->asArray()
+			->where(['f_id' => $id])
+			->first();
+	}
+	
+	public function noticeTable()
+	{
+		$builder = $this->db->table('funcionarios');
+		return $builder;
+	}
+
+	public function button()
+	{
+		$action_button = function($row){
+			return '
+			<div class="btn-group">
+				<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Opções
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="/Rh/CadastrocolaboradorController/visualizaDadosCadastrado/'.esc($row['f_id']).'"><i class="fas fa-eye"></i>&nbsp;Visualizar</a>
+					<a class="cl_func_doc dropdown-item" href="#" data-id="'.$row['f_id'].'"><i class="fas fa-file-pdf"></i>&nbsp;Documentos</a>
+					<a class="cl_func_cng dropdown-item" href="#" data-id="'.$row['f_id'].'"><i class="fas fa-id-card"></i>&nbsp;Habilitação</a>
+					<a class="cl_func_aso dropdown-item" href="#" data-id="'.$row['f_id'].'"><i class="fas fa-file-medical-alt"></i>&nbsp;ASO</a>
+				<div class="dropdown-divider"></div>
+					<a class="cl_func_desabilita dropdown-item" href="#" id="'.$row['f_id'].'"><i class="fas fa-power-off"></i>&nbsp;Desativar</a>
+				</div>
+			</div>
+				';
+		};
+
+		return $action_button;
+	}
+
+
 }

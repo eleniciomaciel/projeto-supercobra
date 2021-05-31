@@ -6,6 +6,14 @@ use App\Controllers\BaseController;
 use App\Models\FrentesModel;
 class Frentes extends BaseController
 {
+	public function __construct()
+    {
+        if (session()->get('role') != "ADMIN") {
+            echo 'Access denied';
+            exit;
+        }
+    }
+	
 	public function cadastroFrentes()
 	{
 		$frt_cliente_error = '';
