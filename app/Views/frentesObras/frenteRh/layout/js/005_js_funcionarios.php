@@ -1,5 +1,11 @@
 <script>
     $(document).ready(function() {
+
+        todasFuncionariosSelect();
+        selectCargoComFuncao();
+        selectAtividades();
+        selectDepartamentos();
+
         $('#lista_funcioanrios_frente').DataTable({
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
@@ -17,8 +23,6 @@
                 type: "GET",
             }
         });
-
-
 
         $('#form_novo_colaborador').on('submit', function(event) {
             event.preventDefault();
@@ -247,6 +251,314 @@
                 }
             })
         });
+
+        /**altera dados do uisuário tipo funcionario */
+        $('#form_update_colaborador').on('submit', function(event) {
+            event.preventDefault();
+
+           
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                dataType: "JSON",
+                beforeSend: function() {
+                    $('#id_up_colab_f').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde... </button>');
+                    $('.cls_up_colab_f').attr('disabled', 'disabled');
+                },
+                success: function(data) {
+
+                    $('#id_up_colab_f').html('<i class="fas fa-sync-alt"></i> Alterar');
+                    $('.cls_up_colab_f').attr('disabled', false);
+
+                    if (data.error == 'yes') {
+
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'Ops! Formulário com erro(s), verifique por gentileza.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        $('#x_add_colab_nome_error_up').text(data.x_add_colab_nome_error_up);
+                        $('#x_add_colab_conjuge_nome_error_up').text(data.x_add_colab_conjuge_nome_error_up);
+                        $('#x_add_colab_codigo_error_up').text(data.x_add_colab_codigo_error_up);
+
+                        $('#x_add_colab_matricula_error_up').text(data.x_add_colab_matricula_error_up);
+                        $('#add_colab_sexo_error_up').text(data.add_colab_sexo_error_up);
+                        $('#add_colab_estado_civil_error_up').text(data.add_colab_estado_civil_error_up);
+
+                        $('#add_colab_escolaridade_error_up').text(data.add_colab_escolaridade_error_up);
+                        $('#add_colab_nacionalidade_error_up').text(data.add_colab_nacionalidade_error_up);
+                        $('#add_colab_naturalidade_error_up').text(data.add_colab_naturalidade_error_up);
+
+                        $('#add_colab_uf_naturalidade_error_up').text(data.add_colab_uf_naturalidade_error_up);
+                        $('#add_colab_data_nacimento_error_up').text(data.add_colab_data_nacimento_error_up);
+                        $('#add_colab_nome_mae_error_up').text(data.add_colab_nome_mae_error_up);
+                        $('#add_colab_do_pai_error_up').text(data.add_colab_do_pai_error_up);
+
+                        $('#add_colab_contato_pricipal_error_up').text(data.add_colab_contato_pricipal_error_up);
+                        $('#add_colab_contato_alternativo_error_up').text(data.add_colab_contato_alternativo_error_up);
+                        $('#add_colab_contato_familiar_error_up').text(data.add_colab_contato_familiar_error_up);
+                        $('#add_colab_email_pessoal_error_up').text(data.add_colab_email_pessoal_error_up);
+
+                        //endereço pessoal
+                        $('#add_colab_cep_moradia_error_up').text(data.add_colab_cep_moradia_error_up);
+                        $('#add_colab_uf_moradia_error_up').text(data.add_colab_uf_moradia_error_up);
+                        $('#add_colab_cidade_moradia_error_up').text(data.add_colab_cidade_moradia_error_up);
+                        $('#add_colab_bairro_moraddia_error_up').text(data.add_colab_bairro_moraddia_error_up);
+                        $('#add_colab_rua_moradia_error_up').text(data.add_colab_rua_moradia_error_up);
+                        $('#add_colab_numero_moradia_error_up').text(data.add_colab_numero_moradia_error_up);
+                        $('#add_colab_complemento_morada_error_up').text(data.add_colab_complemento_morada_error_up);
+
+                        //documentos
+                        $('#add_colab_doc_numero_rg_error_up').text(data.add_colab_doc_numero_rg_error_up);
+                        $('#add_colab_doc_orgao_emissor_rg_error_up').text(data.add_colab_doc_orgao_emissor_rg_error_up);
+                        $('#add_colab_doc_data_rg_emissao_error_up').text(data.add_colab_doc_data_rg_emissao_error_up);
+                        $('#add_colab_doc_uf_rg_error_up').text(data.add_colab_doc_uf_rg_error_up);
+                        $('#add_colab_titulo_numero_error_up').text(data.add_colab_titulo_numero_error_up);
+                        $('#add_colab_titulo_zona_error_up').text(data.add_colab_titulo_zona_error_up);
+                        $('#add_colab_titulo_sessao_error_up').text(data.add_colab_titulo_sessao_error_up);
+                        $('#add_colab_titulo_data_emissao_error_up').text(data.add_colab_titulo_data_emissao_error_up);
+                        $('#add_colab_titulo_uf_emissao_error_up').text(data.add_colab_titulo_uf_emissao_error_up);
+                        $('#add_colab_cpf_numero_error_up').text(data.add_colab_cpf_numero_error_up);
+                        $('#add_colab_numero_pis_error_up').text(data.add_colab_numero_pis_error_up);
+                        $('#add_colab_reservista_numero_error_up').text(data.add_colab_reservista_numero_error_up);
+                        $('#add_colab_sus_numero_error_up').text(data.add_colab_sus_numero_error_up);
+
+                        //CTPS--FGTS
+                        $('#add_colab_ctps_numero_error_up').text(data.add_colab_ctps_numero_error_up);
+                        $('#add_colab_ctps_serie_error_up').text(data.add_colab_ctps_serie_error_up);
+                        $('#add_colab_data_emissao_error_up').text(data.add_colab_data_emissao_error_up);
+                        $('#add_colab_uf_emissor_error_up').text(data.add_colab_uf_emissor_error_up);
+                        $('#add_colab_fgts_categoria_error_up').text(data.add_colab_fgts_categoria_error_up);
+                        $('#add_colab_fgts_codigo_error_up').text(data.add_colab_fgts_codigo_error_up);
+
+                        //UNIFORME -- TIPO SANGUE
+                        $('#add_colab_uniforme_tamanho_error_up').text(data.add_colab_uniforme_tamanho_error_up);
+                        $('#add_colab_uniforme_calca_error_up').text(data.add_colab_uniforme_calca_error_up);
+                        $('#add_colab_tipo_sangue_error_up').text(data.add_colab_tipo_sangue_error_up);
+
+                         //FUNCIONAIS
+                        $('#add_colab_funcao_cargo_error_up').text(data.add_colab_funcao_cargo_error_up);
+                        $('#add_colab_funcao_situacao_error_up').text(data.add_colab_funcao_situacao_error_up);
+                        $('#add_colab_funcao_admissao_data_error_up').text(data.add_colab_funcao_admissao_data_error_up);
+
+                        $('#add_colab_funcao_desligamento_data_data_error_up').text(data.add_colab_funcao_desligamento_data_data_error_up);
+                        $('#add_colab_funcao_hora_extra_fixa_error_up').text(data.add_colab_funcao_hora_extra_fixa_error_up);
+                        $('#add_colab_funcao_salario_error_up').text(data.add_colab_funcao_salario_error_up);
+
+                        $('#add_colab_funcao_tipo_pagamento_error_up').text(data.add_colab_funcao_tipo_pagamento_error_up);
+                        $('#add_colab_funcao_tipo_salario_error_up').text(data.add_colab_funcao_tipo_salario_error_up);
+                        $('#add_colab_funcao_departamento_error_up').text(data.add_colab_funcao_departamento_error_up);
+
+                        $('#add_colab_cento_de_custo_error_up').text(data.add_colab_cento_de_custo_error_up);
+                        $('#add_colab_funcao_hora_extras_error_up').text(data.add_colab_funcao_hora_extras_error_up);
+                        $('#add_colab_funcao_encarregado_error_up').text(data.add_colab_funcao_encarregado_error_up);
+
+                        $('#add_colab_funcao_periculosidade_error_up').text(data.add_colab_funcao_periculosidade_error_up);
+                        $('#add_colab_funcao_insalubridade_error_up').text(data.add_colab_funcao_insalubridade_error_up);
+                        $('#add_colab_funcao_desconto_sindical_error_up').text(data.add_colab_funcao_desconto_sindical_error_up);
+                        $('#add_colab_funcao_ps_error_up').text(data.add_colab_funcao_ps_error_up);
+
+                        //Aeroporto
+                        $('#add_colab_cep_aeroporto_error_up').text(data.add_colab_cep_aeroporto_error_up);
+                        $('#add_colab_uf_eroporto_error_up').text(data.add_colab_uf_eroporto_error_up);
+                        $('#add_colab_cidade_aeroporto_error_up').text(data.add_colab_cidade_aeroporto_error_up);
+
+                        //Outros
+                        $('#add_colab_outros_local_trabalho_error_up').text(data.add_colab_outros_local_trabalho_error_up);
+                        $('#add_colab_outros_tipo_moradia_error_up').text(data.add_colab_outros_tipo_moradia_error_up);
+                        $('#add_colab_outros_observacao_error_up').text(data.add_colab_outros_observacao_error_up);
+
+                    } else {
+
+                        //limpa
+                        $('#x_add_colab_nome_error_up').text('');
+                        $('#x_add_colab_conjuge_nome_error_up').text('');
+                        $('#x_add_colab_codigo_error_up').text('');
+
+                        $('#x_add_colab_matricula_error_up').text('');
+                        $('#add_colab_sexo_error_up').text('');
+                        $('#add_colab_estado_civil_error_up').text('');
+
+                        $('#add_colab_escolaridade_error_up').text('');
+                        $('#add_colab_nacionalidade_error_up').text('');
+                        $('#add_colab_naturalidade_error_up').text('');
+
+                        $('#add_colab_uf_naturalidade_error_up').text('');
+                        $('#add_colab_data_nacimento_error_up').text('');
+                        $('#add_colab_nome_mae_error_up').text('');
+                        $('#add_colab_do_pai_error_up').text('');
+
+                        //contato
+                        $('#add_colab_contato_pricipal_error_up').text('');
+                        $('#add_colab_contato_alternativo_error_up').text('');
+                        $('#add_colab_contato_familiar_error_up').text('');
+                        $('#add_colab_email_pessoal_error_up').text('');
+
+                        //endereço pessola
+                        $('#add_colab_cep_moradia_error_up').text('');
+                        $('#add_colab_uf_moradia_error_up').text('');
+                        $('#add_colab_cidade_moradia_error_up').text('');
+                        $('#add_colab_bairro_moraddia_error_up').text('');
+                        $('#add_colab_rua_moradia_error_up').text('');
+                        $('#add_colab_numero_moradia_error_up').text('');
+                        $('#add_colab_complemento_morada_error_up').text('');
+                        
+                        //documentos
+                        $('#add_colab_doc_numero_rg_error_up').text('');
+                        $('#add_colab_doc_orgao_emissor_rg_error_up').text('');
+                        $('#add_colab_doc_data_rg_emissao_error_up').text('');
+                        $('#add_colab_doc_uf_rg_error_up').text('');
+                        $('#add_colab_titulo_numero_error_up').text('');
+                        $('#add_colab_titulo_zona_error_up').text('');
+                        $('#add_colab_titulo_sessao_error_up').text('');
+                        $('#add_colab_titulo_data_emissao_error_up').text('');
+                        $('#add_colab_titulo_uf_emissao_error_up').text('');
+                        $('#add_colab_cpf_numero_error_up').text('');
+                        $('#add_colab_numero_pis_error_up').text('');
+                        $('#add_colab_reservista_numero_error_up').text('');
+                        $('#add_colab_sus_numero_error_up').text('');
+
+                        //CTPS--FGTS
+                        $('#add_colab_ctps_numero_error_up').text('');
+                        $('#add_colab_ctps_serie_error_up').text('');
+                        $('#add_colab_data_emissao_error_up').text('');
+                        $('#add_colab_uf_emissor_error_up').text('');
+                        $('#add_colab_fgts_categoria_error_up').text('');
+                        $('#add_colab_fgts_codigo_error_up').text('');
+
+                        //UNIFORME -- TIPO SANGUE
+                        $('#add_colab_uniforme_tamanho_error_up').text('');
+                        $('#add_colab_uniforme_calca_error_up').text('');
+                        $('#add_colab_tipo_sangue_error_up').text('');
+
+                        //FUNCIONAIS
+                        $('#add_colab_funcao_cargo_error_up').text('');
+                        $('#add_colab_funcao_situacao_error_up').text('');
+                        $('#add_colab_funcao_admissao_data_error_up').text('');
+
+                        $('#add_colab_funcao_desligamento_data_data_error_up').text('');
+                        $('#add_colab_funcao_hora_extra_fixa_error_up').text('');
+                        $('#add_colab_funcao_salario_error_up').text('');
+
+                        $('#add_colab_funcao_tipo_pagamento_error_up').text('');
+                        $('#add_colab_funcao_tipo_salario_error_up').text('');
+                        $('#add_colab_funcao_departamento_error_up').text('');
+
+                        $('#add_colab_cento_de_custo_error_up').text('');
+                        $('#add_colab_funcao_hora_extras_error_up').text('');
+                        $('#add_colab_funcao_encarregado_error_up').text('');
+                        
+                        $('#add_colab_funcao_periculosidade_error_up').text('');
+                        $('#add_colab_funcao_insalubridade_error_up').text('');
+                        $('#add_colab_funcao_desconto_sindical_error_up').text('');
+                        $('#add_colab_funcao_ps_error_up').text('');
+
+                        //Aeroporto
+                        $('#add_colab_cep_aeroporto_error_up').text('');
+                        $('#add_colab_uf_eroporto_error_up').text('');
+                        $('#add_colab_cidade_aeroporto_error_up').text('');
+
+                        //Outros
+                        $('#add_colab_outros_local_trabalho_error_up').text('');
+                        $('#add_colab_outros_tipo_moradia_error_up').text('');
+                        $('#add_colab_outros_observacao_error_up').text('');
+
+
+
+                        $('#message_up_funcionario').html(data.message);
+                        $('#lista_funcioanrios_frente').DataTable().ajax.reload();
+                        setTimeout(function() {
+                            $('#message_up_funcionario').html('');
+                        }, 3000);
+                    }
+                }
+            })
+        });
+
+         /**seleciona os funcionarios */
+         function todasFuncionariosSelect() {
+            $.ajax({
+                url: '<?= site_url('/admin_rh/list_funcionarios_select') ?>',
+                method: 'get',
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    $('select[name="funcionario_select"]').empty();
+                    $('select[name="funcionario_select"]').append('<option selected disabled>Selecione aqui...</option>');
+
+                    $.each(response, function(index, data) {
+                        $('#funcionario_select').append('<option value="' + data['f_id'] + '">' + data['f_nome'] + '</option>');
+                    });
+                }
+            });
+        }
+
+         /**seleciona os funcionarios */
+         function selectCargoComFuncao() {
+            $.ajax({
+                url: '<?= site_url('/admin_rh/list_funcionarios_funcao') ?>',
+                method: 'get',
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    $('select[name="select_cargo_e_funcoes"]').empty();
+                    $('select[name="select_cargo_e_funcoes"]').append('<option selected disabled>Selecione aqui...</option>');
+
+                    $.each(response, function(index, data) {
+                        $('#select_cargo_e_funcoes').append('<option value="' + data['id'] + '">' + data['cf_nome_cargo_funcao'] + '</option>');
+                    });
+                }
+            });
+        }
+
+        /**seleciona os departamentos */
+        function selectDepartamentos() {
+            $.ajax({
+                url: '<?= site_url('/admin_rh/list_funcionarios_departamento') ?>',
+                method: 'get',
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    $('select[name="select_departamentos_all"]').empty();
+                    $('select[name="select_departamentos_all"]').append('<option selected disabled>Selecione aqui...</option>');
+
+                    $.each(response, function(index, data) {
+                        $('#select_departamentos_all').append('<option value="' + data['id'] + '">' + data['dep_name'] + '</option>');
+                    });
+                }
+            });
+        }
+
+         /**seleciona os departamentos */
+         function selectAtividades() {
+            $.ajax({
+                url: '<?= site_url('/admin_rh/list_funcionarios_atividade') ?>',
+                method: 'get',
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    $('select[name="select_atividades_all"]').empty();
+                    $('select[name="select_atividades_all"]').append('<option selected disabled>Selecione aqui...</option>');
+
+                    $.each(response, function(index, data) {
+                        $('#select_atividades_all').append('<option value="' + data['id'] + '">' + data['titulo_nome'] + '</option>');
+                    });
+                }
+            });
+        }
 
         $(document).on('click', '.cl_func_view', function() {
             var id = $(this).data('id');

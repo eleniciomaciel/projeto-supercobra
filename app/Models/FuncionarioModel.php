@@ -132,6 +132,13 @@ class FuncionarioModel extends Model
 			->first();
 	}
 	
+	/**lista funcionarios do rh da frente */
+	public function getFuncionariosFrente($id)
+	{
+		return $this->asArray()
+			->where(['f_Fk_frente' => $id])
+			->findAll();
+	}
 	public function noticeTable()
 	{
 		$builder = $this->db->table('funcionarios');

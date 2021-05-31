@@ -22,6 +22,17 @@ class CargofuncoesModel extends Model
 	protected $updatedField         = 'updated_at';
 	protected $deletedField         = 'deleted_at';
 
+	public function getCargosFuncoes($slug = false)
+	{
+		if ($slug === false) {
+			return $this->findAll();
+		}
+
+		return $this->asArray()
+			->where(['slug' => $slug])
+			->first();
+	}
+
 	public function noticeTable()
 	{
 		$builder = $this->db->table('cargofuncoes');

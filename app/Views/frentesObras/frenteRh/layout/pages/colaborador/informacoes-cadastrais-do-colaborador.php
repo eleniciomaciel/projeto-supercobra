@@ -9,7 +9,7 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form action="/admin_rh/inserir-funcionario" method="POST" id="form_novo_colaborador">
+        <form action="/admin_rh/altera-funcionario" method="POST" id="form_update_colaborador">
             <?= csrf_field() ?>
 
             <div class="card-body">
@@ -20,13 +20,13 @@
                     <div class="form-group">
                         <label for="x_add_colab_nome">Nome Completo do colaborador(a):</label>
                         <input type="text" class="form-control" name="x_add_colab_nome" name="x_add_colab_nome" value="<?= esc($dd_funcionarios['f_nome']) ?>">
-                        <span id="x_add_colab_nome_error" class="text-danger"></span>
+                        <span id="x_add_colab_nome_error_up" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="x_add_colab_conjuge">Nome do Cônjuge:</label>
                         <input type="text" class="form-control" name="x_add_colab_conjuge" id="x_add_colab_conjuge"  value="<?= esc($dd_funcionarios['f_conjugue']) ?>">
-                        <span id="x_add_colab_conjuge_nome_error" class="text-danger"></span>
+                        <span id="x_add_colab_conjuge_nome_error_up" class="text-danger"></span>
                     </div>
 
                     <div class="form-row">
@@ -34,13 +34,13 @@
                         <div class="form-group col-md-3">
                             <label for="x_add_colab_codigo">Código:</label>
                             <input type="text" class="form-control" name="x_add_colab_codigo" id="x_add_colab_codigo"  value="<?= esc($dd_funcionarios['f_codigo']) ?>">
-                            <span id="x_add_colab_codigo_error" class="text-danger"></span>
+                            <span id="x_add_colab_codigo_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
                             <label for="x_add_colab_matricula">Matrícula:</label>
                             <input type="text" class="form-control" name="x_add_colab_matricula" id="x_add_colab_matricula"  value="<?= esc($dd_funcionarios['f_matricula']) ?>">
-                            <span id="x_add_colab_matricula_error" class="text-danger"></span>
+                            <span id="x_add_colab_matricula_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -49,7 +49,7 @@
                                 <option value="Masculino" <?php if($dd_funcionarios['f_sexo'] == "Masculino"){echo "selected";} ?>>Masculino</option>
                                 <option value="Feminino" <?php if($dd_funcionarios['f_sexo'] == "Feminino"){echo "selected";} ?>>Feminino</option>
                             </select>
-                            <span id="add_colab_sexo_error" class="text-danger"></span>
+                            <span id="add_colab_sexo_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -61,7 +61,7 @@
                                 <option value="Viúvo(a)" <?php if($dd_funcionarios['f_estado_civil'] == 'Viúvo(a)'){echo 'selected';} ?>>Viúvo(a)</option>
                                 <option value="Outros" <?php if($dd_funcionarios['f_estado_civil'] == 'Outros'){echo 'selected';} ?>>Outros</option>
                             </select>
-                            <span id="add_colab_estado_civil_error" class="text-danger"></span>
+                            <span id="add_colab_estado_civil_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -81,7 +81,7 @@
                                 <option value="10" <?php if($dd_funcionarios['f_grau_instrucao'] == '10'){echo 'selected';} ?>>Doutorado</option>
                                 <option value="11" <?php if($dd_funcionarios['f_grau_instrucao'] == '11'){echo 'selected';} ?>>Pós-Doutorado</option>
                             </select>
-                            <span id="add_colab_escolaridade_error" class="text-danger"></span>
+                            <span id="add_colab_escolaridade_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -90,18 +90,18 @@
                                 <option value="Brasileira(a)" <?php if($dd_funcionarios['f_nacionalidade'] == 'Brasileira(a)'){echo 'selected';} ?>>Brasileira(a)</option>
                                 <option value="Estrangeira(a)" <?php if($dd_funcionarios['f_nacionalidade'] == 'Estrangeira(a)'){echo 'selected';} ?>>Estrangeira(a)</option>
                             </select>
-                            <span id="add_colab_nacionalidade_error" class="text-danger"></span>
+                            <span id="add_colab_nacionalidade_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
                             <label for="add_colab_naturalidade">Naturalidade:</label>
                             <input type="text" class="form-control" name="add_colab_naturalidade" id="add_colab_naturalidade" value="<?= esc($dd_funcionarios['f_nacionalidade']) ?>">
-                            <span id="add_colab_naturalidade_error" class="text-danger"></span>
+                            <span id="add_colab_naturalidade_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
                             <label for="add_colab_uf_naturalidade">UF da Naturalidade:</label>
-                            <select name="up_add_colab_uf_naturalidade" id="up_add_colab_uf_naturalidade" class="form-control">
+                            <select name="add_colab_uf_naturalidade" id="add_colab_uf_naturalidade" class="form-control">
                                 <option selected disabled>Selecione aqui...</option>
                                 <?php if (!empty($estados) && is_array($estados)) : ?>
                                     <?php foreach ($estados as $uf) : ?>
@@ -111,25 +111,25 @@
                                     <option selected disabled>Sem estados cadastrados</option>
                                 <?php endif ?>
                             </select>
-                            <span id="add_colab_uf_naturalidade_error" class="text-danger"></span>
+                            <span id="add_colab_uf_naturalidade_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="add_colab_data_nacimento">Data de nascimento:</label>
                             <input type="date" class="form-control" name="add_colab_data_nacimento" id="add_colab_data_nacimento" value="<?= esc($dd_funcionarios['f_data_nascimento']) ?>">
-                            <span id="add_colab_data_nacimento_error" class="text-danger"></span>
+                            <span id="add_colab_data_nacimento_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="add_colab_nome_mae">Nome da Mãe:</label>
                             <input type="text" class="form-control" name="add_colab_nome_mae" id="add_colab_nome_mae" value="<?= esc($dd_funcionarios['f_mae']) ?>">
-                            <span id="add_colab_nome_mae_error" class="text-danger"></span>
+                            <span id="add_colab_nome_mae_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="add_colab_do_pai">Nome do Pai:</label>
                             <input type="text" class="form-control" name="add_colab_do_pai" id="add_colab_do_pai" value="<?= esc($dd_funcionarios['f_pai']) ?>">
-                            <span id="add_colab_do_pai_error" class="text-danger"></span>
+                            <span id="add_colab_do_pai_error_up" class="text-danger"></span>
                         </div>
 
                     </div>
@@ -141,22 +141,22 @@
                         <div class="form-group col-md-3">
                             <label for="add_colab_contato_pricipal">Contato Principal:</label>
                             <input type="text" class="form-control" name="add_colab_contato_pricipal" id="add_colab_contato_pricipal" value="<?= esc($dd_funcionarios['f_telefone_pessoal']) ?>">
-                            <span id="add_colab_contato_pricipal_error" class="text-danger"></span>
+                            <span id="add_colab_contato_pricipal_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_contato_alternativo">Contato Alternativo</label>
                             <input type="text" class="form-control" name="add_colab_contato_alternativo" id="add_colab_contato_alternativo" value="<?= esc($dd_funcionarios['f_contato_alternativo']) ?>">
-                            <span id="add_colab_contato_alternativo_error" class="text-danger"></span>
+                            <span id="add_colab_contato_alternativo_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_contato_familiar">Contato Familiar</label>
                             <input type="text" class="form-control" name="add_colab_contato_familiar" id="add_colab_contato_familiar" value="<?= esc($dd_funcionarios['f_telefone_contato']) ?>">
-                            <span id="add_colab_contato_familiar_error" class="text-danger"></span>
+                            <span id="add_colab_contato_familiar_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_email_pessoal">Email Pessoal:</label>
                             <input type="email" class="form-control" name="add_colab_email_pessoal" id="add_colab_email_pessoal" value="<?= esc($dd_funcionarios['f_email_pessoal']) ?>">
-                            <span id="add_colab_email_pessoal_error" class="text-danger"></span>
+                            <span id="add_colab_email_pessoal_error_up" class="text-danger"></span>
                         </div>
                     </div>
                 </fieldset>
@@ -167,37 +167,37 @@
                         <div class="form-group col-md-3">
                             <label for="add_colab_cep_moradia">CEP:</label>
                             <input type="text" class="form-control" name="add_colab_cep_moradia" id="add_colab_cep_moradia" value="<?= esc($dd_funcionarios['f_cep']) ?>">
-                            <span id="add_colab_cep_moradia_error" class="text-danger"></span>
+                            <span id="add_colab_cep_moradia_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="add_colab_uf_moradia">UF</label>
                             <input type="text" class="form-control" name="add_colab_uf_moradia" id="add_colab_uf_moradia" value="<?= esc($dd_funcionarios['f_estado']) ?>" readonly>
-                            <span id="add_colab_uf_moradia_error" class="text-danger"></span>
+                            <span id="add_colab_uf_moradia_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-7">
                             <label for="add_colab_cidade_moradia">Cidade:</label>
                             <input type="text" class="form-control" name="add_colab_cidade_moradia" id="add_colab_cidade_moradia" value="<?= esc($dd_funcionarios['f_cidade']) ?>" readonly>
-                            <span id="add_colab_cidade_moradia_error" class="text-danger"></span>
+                            <span id="add_colab_cidade_moradia_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_bairro_moraddia">Bairro:</label>
                             <input type="text" class="form-control" name="add_colab_bairro_moraddia" id="add_colab_bairro_moraddia" value="<?= esc($dd_funcionarios['f_bairro']) ?>">
-                            <span id="add_colab_bairro_moraddia_error" class="text-danger"></span>
+                            <span id="add_colab_bairro_moraddia_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-7">
                             <label for="add_colab_rua_moradia">Rua:</label>
                             <input type="text" class="form-control" name="add_colab_rua_moradia" id="add_colab_rua_moradia" value="<?= esc($dd_funcionarios['f_endereco']) ?>">
-                            <span id="add_colab_rua_moradia_error" class="text-danger"></span>
+                            <span id="add_colab_rua_moradia_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="add_colab_numero_moradia">Número:</label>
                             <input type="number" class="form-control" name="add_colab_numero_moradia" id="add_colab_numero_moradia" value="<?= esc($dd_funcionarios['f_numero_casa']) ?>">
-                            <span id="add_colab_numero_moradia_error" class="text-danger"></span>
+                            <span id="add_colab_numero_moradia_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="add_colab_complemento_morada">Complemento:</label>
                             <input type="text" class="form-control" name="add_colab_complemento_morada" id="add_colab_complemento_morada" value="<?= esc($dd_funcionarios['f_endereco_complemento']) ?>">
-                            <span id="add_colab_complemento_morada_error" class="text-danger"></span>
+                            <span id="add_colab_complemento_morada_error_up" class="text-danger"></span>
                         </div>
                     </div>
                 </fieldset>
@@ -208,7 +208,7 @@
                         <div class="form-group col-md-3">
                             <label for="add_colab_doc_numero_rg">Número do RG:</label>
                             <input type="number" class="form-control" name="add_colab_doc_numero_rg" id="add_colab_doc_numero_rg" value="<?= esc($dd_funcionarios['f_rg_numero']) ?>">
-                            <span id="add_colab_doc_numero_rg_error" class="text-danger"></span>
+                            <span id="add_colab_doc_numero_rg_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_doc_orgao_emissor_rg">Emissor do RG:</label>
@@ -281,12 +281,12 @@
                                 <option value="SJTS" <?php if($dd_funcionarios['f_rg_emissor'] == 'SJTS'){echo 'selected';}?>>SJTS</option>
                                 <option value="SPTC" <?php if($dd_funcionarios['f_rg_emissor'] == 'SPTC'){echo 'selected';}?>>SPTC</option>
                             </select>
-                            <span id="add_colab_doc_orgao_emissor_rg_error" class="text-danger"></span>
+                            <span id="add_colab_doc_orgao_emissor_rg_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_doc_data_rg_emissao">Data de Emissão do RG:</label>
                             <input type="date" class="form-control" name="add_colab_doc_data_rg_emissao" id="add_colab_doc_data_rg_emissao"" value="<?= esc($dd_funcionarios['f_rg_data_emissao']) ?>">
-                            <span id="add_colab_doc_data_rg_emissao_error" class="text-danger"></span>
+                            <span id="add_colab_doc_data_rg_emissao_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_doc_uf_rg">UF de Emissão do RG:</label>
@@ -300,28 +300,28 @@
                                     <option selected disabled>Sem estados cadastrados</option>
                                 <?php endif ?>
                             </select>
-                            <span id="add_colab_doc_uf_rg_error" class="text-danger"></span>
+                            <span id="add_colab_doc_uf_rg_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
                             <label for="add_colab_titulo_numero">N° do Título:</label>
                             <input type="number" class="form-control" name="add_colab_titulo_numero" id="add_colab_titulo_numero" value="<?= esc($dd_funcionarios['f_titulo_eleitor_numero']) ?>">
-                            <span id="add_colab_titulo_numero_error" class="text-danger"></span>
+                            <span id="add_colab_titulo_numero_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="add_colab_titulo_zona">Zona:</label>
                             <input type="number" class="form-control" name="add_colab_titulo_zona" id="add_colab_titulo_zona" value="<?= esc($dd_funcionarios['f_titulo_eleitor_nona']) ?>">
-                            <span id="add_colab_titulo_zona_error" class="text-danger"></span>
+                            <span id="add_colab_titulo_zona_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="add_colab_titulo_sessao">Sessão:</label>
                             <input type="number" class="form-control" name="add_colab_titulo_sessao" id="add_colab_titulo_sessao" value="<?= esc($dd_funcionarios['f_titulo_eleitor_sessao']) ?>">
-                            <span id="add_colab_titulo_sessao_error" class="text-danger"></span>
+                            <span id="add_colab_titulo_sessao_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_titulo_data_emissao">Data de Emissão:</label>
                             <input type="date" class="form-control" name="add_colab_titulo_data_emissao" id="add_colab_titulo_data_emissao" value="<?= esc($dd_funcionarios['f_titulo_eleitor_data_emissao']) ?>">
-                            <span id="add_colab_titulo_data_emissao_error" class="text-danger"></span>
+                            <span id="add_colab_titulo_data_emissao_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="add_colab_titulo_uf_emissao">UF de Emissão:</label>
@@ -335,28 +335,28 @@
                                     <option selected disabled>Sem estados cadastrados</option>
                                 <?php endif ?>
                             </select>
-                            <span id="add_colab_titulo_uf_emissao_error" class="text-danger"></span>
+                            <span id="add_colab_titulo_uf_emissao_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
                             <label for="add_colab_cpf_numero">Número do CPF:</label>
                             <input type="text" class="form-control" name="add_colab_cpf_numero" id="add_colab_cpf_numero" value="<?= esc($dd_funcionarios['f_cpf']) ?>">
-                            <span id="add_colab_cpf_numero_error" class="text-danger"></span>
+                            <span id="add_colab_cpf_numero_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_numero_pis">Número do PIS:</label>
                             <input type="number" class="form-control" name="add_colab_numero_pis" id="add_colab_numero_pis" value="<?= esc($dd_funcionarios['f_pis']) ?>">
-                            <span id="add_colab_numero_pis_error" class="text-danger"></span>
+                            <span id="add_colab_numero_pis_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_reservista_numero">Número do Reservista:</label>
                             <input type="number" class="form-control" name="add_colab_reservista_numero" id="add_colab_reservista_numero" value="<?= esc($dd_funcionarios['f_numero_reservista']) ?>">
-                            <span id="add_colab_reservista_numero_error" class="text-danger"></span>
+                            <span id="add_colab_reservista_numero_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_sus_numero">Número do SUS:</label>
                             <input type="number" class="form-control" name="add_colab_sus_numero" id="add_colab_sus_numero" value="<?= esc($dd_funcionarios['f_numero_cartao_sus']) ?>">
-                            <span id="add_colab_sus_numero_error" class="text-danger"></span>
+                            <span id="add_colab_sus_numero_error_up" class="text-danger"></span>
                         </div>
                     </div>
                 </fieldset>
@@ -368,17 +368,17 @@
                         <div class="form-group col-md-3">
                             <label for="add_colab_ctps_numero">Número da CTPS:</label>
                             <input type="number" class="form-control" name="add_colab_ctps_numero" id="add_colab_ctps_numero" value="<?= esc($dd_funcionarios['f_ctps_numero']) ?>">
-                            <span id="add_colab_ctps_numero_error" class="text-danger"></span>
+                            <span id="add_colab_ctps_numero_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_ctps_serie">Série da CTPS:</label>
                             <input type="number" class="form-control" name="add_colab_ctps_serie" id="add_colab_ctps_serie" value="<?= esc($dd_funcionarios['f_ctps_numero_serie']) ?>">
-                            <span id="add_colab_ctps_serie_error" class="text-danger"></span>
+                            <span id="add_colab_ctps_serie_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_data_emissao">Data de Emissão da CTPS:</label>
                             <input type="date" class="form-control" name="add_colab_data_emissao" value="<?= esc($dd_funcionarios['f_ctps_data_emissao']) ?>">
-                            <span id="add_colab_data_emissao_error" class="text-danger"></span>
+                            <span id="add_colab_data_emissao_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
@@ -393,7 +393,7 @@
                                     <option selected disabled>Sem estados cadastrados</option>
                                 <?php endif ?>
                             </select>
-                            <span id="add_colab_uf_emissor_error" class="text-danger"></span>
+                            <span id="add_colab_uf_emissor_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="add_colab_fgts_categoria">Categoria do FGTS:</label>
@@ -405,12 +405,12 @@
                                 } ?>
 
                             </select>
-                            <span id="add_colab_fgts_categoria_error" class="text-danger"></span>
+                            <span id="add_colab_fgts_categoria_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="add_colab_fgts_codigo">Código do FGTS:</label>
                             <input type="text" class="form-control" name="add_colab_fgts_codigo" id="add_colab_fgts_codigo" value="<?= esc($dd_funcionarios['f_fgts_codigo']) ?>">
-                            <span id="add_colab_fgts_codigo_error" class="text-danger"></span>
+                            <span id="add_colab_fgts_codigo_error_up" class="text-danger"></span>
                         </div>
                     </div>
                 </fieldset>
@@ -431,7 +431,7 @@
                                 <option value="G1" <?php if($dd_funcionarios['f_uniforme_camisa'] == 'G1'){echo 'selected';}?>>G1</option>
                                 <option value="G2" <?php if($dd_funcionarios['f_uniforme_camisa'] == 'G2'){echo 'selected';}?>>G2</option>
                             </select>
-                            <span id="add_colab_uniforme_tamanho_error" class="text-danger"></span>
+                            <span id="add_colab_uniforme_tamanho_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
@@ -446,7 +446,7 @@
                                 <option value="G1" <?php if($dd_funcionarios['f_uniforme_calca'] == 'G1'){echo 'selected';}?>>G1</option>
                                 <option value="G2" <?php if($dd_funcionarios['f_uniforme_calca'] == 'G2'){echo 'selected';}?>>G2</option>
                             </select>
-                            <span id="add_colab_uniforme_calca_error" class="text-danger"></span>
+                            <span id="add_colab_uniforme_calca_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
@@ -462,7 +462,7 @@
                                 <option value="O+" <?php if($dd_funcionarios['f_tipo_sangue'] == 'O+'){echo 'selected';}?>>O+</option>
                                 <option value="O-" <?php if($dd_funcionarios['f_tipo_sangue'] == 'O-'){echo 'selected';}?>>O-</option>
                             </select>
-                            <span id="add_colab_tipo_sangue_error" class="text-danger"></span>
+                            <span id="add_colab_tipo_sangue_error_up" class="text-danger"></span>
                         </div>
                     </div>
                 </fieldset>
@@ -483,7 +483,7 @@
                                     <option>...</option>
                                 <?php endif ?>
                             </select>
-                            <span id="add_colab_funcao_cargo_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_cargo_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
@@ -493,18 +493,18 @@
                                 <option value="Ativo" <?php if($dd_funcionarios['f_situacao'] == 'Ativo'){echo 'selected';}?>>Ativo</option>
                                 <option value="Inativo" <?php if($dd_funcionarios['f_situacao'] == 'Inativo'){echo 'selected';}?>>Inativo</option>
                             </select>
-                            <span id="add_colab_funcao_situacao_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_situacao_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="add_colab_funcao_admissao_data">Admissão:</label>
                             <input type="date" class="form-control" name="add_colab_funcao_admissao_data" id="add_colab_funcao_admissao_data" value="<?= esc($dd_funcionarios['f_admissao']) ?>">
-                            <span id="add_colab_funcao_admissao_data_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_admissao_data_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="add_colab_funcao_desligamento_data">Desligamento:</label>
                             <input type="date" class="form-control" name="add_colab_funcao_desligamento_data" value="<?= esc($dd_funcionarios['f_desligamento']) ?>">
-                            <span id="add_colab_funcao_desligamento_data_data_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_desligamento_data_data_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
@@ -514,13 +514,13 @@
                                 <option value="Sim" <?php if($dd_funcionarios['f_desligamento'] == ''){echo 'selected';}?>>Sim</option>
                                 <option value="Não" <?php if($dd_funcionarios['f_desligamento'] == ''){echo 'selected';}?>>Não</option>
                             </select>
-                            <span id="add_colab_funcao_hora_extra_fixa_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_hora_extra_fixa_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="add_colab_funcao_salario">Salário:</label>
                             <input type="text" class="form-control" name="add_colab_funcao_salario" placeholder="Ex.: 1.000,00" value="<?= esc($dd_funcionarios['f_salario']) ?>">
-                            <span id="add_colab_funcao_salario_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_salario_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="add_colab_funcao_tipo_pagamento">Tipo de Pagamento:</label>
@@ -530,14 +530,14 @@
                                 <option value="Quizenal" <?php if($dd_funcionarios['f_tipo_pagamento'] == 'Quizenal'){echo 'selected';}?>>Quizenal</option>
                                 <option value="Semanal" <?php if($dd_funcionarios['f_tipo_pagamento'] == 'Semanal'){echo 'selected';}?>>Semanal</option>
                             </select>
-                            <span id="add_colab_funcao_tipo_pagamento_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_tipo_pagamento_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="add_colab_funcao_tipo_salario">Tipo de Salário:</label>
                             <select name="add_colab_funcao_tipo_salario" class="form-control">
                                 <option value="Mensalista" selected>Mensalista</option>
                             </select>
-                            <span id="add_colab_funcao_tipo_salario_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_tipo_salario_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
@@ -552,7 +552,7 @@
                                     <option selected>Sem departamento cadastrados</option>
                                 <?php endif ?>
                             </select>
-                            <span id="add_colab_funcao_departamento_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_departamento_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="add_colab_cento_de_custo">Cento de Custo:</label>
@@ -566,7 +566,7 @@
                                     <option selected disabled>Não há CC registrado para sua frente.</option>
                                 <?php endif ?>
                             </select>
-                            <span id="add_colab_cento_de_custo_error" class="text-danger"></span>
+                            <span id="add_colab_cento_de_custo_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="add_colab_funcao_hora_extras">Horas trabalhadas:</label>
@@ -575,7 +575,7 @@
                                 <option value="Sim" <?php if($dd_funcionarios['f_horas_trabalho'] == 'sim'){echo 'selected';}?>>Sim</option>
                                 <option value="Nao" <?php if($dd_funcionarios['f_horas_trabalho'] == 'nao'){echo 'selected';}?>>Não</option>
                             </select>
-                            <span id="add_colab_funcao_hora_extras_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_hora_extras_error_up" class="text-danger"></span>
                         </div>
 
                         <!-- <div class="form-group col-md-2">
@@ -584,7 +584,7 @@
                                 <option selected disabled>Choose...</option>
                                 <option>...</option>
                             </select>
-                            <span id="add_colab_funcao_encarregado_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_encarregado_error_up" class="text-danger"></span>
                         </div> -->
 
                         <div class="form-group col-md-3">
@@ -594,7 +594,7 @@
                                 <option value="Sim" <?php if($dd_funcionarios['f_periculosidade'] == 'sim'){echo 'selected';}?>>Sim</option>
                                 <option value="Nao" <?php if($dd_funcionarios['f_periculosidade'] == 'nao'){echo 'selected';}?>>Não</option>
                             </select>
-                            <span id="add_colab_funcao_periculosidade_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_periculosidade_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_funcao_insalubridade">Insalubridade:</label>
@@ -603,7 +603,7 @@
                                 <option value="Sim" <?php if($dd_funcionarios['f_insalubridade'] == 'sim'){echo 'selected';}?>>Sim</option>
                                 <option value="Nao" <?php if($dd_funcionarios['f_insalubridade'] == 'nao'){echo 'selected';}?>>Não</option>
                             </select>
-                            <span id="add_colab_funcao_insalubridade_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_insalubridade_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_funcao_desconto_sindical">Desc.: Sindical:</label>
@@ -612,7 +612,7 @@
                                 <option value="Sim" <?php if($dd_funcionarios['f_desconto_sindical'] == 'sim'){echo 'selected';}?>>Sim</option>
                                 <option value="Nao" <?php if($dd_funcionarios['f_desconto_sindical'] == 'nao'){echo 'selected';}?>>Não</option>
                             </select>
-                            <span id="add_colab_funcao_desconto_sindical_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_desconto_sindical_error_up" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="add_colab_funcao_ps">PS.:</label>
@@ -621,7 +621,7 @@
                                 <option value="Sim" <?php if($dd_funcionarios['f_ps'] == 'sim'){echo 'selected';}?>>Sim</option>
                                 <option value="Nao" <?php if($dd_funcionarios['f_ps'] == 'nao'){echo 'selected';}?>>Não</option>
                             </select>
-                            <span id="add_colab_funcao_ps_error" class="text-danger"></span>
+                            <span id="add_colab_funcao_ps_error_up" class="text-danger"></span>
                         </div>
 
                     </div>
@@ -634,19 +634,19 @@
                         <div class="form-group col-md-3">
                             <label for="add_colab_cep_aeroporto">Cep:</label>
                             <input type="text" class="form-control" name="add_colab_cep_aeroporto" id="add_colab_cep_aeroporto" value="<?= esc($dd_funcionarios['f_aeroporto_cep']) ?>">
-                            <span id="add_colab_cep_aeroporto_error" class="text-danger"></span>
+                            <span id="add_colab_cep_aeroporto_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-3">
                             <label for="add_colab_uf_eroporto">UF:</label>
                             <input type="text" class="form-control" name="add_colab_uf_eroporto" id="add_colab_uf_eroporto" value="<?= esc($dd_funcionarios['f_aeroporto_uf']) ?>" readonly>
-                            <span id="add_colab_uf_eroporto_error" class="text-danger"></span>
+                            <span id="add_colab_uf_eroporto_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="add_colab_cidade_aeroporto">Cidade:</label>
                             <input type="text" class="form-control" name="add_colab_cidade_aeroporto" id="add_colab_cidade_aeroporto" value="<?= esc($dd_funcionarios['f_aeroporto_cidade']) ?>" readonly>
-                            <span id="add_colab_cidade_aeroporto_error" class="text-danger"></span>
+                            <span id="add_colab_cidade_aeroporto_error_up" class="text-danger"></span>
                         </div>
 
                     </div>
@@ -668,7 +668,7 @@
                                     <option selected disabled>Não ha frentes cadastradas...</option>
                                 <?php endif ?>
                             </select>
-                            <span id="add_colab_outros_local_trabalho_error" class="text-danger"></span>
+                            <span id="add_colab_outros_local_trabalho_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-6">
@@ -681,13 +681,13 @@
                                 <option value="República" <?php if($dd_funcionarios['f_tipo_moradia'] == 'República'){echo 'selected';}?>>República</option>
                                 <option value="Pousada" <?php if($dd_funcionarios['f_tipo_moradia'] == 'Pousada'){echo 'selected';}?>>Pousada</option>
                             </select>
-                            <span id="add_colab_outros_tipo_moradia_error" class="text-danger"></span>
+                            <span id="add_colab_outros_tipo_moradia_error_up" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-12">
                             <label for="add_colab_outros_observacao">Observações:</label>
                             <textarea class="form-control" name="add_colab_outros_observacao" rows="3" placeholder="Digite aqui..."><?= esc($dd_funcionarios['f_description']) ?></textarea>
-                            <span id="add_colab_outros_observacao_error" class="text-danger"></span>
+                            <span id="add_colab_outros_observacao_error_up" class="text-danger"></span>
                         </div>
 
                     </div>
@@ -697,16 +697,19 @@
             <!-- /.card-body -->
             <input type="hidden" name="obra_quem_cadastra" value="<?= session()->get('log_obra') ?>">
             <input type="hidden" name="frente_quem_cadastra" value="<?= session()->get('log_frente') ?>">
+            <input type="hidden" name="id_funcionario_hidden" value="<?= esc($dd_funcionarios['f_id']) ?>">
 
 
             <div class="card-footer">
-                <button type="submit" class="cls_add_colab_f btn btn-danger" id="id_add_colab_f"><i class="fas fa-sync-alt"></i> Alterar</button>
+                <button type="submit" class="cls_up_colab_f btn btn-danger" id="id_up_colab_f">
+                    <i class="fas fa-sync-alt"></i> Alterar
+                </button>
                 <a href="/admin_rh/cadastro-colaboradores" class="btn btn-success"><i class="fa fa-reply-all"></i> Voltar</a>
             </div>
         </form>
         <br>
         <div class="col-12">
-            <span id="message_add_funcionario"></span>
+            <span id="message_up_funcionario"></span>
         </div>
     </div>
     <!-- /.card -->

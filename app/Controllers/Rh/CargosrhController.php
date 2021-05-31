@@ -202,6 +202,7 @@ class CargosrhController extends BaseController
 			$func_select_error = '';
             $cargo_new_nome_error = '';
             $cargo_new_descricao_error = '';
+			
             $error = 'no';
             $success = 'no';
             $message = '';

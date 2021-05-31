@@ -142,8 +142,9 @@ $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
   $routes->post("inserir-funcionario", "Rh/CadastrocolaboradorController::addNovoFuncionario");
   $routes->get("ler_funcionarios_por_frente", "Rh/CadastrocolaboradorController::listFuncionarios");
   $routes->get("atualiza-cadastro-do-funcionario/(:num)", "Rh/CadastrocolaboradorController::visualizaDadosCadastrado/$1");
-  
+  $routes->post("altera-funcionario", "Rh/CadastrocolaboradorController::alteraCadastroFuncionario");  
 });
+
 
 /**dados de atividades do rh */
 $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
@@ -153,6 +154,21 @@ $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
     $routes->post("altera_atividade", "Rh/AtividadesController::alteraDadosAtividade");
     $routes->get("delete_atividade", "Rh/AtividadesController::deletaDadosAtividade");
 });
+
+/**selecct do funcionario lista dinamica */
+$routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
+    $routes->get("list_funcionarios_select","Rh/UsuarioscargosController::index");
+    $routes->get("list_funcionarios_funcao","Rh/UsuarioscargosController::selctFuncao");
+    $routes->get("list_funcionarios_departamento","Rh/UsuarioscargosController::selctDepartamento");
+    $routes->get("list_funcionarios_atividade","Rh/UsuarioscargosController::selctAtividade");
+
+    /** cria dados dados do funcionario a obra */
+    $routes->post("cria-funcionario_cargo", "Rh/UsuarioscargosController::cadastrarCargoFunconario");
+    $routes->get("lista_tabela_funcionarios_cargos", "Rh/UsuarioscargosController::getListFuncionariosFuncao");
+
+});
+
+
 
 
 $routes->get('logout', 'Home::logout');

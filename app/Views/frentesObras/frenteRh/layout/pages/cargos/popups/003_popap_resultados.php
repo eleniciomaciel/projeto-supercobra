@@ -10,36 +10,54 @@
             </div>
             <div class="modal-body">
 
-                <form>
+                <form action="/admin_rh/cria-funcionario_cargo" method="POST" id="form_add_cargo_funcao_funcionario">
+                    <?= csrf_field() ?>
                     <div class="form-row">
+
                         <div class="form-group col-md-12">
                             <label for="trabalho_nome">Colaborador</label>
-                            <input type="text" class="form-control" id="trabalho_nome">
+                            <select class="form-control select2FuncionarioCargos" name="funcionario_select" id="funcionario_select"></select>
+                            <span id="funcionario_select_error" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="inputPassword4">Cargo</label>
-                            <input type="text" class="form-control" id="inputPassword4" placeholder="Password">
+                            <select class="form-control" name="select_cargo_e_funcoes" id="select_cargo_e_funcoes"></select>
+                            <span id="select_cargo_e_funcoes_error" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="inputPassword4">Função</label>
-                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                        <div class="form-group col-md-4">
+                            <label for="inputAddress">Departamento</label>
+                            <select class="form-control" name="select_departamentos_all" id="select_departamentos_all"></select>
+                            <span id="select_departamentos_all_error" class="text-danger"></span>
                         </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputAddress2">Atividade</label>
+                            <select class="form-control" name="select_atividades_all" id="select_atividades_all"></select>
+                            <span id="select_atividades_all_error" class="text-danger"></span>
+                        </div>
+
                     </div>
 
                     <div class="form-group">
-                        <label for="inputAddress">Departamento</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                        <label for="compositor_description">Descrição</label>
+                        <textarea class="form-control" name="compositor_description" rows="3" placeholder="Digite aqui..."></textarea>
+                        <span id="compositor_description_error" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputAddress2">Atividade</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                        <input type="hidden" name="rh_cadastro" value="<?= session()->get('id') ?>">
+                        <span id="rh_cadastro_error" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+
+                    <button type="submit" class="cls_funcionario_cargo_add btn btn-info" id="id_funcionario_cargo_add">
+                        <i class="fa fa-save"></i> Salvar
+                    </button>
+
                 </form>
-
+<br>
+<span id="message_cargo_funcionario"></span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

@@ -14,13 +14,15 @@
         <div class="table table-responsive">
         
             <div class="col-12">
-                <table class="table" id="lista_funcoes_e_cargos_geral" style="width: 100%;">
+                <table class="table" id="lista_funcoes_e_cargos_funcionarios" style="width: 100%;">
                     <thead>
                         <tr>
-                            <th>nome</th>
-                            <th>Função</th>
-                            <th>Cargo</th>
-                            <th>Departamento</th>
+                            <th>Data</th>
+                            <th>Nomes</th>
+                            <th>Cargos</th>
+                            <th>Departamentos</th>
+                            <th>Atividades</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>

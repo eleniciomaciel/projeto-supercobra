@@ -43,6 +43,22 @@
             }
         });
 
+        $('#lista_funcoes_e_cargos_funcionarios').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+            },
+            columnDefs:[{
+                targets: 0,
+                render: function(data){
+                    return moment(data).format('L');
+                }
+            }],
+            "serverSide": true,
+            "ajax": {
+                url: "<?php echo site_url("/admin_rh/lista_tabela_funcionarios_cargos"); ?>",
+                type: "GET",
+            }
+        });
 
         $('#for_add_funco_cargo').on('submit', function(event) {
             event.preventDefault();
@@ -219,6 +235,27 @@
             });
         }
 
+        /**Cargo com função */
+        SelecionaCargoComFuncao();
+        function SelecionaCargoComFuncao() {
+            $.ajax({
+                url: '<?= site_url('/admin_rh/lista-funcoes_select') ?>',
+                method: 'get',
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    $('select[name="func_select"]').empty();
+                    $('select[name="func_select"]').append('<option selected disabled>Selecione aqui...</option>');
+
+                    $.each(response, function(index, data) {
+                        $('#func_select').append('<option value="' + data['id_cargo'] + '">' + data['cargo_nome'] + '</option>');
+                    });
+                }
+            });
+        }
+
         /**salvando os cagos com funções */
         $('#formAddCargoWithFunction').on('submit', function(event) {
             event.preventDefault();
@@ -358,6 +395,52 @@
                     })
                 }
             });
+        });
+
+        /**salva todos os cargos com funcionarios e funções ================================== */
+        $('#form_add_cargo_funcao_funcionario').on('submit', function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: $(this).serialize(),
+                dataType: "JSON",
+                beforeSend: function() {
+                    $('#id_funcionario_cargo_add').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde... </button>');
+                    $('.cls_funcionario_cargo_add').attr('disabled', 'disabled');
+                },
+
+                success: function(data) {
+                    $('#id_funcionario_cargo_add').html('<i class="fa fa-save"></i> Salvar');
+                    $('.cls_funcionario_cargo_add').attr('disabled', false);
+                    if (data.error == 'yes') {
+
+                        $('#rh_cadastro_error').text(data.rh_cadastro_error);
+                        $('#funcionario_select_error').text(data.funcionario_select_error);
+                        $('#select_cargo_e_funcoes_error').text(data.select_cargo_e_funcoes_error);
+                        $('#select_departamentos_all_error').text(data.select_departamentos_all_error);
+                        $('#select_atividades_all_error').text(data.select_atividades_all_error);
+                        $('#compositor_description_error').text(data.compositor_description_error);
+
+                    } else {
+
+                        $('#rh_cadastro_error').text('');
+                        $('#funcionario_select_error').text('');
+                        $('#select_cargo_e_funcoes_error').text('');
+                        $('#select_departamentos_all_error').text('');
+                        $('#select_atividades_all_error').text('');
+                        $('#compositor_description_error').text('');
+
+                        $('#message_cargo_funcionario').html(data.message);
+                        $('#lista_funcoes_e_cargos_funcionarios').DataTable().ajax.reload();
+                        $('#form_add_cargo_funcao_funcionario')[0].reset();
+                        setTimeout(function() {
+                            $('#message_cargo_funcionario').html('');
+                        }, 3000);
+                    }
+                }
+            })
         });
 
     });

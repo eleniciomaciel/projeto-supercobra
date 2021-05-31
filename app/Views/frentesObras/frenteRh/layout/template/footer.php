@@ -113,6 +113,10 @@
       $('.select2FuncionarioCC').select2({
         theme: 'bootstrap4',
       });
+      $('.select2FuncionarioCargos').select2({
+        theme: 'bootstrap4',
+        dropdownParent: $("#trabalhoModalLong")
+      });
       //mask
       $('#add_colab_cep_moradia').mask("00.000-000", {
         placeholder: "00.000-000"

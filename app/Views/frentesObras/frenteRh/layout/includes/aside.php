@@ -71,12 +71,12 @@
                             </a>
                         </li>
 
-                        <!-- <li class="nav-item">
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Cargos</p>
+                                <p>Grupos de Trabalho</p>
                             </a>
-                        </li> -->
+                        </li>
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
