@@ -128,7 +128,10 @@ class AcessorestritoController extends BaseController
 				'au_token_expiracao'  		=> date("Y-m-d", strtotime('+ 1 days')),
 				'au_status'  				=> '1',
 			]);
-			$this->sendMailToActive();
+
+			$to = strtolower($this->request->getPost('email_user_acesso'));
+
+			$this->sendMailToActive($to, $id);
 			$session = session();
 			$session->setFlashdata("success_users_cria_user", "Usuario criado com sucesso!");
 			return redirect()->back();
@@ -169,15 +172,19 @@ class AcessorestritoController extends BaseController
 	}
 
 	/**envia email */
-	public function sendMailToActive()
+	public function sendMailToActive($mail_to, $id)
 	{
 		$email = \Config\Services::email();
 
-		$email->setFrom('obraseletricidade@outlook.com', 'Bem vindo ao SYS-IO');
-		$email->setTo('2738660@aluno.uniasselvi.com.br');
+		$model_funcionario = new FuncionarioModel();
+		$data['send_user'] = $model_funcionario->getFuncionariosId($id);
 
-		$email->setSubject('Email Test');
-		$email->setMessage('SYS-IO Obras Eletrica, você foi convidado a acessar o sistema.');
+		$templateMessage =  view('email-public/template-mail.php', $data);
+		$email->setFrom('obraseletricidade@outlook.com', 'Bem vindo ao SYS-IO');
+		$email->setTo($mail_to);
+
+		$email->setSubject('Confirmação de acesso SGI-IO');
+		$email->setMessage($templateMessage);
 
 		if ($email->send()) {
 			return true;

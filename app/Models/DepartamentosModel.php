@@ -39,6 +39,16 @@ class DepartamentosModel extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
+	public function getDepartamentos($slug = false)
+	{
+		if ($slug === false) {
+			return $this->findAll();
+		}
+
+		return $this->asArray()
+			->where(['id' => $slug])
+			->first();
+	}
 	public function noticeTable()
 	{
 		$builder = $this->db->table('departamentos');

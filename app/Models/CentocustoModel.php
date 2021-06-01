@@ -23,6 +23,12 @@ class CentocustoModel extends Model
 	protected $updatedField         = 'updated_at';
 	protected $deletedField         = 'deleted_at';
 
+	public function getTodosCc()
+	{
+		return $this->findAll();
+	}
+
+
 	public function getCentocusto($id = false)
 	{
 		if ($id === false) {

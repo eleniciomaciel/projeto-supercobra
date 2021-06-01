@@ -5,6 +5,10 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\FuncionarioModel;
 use App\Models\CargosModel;
+use App\Models\DepartamentosModel;
+use App\Models\ObrasModel;
+use App\Models\FrentesModel;
+use App\Models\CentocustoModel;
 
 class FuncionarioController extends BaseController
 {
@@ -22,8 +26,17 @@ class FuncionarioController extends BaseController
 			throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
 		}
 		$cargos = new CargosModel();
+		$departamento = new DepartamentosModel();
+		$obras = new ObrasModel();
+		$frentes = new FrentesModel();
+		$cc = new CentocustoModel();
+
 		$data = [
 			'list_cargos' => $cargos->getCargos(),
+			'list_departamentos' => $departamento->getDepartamentos(),
+			'list_obras' => $obras->getObras(),
+			'list_frentes' => $frentes->getFrentes(),
+			'list_cc' => $cc->getTodosCc(),
 			'title' => 'Cadastrar usuarios'
 		];
 		echo view('master/layout/pages/usuarios/' . $page, $data);
@@ -34,16 +47,24 @@ class FuncionarioController extends BaseController
 		$model = new FuncionarioModel();
 
 		if ($this->request->getMethod() === 'post' && $this->validate([
-			'nome_user' 		=> ['label' => 'Usuario', 'rules' => 'required|min_length[3]|max_length[100]|is_unique[funcionarios.f_nome]'],
-			'cargo_user' 		=> ['label' => 'Cargo', 'rules' => 'required'],
-			'email_user' 		=> ['label' => 'Email', 'rules' => 'required|valid_email|is_unique[funcionarios.f_email_pessoal]'],
-			'matricula_user' 	=> ['label' => 'Matrícula', 'rules' => 'required|min_length[3]|max_length[50]|is_unique[funcionarios.f_codigo]']
+			'nome_user' 				=> ['label' => 'Usuario', 'rules' => 'required|min_length[3]|max_length[100]|is_unique[funcionarios.f_nome]'],
+			'cargo_user' 				=> ['label' => 'Cargo', 'rules' => 'required'],
+			'email_user' 				=> ['label' => 'Email', 'rules' => 'required|valid_email|is_unique[funcionarios.f_email_pessoal]'],
+			'matricula_user' 			=> ['label' => 'Matrícula', 'rules' => 'required|min_length[3]|max_length[50]|is_unique[funcionarios.f_codigo]'],
+			'user_departamento' 		=> ['label' => 'Departamento', 'rules' => 'required'],
+			'user_obra'					=> ['label' => 'Obra', 'rules' => 'required'],
+			'user_frente'				=> ['label' => 'Frente', 'rules' => 'required'],
+			'user_cento_de_custo_cc' 	=> ['label' => 'Cento de Custo', 'rules' => 'required'],
 		])) {
 			$model->save([
 				'f_nome' 			=> $this->request->getPost('nome_user'),
 				'f_codigo'  		=> $this->request->getPost('matricula_user'),
 				'f_email_pessoal'  	=> strtolower($this->request->getPost('email_user')),
 				'f_cargo'  			=> $this->request->getPost('cargo_user'),
+				'f_fk_obra'  			=> $this->request->getPost('user_obra'),
+				'f_Fk_frente'  			=> $this->request->getPost('user_frente'),
+				'f_fk_cento_custo'  	=> $this->request->getPost('user_cento_de_custo_cc'),
+				'f_fk_id_departamento'  => $this->request->getPost('user_departamento'),
 				
 			]);
 

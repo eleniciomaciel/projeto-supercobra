@@ -33,9 +33,6 @@
   <link rel="stylesheet" href="<?= base_url() ?>/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="<?= base_url() ?>/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="<?= base_url() ?>/plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="<?= base_url() ?>/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?= base_url() ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -184,6 +181,15 @@
   <?= $this->include('master/layout/js/js_003_components_frentes') ?>
   <?= $this->include('master/layout/js/js_004_components_cc') ?>
   <?= $this->include('master/layout/js/js_005_components_usuarios') ?>
+
+  <script>
+    $(function() {
+      //Initialize Select2 Elements
+      $('.select2').select2({
+        theme: 'bootstrap4'
+      });
+    });
+  </script>
 </body>
 
 </html>
