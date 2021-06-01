@@ -41,9 +41,10 @@ class FuncionarioController extends BaseController
 		])) {
 			$model->save([
 				'f_nome' 			=> $this->request->getPost('nome_user'),
-				'f_cargo'  			=> $this->request->getPost('cargo_user'),
-				'f_email_pessoal'  	=> strtolower($this->request->getPost('email_user')),
 				'f_codigo'  		=> $this->request->getPost('matricula_user'),
+				'f_email_pessoal'  	=> strtolower($this->request->getPost('email_user')),
+				'f_cargo'  			=> $this->request->getPost('cargo_user'),
+				
 			]);
 
 			$session = session();

@@ -45,7 +45,7 @@
             <!-- form start -->
             <form action="/usuario_acesso/altera-status-login/<?= esc($usuarios_login['au_id']) ?>" method="POST">
                 <div class="card-body">
-
+                <?= csrf_field() ?>
                     <div class="form-group">
                         <label for="up_acc_nome">Usuário</label>
                         <input type="text" class="form-control" name="up_acc_nome" value="<?= esc($usuarios_login['f_nome']) ?>" disabled>
@@ -170,9 +170,9 @@
 
         <?php else : ?>
 
-            <form action="/usuario_acesso/gera_acesso_usuarios/<?= esc($ddf['f_id']) ?>" method="post" autocomplete="off">
+            <form action="/usuario_acesso/gera_acesso_usuarios/<?= esc($ddf['f_id']) ?>" method="POST">
                 <div class="card-body">
-
+                <?= csrf_field() ?>
                     <?php $validation = \Config\Services::validation(); ?>
 
                     <div class="form-row">
