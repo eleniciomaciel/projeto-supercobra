@@ -48,7 +48,7 @@
                     <h3 class="card-title">Cadastrar cliente</h3>
                 </div>
                 <!-- /form cadastro clientes -->
-                <?= $this->include('master\layout\components\002_components_form_obras_cliente'); ?>
+                <?= $this->include('master/layout/components/002_components_form_obras_cliente'); ?>
                 <!-- / end form cadastro clientes -->
             </div>
 

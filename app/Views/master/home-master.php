@@ -32,27 +32,27 @@
       <div class="tab-content" id="nav-tabContent">
 
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-           <?= $this->include('master\layout\includes\tab-obras') ?>
+           <?= $this->include('master/layout/includes/tab-obras') ?>
         </div>
 
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-          <?= $this->include('master\layout\includes\tab-frentes') ?>
+          <?= $this->include('master/layout/includes/tab-frentes') ?>
         </div>
 
         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-          <?= $this->include('master\layout\includes\tab-licencas') ?>
+          <?= $this->include('master/layout/includes/tab-licencas') ?>
         </div>
 
         <div class="tab-pane fade" id="nav-cento_custo" role="tabpanel" aria-labelledby="nav-cento_custo-tab">
-          <?= $this->include('master\layout\includes\tab-cento_custo') ?>
+          <?= $this->include('master/layout/includes/tab-cento_custo') ?>
         </div>
 
         <div class="tab-pane fade" id="nav-contratos" role="tabpanel" aria-labelledby="nav-contratos-tab">
-        <?= $this->include('master\layout\includes\tab-contratos') ?>
+        <?= $this->include('master/layout/includes/tab-contratos') ?>
         </div>
 
         <div class="tab-pane fade" id="nav-usuarios" role="tabpanel" aria-labelledby="nav-usuarios-tab">
-          <?= $this->include('master\layout\includes\tab-users') ?>
+          <?= $this->include('master/layout/includes/tab-users') ?>
         </div>
       </div>
 

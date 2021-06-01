@@ -128,7 +128,7 @@ class AcessorestritoController extends BaseController
 				'au_token_expiracao'  		=> date("Y-m-d", strtotime('+ 1 days')),
 				'au_status'  				=> '1',
 			]);
-
+			$this->sendMailToActive();
 			$session = session();
 			$session->setFlashdata("success_users_cria_user", "Usuario criado com sucesso!");
 			return redirect()->back();
@@ -165,6 +165,24 @@ class AcessorestritoController extends BaseController
 			return redirect()->back();
 		} else {
 			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+		}
+	}
+
+	/**envia email */
+	public function sendMailToActive()
+	{
+		$email = \Config\Services::email();
+
+		$email->setFrom('obraseletricidade@outlook.com', 'Bem vindo ao SYS-IO');
+		$email->setTo('2738660@aluno.uniasselvi.com.br');
+
+		$email->setSubject('Email Test');
+		$email->setMessage('SYS-IO Obras Eletrica, você foi convidado a acessar o sistema.');
+
+		if ($email->send()) {
+			return true;
+		}else {
+			return false;
 		}
 	}
 }

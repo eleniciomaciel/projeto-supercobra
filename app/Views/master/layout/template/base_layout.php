@@ -52,13 +52,13 @@
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <?= $this->include('master\layout\includes\navbar') ?>
+      <?= $this->include('master/layout/includes/navbar') ?>
     </nav>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <?= $this->include('master\layout\includes\aside') ?>
+      <?= $this->include('master/layout/includes/aside') ?>
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
@@ -86,7 +86,7 @@
         <div class="container-fluid">
           <!-- Small boxes (Stat box) -->
           <div class="row">
-            <?= $this->include('master\layout\includes\boxes') ?>
+            <?= $this->include('master/layout/includes/boxes') ?>
           </div>
           <!-- /.row -->
           <!-- Main row -->
@@ -177,13 +177,13 @@
   <!-- Select2 -->
   <script src="<?= base_url() ?>/plugins/select2/js/select2.full.min.js"></script>
   <!-- inclusão componente modal -->
-  <?= $this->include('master\layout\components\001_components-supply') ?>
+  <?= $this->include('master/layout/components/001_components-supply') ?>
   <!-- inclusão js-->
-  <?= $this->include('master\layout\js\js_001_components_supply') ?>
-  <?= $this->include('master\layout\js\js_002_components_clienteObra') ?>
-  <?= $this->include('master\layout\js\js_003_components_frentes') ?>
-  <?= $this->include('master\layout\js\js_004_components_cc') ?>
-  <?= $this->include('master\layout\js\js_005_components_usuarios') ?>
+  <?= $this->include('master/layout/js/js_001_components_supply') ?>
+  <?= $this->include('master/layout/js/js_002_components_clienteObra') ?>
+  <?= $this->include('master/layout/js/js_003_components_frentes') ?>
+  <?= $this->include('master/layout/js/js_004_components_cc') ?>
+  <?= $this->include('master/layout/js/js_005_components_usuarios') ?>
 </body>
 
 </html>

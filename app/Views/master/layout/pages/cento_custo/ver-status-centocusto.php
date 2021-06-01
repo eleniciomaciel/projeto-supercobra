@@ -1,4 +1,4 @@
-<?= $this->extend('master\layout\template\base_layout') ?>
+<?= $this->extend('master/layout/template/base_layout') ?>
 
 <?= $this->section('content') ?>
 <div class="col-md-12">
