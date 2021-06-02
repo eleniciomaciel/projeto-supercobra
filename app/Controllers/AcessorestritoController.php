@@ -9,6 +9,7 @@ use App\Models\CargosModel;
 use App\Models\AcessousuariosModel;
 use App\Models\ObrasModel;
 use App\Models\FrentesModel;
+use App\Models\DepartamentosModel;
 
 class AcessorestritoController extends BaseController
 {
@@ -84,6 +85,7 @@ class AcessorestritoController extends BaseController
 		$login = new AcessousuariosModel();
 		$obras = new ObrasModel();
 		$frentes = new FrentesModel();
+		$departamento = new DepartamentosModel();
 
 		if ( ! is_file(APPPATH.'/Views/master/layout/pages/acessos/'.$page.'.php'))
 		{
@@ -96,40 +98,53 @@ class AcessorestritoController extends BaseController
 			'usuarios_login' => $login->getUsuarioAcesso($id),
 			'obras' => $obras->getObras(),
 			'frentes' => $frentes->getFrentes(),
-			'cargos' => $cargos->getCargos()
+			'cargos' => $cargos->getCargos(),
+			'depart' => $departamento->getDepartamentos(),
 		]; // Capitalize the first letter
 		echo view('master/layout/pages/acessos/'.$page, $data);
 	}
 
 	public function criaUsuarioLogin(int $id)
 	{
+		//dd($_POST);
 		$model = new AcessousuariosModel();
-
 		if ($this->request->getMethod() === 'post' && $this->validate([
 			'email_user_acesso' 	=> ['label' => 'E-mail', 'rules' => 'required|valid_email|is_unique[acessousuarios.au_login_corp]'],
+			
 			'senha_user_acesso'     => ['label' => 'Senha', 'rules' => 'required|regex_match[/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/]',
             'errors' => [
-                'regex_match' => 'Insira uma senha e envie [8 a 15] caracteres que contêm pelo menos uma letra minúscula, uma letra maiúscula, um dígito numérico e um caractere especial.'
+                'regex_match' => 'Insira uma senha de [8 a 15] caracteres que contêm pelo menos uma letra minúscula, uma letra maiúscula, um dígito numérico e um caractere especial.'
             ]],
+			
 			'obra_user_acesso' 		=> ['label' => 'OBRA', 'rules' => 'required'],
+			
 			'frente_user_acesso' 		=> ['label' => 'FRENTE DE TRABALHO', 'rules' => 'required'],
+			
 			'id_usuario_acesso' 	=> ['label' => 'ID USUÁRIO', 'rules' => 'required|is_unique[acessousuarios.au_fk_usuario_corp]',
             'errors' => [
                 'is_unique' => 'Esse usuário já foi cadastrado no sistema.',
-            ]]
+            ]],
+			
+			'user_nivel_cat' 	=> ['label' => 'Nível', 'rules' => 'required'],
+			
+			'cargo_user' 	=> ['label' => 'Cargo', 'rules' => 'required'],
 		])) {
+
 			$model->save([
 				'au_fk_usuario_corp'        => $id,
-				'au_login_corp' 			=> strtolower($this->request->getPost('email_user_acesso')),
-				'au_passwword'  			=> password_hash($this->request->getPost('senha_user_acesso'), PASSWORD_DEFAULT),
-				'au_fk_frente'  			=> $this->request->getPost('frente_user_acesso'),
-				'au_fk_obra'  				=> $this->request->getPost('obra_user_acesso'),
+				'au_login_corp' 			=> strtolower($this->request->getVar('email_user_acesso')),
+				'au_passwword'  			=> password_hash($this->request->getVar('senha_user_acesso'), PASSWORD_DEFAULT),
+				'au_fk_cargo'  			=> $this->request->getVar('cargo_user'),
+				'au_fk_frente'  			=> $this->request->getVar('frente_user_acesso'),
+				'au_fk_obra'  				=> $this->request->getVar('obra_user_acesso'),
+				'au_fk_departamento_func'  => $this->request->getVar('user_depatamento'),
 				'au_token_active'  			=> md5(uniqid(rand(), true)),
 				'au_token_expiracao'  		=> date("Y-m-d", strtotime('+ 1 days')),
 				'au_status'  				=> '1',
+				'role'  					=> $this->request->getVar('user_nivel_cat'),
 			]);
 
-			$to = strtolower($this->request->getPost('email_user_acesso'));
+			$to = strtolower($this->request->getVar('email_user_acesso'));
 
 			$this->sendMailToActive($to, $id);
 			$session = session();

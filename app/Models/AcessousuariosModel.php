@@ -14,7 +14,7 @@ class AcessousuariosModel extends Model
 	protected $returnType           = 'array';
 	protected $useSoftDeletes        = true;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['au_fk_usuario_corp','au_login_corp','au_passwword','au_fk_cargo', 'au_fk_frente','au_fk_obra','au_status','au_token_active','au_token_expiracao'];
+	protected $allowedFields        = ['au_fk_usuario_corp','au_login_corp','au_passwword','au_fk_cargo', 'au_fk_frente','au_fk_obra','au_fk_departamento_func','au_status','role','au_token_active','au_token_expiracao'];
 
 	// Dates
 	protected $useTimestamps        = true;

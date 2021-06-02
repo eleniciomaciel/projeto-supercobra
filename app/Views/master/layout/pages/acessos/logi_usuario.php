@@ -177,14 +177,28 @@
 
                     <div class="form-row">
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-8">
                             <label for="nome_user">Nome completo:</label>
                             <input type="text" class="form-control" name="nome_user" value="<?= esc($ddf['f_nome']) ?>" disabled>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
+                            <label for="user_depatamento">Departamento:</label>
+                            <select class="custom-select rounded-0" name="user_depatamento">
+                                <option selected disabled>Selecione aqui...</option>
+                                <?php if (!empty($depart) && is_array($depart)) : ?>
+                                    <?php foreach ($depart as $lt_depart) : ?>
+                                        <option value="<?php echo $lt_depart['id'] ?>" <?php if ($lt_depart['id'] == $ddf['f_fk_id_departamento']) echo "selected = 'selected'" ?>><?php echo $lt_depart['dep_name'] ?></option>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <option>Sem registro cadastrado</option>
+                                <?php endif ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
                             <label for="cargo_user">Cargo:</label>
-                            <select class="custom-select rounded-0" name="cargo_user" disabled>
+                            <select class="custom-select rounded-0" name="cargo_user">
                                 <option selected disabled>Selecione aqui...</option>
                                 <?php if (!empty($list_cargos) && is_array($list_cargos)) : ?>
                                     <?php foreach ($list_cargos as $lt_cargos) : ?>
@@ -202,13 +216,13 @@
                         </div>
 
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="obra_user_acesso">Obra</label>
                             <select name="obra_user_acesso" class="form-control">
                             <option selected disabled>Selecione aqui...</option>
                                 <?php if (!empty($obras) && is_array($obras)) : ?>
                                     <?php foreach ($obras as $us_obras) : ?>
-                                        <option value="<?= esc($us_obras['id']) ?>"><?= esc($us_obras['obras_local']) ?></option>
+                                        <option value="<?= esc($us_obras['id']) ?>" <?php if($us_obras['id'] == $ddf['f_fk_obra']){echo 'selected';}?>><?= esc($us_obras['obras_local']) ?></option>
                                     <?php endforeach; ?>
                                 <?php else : ?>
                                     <option>Não ha obra cadastrada</option>
@@ -221,13 +235,13 @@
                             <?php } ?>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="up_acc_frente">Frente</label>
                             <select name="frente_user_acesso" class="form-control">
                             <option selected disabled>Selecione aqui...</option>
                                 <?php if (!empty($frentes) && is_array($frentes)) : ?>
                                     <?php foreach ($frentes as $us_frentes) : ?>
-                                        <option value="<?= esc($us_frentes['id_ft']) ?>"><?= esc($us_frentes['nome_ft']) ?></option>
+                                        <option value="<?= esc($us_frentes['id_ft']) ?>" <?php if($us_frentes['id_ft'] == $ddf['f_Fk_frente']){echo 'selected';}?>><?= esc($us_frentes['nome_ft']) ?></option>
                                     <?php endforeach; ?>
                                 <?php else : ?>
                                     <option>Não há frentes cadastrada</option>
@@ -240,7 +254,22 @@
                             <?php } ?>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
+                            <label for="user_nivel_cat">Nível</label>
+                            <select name="user_nivel_cat" class="form-control">
+                                <option selected disabled>Selecione aqui...</option>
+                                <option value="ADMIN">ADMINISTRADOR</option>
+                                <option value="RH">RECURSOS HUMANOS</option>
+                                <option value="USER">TRANSPOSTE</option>
+                            </select>
+                            <?php if ($validation->getError('user_nivel_cat')) { ?>
+                                <div class='text-danger mt-2'>
+                                    <?= $error = $validation->getError('user_nivel_cat'); ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+                        <div class="form-group col-md-4">
                             <label for="email_user_acesso">Login:</label>
                             <input type="email" class="form-control" name="email_user_acesso" value="<?= esc($ddf['f_email_pessoal']) ?>">
 
@@ -251,9 +280,9 @@
                             <?php } ?>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="senha_user_acesso">Senha:</label>
-                            <input type="text" class="form-control" name="senha_user_acesso" value="<?= esc($ddf['f_codigo']) ?>">
+                            <input type="text" class="form-control" name="senha_user_acesso" value="Eu@123456">
 
                             <?php if ($validation->getError('senha_user_acesso')) { ?>
                                 <div class='text-danger mt-2'>
@@ -279,7 +308,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-danger">
+                    <button type="submit" class="btn btn-danger" onClick="this.form.submit(); this.disabled=true; this.value='Salvando…'; ">
                         <i class="fas fa-save"></i> Gerar acesso
                     </button>
                     <a href="/admin_master/gestao_master" class="btn btn-warning">
