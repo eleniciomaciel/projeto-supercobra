@@ -113,61 +113,57 @@ $routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
     $routes->get("deleteCursoRh", "Rh/CargosrhController::deletaUmCargoEfuncao");
     $routes->get("todoCargosFuncRh", "Rh/CargosrhController::list_funcoesCargosGeralTodos");
 
-    
-});
+    $routes->get("cadastro_cnh/(:num)", "Rh/Documentos/DocumentosController::habilitacao/$1"); 
 
-/**departamentos */
-$routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
+    /**departamentos */
     $routes->get("lista_departamentos", "Rh/DepartamentosController::index");
     $routes->post("cadastra_departamentos", "Rh/DepartamentosController::addDepartamento");
     $routes->get("get_departamento_dados", "Rh/DepartamentosController::DadosDepartamento");
     $routes->post("altera_depatamento", "Rh/DepartamentosController::alteraDadosDepartamento");
     $routes->get("deleta_depatamento", "Rh/DepartamentosController::deletaDadosDepartamento");
-});
-
 /**cc */
-$routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
     $routes->get("lista-cento-custo", "Rh/RhccController::index");
     $routes->post("adiciona_rh_cc", "Rh/RhccController::addNewCc");
     $routes->get("lista_cc_da_frente", "Rh/RhccController::lista_cc_rh_frente");
     $routes->get("getListDados_cc", "Rh/RhccController::lista_info_cc");
     $routes->post("altera_novo_rh_cc", "Rh/RhccController::alteraDados_cc");
     $routes->get("altera_status_do_cc", "Rh/RhccController::alteraStatusDoCc");
-});
-
 /**cadastro do colaborador */
-$routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
-  $routes->get("cadastro-colaboradores", "Rh/CadastrocolaboradorController::index");
-  $routes->get("cadastrar-dados", "Rh/CadastrocolaboradorController::cadastro");
-  $routes->post("inserir-funcionario", "Rh/CadastrocolaboradorController::addNovoFuncionario");
-  $routes->get("ler_funcionarios_por_frente", "Rh/CadastrocolaboradorController::listFuncionarios");
-  $routes->get("atualiza-cadastro-do-funcionario/(:num)", "Rh/CadastrocolaboradorController::visualizaDadosCadastrado/$1");
-  $routes->post("altera-funcionario", "Rh/CadastrocolaboradorController::alteraCadastroFuncionario");  
-});
-
-
+    $routes->get("cadastro-colaboradores", "Rh/CadastrocolaboradorController::index");
+    $routes->get("cadastrar-dados", "Rh/CadastrocolaboradorController::cadastro");
+    $routes->post("inserir-funcionario", "Rh/CadastrocolaboradorController::addNovoFuncionario");
+    $routes->get("ler_funcionarios_por_frente", "Rh/CadastrocolaboradorController::listFuncionarios");
+    $routes->get("atualiza-cadastro-do-funcionario/(:num)", "Rh/CadastrocolaboradorController::visualizaDadosCadastrado/$1");
+    $routes->post("altera-funcionario", "Rh/CadastrocolaboradorController::alteraCadastroFuncionario");
 /**dados de atividades do rh */
-$routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
     $routes->get("lista_atividades", "Rh/AtividadesController::index");
     $routes->post("add_atividade", "Rh/AtividadesController::adicionaAtividade");
     $routes->get("dados_atividade", "Rh/AtividadesController::dadosDaAtividade");
     $routes->post("altera_atividade", "Rh/AtividadesController::alteraDadosAtividade");
     $routes->get("delete_atividade", "Rh/AtividadesController::deletaDadosAtividade");
-});
-
 /**selecct do funcionario lista dinamica */
-$routes->group("admin_rh", ["filter" => "auth"], function ($routes) {
-    $routes->get("list_funcionarios_select","Rh/UsuarioscargosController::index");
-    $routes->get("list_funcionarios_funcao","Rh/UsuarioscargosController::selctFuncao");
-    $routes->get("list_funcionarios_departamento","Rh/UsuarioscargosController::selctDepartamento");
-    $routes->get("list_funcionarios_atividade","Rh/UsuarioscargosController::selctAtividade");
-
-    /** cria dados dados do funcionario a obra */
+    $routes->get("list_funcionarios_select", "Rh/UsuarioscargosController::index");
+    $routes->get("list_funcionarios_funcao", "Rh/UsuarioscargosController::selctFuncao");
+    $routes->get("list_funcionarios_departamento", "Rh/UsuarioscargosController::selctDepartamento");
+    $routes->get("list_funcionarios_atividade", "Rh/UsuarioscargosController::selctAtividade");
+/** cria dados dados do funcionario a obra */
     $routes->post("cria-funcionario_cargo", "Rh/UsuarioscargosController::cadastrarCargoFunconario");
     $routes->get("lista_tabela_funcionarios_cargos", "Rh/UsuarioscargosController::getListFuncionariosFuncao");
+/**DOCUMENTOS DO COLABORADOR */
+    $routes->get("colaborador-documentos/(:num)", "Rh/Documentos/DocumentosController::index/$1");
+    $routes->post("cadastra-arquivo/(:num)", "Rh/Documentos/DocumentosController::uploadDocumentoColaborador/$1");
+//$routes->get("lista-documentos/(:num)", "Rh/Documentos/DocumentosController::listaDocUser/$1"); 
+    $routes->get("delete_file_doc", "Rh/Documentos/DocumentosController::deleteDocUser"); 
 
 });
 
+$routes->group('arquivos_cnh', ["filter" => "auth"], function($routes)
+{
+    $routes->add('upload_cnh/(:num)', 'Rh\Documentos\DocumentosController::inseri_nova_cnh/$1');
+    $routes->get("cadastro_cnh/(:num)", "Rh\Documentos\DocumentosController::habilitacao/$1"); 
+    $routes->get("list_my_cnh/(:num)", "Rh\Documentos\DocumentosController::listCNH/$1"); 
+    $routes->add("carrega_cnh_download/(:num)", "Rh\Documentos\DocumentosController::download_cnh/$1"); 
+});
 
 
 

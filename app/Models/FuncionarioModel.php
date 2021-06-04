@@ -155,9 +155,10 @@ class FuncionarioModel extends Model
 				</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="/Rh/CadastrocolaboradorController/visualizaDadosCadastrado/'.esc($row['f_id']).'"><i class="fas fa-eye"></i>&nbsp;Visualizar</a>
-					<a class="cl_func_doc dropdown-item" href="#" data-id="'.$row['f_id'].'"><i class="fas fa-file-pdf"></i>&nbsp;Documentos</a>
-					<a class="cl_func_cng dropdown-item" href="#" data-id="'.$row['f_id'].'"><i class="fas fa-id-card"></i>&nbsp;Habilitação</a>
+					<a class="cl_func_doc dropdown-item" href="/Rh/Documentos/DocumentosController/index/'.esc($row['f_id']).'" data-id="'.$row['f_id'].'"><i class="fas fa-file-pdf"></i>&nbsp;Documentos</a>
+					<a class="dropdown-item" href="/Rh/Documentos/DocumentosController/habilitacao/'.esc($row['f_id']).'" data-id="'.$row['f_id'].'"><i class="fas fa-id-card"></i>&nbsp;Habilitação</a>
 					<a class="cl_func_aso dropdown-item" href="#" data-id="'.$row['f_id'].'"><i class="fas fa-file-medical-alt"></i>&nbsp;ASO</a>
+					<a class="cl_func_aso dropdown-item" href="#" data-id="'.$row['f_id'].'"><i class="fas fa-university"></i>&nbsp;Banco</a>
 				<div class="dropdown-divider"></div>
 					<a class="cl_func_desabilita dropdown-item" href="#" id="'.$row['f_id'].'"><i class="fas fa-power-off"></i>&nbsp;Desativar</a>
 				</div>
@@ -167,6 +168,5 @@ class FuncionarioModel extends Model
 
 		return $action_button;
 	}
-
 
 }

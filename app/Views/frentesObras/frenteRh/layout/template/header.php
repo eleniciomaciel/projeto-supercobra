@@ -56,6 +56,10 @@
       border: 1px solid #000;
       border-radius: 8px;
     }
+
+    #form_add_documento label.error{
+            color:red;
+        }
   </style>
 </head>
 

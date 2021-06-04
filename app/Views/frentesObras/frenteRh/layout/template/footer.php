@@ -52,6 +52,7 @@
   <script src="<?= base_url() ?>/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <!-- SweetAlert2 -->
   <script src="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
+
   <!-- moment js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/x.y.z/locale/ar.js"></script>
 
@@ -149,6 +150,7 @@
   <?= $this->include('frentesObras/frenteRh/layout/js/005_js_funcionarios') ?>
   <?= $this->include('frentesObras/frenteRh/layout/js/006_atividades') ?>
 
+  <?= $this->renderSection('extra-js') ?>
 </body>
 
 </html>

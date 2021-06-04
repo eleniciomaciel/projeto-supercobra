@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition login-page img-responsive" style="background-image: url(dist/img/electrical-home.jpg); margin-top: auto; margin-left: auto; margin-right: auto;">
+<body class="hold-transition login-page img-responsive" style="background-image: url(dist/img/electrical-home.jpg); margin-top: auto; margin-left: auto; margin-right: auto;  background-repeat:no-repeat;background-size:cover;">
 	<div class="login-box">
 		<!-- /.login-logo -->
 		<div class="card card-outline card-primary">

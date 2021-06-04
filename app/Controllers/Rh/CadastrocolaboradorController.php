@@ -36,7 +36,6 @@ class CadastrocolaboradorController extends BaseController
 	public function cadastro($page = 'cadastrar-dados')
 	{
 		$id_frente = session()->get('log_frente');
-
 		$estados 		= new EstadosModel();
 		$funcao 		= new CargosModel();
 		$departamento  	= new DepartamentosModel();
