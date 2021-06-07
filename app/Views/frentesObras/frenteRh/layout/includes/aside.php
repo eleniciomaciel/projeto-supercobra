@@ -79,15 +79,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Clinicas</p>
-                            </a>
-                        </li>
-
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/exames/lista_clinicas" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Clínicas</p>
                             </a>
@@ -98,6 +90,13 @@
                                 <p>Exames</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Collapsed Sidebar</p>
+                            </a>
+                        </li>
+                        
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>

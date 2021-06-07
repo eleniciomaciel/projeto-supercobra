@@ -165,7 +165,16 @@ $routes->group('arquivos_cnh', ["filter" => "auth"], function($routes)
     $routes->add("carrega_cnh_download/(:num)", "Rh\Documentos\DocumentosController::download_cnh/$1"); 
 });
 
-
+/**cliniacas e exames */
+$routes->group('exames', ["filter" => "auth"], function($routes)
+{
+    $routes->get('lista_clinicas', 'Rh\Clinica\ClinicaController::index');
+    $routes->post('cadastra-clinica', 'Rh\Clinica\ClinicaController::addClinica');
+    $routes->get('lista_clinicas_frentes', 'Rh\Clinica\ClinicaController::listClinicas');
+    $routes->get('getClinica', 'Rh\Clinica\ClinicaController::dadosClinica');
+    $routes->post('cadastra_altera_clinica', 'Rh\Clinica\ClinicaController::alteraDadosClinicaOne');
+    $routes->get('delete_clinica', 'Rh\Clinica\ClinicaController::deleteDadosClinicaOne');
+});
 
 $routes->get('logout', 'Home::logout');
 /*
