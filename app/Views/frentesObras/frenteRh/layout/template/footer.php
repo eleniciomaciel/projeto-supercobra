@@ -118,6 +118,9 @@
         theme: 'bootstrap4',
         dropdownParent: $("#trabalhoModalLong")
       });
+      $('.select2MultipleEx').select2({
+        theme: 'bootstrap4',
+      });
       //mask
       $('#add_colab_cep_moradia').mask("00.000-000", {
         placeholder: "00.000-000"
@@ -138,6 +141,7 @@
   <?= $this->include('frentesObras/frenteRh/layout/components/002_popap_cc_rh') ?>
   <?= $this->include('frentesObras/frenteRh/layout/components/003_popap_atividade') ?>
   <?= $this->include('frentesObras/frenteRh/layout/components/004_popap_funcionario') ?>
+ 
   <!-- popups -->
 
 

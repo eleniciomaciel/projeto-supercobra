@@ -57,11 +57,41 @@
       border-radius: 8px;
     }
 
-    #form_add_documento label.error{
-            color:red;
-        }
+    #form_add_documento label.error {
+      color: red;
+    }
+
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid blue;
+      border-right: 16px solid green;
+      border-bottom: 16px solid red;
+      border-left: 16px solid pink;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+      position: fixed;
+      z-index: 20000000;
+      top: 5em;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%)
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
+  <div class="loader"  style="display:none;"></div>

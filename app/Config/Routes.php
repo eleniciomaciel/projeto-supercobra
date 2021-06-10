@@ -174,7 +174,31 @@ $routes->group('exames', ["filter" => "auth"], function($routes)
     $routes->get('getClinica', 'Rh\Clinica\ClinicaController::dadosClinica');
     $routes->post('cadastra_altera_clinica', 'Rh\Clinica\ClinicaController::alteraDadosClinicaOne');
     $routes->get('delete_clinica', 'Rh\Clinica\ClinicaController::deleteDadosClinicaOne');
+
+	/**exames config */
+    $routes->get('configuracao_exames', 'Rh\Exames\ExamesClinicosController::index');
+    $routes->post('cadastra_exames_contratual_ativo', 'Rh\Exames\ExamesClinicosController::addExameContratual');
+    $routes->get('list_exames_contratuais', 'Rh\Exames\ExamesClinicosController::listExamesContratuais');
+    $routes->get('get_exames_contartual_modal', 'Rh\Exames\ExamesClinicosController::getDadosExame');
+	$routes->post('altera_exames_contratual_ativo', 'Rh\Exames\ExamesClinicosController::uPExameContratual');
+	$routes->get('delete_exames_contratual_ativo', 'Rh\Exames\ExamesClinicosController::deleteExamesContratuais');
+
+	$routes->post('adiciona_risco_em_grau', 'Rh\Exames\ExamesClinicosController::addRisco');
+	$routes->get('list_risco_em_grau', 'Rh\Exames\ExamesClinicosController::listRiscosTrabalho');
+	$routes->get('get_exames_riscos', 'Rh\Exames\ExamesClinicosController::verExamesRiscoa');
+	$routes->post('alterar_risco_em_grau', 'Rh\Exames\ExamesClinicosController::alteraRisco');
+	$routes->get('delete_risco_em_grau', 'Rh\Exames\ExamesClinicosController::deleteRiscos');
+	$routes->get('listSelectExamesContrato', 'Rh\Exames\ExamesClinicosController::listaExamesContratuaisSelect');
+	$routes->get('listSelectExamesRiscos', 'Rh\Exames\ExamesClinicosController::listaExamesRiscosSelect');
+	$routes->get('list_funcao_cargos_riscos', 'Rh\Exames\ExamesClinicosController::getfuncoesCargos');
+	$routes->post('adiciona_combo', 'Rh\Exames\ExamesClinicosController::adicinaComboExames');
+    $routes->get('get_lista_exames_combo', 'Rh\Exames\ExamesClinicosController::getExamesCombo');
+    $routes->get('get_lista_one_exames', 'Rh\Exames\ExamesClinicosController::getListExames');
+    $routes->get('get_lista_funcao_select', 'Rh\Exames\ExamesClinicosController::listaRiscosFuncaoSelect');
+    $routes->post('altera_exames_combo', 'Rh\Exames\ExamesClinicosController::alteraComboExames');
+    $routes->get('get_deleteExames', 'Rh\Exames\ExamesClinicosController::deleteExamesCombo');
 });
+
 
 $routes->get('logout', 'Home::logout');
 /*

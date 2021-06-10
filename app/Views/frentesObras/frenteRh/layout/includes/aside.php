@@ -39,8 +39,53 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="/admin_rh/lista-cento-custo" class="nav-link">
+                        <i class="nav-icon fas fa-cart-plus"></i>
+                        <p>
+                            Cento de Custo
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
+                    <a href="/exames/configuracao_exames" class="nav-link">
+                        <i class="nav-icon fas fa-file-medical-alt"></i>
+                        <p>
+                            Config.: Exames
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/admin_rh/cadastro-colaboradores" class="nav-link">
+                        <i class="nav-icon fas fa-id-card-alt"></i>
+                        <p>
+                            Colaboradores
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/exames/lista_clinicas" class="nav-link">
+                        <i class="nav-icon fas fa-clinic-medical"></i>
+                        <p>
+                            Clínicas
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/admin_rh/cadastrar-cargo" class="nav-link">
+                        <i class="nav-icon fas fa-clipboard-check"></i>
+                        <p>
+                            Funcionais
+                        </p>
+                    </a>
+                </li>
+
+
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
@@ -50,7 +95,7 @@
                     </a>
                     <ul class="nav nav-treeview">
 
-                    <li class="nav-item">
+                        <li class="nav-item">
                             <a href="/admin_rh/cadastrar-cargo" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Funcionais</p>
@@ -71,10 +116,11 @@
                             </a>
                         </li>
 
+
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/exames/configuracao_exames" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Grupos de Trabalho</p>
+                                <p>Config.: Exames</p>
                             </a>
                         </li>
 
@@ -84,19 +130,16 @@
                                 <p>Clínicas</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Exames</p>
-                            </a>
-                        </li>
+
+
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Collapsed Sidebar</p>
                             </a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -104,9 +147,9 @@
                             </a>
                         </li>
                     </ul>
-                </li>
-     
-                <li class="nav-item">
+                </li> -->
+
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
@@ -209,7 +252,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon far fa-plus-square"></i>
@@ -338,7 +381,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
