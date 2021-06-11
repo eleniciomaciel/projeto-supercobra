@@ -12,6 +12,14 @@ use monken\TablesIgniter;
 
 class ExamesClinicosController extends BaseController
 {
+	public function __construct()
+    {
+        if (session()->get('role') != "RH") {
+            echo view('/');
+            exit;
+        }
+    }
+	
 	public function index($page = 'home-exames')
 	{
 		if (!is_file(APPPATH . '/Views/frentesObras/frenteRh/layout/pages/examesClinicos/' . $page . '.php')) {

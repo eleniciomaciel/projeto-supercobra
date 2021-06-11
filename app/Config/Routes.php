@@ -199,6 +199,25 @@ $routes->group('exames', ["filter" => "auth"], function($routes)
     $routes->get('get_deleteExames', 'Rh\Exames\ExamesClinicosController::deleteExamesCombo');
 });
 
+$routes->group('banco', ["filter" => "auth"], function($routes)
+{
+    $routes->get('page-banco/(:num)', 'Rh\Banco\BancoController::bancoPage/$1');
+    $routes->post('cadastro_banco', 'Rh\Banco\BancoController::adicionarBanco');
+    $routes->get('get-bancos', 'Rh\Banco\BancoController::listaBancosCadastrados');
+    $routes->get('get_list_nacos_select', 'Rh\Banco\BancoController::listaSelectBancos');
+    $routes->get('listaOneBanco', 'Rh\Banco\BancoController::dadoBanco');
+    $routes->post('altera_dados_banco', 'Rh\Banco\BancoController::alteraBanco');
+    $routes->get('deleta_banco', 'Rh\Banco\BancoController::deleteBanco');
+    $routes->post('criar-conta_usuario_bancaria', 'Rh\Banco\BancoController::addContaUsuarioBanco');
+    $routes->get('getContas_funcionarios/(:num)', 'Rh\Banco\BancoController::listaContasFuncionarios/$1');
+    $routes->get('getDadosConta', 'Rh\Banco\BancoController::getContaUsuario');
+    $routes->post('conta_usuario_bancaria_alterar', 'Rh\Banco\BancoController::alterarContaUsuarioBanco');
+    $routes->get('deleta_conta_usuario', 'Rh\Banco\BancoController::deleteContaUsuario');
+    $routes->get('alter_status', 'Rh\Banco\BancoController::alterarStatusContaUsuario');
+    
+
+});
+
 
 $routes->get('logout', 'Home::logout');
 /*
