@@ -12,15 +12,23 @@ class BancousuariosModel extends Model
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
 	protected $returnType           = 'array';
-	protected $useSoftDeletes       = false;
+	protected $useSoftDeletes       = true;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['fk_funcionario_bu','fk_banco_bu','tipo_conta_bu','agencia_bu','digito_agencia_bu','numero_conta_bu','digito_conta_bu','status_conta_bu','titular_status_bu','data_vencimento_conta_bu','observacao_bu'];
+	protected $allowedFields        = ['fk_funcionario_bu','fk_banco_bu','fk_frente_bu','tipo_conta_bu','agencia_bu','digito_agencia_bu','numero_conta_bu','digito_conta_bu','status_conta_bu','titular_status_bu','data_vencimento_conta_bu','observacao_bu'];
 
 	// Dates
 	protected $useTimestamps        = true;
 	protected $createdField         = 'created_at';
 	protected $updatedField         = 'updated_at';
 	protected $deletedField         = 'deleted_at';
+
+	public function getBanco_frente($id_frente)
+	{
+		$data_hoje = date('Y-m-d');
+		$sql = 'SELECT * FROM bancousuarios  INNER JOIN funcionarios ON bancousuarios.fk_funcionario_bu = funcionarios.f_id WHERE fk_frente_bu = "'.$id_frente.'" AND data_vencimento_conta_bu <= "'.$data_hoje.'";';
+		$query =  $this->db->query($sql);
+		return $query->getResult();
+	}
 
 	public function noticeTable($id)
 	{

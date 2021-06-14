@@ -214,6 +214,9 @@ $routes->group('banco', ["filter" => "auth"], function($routes)
     $routes->post('conta_usuario_bancaria_alterar', 'Rh\Banco\BancoController::alterarContaUsuarioBanco');
     $routes->get('deleta_conta_usuario', 'Rh\Banco\BancoController::deleteContaUsuario');
     $routes->get('alter_status', 'Rh\Banco\BancoController::alterarStatusContaUsuario');
+    $routes->get('get_toast_vence_conta', 'Rh\Banco\BancoController::avisosVencimentosContaBanco');
+    $routes->get('get_toast_habilitacao_vencida', 'Rh\CadastrocolaboradorController::listHabilitacaoVencidaFrente');
+    $routes->get("visualiza_minha_cnh/(:num)", "Rh\Documentos\DocumentosController::habilitacao/$1"); 
     
 
 });

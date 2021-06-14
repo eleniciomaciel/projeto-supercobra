@@ -31,12 +31,18 @@
     <!-- /.card -->
     <?= $this->include('frentesObras/frenteRh/layout/components/006_popap_banco') ?>
     <?= $this->include('frentesObras/frenteRh/layout/components/007_popap_banco_funcionario', $funcionario) ?>
+
+
+
 </section>
 <?= $this->endSection() ?>
 
 <?= $this->section('extra-js') ?>
+
 <script>
     $(document).ready(function() {
+
+
         var id_usuario_conta = <?= esc($funcionario['f_id']) ?>;
         selectListaBancos();
         selectListaBancosParaUsuarios();
@@ -61,6 +67,8 @@
             "ajax": {
                 url: "<?php echo site_url("/banco/getContas_funcionarios/"); ?>" + id_usuario_conta,
                 type: "GET",
+            },
+            success: function(){
             }
         });
 
@@ -237,6 +245,8 @@
         $('#form_add_dados_banco_usuario').on('submit', function(event) {
             event.preventDefault();
 
+            var id_funci = $("input[name='bu_usuario_conta']").val();
+
             $.ajax({
                 url: $(this).attr('action'),
                 type: $(this).attr('method'),
@@ -264,6 +274,7 @@
                         $('#bu_tutular_conta_error').text(data.bu_tutular_conta_error);
                         $('#bu_data_vencimento_conta_error').text(data.bu_data_vencimento_conta_error);
                         $('#bu_observacao_conta_error').text(data.bu_observacao_conta_error);
+                        $('#frente_id_error').text(data.frente_id_error);
                     } else {
                         $('#select_banco_cad_error').text('');
                         $('#us_tipo_conta_error').text('');
@@ -275,6 +286,7 @@
                         $('#bu_tutular_conta_error').text('');
                         $('#bu_data_vencimento_conta_error').text('');
                         $('#bu_observacao_conta_error').text('');
+                        $('#frente_id_error').text('');
 
                         $('#message_user_conta_add').html(data.message);
                         $('#form_add_dados_banco_usuario')[0].reset();
@@ -287,7 +299,7 @@
                 }
             })
         });
-
+        
         $(document).on('click', '.clickBancoUser', function(event) {
             event.preventDefault();
             let id = $(this).data('id');

@@ -27,7 +27,7 @@
         $('#form_novo_colaborador').on('submit', function(event) {
             event.preventDefault();
 
-           
+
 
             $.ajax({
                 url: $(this).attr('action'),
@@ -112,7 +112,7 @@
                         $('#add_colab_uniforme_calca_error').text(data.add_colab_uniforme_calca_error);
                         $('#add_colab_tipo_sangue_error').text(data.add_colab_tipo_sangue_error);
 
-                         //FUNCIONAIS
+                        //FUNCIONAIS
                         $('#add_colab_funcao_cargo_error').text(data.add_colab_funcao_cargo_error);
                         $('#add_colab_funcao_situacao_error').text(data.add_colab_funcao_situacao_error);
                         $('#add_colab_funcao_admissao_data_error').text(data.add_colab_funcao_admissao_data_error);
@@ -178,7 +178,7 @@
                         $('#add_colab_rua_moradia_error').text('');
                         $('#add_colab_numero_moradia_error').text('');
                         $('#add_colab_complemento_morada_error').text('');
-                        
+
                         //documentos
                         $('#add_colab_doc_numero_rg_error').text('');
                         $('#add_colab_doc_orgao_emissor_rg_error').text('');
@@ -223,7 +223,7 @@
                         $('#add_colab_cento_de_custo_error').text('');
                         $('#add_colab_funcao_hora_extras_error').text('');
                         $('#add_colab_funcao_encarregado_error').text('');
-                        
+
                         $('#add_colab_funcao_periculosidade_error').text('');
                         $('#add_colab_funcao_insalubridade_error').text('');
                         $('#add_colab_funcao_desconto_sindical_error').text('');
@@ -255,8 +255,6 @@
         /**altera dados do uisuário tipo funcionario */
         $('#form_update_colaborador').on('submit', function(event) {
             event.preventDefault();
-
-           
 
             $.ajax({
                 url: $(this).attr('action'),
@@ -341,7 +339,7 @@
                         $('#add_colab_uniforme_calca_error_up').text(data.add_colab_uniforme_calca_error_up);
                         $('#add_colab_tipo_sangue_error_up').text(data.add_colab_tipo_sangue_error_up);
 
-                         //FUNCIONAIS
+                        //FUNCIONAIS
                         $('#add_colab_funcao_cargo_error_up').text(data.add_colab_funcao_cargo_error_up);
                         $('#add_colab_funcao_situacao_error_up').text(data.add_colab_funcao_situacao_error_up);
                         $('#add_colab_funcao_admissao_data_error_up').text(data.add_colab_funcao_admissao_data_error_up);
@@ -407,7 +405,7 @@
                         $('#add_colab_rua_moradia_error_up').text('');
                         $('#add_colab_numero_moradia_error_up').text('');
                         $('#add_colab_complemento_morada_error_up').text('');
-                        
+
                         //documentos
                         $('#add_colab_doc_numero_rg_error_up').text('');
                         $('#add_colab_doc_orgao_emissor_rg_error_up').text('');
@@ -452,7 +450,7 @@
                         $('#add_colab_cento_de_custo_error_up').text('');
                         $('#add_colab_funcao_hora_extras_error_up').text('');
                         $('#add_colab_funcao_encarregado_error_up').text('');
-                        
+
                         $('#add_colab_funcao_periculosidade_error_up').text('');
                         $('#add_colab_funcao_insalubridade_error_up').text('');
                         $('#add_colab_funcao_desconto_sindical_error_up').text('');
@@ -480,8 +478,8 @@
             })
         });
 
-         /**seleciona os funcionarios */
-         function todasFuncionariosSelect() {
+        /**seleciona os funcionarios */
+        function todasFuncionariosSelect() {
             $.ajax({
                 url: '<?= site_url('/admin_rh/list_funcionarios_select') ?>',
                 method: 'get',
@@ -500,8 +498,8 @@
             });
         }
 
-         /**seleciona os funcionarios */
-         function selectCargoComFuncao() {
+        /**seleciona os funcionarios */
+        function selectCargoComFuncao() {
             $.ajax({
                 url: '<?= site_url('/admin_rh/list_funcionarios_funcao') ?>',
                 method: 'get',
@@ -540,8 +538,8 @@
             });
         }
 
-         /**seleciona os departamentos */
-         function selectAtividades() {
+        /**seleciona os departamentos */
+        function selectAtividades() {
             $.ajax({
                 url: '<?= site_url('/admin_rh/list_funcionarios_atividade') ?>',
                 method: 'get',
@@ -562,7 +560,7 @@
 
         $(document).on('click', '.cl_func_view', function() {
             var id = $(this).data('id');
-           
+
             $.ajax({
                 url: "<?php echo site_url('/admin_rh/listaDadosColaborador'); ?>",
                 method: "GET",
@@ -601,5 +599,77 @@
                 })
             }
         });
+
+        get_load_toast_habilitacao_vencida();
+
+        function get_load_toast_habilitacao_vencida() {
+            $.ajax({
+                url: "<?php echo site_url('/banco/get_toast_habilitacao_vencida'); ?>",
+                method: "GET",
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                dataType: 'JSON',
+
+                success: function(response) {
+
+                    if (response == '') {
+                        $('#load_list_habilitacao').html('<a href="#" class="dropdown-item">' +
+                            '<i class="fas fa-user-clock mr-2"></i>Sem vencimentos' +
+                            '</a>');
+                    } else {
+                        var numeroSelecionadas = 0;
+                        $.each(response, function(index, data) {
+                            $('#load_list_habilitacao').append(
+                                '<div class="dropdown-divider"></div>' +
+                                '<a href="/banco/visualiza_minha_cnh/' + data['f_id'] + '" class="dropdown-item">' +
+                                '<i class="fas fa-id-badge mr-2"></i> ' + data['f_nome'] + ' ' +
+                                '</a>');
+                            numeroSelecionadas++;
+                        });
+                        $('#total_habil_sum').html(numeroSelecionadas++);
+                    }
+
+                }
+            })
+        }
+
+        list_load_cartao_banco();
+
+        function list_load_cartao_banco() {
+            $.ajax({
+
+                url: "<?php echo site_url('/banco/get_toast_vence_conta'); ?>",
+                method: "GET",
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                dataType: 'JSON',
+
+                success: function(response) {
+
+                    if (response == '') {
+                        $('#load_list_cartao_venci').html('<a href="#" class="dropdown-item">' +
+                            '<i class="fas fa-user-clock mr-2"></i>Sem vencimentos' +
+                            '</a>');
+                    } else {
+                        var soma_venci_cartao = 0;
+                        $.each(response, function(index, data) {
+
+                            $('#load_list_cartao_venci').append(
+                                '<div class="dropdown-divider"></div>' +
+                                '<a href="/banco/page-banco/' + data['f_id'] + '" class="dropdown-item">' +
+                                '<i class="fas fa-id-badge mr-2"></i> ' + data['f_nome'] + ' ' +
+                                '</a>');
+                            soma_venci_cartao++;
+                        });
+                        $('#total_cartao_sum').html(soma_venci_cartao++);
+                    }
+
+
+                }
+            })
+        }
+
     });
 </script>

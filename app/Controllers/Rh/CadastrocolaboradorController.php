@@ -1511,4 +1511,13 @@ class CadastrocolaboradorController extends BaseController
             echo json_encode($output);
 		}
 	}
+
+	/**lista toast habilitação vencidas */
+	public function listHabilitacaoVencidaFrente()
+	{
+		$id_frente = session()->get('log_frente');
+		$model = new FuncionarioModel();
+		$status = $model->getHabilitacaoUser($id_frente);
+		echo json_encode($status);
+	}
 }

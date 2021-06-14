@@ -94,12 +94,14 @@
                     <label for="bu_observacao_conta">Observações da Conta:</label>
                     <textarea class="form-control" name="bu_observacao_conta" id="bu_observacao_conta" rows="3"></textarea>
                     <span id="bu_observacao_conta_error" class="text-danger"></span>
+                    <span id="frente_id_error" class="text-danger"></span>
                 </div>
             </div>
 
             <!-- /.card-body -->
 
             <input type="hidden" name="bu_usuario_conta" value="<?= esc($funcionario['f_id']) ?>">
+            <input type="hidden" name="frente_id" value="<?= session()->get('log_frente') ?>">
 
             <div class="card-footer">
                 <button type="submit" class="cls_up_banco_user btn btn-primary" id="id_up_banco_user">

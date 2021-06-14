@@ -191,6 +191,7 @@ class BancoController extends BaseController
 			$bu_tutular_conta_error = '';
 			$bu_data_vencimento_conta_error = '';
 			$bu_observacao_conta_error = '';
+			$frente_id_error = '';
 
 
 			$error = 'no';
@@ -199,7 +200,7 @@ class BancoController extends BaseController
 
 			$error = $this->validate([
 				'select_banco_cad' 			=> ['label' => 'banco', 'rules' => 'required'],
-				'ub_tipo_conta' 			=> ['label' => 'tipo de cota', 'rules' => 'required'],
+				'ub_tipo_conta' 			=> ['label' => 'tipo de cota bb', 'rules' => 'required'],
 				'ub_agenco' 				=> ['label' => 'agência', 'rules' => 'required|max_length[40]'],
 				'up_digito_agencia' 		=> ['label' => 'dígito da agencia', 'rules' => 'required|max_length[20]|integer'],
 				'ub_numero_conta' 			=> ['label' => 'nº da agência', 'rules' => 'required|max_length[20]|integer'],
@@ -208,6 +209,7 @@ class BancoController extends BaseController
 				'bu_tutular_conta' 			=> ['label' => 'titular da conta', 'rules' => 'required'],
 				'bu_data_vencimento_conta' 	=> ['label' => 'data de vencimento', 'rules' => 'required|valid_date'],
 				'bu_observacao_conta' 		=> ['label' => 'Observação', 'rules' => 'required'],
+				'frente_id' 		        => ['label' => 'Frente', 'rules' => 'required'],
 			]);
 
 			if (!$error) {
@@ -252,12 +254,16 @@ class BancoController extends BaseController
 				if ($validation->getError('bu_observacao_conta')) {
 					$bu_observacao_conta_error = $validation->getError('bu_observacao_conta');
 				}
+				if ($validation->getError('frente_id')) {
+					$frente_id_error = $validation->getError('frente_id');
+				}
 			} else {
 				$success = 'yes';
 				$mdel_banco_usuario = new BancousuariosModel();
 					$mdel_banco_usuario->save([
 						'fk_funcionario_bu'			=>	$this->request->getVar('bu_usuario_conta'),
 						'fk_banco_bu'				=>	$this->request->getVar('select_banco_cad'),
+						'fk_frente_bu'				=>	$this->request->getVar('frente_id'),
 						'tipo_conta_bu'				=>	$this->request->getVar('ub_tipo_conta'),
 						'agencia_bu'				=>	$this->request->getVar('ub_agenco'),
 						'digito_agencia_bu'			=>	$this->request->getVar('up_digito_agencia'),
@@ -283,6 +289,7 @@ class BancoController extends BaseController
 				'bu_tutular_conta_error'			=>	$bu_tutular_conta_error,
 				'bu_data_vencimento_conta_error'	=>	$bu_data_vencimento_conta_error,
 				'bu_observacao_conta_error'			=>	$bu_observacao_conta_error,
+				'frente_id_error'					=>	$frente_id_error,
 
 
 				'error'			=>	$error,
@@ -458,5 +465,14 @@ class BancoController extends BaseController
             $model->update($id, $data);
             echo 'Status alterado com sucesso!';
         }
+	}
+
+	/**avisos de vencimentos */
+	public function avisosVencimentosContaBanco()
+	{
+		$id_frente = session()->get('log_frente');
+		$model = new BancousuariosModel();
+		$status = $model->getBanco_frente($id_frente);
+		echo json_encode($status);
 	}
 }

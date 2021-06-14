@@ -15,7 +15,7 @@
         <div class="card-body p-0">
             <div class="table table-responsive col-12">
                 <table class="table table-sm" id="lista_funcioanrios_frente" style="width: 100%;">
-                <br>
+                    <br>
                     <thead>
                         <tr>
                             <th>Data</th>
@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-              
+
                     </tbody>
                 </table>
             </div>
@@ -39,4 +39,60 @@
     </div>
     <!-- /.card -->
 </section>
+
+<?= $this->endSection() ?>
+<?= $this->section('script_toast') ?>
+<script>
+$(document).ready(function(){
+    // load_toast_frente();
+    // load_toast_habilitacao_vencida();
+
+    // function load_toast_frente() {
+    //     $.ajax({
+
+    //         url: "<?php echo site_url('/banco/get_toast_vence_conta'); ?>",
+    //         method: "GET",
+    //         headers: {
+    //             'X-Requested-With': 'XMLHttpRequest'
+    //         },
+    //         dataType: 'JSON',
+
+    //         success: function(response) {
+
+    //             $.each(response, function(index, data) {
+    //                 $(document).Toasts('create', {
+    //                     class: 'bg-maroon',
+    //                     title: 'Aviso:',
+    //                     subtitle: data['f_nome'],
+    //                     body: 'Esses funcionários com cartões vencidos <a href="/banco/page-banco/' + data['f_id'] + '">Visualizar<a/>.'
+    //                 })
+    //             });
+    //         }
+    //     })
+    // }
+
+    // function load_toast_habilitacao_vencida() {
+    //     $.ajax({
+    //         url: "<?php echo site_url('/banco/get_toast_habilitacao_vencida'); ?>",
+    //         method: "GET",
+    //         headers: {
+    //             'X-Requested-With': 'XMLHttpRequest'
+    //         },
+    //         dataType: 'JSON',
+
+    //         success: function(response) {
+
+    //             $.each(response, function(index, data) {
+    //                 $(document).Toasts('create', {
+    //                     class: 'bg-warning',
+    //                     title: 'Aviso:',
+    //                     subtitle: 'Habilitação vencida',
+    //                     body: 'Habilitação do(a) mototista <a href="/banco/visualiza_minha_cnh/' + data['f_id'] + '">'+ data['f_nome']+'<a/> Vencida.'
+    //                 })
+    //             });
+    //         }
+    //     })
+    // }
+});
+</script>
 <?= $this->endSection() ?>

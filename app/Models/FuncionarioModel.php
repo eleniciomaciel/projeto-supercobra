@@ -132,6 +132,17 @@ class FuncionarioModel extends Model
 			->first();
 	}
 	
+	public function getHabilitacaoUser($id_frente)
+	{
+		$data_hoje = date('Y-m-d');
+		$builder = $this->db->table('funcionarios');
+		$query = $builder->select('*')
+                 ->where('f_Fk_frente', $id_frente)
+                 ->where('f_cnh_data_vencimento !=', 'NULL')
+                 ->where('f_cnh_data_vencimento <=', $data_hoje)
+                 ->get();
+		return $query->getResult();
+	}
 	/**lista funcionarios do rh da frente */
 	public function getFuncionariosFrente($id)
 	{
