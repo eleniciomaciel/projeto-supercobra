@@ -147,6 +147,11 @@
                 },
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
+                }, beforeSend: function() {
+                    $(".loader").css('display', 'block');
+                },
+                complete: function() {
+                    $(".loader").css('display', 'none');
                 },
                 dataType: 'JSON',
 
@@ -311,7 +316,12 @@
                     'X-Requested-With': 'XMLHttpRequest'
                 },
                 dataType: 'JSON',
-
+                beforeSend: function() {
+                    $(".loader").css('display', 'block');
+                },
+                complete: function() {
+                    $(".loader").css('display', 'none');
+                },
                 success: function(data) {
                     $('#cargos_select').val(data.cf_fk_funcao);
                     $('#fc_cargo_up').val(data.cf_nome_cargo_funcao);

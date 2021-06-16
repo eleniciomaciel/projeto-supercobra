@@ -70,6 +70,12 @@
                     id: id
                 },
                 dataType: 'JSON',
+                beforeSend: function() {
+                    $(".loader").css('display', 'block');
+                },
+                complete: function() {
+                    $(".loader").css('display', 'none');
+                },
                 success: function(data) {
                     $('#titulo_nome').val(data.titulo_nome);
                     $('#titulo_description').val(data.titulo_description);

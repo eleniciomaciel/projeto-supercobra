@@ -71,7 +71,12 @@
                     'X-Requested-With': 'XMLHttpRequest'
                 },
                 dataType: 'JSON',
-
+                beforeSend: function() {
+                    $(".loader").css('display', 'block');
+                },
+                complete: function() {
+                    $(".loader").css('display', 'none');
+                },
                 success: function(data) {
                     $('#dep_nme').val(data.dep_name);
                     $('#dp_descricao').val(data.dep_description);
