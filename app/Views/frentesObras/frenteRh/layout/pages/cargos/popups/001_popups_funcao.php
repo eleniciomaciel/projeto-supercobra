@@ -17,8 +17,14 @@
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form action="/admin_rh/altera_funcao" method="post" id="formAlteraFuncao">
-                    <?= csrf_field() ?>
+                        <?= csrf_field() ?>
                         <div class="card-body">
+
+                            <div class="form-group">
+                                <label for="cargo_numero">Nº</label>
+                                <input type="number" class="form-control form-control-border border-width-2" name="cargo_numero" id="cargo_numero" placeholder="Digite aqui...">
+                                <span id="cargo_numero_error" class="text-danger"></span>
+                            </div>
 
                             <div class="form-group">
                                 <label for="fun_funcao_up">Função</label>

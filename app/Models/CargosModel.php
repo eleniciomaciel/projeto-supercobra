@@ -14,7 +14,7 @@ class CargosModel extends Model
 	protected $returnType           = 'array';
 	protected $useSoftDelete        = true;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['cargo_nome','cargo_description','datetime','created_at','updated_at','deleted_at'];
+	protected $allowedFields        = ['cargo_nome','cargo_description','cargo_numero','datetime','created_at','updated_at','deleted_at'];
 
 	// Dates
 	protected $useTimestamps        = true;

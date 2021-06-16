@@ -53,8 +53,8 @@ class CargosrhController extends BaseController
 		$data_table->setTable($crudModel->noticeTable())
 				   ->setDefaultOrder("id_cargo", "DESC")
 				   ->setSearch(["cargo_nome", "cargo_description"])
-				   ->setOrder(["id_cargo", "cargo_nome", "cargo_description"])
-				   ->setOutput(["id_cargo", "cargo_nome", "cargo_description", $crudModel->button()]);
+				   ->setOrder(["cargo_numero", "cargo_nome", "cargo_description"])
+				   ->setOutput(["cargo_numero", "cargo_nome", "cargo_description", $crudModel->button()]);
 		return $data_table->getDatatable();
 	}
 	/**Cadastro de funções */
@@ -62,6 +62,7 @@ class CargosrhController extends BaseController
 	{
 		if ($this->request->getMethod() === 'post') {
 
+			$fun_numero_error = '';
 			$fun_funcao_error = '';
 			$fun_descricao_error = '';
 			$error = 'no';
@@ -69,11 +70,20 @@ class CargosrhController extends BaseController
 			$message = '';
 
 			$error = $this->validate([
+				'fun_numero' => ['label' => 'Nº', 'rules' => 'required|max_length[10]|integer|is_unique[cargos.cargo_numero]',
+				'errors' => [
+					'required' => 'A {field} não pode ir vazia.',
+					'is_unique' => 'Essa {field} já foi cadastrada.',
+					'integer' => 'Essa {field} só permite números.',
+					'max_length' => 'Essa {field} só permite até 10 caracteres.',
+				]],
+
 				'fun_funcao' => ['label' => 'FUNÇÃO', 'rules' => 'required|max_length[100]|is_unique[cargos.cargo_nome]',
 				'errors' => [
 					'required' => 'A {field} não pode ir vazia.',
 					'is_unique' => 'Essa {field} já foi cadastrada.',
 				]],
+
 				'fun_descricao' => ['label' => 'DESCRIÇÃO DA FUNÇÃO', 'rules' => 'required',
 				'errors' => [
 					'required' => 'A {field} não pode está vazia.'
@@ -83,6 +93,10 @@ class CargosrhController extends BaseController
 			if (!$error) {
 				$error = 'yes';
 				$validation = \Config\Services::validation();
+				if ($validation->getError('fun_numero')) {
+					$fun_numero_error = $validation->getError('fun_numero');
+				}
+
 				if ($validation->getError('fun_funcao')) {
 					$fun_funcao_error = $validation->getError('fun_funcao');
 				}
@@ -96,10 +110,12 @@ class CargosrhController extends BaseController
 					$crudModel->save([
 						'cargo_nome'			=>	strtoupper($this->request->getVar('fun_funcao')),
 						'cargo_description'		=>	strtoupper($this->request->getVar('fun_descricao')),
+						'cargo_numero'		=>	strtoupper($this->request->getVar('fun_numero')),
 					]);
 					$message = '<div class="alert alert-success">Função adicionada com sucesso.</div>';
 			}
 			$output = array(
+				'fun_numero_error'		=>	$fun_numero_error,
 				'fun_funcao_error'		=>	$fun_funcao_error,
 				'fun_descricao_error'	=>	$fun_descricao_error,
 				'error'					=>	$error,
@@ -125,6 +141,7 @@ class CargosrhController extends BaseController
 	{
 		if ($this->request->getMethod() === 'post') {
 
+			$cargo_numero_error = '';
 			$fun_funcao_up_error = '';
 			$fun_descricao_up_error = '';
 			$error = 'no';
@@ -132,11 +149,21 @@ class CargosrhController extends BaseController
 			$message = '';
 
 			$error = $this->validate([
-				'fun_funcao_up' => ['label' => 'FUNÇÃO', 'rules' => 'required|max_length[100]|is_unique[cargos.cargo_nome]',
+
+				'cargo_numero' => ['label' => 'Nº', 'rules' => 'required|max_length[10]|integer',
+				'errors' => [
+					'required' => 'A {field} não pode ir vazia.',
+					'integer' => 'Essa {field} só permite números.',
+					'max_length' => 'Essa {field} só permite até 10 caracteres.',
+				]],
+
+
+				'fun_funcao_up' => ['label' => 'FUNÇÃO', 'rules' => 'required|max_length[100]',
 				'errors' => [
 					'required' => 'A {field} não pode ir vazia.',
 					'is_unique' => 'Essa {field} já foi cadastrada.',
 				]],
+
 				'fun_descricao_up' => ['label' => 'DESCRIÇÃO DA FUNÇÃO', 'rules' => 'required',
 				'errors' => [
 					'required' => 'A {field} não pode está vazia.'
@@ -146,6 +173,10 @@ class CargosrhController extends BaseController
 			if (!$error) {
 				$error = 'yes';
 				$validation = \Config\Services::validation();
+				if ($validation->getError('cargo_numero')) {
+					$cargo_numero_error = $validation->getError('cargo_numero');
+				}
+
 				if ($validation->getError('fun_funcao_up')) {
 					$fun_funcao_up_error = $validation->getError('fun_funcao_up');
 				}
@@ -160,10 +191,12 @@ class CargosrhController extends BaseController
 						'id_cargo' 					=> $this->request->getVar('hidden_id'),
 						'cargo_nome'			=>	strtoupper($this->request->getVar('fun_funcao_up')),
 						'cargo_description'		=>	strtoupper($this->request->getVar('fun_descricao_up')),
+						'cargo_numero'		=>	strtoupper($this->request->getVar('cargo_numero')),
 					]);
 					$message = '<div class="alert alert-success">Função alterada com sucesso.</div>';
 			}
 			$output = array(
+				'cargo_numero_error'		=>	$cargo_numero_error,
 				'fun_funcao_up_error'		=>	$fun_funcao_up_error,
 				'fun_descricao_up_error'	=>	$fun_descricao_up_error,
 				'error'					=>	$error,

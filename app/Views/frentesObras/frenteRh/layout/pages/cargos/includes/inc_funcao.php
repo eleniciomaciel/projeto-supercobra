@@ -13,6 +13,12 @@
                 <div class="card-body">
 
                     <div class="form-group">
+                        <label for="fun_numero">Nº</label>
+                        <input type="number" class="form-control form-control-border border-width-2" name="fun_numero" id="fun_numero" placeholder="Digite aqui...">
+                        <span id="fun_numero_error" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
                         <label for="fun_funcao">Cadastrar função </label>
                         <input type="text" class="form-control form-control-border" name="fun_funcao" id="fun_funcao" placeholder="Digite aqui...">
                         <span id="fun_funcao_error" class="text-danger"></span>

@@ -80,10 +80,12 @@
                     $('#id_func_add').html('<i class="fa fa-save"></i> Salvar');
                     $('.cls_func_add').attr('disabled', false);
                     if (data.error == 'yes') {
+                        $('#fun_numero_error').text(data.fun_numero_error);
                         $('#fun_funcao_error').text(data.fun_funcao_error);
                         $('#fun_descricao_error').text(data.fun_descricao_error);
                     } else {
                         $('#for_add_funco_cargo')[0].reset();
+                        $('#fun_numero_error').text('');
                         $('#fun_funcao_error').text('');
                         $('#fun_descricao_error').text('');
 
@@ -119,9 +121,11 @@
                     $('#id_func_add_up').html('<i class="fa fa-save"></i> Salvar');
                     $('.cls_func_add_up').attr('disabled', false);
                     if (data.error == 'yes') {
+                        $('#cargo_numero_error').text(data.cargo_numero_error);
                         $('#fun_funcao_up_error').text(data.fun_funcao_up_error);
                         $('#fun_descricao_up_error').text(data.fun_descricao_up_error);
                     } else {
+                        $('#cargo_numero_error').text('');
                         $('#fun_funcao_up_error').text('');
                         $('#fun_descricao_up_error').text('');
 
@@ -156,10 +160,10 @@
                 dataType: 'JSON',
 
                 success: function(data) {
+                    $('#cargo_numero').val(data.cargo_numero);
                     $('#fun_funcao_up').val(data.cargo_nome);
                     $('#fun_descricao_up').val(data.cargo_description);
-                    $('#fun_funcao_error').text('');
-                    $('#fun_descricao').text('');
+                   
                     $('#modalFuncao').modal('show');
                     $('#hidden_id').val(id);
                 }
