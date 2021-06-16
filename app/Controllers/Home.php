@@ -84,12 +84,14 @@ class Home extends BaseController
     private function setUserSession($user)
     {
         $data = [
+            'id_pw' 			=> $user['au_id'],
             'id' 			    => $user['au_fk_usuario_corp'],
             'log_cargo' 		=> $user['au_fk_cargo'],
             'log_obra' 		    => $user['au_fk_obra'],
             'log_frente' 	    => $user['au_fk_frente'],
             'log_departamento'  => $user['au_fk_departamento_func'],
             'login_use' 	    => $user['au_login_corp'],
+            'foto' 	            => $user['au_foto'],
             'isLoggedIn' 	    => true,
             "role" 			    => $user['role'],
         ];

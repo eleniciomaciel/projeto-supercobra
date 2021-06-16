@@ -36,18 +36,17 @@
                 <span class="badge badge-info navbar-badge" id="total_cartao_sum">0</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
-                <span class="dropdown-item dropdown-header">15 Cartões Vencidas</span>
+                <span class="dropdown-item dropdown-header">Cartões Vencidas</span>
 
                 <span id="load_list_cartao_venci"></span>
 
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
         <!-- Messages Habilitações -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
                 <i class="far fa-address-card"></i>
-                <span class="badge badge-danger navbar-badge" id="total_habil_sum">15</span>
+                <span class="badge badge-danger navbar-badge" id="total_habil_sum">0</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
                 <span class="dropdown-item dropdown-header">habilitações vencidas</span>
@@ -58,6 +57,34 @@
                 <a href="#" class="dropdown-item dropdown-footer">Habilitações com com prazos vencidos</a>
             </div>
         </li>
+
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                <i class="fas fa-heartbeat"></i>
+                <span class="badge badge-warning navbar-badge">15</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                <span class="dropdown-item dropdown-header">ASO a serem realizados</span>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-envelope mr-2"></i> 4 new messages
+                    <span class="float-right text-muted text-sm">3 mins</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-users mr-2"></i> 8 friend requests
+                    <span class="float-right text-muted text-sm">12 hours</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-file mr-2"></i> 3 new reports
+                    <span class="float-right text-muted text-sm">2 days</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+            </div>
+        </li>
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
@@ -66,23 +93,14 @@
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">Dados do seu perfíl</span>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-id-card mr-2"></i> Informações cadastrais
-                    <span class="float-right text-muted text-sm">3 mins</span>
+                <a href="/dados_pessoais/meus-dados/<?= session()->get('id') ?>" class="text-center dropdown-item">
+                    <i class="fas fa-id-card mr-2"></i> Perfíl
                 </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-id-card-alt mr-2"></i> Imagem do perfíl
-                    <span class="float-right text-muted text-sm">12 hours</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-user-lock mr-2"></i> Dados de acesso
-                    <span class="float-right text-muted text-sm">2 days</span>
-                </a>
+
                 <div class="dropdown-divider"></div>
                 <a href="/logout" class="dropdown-item dropdown-footer">
-                    <i class="fas fa-power-off mr-2"></i> Sair do sistema</a>
+                    <i class="fas fa-power-off mr-2"></i> Sair do sistema
+                </a>
             </div>
         </li>
 

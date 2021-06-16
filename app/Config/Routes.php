@@ -217,11 +217,34 @@ $routes->group('banco', ["filter" => "auth"], function($routes)
     $routes->get('get_toast_vence_conta', 'Rh\Banco\BancoController::avisosVencimentosContaBanco');
     $routes->get('get_toast_habilitacao_vencida', 'Rh\CadastrocolaboradorController::listHabilitacaoVencidaFrente');
     $routes->get("visualiza_minha_cnh/(:num)", "Rh\Documentos\DocumentosController::habilitacao/$1"); 
-    
-
 });
 
 
+
+/**painel do aso */
+$routes->group('aso', ["filter" => "auth"], function($routes)
+{
+    $routes->get('gerar-aso/(:num)', 'Rh\Aso\AsoController::index/$1');
+});
+
+/**área de acesso */
+$routes->group('dados_pessoais', ["filter" => "auth"], function($routes)
+{
+    $routes->get('meus-dados/(:num)', 'Rh\Acesso\AcessoController::index/$1');
+    $routes->post('altera-dados-foto/(:num)', 'Rh\Acesso\AcessoController::alteraFoto/$1');
+    $routes->post('altera_acesso_senha/(:num)', 'Rh\Acesso\AcessoController::alteraMeuAcesso/$1');
+});
+
+
+/**MÃO DE OBRA */
+$routes->group('mao_obra', ["filter" => "auth"], function($routes)
+{
+    $routes->post('adiciona-mao-obra', 'Rh\MaoObra\MaoObraController::index');
+    $routes->get('lista_mao_obras', 'Rh\MaoObra\MaoObraController::getMaoObras');
+    $routes->get('getMaoObraOne', 'Rh\MaoObra\MaoObraController::getMaoDeObraUnica');
+    $routes->post('altera_names-mao-obra', 'Rh\MaoObra\MaoObraController::alteraMaoObraDados');
+    $routes->get('deleta_mao_obra', 'Rh\MaoObra\MaoObraController::delMaoObraOne');
+});
 $routes->get('logout', 'Home::logout');
 /*
  * --------------------------------------------------------------------

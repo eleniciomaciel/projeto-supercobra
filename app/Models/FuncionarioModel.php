@@ -168,8 +168,9 @@ class FuncionarioModel extends Model
 					<a class="dropdown-item" href="/Rh/CadastrocolaboradorController/visualizaDadosCadastrado/'.esc($row['f_id']).'"><i class="fas fa-eye"></i>&nbsp;Visualizar</a>
 					<a class="cl_func_doc dropdown-item" href="/Rh/Documentos/DocumentosController/index/'.esc($row['f_id']).'" data-id="'.$row['f_id'].'"><i class="fas fa-file-pdf"></i>&nbsp;Documentos</a>
 					<a class="dropdown-item" href="/Rh/Documentos/DocumentosController/habilitacao/'.esc($row['f_id']).'" data-id="'.$row['f_id'].'"><i class="fas fa-id-card"></i>&nbsp;Habilitação</a>
-					<a class="cl_func_aso dropdown-item" href="#" data-id="'.$row['f_id'].'"><i class="fas fa-file-medical-alt"></i>&nbsp;ASO</a>
+					<a class="cl_func_aso dropdown-item" href="/aso/gerar-aso/'.$row['f_id'].'"><i class="fas fa-file-medical-alt"></i>&nbsp;ASO</a>
 					<a class="dropdown-item" href="'. site_url('/banco/page-banco/'.$row['f_id']).'"><i class="fas fa-university"></i>&nbsp;Banco</a>
+					<a class="dropdown-item" href="'. site_url('/transferencia/funcionario-transfere/'.$row['f_id']).'"><i class="fas fa-user-cog"></i>&nbsp;Transferir</a>
 				<div class="dropdown-divider"></div>
 					<a class="cl_func_desabilita dropdown-item" href="#" id="'.$row['f_id'].'"><i class="fas fa-power-off"></i>&nbsp;Desativar</a>
 				</div>
