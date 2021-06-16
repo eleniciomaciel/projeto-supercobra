@@ -11,7 +11,7 @@
                         <!-- //form -->
                         <div class="card card-danger">
                             <div class="card-header">
-                                <h3 class="card-title">Exames contratuais</h3>
+                                <h3 class="card-title">Exames</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -20,7 +20,7 @@
                                 <div class="card-body">
 
                                     <div class="form-group">
-                                        <label for="exc_name">Tipo de contrato: </label>
+                                        <label for="exc_name">Tipo: </label>
                                         <select class="custom-select rounded-0" name="exm_contrato" id="exm_contrato">
 
                                         </select>
@@ -31,8 +31,8 @@
                                         <label for="exc_name">Função:</label>
                                         <select name="todas_funcao_para_risco" id="todas_funcao_para_risco" class="custom-select">
                                             <option selected disabled>Selecione aqui...</option>
-                                            <?php foreach ($funf as $select_func) : ?>
-                                                <option value="<?= esc($select_func['id']) ?>"> <?= esc($select_func['cf_nome_cargo_funcao']) ?></option>
+                                            <?php foreach ($carg as $select_func) : ?>
+                                                <option value="<?= esc($select_func['id_cargo']) ?>"> <?= esc($select_func['cargo_numero']) ?> <==> <?= esc($select_func['cargo_nome']) ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                         <span id="todas_funcao_para_risco_error" class="text-danger"></span>

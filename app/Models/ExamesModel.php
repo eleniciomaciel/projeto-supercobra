@@ -27,7 +27,7 @@ class ExamesModel extends Model
 		$builder = $this->db->table('exames');
 		$builder->select('*');
 		$builder->join('examescontratuais', 'examescontratuais.id = exames.ex_fk_tipo_contato');
-		$builder->join('cargofuncoes', 'cargofuncoes.id = exames.ex_fk_funcao');
+		$builder->join('cargos', 'cargos.id_cargo = exames.ex_fk_funcao');
 		$builder->join('examesocupacionaisriscos', 'examesocupacionaisriscos.id_r = exames.ex_fk_risco');
 		//$query = $builder;
 

@@ -38,7 +38,7 @@
 
                 <div class="chart tab-pane" id="sales-chart">
                     <div class="chartjs-size-monitor">
-                        <?= $this->include('frentesObras/frenteRh/layout/pages/examesClinicos/includes/exames_riscos_ocupacionais', $funf) ?>
+                        <?= $this->include('frentesObras/frenteRh/layout/pages/examesClinicos/includes/exames_riscos_ocupacionais', $carg) ?>
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@
 
 
 </section>
-<?= $this->include('frentesObras/frenteRh/layout/components/005_popap_config_exames', $funf) ?>
+<?= $this->include('frentesObras/frenteRh/layout/components/005_popap_config_exames', $carg) ?>
 
 <?= $this->endSection() ?>
 
@@ -97,12 +97,7 @@
                 "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
             },
             "order": [0, "desc"],
-            columnDefs: [{
-                targets: 0,
-                render: function(data) {
-                    return moment(data).format('L');
-                }
-            }],
+           
             "serverSide": true,
             "ajax": {
                 url: "<?php echo site_url("/exames/list_risco_em_grau"); ?>",
@@ -653,10 +648,10 @@
                 },
                 success: function(response) {
                     $('select[name="exm_riscos_funcao_ajax"]').empty();
-                    $('select[name="exm_riscos_funcao_ajax"]').append('<option selected disabled>Selecione aqui...</option>');
+                    $('select[name="exm_riscos_funcao_ajax"]').append('<option selected disabled>Selecione aquixx...</option>');
 
                     $.each(response, function(index, data) {
-                        $('#exm_riscos_funcao_ajax').append('<option value="' + data['id_r'] + '">' + data['eor_nome'] + ' <---> ' + data['cf_nome_cargo_funcao'] + '</option>');
+                        $('#exm_riscos_funcao_ajax').append('<option value="' + data['id_r'] + '">' + data['eor_nome'] + ' <---> ' + data['eor_grau_risco'] + '</option>');
                     });
                 }
             });

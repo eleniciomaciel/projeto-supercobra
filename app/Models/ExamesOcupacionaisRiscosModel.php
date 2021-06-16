@@ -25,13 +25,25 @@ class ExamesOcupacionaisRiscosModel extends Model
 	public function noticeTable()
 	{
 		$builder = $this->db->table('examesocupacionaisriscos');
-		$builder->join('cargofuncoes', 'cargofuncoes.id = examesocupacionaisriscos.fk_funcao_eor');
+		$builder->join('cargos', 'cargos.id_cargo = examesocupacionaisriscos.fk_funcao_eor');
 		return $builder;
+
+		// $builder = $this->db->table('examesocupacionaisriscos');
+		// $builder->select('*');
+		// $builder->join('cargos', 'cargos.id_cargo = examesocupacionaisriscos.fk_funcao_eor');
+		// $query = $builder->get();
+		// return $query->getResult();
 	}
 
 	public function examesAtividadesRiscos() {
-		$sql = 'SELECT * FROM examesocupacionaisriscos AS t1 INNER JOIN cargofuncoes t2 ON t1.fk_funcao_eor = t2.id';
-		$query =  $this->db->query($sql);
+		// $sql = 'SELECT * FROM examesocupacionaisriscos AS t1 INNER JOIN cargofuncoes t2 ON t1.fk_funcao_eor = t2.id';
+		// $query =  $this->db->query($sql);
+		// return $query->getResult();
+
+		$builder = $this->db->table('examesocupacionaisriscos');
+		$builder->select('*');
+		$builder->join('cargos', 'cargos.id_cargo = examesocupacionaisriscos.fk_funcao_eor');
+		$query = $builder->get();
 		return $query->getResult();
 	  }
 

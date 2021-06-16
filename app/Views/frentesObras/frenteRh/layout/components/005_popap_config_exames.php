@@ -84,8 +84,8 @@
                             <div class="form-group">
                                 <label for="fk_funcao_eor">Função: </label>
                                 <select name="fk_funcao_eor" id="fk_funcao_eor" class="custom-select">
-                                    <?php foreach ($funf as $select_func) : ?>
-                                        <option value="<?= esc($select_func['id']) ?>"> <?= esc($select_func['cf_nome_cargo_funcao']) ?></option>
+                                    <?php foreach ($carg as $select_func) : ?>
+                                        <option value="<?= esc($select_func['id_cargo']) ?>"> <?= esc($select_func['cargo_nome']) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <span id="fk_funcao_eor_error" class="text-danger"></span>
@@ -180,8 +180,8 @@
                                 <label for="ex_fk_funcao">Função:</label>
                                 <select name="ex_fk_funcao" id="ex_fk_funcao" class="custom-select">
                                     <option selected disabled>Selecione aqui...</option>
-                                    <?php foreach ($funf as $select_func) : ?>
-                                        <option value="<?= esc($select_func['id']) ?>"> <?= esc($select_func['cf_nome_cargo_funcao']) ?></option>
+                                    <?php foreach ($carg as $select_func) : ?>
+                                        <option value="<?= esc($select_func['id_cargo']) ?>"> <?= esc($select_func['cargo_numero']) ?> <==> <?= esc($select_func['cargo_nome']) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <span id="ex_fk_funcao_error" class="text-danger"></span>

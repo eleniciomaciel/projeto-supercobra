@@ -21,10 +21,10 @@
                                         <label for="exc_name">Função: </label>
                                         <select class="custom-select rounded-0" name="risco_funcao" id="risco_funcao">
                                             <option selected disabled>Selecione aqui...</option>
-                                            <?php if (!empty($funf) && is_array($funf)) : ?>
+                                            <?php if (!empty($carg) && is_array($carg)) : ?>
 
-                                                <?php foreach ($funf as $select_func) : ?>
-                                                    <option value="<?= esc($select_func['id']) ?>"> <?= esc($select_func['cf_nome_cargo_funcao']) ?></option>
+                                                <?php foreach ($carg as $select_func) : ?>
+                                                    <option value="<?= esc($select_func['id_cargo']) ?>"> <?= esc($select_func['cargo_numero']) ?> <==> <?= esc($select_func['cargo_nome']) ?></option>
                                                 <?php endforeach; ?>
 
                                             <?php else : ?>
@@ -89,7 +89,7 @@
                                 <table class="table table-striped" id="lista_tipo_risco_trabalho" style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th>Data</th>
+                                            <th>Nº</th>
                                             <th>Função</th>
                                             <th>Nome</th>
                                             <th>Grau</th>
@@ -97,46 +97,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1.</td>
-                                            <td>Update software</td>
-                                            <td>
-                                                <div class="progress progress-xs">
-                                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-danger">55%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2.</td>
-                                            <td>Clean database</td>
-                                            <td>
-                                                <div class="progress progress-xs">
-                                                    <div class="progress-bar bg-warning" style="width: 70%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-warning">70%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3.</td>
-                                            <td>Cron job running</td>
-                                            <td>
-                                                <div class="progress progress-xs progress-striped active">
-                                                    <div class="progress-bar bg-primary" style="width: 30%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-primary">30%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4.</td>
-                                            <td>Fix and squish bugs</td>
-                                            <td>
-                                                <div class="progress progress-xs progress-striped active">
-                                                    <div class="progress-bar bg-success" style="width: 90%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-success">90%</span></td>
-                                        </tr>
+
+                            
                                     </tbody>
                                 </table>
                             </div>

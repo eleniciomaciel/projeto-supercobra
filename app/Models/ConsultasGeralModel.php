@@ -21,7 +21,7 @@ class ConsultasGeralModel extends Model
     public function getRiscosFuncao($postData) {
 		$builder = $this->db->table('examesocupacionaisriscos');
 		$builder->select('*');
-		$builder->join('cargofuncoes', 'cargofuncoes.id = examesocupacionaisriscos.fk_funcao_eor');
+		$builder->join('cargos', 'cargos.id_cargo = examesocupacionaisriscos.fk_funcao_eor');
 		$builder->where('fk_funcao_eor',$postData['id_func']);
 		$query = $builder->get();
 		return $query->getResult();

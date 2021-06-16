@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ExamesContratuaisModel;
 use App\Models\ExamesOcupacionaisRiscosModel;
 use App\Models\CargofuncoesModel;
+use App\Models\CargosModel;
 use App\Models\ConsultasGeralModel;
 use App\Models\ExamesModel;
 use monken\TablesIgniter;
@@ -27,10 +28,12 @@ class ExamesClinicosController extends BaseController
 			throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
 		}
 
-		$model = new CargofuncoesModel();
+		$model = new CargosModel();
+		$model_cargos = new CargofuncoesModel();
 		$data = [
 			'title' =>	'Informações dos exames Clínicos',
-			'funf' 	=> 	$model->findAll(),
+			'funf' 	=> 	$model_cargos->findAll(),
+			'carg' 	=> 	$model->findAll(),
 		]; // Capitalize the first letter
 
 		return view('frentesObras/frenteRh/layout/pages/examesClinicos/' . $page, $data);
@@ -255,10 +258,10 @@ class ExamesClinicosController extends BaseController
 		$model_risco = new ExamesOcupacionaisRiscosModel();
 		$data_table = new TablesIgniter();
 		$data_table->setTable($model_risco->noticeTable())
-			->setDefaultOrder("cf_nome_cargo_funcao", "DESC")
-			->setSearch(["cf_nome_cargo_funcao", "eor_nome", "eor_grau_risco"])
-			->setOrder(["cf_nome_cargo_funcao", "eor_nome", "eor_grau_risco"])
-			->setOutput(["created_at", "cf_nome_cargo_funcao", "eor_nome", "eor_grau_risco", $model_risco->button()]);
+			->setDefaultOrder("cargo_nome", "DESC")
+			->setSearch(["cargo_nome", "eor_nome", "eor_grau_risco"])
+			->setOrder(["cargo_nome", "eor_nome", "eor_grau_risco"])
+			->setOutput(["cargo_numero", "cargo_nome", "eor_nome", "eor_grau_risco", $model_risco->button()]);
 		return $data_table->getDatatable();
 	}
 
@@ -469,9 +472,9 @@ class ExamesClinicosController extends BaseController
 
 		$data_table->setTable($model->noticeTable())
 				   ->setDefaultOrder("id_ex", "DESC")
-				   ->setSearch(["ect_nome", "cf_nome_cargo_funcao", "eor_nome", "ex_tipo_exame", "ex_validade_meses"])
-				   ->setOrder(["ect_nome", "cf_nome_cargo_funcao", "eor_nome", "ex_tipo_exame", "ex_validade_meses"])
-				   ->setOutput(["ect_nome", "cf_nome_cargo_funcao", "eor_nome", "ex_tipo_exame", "ex_validade_meses", $model->button()]);
+				   ->setSearch(["ect_nome", "cargo_nome", "eor_nome", "ex_tipo_exame", "ex_validade_meses"])
+				   ->setOrder(["ect_nome", "cargo_nome", "eor_nome", "ex_tipo_exame", "ex_validade_meses"])
+				   ->setOutput(["ect_nome", "cargo_nome", "eor_nome", "ex_tipo_exame", "ex_validade_meses", $model->button()]);
 		return $data_table->getDatatable();
 	}
 
