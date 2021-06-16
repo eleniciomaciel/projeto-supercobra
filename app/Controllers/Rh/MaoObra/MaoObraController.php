@@ -9,6 +9,15 @@ use monken\TablesIgniter;
 
 class MaoObraController extends BaseController
 {
+
+	public function __construct()
+    {
+        if (session()->get('role') != "RH") {
+            echo view('/');
+            exit;
+        }
+    }
+	
 	public function getMaoObras()
 	{
 		$crudModel = new TipoMaoDeObraModel();
@@ -145,6 +154,5 @@ class MaoObraController extends BaseController
             $crudModel->where('id_tmo', $id)->delete($id);
             echo 'Mão de obra deletada com sucesso!';
         }
-    
 	}
 }

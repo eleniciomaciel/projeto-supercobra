@@ -8,6 +8,14 @@ use monken\TablesIgniter;
 
 class AtividadesController extends BaseController
 {
+	public function __construct()
+    {
+        if (session()->get('role') != "RH") {
+            echo view('/');
+            exit;
+        }
+    }
+	
 	public function index()
 	{
 		$model_atividades = new AtividadesModel();

@@ -245,6 +245,17 @@ $routes->group('mao_obra', ["filter" => "auth"], function($routes)
     $routes->post('altera_names-mao-obra', 'Rh\MaoObra\MaoObraController::alteraMaoObraDados');
     $routes->get('deleta_mao_obra/(:num)', 'Rh\MaoObra\MaoObraController::delMaoObraOne/$1');
 });
+/**adiciona novas frentes */
+$routes->group('frentes_trabalho', ["filter" => "auth"], function($routes)
+{
+    $routes->post('adiciona-frentes-trabalho', 'Rh\FrenteTrabalho\FrentesTrabalhosController::index');
+    $routes->get('lista_frente_trabalho', 'Rh\FrenteTrabalho\FrentesTrabalhosController::getFrentesTrabalho');
+    $routes->get('getFrenteTrabalho', 'Rh\FrenteTrabalho\FrentesTrabalhosController::getFrentesTrabOne');
+    $routes->post('altera_frente_frabalho', 'Rh\FrenteTrabalho\FrentesTrabalhosController::novaFrente');
+    $routes->get('deleta_front_work/(:num)', 'Rh\FrenteTrabalho\FrentesTrabalhosController::delFrontWorkOne/$1');
+});
+
+
 $routes->get('logout', 'Home::logout');
 /*
  * --------------------------------------------------------------------

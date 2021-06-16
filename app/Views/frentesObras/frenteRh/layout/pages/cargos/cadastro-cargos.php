@@ -33,8 +33,13 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#menu3">Departamentos</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#menu4">Atividades</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#menu5">Frentes</a>
                     </li>
                 </ul>
 
@@ -58,8 +63,13 @@
                     <div id="menu3" class="container tab-pane fade"><br>
                         <?= $this->include('frentesObras/frenteRh/layout/pages/cargos/includes/inc_departamento') ?>
                     </div>
+
                     <div id="menu4" class="container tab-pane fade"><br>
                         <?= $this->include('frentesObras/frenteRh/layout/pages/cargos/includes/inc_atividades') ?>
+                    </div>
+
+                    <div id="menu5" class="container tab-pane fade"><br>
+                        <?= $this->include('frentesObras/frenteRh/layout/pages/cargos/includes/inc_frentes') ?>
                     </div>
                 </div>
 
@@ -69,6 +79,7 @@
     </div>
     <!-- /.col -->
     <?= $this->include('frentesObras/frenteRh/layout/components/008_popap_mao_obra') ?>
+    <?= $this->include('frentesObras/frenteRh/layout/components/009_popap_frentes_trabalho') ?>
 </section>
 <?= $this->endSection() ?>
 <?= $this->section('extra-js') ?>
@@ -87,6 +98,19 @@
             }
         });
 
+
+        /**lista frentes de trabalho */
+        $('#lista_todas_as_frentes').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+            },
+            "order": [0, "desc"],
+            "serverSide": true,
+            "ajax": {
+                url: "<?php echo site_url("/frentes_trabalho/lista_frente_trabalho"); ?>",
+                type: "GET",
+            }
+        });
 
         $('#form_add_mao_obra').on('submit', function(event) {
             event.preventDefault();
@@ -190,11 +214,11 @@
         });
 
 
-        /**delete banco */
+        /**delete mao obra */
         $(document).on('click', '.deleteMaoObra', function(event) {
             let id_del_mao_obra = $(this).data('id');
             event.preventDefault();
-            
+
             Swal.fire({
                 title: 'Deseja deletar?',
                 text: "Essa ação será de forma permanente ao confirmar!",
@@ -212,7 +236,7 @@
                         headers: {
                             'X-Requested-With': 'XMLHttpRequest'
                         },
-                       
+
                         success: function(data) {
                             Swal.fire(
                                 'OK!',
@@ -220,6 +244,143 @@
                                 'success'
                             );
                             $('#lista_todas_mao_obra').DataTable().ajax.reload();
+                        }
+                    })
+                }
+            });
+        });
+
+
+        //************************************************************ FRENTES ******************* */
+        $('#form_add_novas_frentes').on('submit', function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                dataType: "JSON",
+                beforeSend: function() {
+                    $('#id_add_frentes_trab').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde... </button>');
+                    $('.cls_add_frentes_trab').attr('disabled', 'disabled');
+                },
+
+                success: function(data) {
+
+                    $('#id_add_frentes_trab').html('<i class="fas fa-save"></i> Salvar');
+                    $('.cls_add_frentes_trab').attr('disabled', false);
+
+                    if (data.error == 'yes') {
+                        $('#name_frentes_trabalho_error').text(data.name_frentes_trabalho_error);
+                        $('#descricao_frentes_trabalho_error').text(data.descricao_frentes_trabalho_error);
+                    } else {
+
+                        $('#name_frentes_trabalho_error').text('');
+                        $('#descricao_frentes_trabalho_error').text('');
+
+                        $('#message_frente_trab').html(data.message);
+                        $('#form_add_novas_frentes')[0].reset();
+                        $('#lista_todas_as_frentes').DataTable().ajax.reload();
+                        setTimeout(function() {
+                            $('#message_frente_trab').html('');
+                        }, 2500);
+                    }
+                }
+            });
+        });
+
+        /**lista dados mão de obra no modal*/
+        $(document).on('click', '.showFrenterab', function() {
+            let id = $(this).data('id');
+            $.ajax({
+                url: "<?php echo site_url('/frentes_trabalho/getFrenteTrabalho'); ?>",
+                method: "GET",
+                data: {
+                    id: id
+                },
+                dataType: 'JSON',
+                beforeSend: function() {
+                    $(".loader").css('display', 'block');
+                },
+                complete: function() {
+                    $(".loader").css('display', 'none');
+                },
+                success: function(data) {
+                    $('#nome_ftbr').val(data.nome_ftbr);
+                    $('#description_ftbr').val(data.description_ftbr);
+                    $('#dadosFrenteTrabalho').modal('show');
+                    $('#hidden_id_up_frente_Trab').val(id);
+                }
+            })
+        });
+
+        /**altera dados da frente de trabalho */
+        $('#form_alterar_fente_trabalho').on('submit', function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                dataType: "JSON",
+                beforeSend: function() {
+                    $('#id_frent_trab_up').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde... </button>');
+                    $('.cls_frent_trab_up').attr('disabled', 'disabled');
+                },
+
+                success: function(data) {
+
+                    $('#id_frent_trab_up').html('<i class="fas fa-sync-alt"></i> Alterar');
+                    $('.cls_frent_trab_up').attr('disabled', false);
+
+                    if (data.error == 'yes') {
+                        $('#nome_ftbr_error').text(data.nome_ftbr_error);
+                        $('#description_ftbr_error').text(data.description_ftbr_error);
+                    } else {
+
+                        $('#nome_ftbr_error').text('');
+                        $('#description_ftbr_error').text('');
+
+                        $('#message_frente_trab_up').html(data.message);
+                        $('#lista_todas_as_frentes').DataTable().ajax.reload();
+                        setTimeout(function() {
+                            $('#message_frente_trab_up').html('');
+                        }, 2500);
+                    }
+                }
+            });
+        });
+
+        /**delete frente trabalho */
+        $(document).on('click', '.deleteFrenterab', function(event) {
+            let id_del_front_work = $(this).data('id');
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Deseja deletar?',
+                text: "Essa ação será de forma permanente ao confirmar!",
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, deletar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url: "<?php echo site_url('/frentes_trabalho/deleta_front_work'); ?>" + '/' + id_del_front_work,
+                        method: "GET",
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+
+                        success: function(data) {
+                            Swal.fire(
+                                'OK!',
+                                data,
+                                'success'
+                            );
+                            $('#lista_todas_as_frentes').DataTable().ajax.reload();
                         }
                     })
                 }
@@ -242,6 +403,9 @@
 
         document.getElementById("descricao_mao_obra").addEventListener("keypress", forceKeyPressUppercase2, false);
         document.getElementById("name_mao_obra").addEventListener("keypress", forceKeyPressUppercase2, false);
+
+        document.getElementById("name_frentes_trabalho").addEventListener("keypress", forceKeyPressUppercase2, false);
+        document.getElementById("descricao_frentes_trabalho").addEventListener("keypress", forceKeyPressUppercase2, false);
 
     });
 </script>
