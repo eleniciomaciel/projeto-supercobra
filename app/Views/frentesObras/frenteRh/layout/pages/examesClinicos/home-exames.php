@@ -13,7 +13,7 @@
                 <ul class="nav nav-pills ml-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="#revenue-chart" data-toggle="tab"><i class="fas fa-file-medical-alt"></i> Exam.: Contratuais</a>
+                        <a class="nav-link active" href="#revenue-chart" data-toggle="tab"><i class="fas fa-file-medical-alt"></i> Tipos</a>
                     </li>
 
                     <li class="nav-item">

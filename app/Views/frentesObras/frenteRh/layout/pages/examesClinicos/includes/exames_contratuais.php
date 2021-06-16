@@ -10,23 +10,24 @@
                         <!-- //form -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Exames contratuais</h3>
+                                <h3 class="card-title">Cadastrar Tipos</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
                             <form action="/exames/cadastra_exames_contratual_ativo" method="POST" id="form_exame_contratual">
                             <?= csrf_field() ?>
                                 <div class="card-body">
+
                                     <div class="form-group">
                                         <label for="exc_name">Nome: </label>
-                                        <input type="text" class="form-control" name="exc_name" id="exc_name" placeholder="Ex.: Periódico Semestral">
+                                        <input type="text" class="form-control" name="exc_name" id="exc_name" placeholder="Ex.: Admissional">
                                         <span id="exc_name_error" class="text-danger"></span>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Descrição:</label>
-                                        <textarea class="form-control" rows="3" name="exc_descricao" id="exc_descricao" placeholder="Descrição digite aqui..."></textarea>
-                                        <small>Descrição exame contartual de trabalho</small>
+                                        <textarea class="form-control" rows="3" name="exc_descricao" id="exc_descricao" placeholder="Descrição do tipo..."></textarea>
+                                        <small>Descrição da classificação de intervalos</small>
                                         <span id="exc_descricao_error" class="text-danger"></span>
                                     </div>
 

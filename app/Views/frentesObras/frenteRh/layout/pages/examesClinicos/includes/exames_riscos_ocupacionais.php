@@ -10,7 +10,7 @@
                         <!-- //form -->
                         <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title">Exames de risco</h3>
+                                <h3 class="card-title">Riscos Ocupacionais</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -34,8 +34,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="risco_nome">Nome do risco: </label>
-                                        <input type="text" class="form-control" name="risco_nome" id="risco_nome" placeholder="Ex.: Riscos químicos">
+                                        <label for="risco_nome">Tipo de risco: </label>
+                                        <input type="text" class="form-control" name="risco_nome" id="risco_nome" placeholder="Ex.: Riscos Demartológico">
                                         <span id="risco_nome_error" class="text-danger"></span>
                                     </div>
 
