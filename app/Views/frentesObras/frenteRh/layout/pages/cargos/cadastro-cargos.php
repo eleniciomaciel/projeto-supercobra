@@ -190,11 +190,11 @@
         });
 
 
-         /**delete banco */
-         $(document).on('click', '.deleteMaoObra', function(event) {
-            let id = $(this).data('id');
+        /**delete banco */
+        $(document).on('click', '.deleteMaoObra', function(event) {
+            let id_del_mao_obra = $(this).data('id');
             event.preventDefault();
-
+            
             Swal.fire({
                 title: 'Deseja deletar?',
                 text: "Essa ação será de forma permanente ao confirmar!",
@@ -207,22 +207,19 @@
                 if (result.isConfirmed) {
 
                     $.ajax({
-                        url: "<?php echo base_url('/mao_obra/deleta_mao_obra'); ?>",
+                        url: "<?php echo site_url('/mao_obra/deleta_mao_obra'); ?>" + '/' + id_del_mao_obra,
                         method: "GET",
                         headers: {
                             'X-Requested-With': 'XMLHttpRequest'
                         },
-                        data: {
-                            id: id
-                        },
+                       
                         success: function(data) {
-                            $('#lista_todas_mao_obra').DataTable().ajax.reload();
-                            selectListaBancos();
                             Swal.fire(
                                 'OK!',
                                 data,
                                 'success'
                             );
+                            $('#lista_todas_mao_obra').DataTable().ajax.reload();
                         }
                     })
                 }

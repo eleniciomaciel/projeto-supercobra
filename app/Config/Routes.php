@@ -243,7 +243,7 @@ $routes->group('mao_obra', ["filter" => "auth"], function($routes)
     $routes->get('lista_mao_obras', 'Rh\MaoObra\MaoObraController::getMaoObras');
     $routes->get('getMaoObraOne', 'Rh\MaoObra\MaoObraController::getMaoDeObraUnica');
     $routes->post('altera_names-mao-obra', 'Rh\MaoObra\MaoObraController::alteraMaoObraDados');
-    $routes->get('deleta_mao_obra', 'Rh\MaoObra\MaoObraController::delMaoObraOne');
+    $routes->get('deleta_mao_obra/(:num)', 'Rh\MaoObra\MaoObraController::delMaoObraOne/$1');
 });
 $routes->get('logout', 'Home::logout');
 /*

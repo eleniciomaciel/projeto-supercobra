@@ -137,11 +137,10 @@ class MaoObraController extends BaseController
 	}
 
 	/**delete mão de obra */
-	public function delMaoObraOne()
+	public function delMaoObraOne(int $id)
 	{
-		if($this->request->getVar('id'))
+		if($id)
         {
-            $id = $this->request->getVar('id');
             $crudModel = new TipoMaoDeObraModel();
             $crudModel->where('id_tmo', $id)->delete($id);
             echo 'Mão de obra deletada com sucesso!';
