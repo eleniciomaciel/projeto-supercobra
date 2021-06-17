@@ -6,7 +6,6 @@ use CodeIgniter\Model;
 
 class FuncionarioModel extends Model
 {
-	protected $DBGroup              = 'default';
 	protected $table                = 'funcionarios';
 	protected $primaryKey           = 'f_id';
 	protected $useAutoIncrement     = true;

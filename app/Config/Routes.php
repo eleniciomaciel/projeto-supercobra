@@ -255,6 +255,12 @@ $routes->group('frentes_trabalho', ["filter" => "auth"], function($routes)
     $routes->get('deleta_front_work/(:num)', 'Rh\FrenteTrabalho\FrentesTrabalhosController::delFrontWorkOne/$1');
 });
 
+/**adiciona novas frentes */
+$routes->group('transferencia', ["filter" => "auth"], function($routes)
+{
+    $routes->get('funcionario-transfere/(:num)', 'Rh\Transfer\TransferenciaFuncionarioController::index/$1');
+    $routes->post('processa-transferencia/(:num)', 'Rh\Transfer\TransferenciaFuncionarioController::createTransfer/$1');
+});
 
 $routes->get('logout', 'Home::logout');
 /*

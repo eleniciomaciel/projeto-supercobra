@@ -26,4 +26,15 @@ class ConsultasGeralModel extends Model
 		$query = $builder->get();
 		return $query->getResult();
 	}
+
+   public function getLocadosUsuario($id) {
+		$builder = $this->db->table('funcionarios');
+		$builder->select('*');
+		$builder->join('obras', 'obras.id = funcionarios.f_fk_obra');
+		$builder->join('frentes', 'frentes.	id_ft = funcionarios.f_Fk_frente');
+		$builder->join('cargos', 'cargos.id_cargo = funcionarios.f_cargo');
+		$builder->where('f_id',$id);
+		$query = $builder->get();
+		return $query->getRowArray();
+	}
 }
