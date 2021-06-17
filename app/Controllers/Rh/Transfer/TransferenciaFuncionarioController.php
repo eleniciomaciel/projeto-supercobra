@@ -14,12 +14,12 @@ use App\Models\CargosModel;
 class TransferenciaFuncionarioController extends BaseController
 {
 	public function __construct()
-    {
-        if (session()->get('role') != "RH") {
-            echo view('/');
-            exit;
-        }
-    }
+	{
+		if (session()->get('role') != "RH") {
+			echo view('/');
+			exit;
+		}
+	}
 
 	public function index(int $id)
 	{
@@ -43,36 +43,36 @@ class TransferenciaFuncionarioController extends BaseController
 			'view_frente' 		=> 	$modelfrente->orderBy('nome_ft', 'ASC')->findAll(),
 			'view_User_dado' 	=> 	$model_consult->getLocadosUsuario($id),
 			'view_cargos' 		=> 	$model_cargos->getCargos(),
-		]; 
+		];
 
 		return view('frentesObras/frenteRh/layout/pages/transferencia/' . $page, $data);
 	}
 
 	public function createTransfer(int $id)
 	{
-		$model = new FuncionarioModel();
+		try {
+			$model = new FuncionarioModel();
+			if ($this->request->getMethod() === 'post' && $this->validate([
+				't_obra' 	=> ['label' => 'Obra', 'rules' => 'required'],
+				't_frente' 	=> ['label' => 'Frente', 'rules' => 'required'],
+				't_cargo' 	=> ['label' => 'Cargo', 'rules' => 'required'],
+			])) {
 
-		if ($this->request->getMethod() === 'post' && $this->validate([
-			't_obra' 	=> ['label' => 'Obra', 'rules' => 'required'],
-			't_frente' 	=> ['label' => 'Frente', 'rules' => 'required'],
-			't_cargo' 	=> ['label' => 'Cargo', 'rules' => 'required'],
-			]))
-		{
-			
-			$model->save([
-				'f_id' 			=> $id,
-				'f_cargo' 		=> $this->request->getPost('t_cargo'),
-				'f_fk_obra'  	=> $this->request->getPost('t_obra'),
-				'f_Fk_frente'  	=> $this->request->getPost('t_frente'),
-			]);
-			
-			session()->setFlashdata('message', 'Transferencia relizada com sucesso!');
-			session()->setFlashdata('alert-class', 'alert-success');
-			return redirect()->back();
-		}
-		else
-		{
-			return redirect()->back()->withInput();
+				$model->save([
+					'f_id' 			=> $id,
+					'f_cargo' 		=> $this->request->getPost('t_cargo'),
+					'f_fk_obra'  	=> $this->request->getPost('t_obra'),
+					'f_Fk_frente'  	=> $this->request->getPost('t_frente'),
+				]);
+
+				session()->setFlashdata('message', 'Transferencia relizada com sucesso!');
+				session()->setFlashdata('alert-class', 'alert-success');
+				return redirect()->back();
+			} else {
+				return redirect()->back()->withInput();
+			}
+		} catch (\Throwable $e) {
+			die($e->getMessage());
 		}
 	}
 }
