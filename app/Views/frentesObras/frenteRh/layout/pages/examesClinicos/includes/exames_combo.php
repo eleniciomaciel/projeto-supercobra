@@ -103,7 +103,7 @@
                                     <table class="table table-striped" id="lista_exames_combo" style="width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>Contrato</th>
+                                                <th>Tipo</th>
                                                 <th>Função</th>
                                                 <th>Risco</th>
                                                 <th>Exame</th>

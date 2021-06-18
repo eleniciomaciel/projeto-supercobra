@@ -33,6 +33,12 @@ class CargofuncoesModel extends Model
 			->first();
 	}
 
+	public function getCargosFuncoesAso($postData)
+	{
+		$sql = 'select * from cargofuncoes where cf_fk_funcao ='.$postData['id_c'] ;
+		$query =  $this->db->query($sql);
+		return $query->getResult();
+	}
 	public function noticeTable()
 	{
 		$builder = $this->db->table('cargofuncoes');

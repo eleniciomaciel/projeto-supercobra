@@ -225,6 +225,8 @@ $routes->group('banco', ["filter" => "auth"], function($routes)
 $routes->group('aso', ["filter" => "auth"], function($routes)
 {
     $routes->get('gerar-aso/(:num)', 'Rh\Aso\AsoController::index/$1');
+    $routes->get('lista_cargos', 'Rh\Aso\AsoController::getTodasFuncoes');
+    $routes->get('seleciona_riscos_cargos', 'Rh\Aso\AsoController::getRiscosCargos');
 });
 
 /**área de acesso */

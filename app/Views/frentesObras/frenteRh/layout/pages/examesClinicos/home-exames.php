@@ -24,6 +24,10 @@
                         <a class="nav-link" href="#comb-cont" data-toggle="tab"><i class="fas fa-user-md"></i> Exames</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="#config-aso" data-toggle="tab"><i class="fas fa-file-signature"></i> Congif.: ASO</a>
+                    </li>
+
                 </ul>
             </div>
         </div><!-- /.card-header -->
@@ -48,6 +52,11 @@
                     </div>
                 </div>
 
+                <div class="chart tab-pane" id="config-aso">
+                    <div class="chartjs-size-monitor">
+                        <?= $this->include('frentesObras/frenteRh/layout/pages/examesClinicos/includes/exames_config_aso', $carg) ?>
+                    </div>
+                </div>
             </div>
         </div><!-- /.card-body -->
     </div>
@@ -97,7 +106,7 @@
                 "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
             },
             "order": [0, "desc"],
-           
+
             "serverSide": true,
             "ajax": {
                 url: "<?php echo site_url("/exames/list_risco_em_grau"); ?>",
@@ -636,7 +645,7 @@
             })
         });
 
-       
+
 
         function SelecionaRiscosDaFuncao() {
             $.ajax({
@@ -712,8 +721,8 @@
             })
         });
 
-       /**deleta departamento */
-       $(document).on('click', '.deleteExamesCombo', function(event) {
+        /**deleta departamento */
+        $(document).on('click', '.deleteExamesCombo', function(event) {
             event.preventDefault();
             let id = $(this).data('id');
             Swal.fire({
@@ -750,6 +759,56 @@
             });
         });
 
+
+        /*************************  lista os cargos das funçãoes ******************************* */
+        $('#select_cargos_p_aso').change(function() {
+            var id_cargo_aso = $(this).val();
+            $.ajax({
+                url: '<?= site_url('/aso/lista_cargos') ?>',
+                method: 'GET',
+                data: {
+                    id_cargo_aso: id_cargo_aso
+                },
+                dataType: 'json',
+                beforeSend: function() {
+                    $(".loader").css('display', 'block');
+                },
+                complete: function() {
+                    $(".loader").css('display', 'none');
+                },
+                success: function(response) {
+                    // Remove options 
+                    $('#select_funcao_cargo_all').find('option').not(':first').remove();
+                    // Add options
+                    $.each(response, function(index, data) {
+                        $('#select_funcao_cargo_all').append('<option value="' + data['cf_fk_funcao'] + '">' + data['cf_nome_cargo_funcao'] + '</option>');
+                    });
+                }
+            });
+        });
+
+        /**lista dos os riscos dos cargos */
+        $('#select_cargos_p_aso').change(function() {
+            var id_cargo_risco = $(this).val();
+            // AJAX request
+            $.ajax({
+                url: '<?= site_url('/aso/seleciona_riscos_cargos') ?>',
+                method: 'GET',
+                data: {
+                    id_cargo_risco: id_cargo_risco
+                },
+                dataType: 'json',
+                success: function(data) {
+                    var html = '';
+                    var i;
+                    for(i=0; i<data.length; i++){
+                        html += '<li>'+data[i].eor_nome + ' ==> ' + data[i].eor_description_risco +'</li>';
+                    }
+                    $('#show_data').html(html);
+
+                }
+            });
+        });
 
 
 
