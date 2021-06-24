@@ -19,13 +19,13 @@
                                 <?= csrf_field() ?>
                                 <div class="card-body">
 
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="exc_name">Tipo: </label>
                                         <select class="custom-select rounded-0" name="exm_contrato" id="exm_contrato">
 
                                         </select>
                                         <span id="exm_contrato_error" class="text-danger"></span>
-                                    </div>
+                                    </div> -->
 
                                     <div class="form-group">
                                         <label for="exc_name">Função:</label>
@@ -53,7 +53,7 @@
                                     </div>
 
 
-                                    <label for="exam_mes_periodo">Fazer a cada mês(es): </label>
+                                    <!-- <label for="exam_mes_periodo">Fazer a cada mês(es): </label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
@@ -63,7 +63,7 @@
                                             <span class="input-group-text">Mês</span>
                                         </div>
                                     </div>
-                                    <span id="exames_mes_valor_error" class="text-danger"></span>
+                                    <span id="exames_mes_valor_error" class="text-danger"></span> -->
 
 
 
@@ -103,11 +103,9 @@
                                     <table class="table table-striped" id="lista_exames_combo" style="width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>Tipo</th>
                                                 <th>Função</th>
                                                 <th>Risco</th>
                                                 <th>Exame</th>
-                                                <th>Carência</th>
                                                 <th>Ações</th>
                                             </tr>
                                         </thead>

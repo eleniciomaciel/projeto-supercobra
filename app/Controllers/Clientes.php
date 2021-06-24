@@ -212,7 +212,7 @@ class Clientes extends BaseController
 	public function listaClientes()
 	{
 		$list = new ClientesModel();
-		$todasClientes = $list->getUsers();
+		$todasClientes = $list->findAll();
 		echo json_encode($todasClientes);
 	}
 }

@@ -9,6 +9,7 @@ use App\Models\CargofuncoesModel;
 use App\Models\CargosModel;
 use App\Models\ConsultasGeralModel;
 use App\Models\ExamesModel;
+use App\Models\ExamescargosModel;
 use monken\TablesIgniter;
 
 class ExamesClinicosController extends BaseController
@@ -385,11 +386,11 @@ class ExamesClinicosController extends BaseController
 	public function adicinaComboExames()
 	{
 		if ($this->request->getMethod() === 'post') {
-			$exm_contrato_error = '';
+			//$exm_contrato_error = '';
 			$todas_funcao_para_risco_error = '';
 			$select_carg_func_risco_error = '';
 			$final_exam_name_error = '';
-			$exames_mes_valor_error = '';
+			//$exames_mes_valor_error = '';
 			$final_exame_desc_error = '';
 
 			$error = 'no';
@@ -397,20 +398,20 @@ class ExamesClinicosController extends BaseController
 			$message = '';
 
 			$error = $this->validate([
-				'exm_contrato' => ['label' => 'tipo de contrato', 'rules' => 'required'],
+				//'exm_contrato' => ['label' => 'tipo de contrato', 'rules' => 'required'],
 				'todas_funcao_para_risco' => ['label' => 'função', 'rules' => 'required'],
 				'select_carg_func_risco' => ['label' => 'função de risco', 'rules' => 'required'],
 				'final_exam_name' => ['label' => 'nome do exame', 'rules' => 'required|max_length[50]'],
-				'exames_mes_valor' => ['label' => 'periodicidade', 'rules' => 'required|integer'],
+				//'exames_mes_valor' => ['label' => 'periodicidade', 'rules' => 'required|integer'],
 				'final_exame_desc' => ['label' => 'observação', 'rules' => 'required|max_length[500]'],
 			]);
 
 			if (!$error) {
 				$error = 'yes';
 				$validation = \Config\Services::validation();
-				if ($validation->getError('exm_contrato')) {
-					$exm_contrato_error = $validation->getError('exm_contrato');
-				}
+				// if ($validation->getError('exm_contrato')) {
+				// 	$exm_contrato_error = $validation->getError('exm_contrato');
+				// }
 
 				if ($validation->getError('todas_funcao_para_risco')) {
 					$todas_funcao_para_risco_error = $validation->getError('todas_funcao_para_risco');
@@ -424,9 +425,9 @@ class ExamesClinicosController extends BaseController
 					$final_exam_name_error = $validation->getError('final_exam_name');
 				}
 
-				if ($validation->getError('exames_mes_valor')) {
-					$exames_mes_valor_error = $validation->getError('exames_mes_valor');
-				}
+				// if ($validation->getError('exames_mes_valor')) {
+				// 	$exames_mes_valor_error = $validation->getError('exames_mes_valor');
+				// }
 
 				if ($validation->getError('final_exame_desc')) {
 					$final_exame_desc_error = $validation->getError('final_exame_desc');
@@ -436,11 +437,11 @@ class ExamesClinicosController extends BaseController
 				$model = new ExamesModel();
 
 				$model->save([
-					'ex_fk_tipo_contato'=>	$this->request->getVar('exm_contrato'),
+					//'ex_fk_tipo_contato'=>	$this->request->getVar('exm_contrato'),
 					'ex_fk_funcao'		=>	$this->request->getVar('todas_funcao_para_risco'),
 					'ex_fk_risco'		=>	$this->request->getVar('select_carg_func_risco'),
 					'ex_tipo_exame'		=>	$this->request->getVar('final_exam_name'),
-					'ex_validade_meses'	=>	$this->request->getVar('exames_mes_valor'),
+					//'ex_validade_meses'	=>	$this->request->getVar('exames_mes_valor'),
 					'ex_description'	=>	$this->request->getVar('final_exame_desc'),
 				]);
 
@@ -448,11 +449,11 @@ class ExamesClinicosController extends BaseController
 			}
 
 			$output = array(
-				'exm_contrato_error'			=>	$exm_contrato_error,
+				//'exm_contrato_error'			=>	$exm_contrato_error,
 				'todas_funcao_para_risco_error'	=>	$todas_funcao_para_risco_error,
 				'select_carg_func_risco_error'	=>	$select_carg_func_risco_error,
 				'final_exam_name_error'			=>	$final_exam_name_error,
-				'exames_mes_valor_error'		=>	$exames_mes_valor_error,
+				//'exames_mes_valor_error'		=>	$exames_mes_valor_error,
 				'final_exame_desc_error'		=>	$final_exame_desc_error,
 
 				'error'			=>	$error,
@@ -472,9 +473,9 @@ class ExamesClinicosController extends BaseController
 
 		$data_table->setTable($model->noticeTable())
 				   ->setDefaultOrder("id_ex", "DESC")
-				   ->setSearch(["ect_nome", "cargo_nome", "eor_nome", "ex_tipo_exame", "ex_validade_meses"])
-				   ->setOrder(["ect_nome", "cargo_nome", "eor_nome", "ex_tipo_exame", "ex_validade_meses"])
-				   ->setOutput(["ect_nome", "cargo_nome", "eor_nome", "ex_tipo_exame", "ex_validade_meses", $model->button()]);
+				   ->setSearch([ "cargo_nome", "eor_nome", "ex_tipo_exame"])
+				   ->setOrder([ "cargo_nome", "eor_nome", "ex_tipo_exame"])
+				   ->setOutput([ "cargo_nome", "eor_nome", "ex_tipo_exame", $model->button()]);
 		return $data_table->getDatatable();
 	}
 
@@ -501,11 +502,11 @@ class ExamesClinicosController extends BaseController
 	public function alteraComboExames()
 	{
 		if ($this->request->getMethod() === 'post') {
-			$exm_contrato_combo_up_error = '';
+			//$exm_contrato_combo_up_error = '';
 			$ex_fk_funcao_error = '';
 			$exm_riscos_funcao_ajax_error = '';
 			$ex_tipo_exame_error = '';
-			$ex_validade_meses_error = '';
+			//$ex_validade_meses_error = '';
 			$ex_description = '';
 
 			$error = 'no';
@@ -513,20 +514,20 @@ class ExamesClinicosController extends BaseController
 			$message = '';
 
 			$error = $this->validate([
-				'exm_contrato_combo_up' => ['label' => 'tipo de contrato', 'rules' => 'required'],
+				//'exm_contrato_combo_up' => ['label' => 'tipo de contrato', 'rules' => 'required'],
 				'ex_fk_funcao' => ['label' => 'função', 'rules' => 'required'],
 				'exm_riscos_funcao_ajax' => ['label' => 'função de risco', 'rules' => 'required'],
 				'ex_tipo_exame' => ['label' => 'nome do exame', 'rules' => 'required|max_length[50]'],
-				'ex_validade_meses' => ['label' => 'periodicidade', 'rules' => 'required|integer'],
+				//'ex_validade_meses' => ['label' => 'periodicidade', 'rules' => 'required|integer'],
 				'ex_description' => ['label' => 'observação', 'rules' => 'required|max_length[500]'],
 			]);
 
 			if (!$error) {
 				$error = 'yes';
 				$validation = \Config\Services::validation();
-				if ($validation->getError('exm_contrato_combo_up')) {
-					$exm_contrato_combo_up_error = $validation->getError('exm_contrato_combo_up');
-				}
+				// if ($validation->getError('exm_contrato_combo_up')) {
+				// 	$exm_contrato_combo_up_error = $validation->getError('exm_contrato_combo_up');
+				// }
 
 				if ($validation->getError('ex_fk_funcao')) {
 					$ex_fk_funcao_error = $validation->getError('ex_fk_funcao');
@@ -540,9 +541,9 @@ class ExamesClinicosController extends BaseController
 					$ex_tipo_exame_error = $validation->getError('ex_tipo_exame');
 				}
 
-				if ($validation->getError('ex_validade_meses')) {
-					$ex_validade_meses_error = $validation->getError('ex_validade_meses');
-				}
+				// if ($validation->getError('ex_validade_meses')) {
+				// 	$ex_validade_meses_error = $validation->getError('ex_validade_meses');
+				// }
 
 				if ($validation->getError('ex_description')) {
 					$ex_description = $validation->getError('ex_description');
@@ -553,23 +554,23 @@ class ExamesClinicosController extends BaseController
 
 				$model->save([
 					'id_ex'				=>	$this->request->getVar('hidden_id_exame_combo'),
-					'ex_fk_tipo_contato'=>	$this->request->getVar('exm_contrato_combo_up'),
+					//'ex_fk_tipo_contato'=>	$this->request->getVar('exm_contrato_combo_up'),
 					'ex_fk_funcao'		=>	$this->request->getVar('ex_fk_funcao'),
 					'ex_fk_risco'		=>	$this->request->getVar('exm_riscos_funcao_ajax'),
 					'ex_tipo_exame'		=>	$this->request->getVar('ex_tipo_exame'),
-					'ex_validade_meses'	=>	$this->request->getVar('ex_validade_meses'),
+					//'ex_validade_meses'	=>	$this->request->getVar('ex_validade_meses'),
 					'ex_description'	=>	$this->request->getVar('ex_description'),
 				]);
 
-				$message = '<div class="alert alert-success">Cadastro inserido com sucesso!</div>';
+				$message = '<div class="alert alert-success">Cadastro alterado com sucesso!</div>';
 			}
 
 			$output = array(
-				'exm_contrato_combo_up_error'			=>	$exm_contrato_combo_up_error,
+				//'exm_contrato_combo_up_error'			=>	$exm_contrato_combo_up_error,
 				'ex_fk_funcao_error'	=>	$ex_fk_funcao_error,
 				'exm_riscos_funcao_ajax_error'	=>	$exm_riscos_funcao_ajax_error,
 				'ex_tipo_exame_error'			=>	$ex_tipo_exame_error,
-				'ex_validade_meses_error'		=>	$ex_validade_meses_error,
+				//'ex_validade_meses_error'		=>	$ex_validade_meses_error,
 				'ex_description'		=>	$ex_description,
 
 				'error'			=>	$error,
@@ -592,4 +593,85 @@ class ExamesClinicosController extends BaseController
             echo 'Exame deletado com sucesso!';
         }
 	}
+
+		/**adiciona dados do exame tipo combo */
+		public function adicinaComboExamesTwo()
+		{
+			if ($this->request->getMethod() === 'post') {
+				$select_cargos_p_aso_error = '';
+				$new_exames_select_error = '';
+				$select_cselect_funcao_cargo_all_error = '';
+				$primeiro_periodico_demiccional_error = '';
+				$segundo_peridico_demissional_error = '';
+	
+				$error = 'no';
+				$success = 'no';
+				$message = '';
+	
+				$error = $this->validate([
+					'select_cargos_p_aso' => ['label' => 'cargo', 'rules' => 'required'],
+					'new_exames_select' => ['label' => 'exame', 'rules' => 'required'],
+					'select_funcao_cargo_all' => ['label' => 'cargo', 'rules' => 'required'],
+					'primeiro_periodico_demiccional' => ['label' => 'nome do exame', 'rules' => 'required|max_length[50]'],
+					'segundo_peridico_demissional' => ['label' => 'periodicidade', 'rules' => 'required|integer'],
+				]);
+	
+				if (!$error) {
+					$error = 'yes';
+					$validation = \Config\Services::validation();
+					if ($validation->getError('select_cargos_p_aso')) {
+						$select_cargos_p_aso_error = $validation->getError('select_cargos_p_aso');
+					}
+	
+					if ($validation->getError('new_exames_select')) {
+						$new_exames_select_error = $validation->getError('new_exames_select');
+					}
+
+					if ($validation->getError('select_funcao_cargo_all')) {
+						$select_cselect_funcao_cargo_all_error = $validation->getError('select_funcao_cargo_all');
+					}
+	
+					if ($validation->getError('primeiro_periodico_demiccional')) {
+						$primeiro_periodico_demiccional_error = $validation->getError('primeiro_periodico_demiccional');
+					}
+	
+					if ($validation->getError('segundo_peridico_demissional')) {
+						$segundo_peridico_demissional_error = $validation->getError('segundo_peridico_demissional');
+					}
+				} else {
+					$success = 'yes';
+					$model = new ExamescargosModel();
+	
+					$model->save([
+						'ef_fk_funcao'			=>	$this->request->getVar('select_cargos_p_aso'),
+						'ef_fk_cargos_funcoes'	=>	$this->request->getVar('select_funcao_cargo_all'),
+						'ef_ek_exame'			=>	$this->request->getVar('new_exames_select'),
+						'ef_tipos_ad'			=>	$this->request->getVar('admissional'),
+						'ef_tipos_d'			=>	$this->request->getVar('demissional'),
+						'ef_tipos_p'			=>	$this->request->getVar('periodico'),
+						'ef_tipos_m'			=>	$this->request->getVar('mudanca_funcao'),
+						'ef_tipos_r'			=>	$this->request->getVar('retorno_trabalho'),
+						'ef_tipos_is'			=>	$this->request->getVar('is'),
+						'ef_dias_1'				=>	$this->request->getVar('primeiro_periodico_demiccional'),
+						'ef_dias_2'				=>	$this->request->getVar('segundo_peridico_demissional'),
+					]);
+	
+					$message = '<div class="alert alert-success">Cadastro inserido com sucesso!</div>';
+				}
+	
+				$output = array(
+					'select_cargos_p_aso_error'				=>	$select_cargos_p_aso_error,
+					'new_exames_select_error'				=>	$new_exames_select_error,
+					'select_cselect_funcao_cargo_all_error'	=>	$select_cselect_funcao_cargo_all_error,
+					'primeiro_periodico_demiccional_error'	=>	$primeiro_periodico_demiccional_error,
+					'segundo_peridico_demissional_error'	=>	$segundo_peridico_demissional_error,
+	
+					'error'			=>	$error,
+					'success'		=>	$success,
+					'message'		=>	$message
+				);
+	
+				echo json_encode($output);
+			}
+		}
 }

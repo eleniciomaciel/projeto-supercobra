@@ -37,6 +37,7 @@
   <link rel="stylesheet" href="<?= base_url() ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -155,7 +156,7 @@
   <script src="<?= base_url() ?>/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
   <!-- InputMask -->
   <script src="<?= base_url() ?>/plugins/moment/moment.min.js"></script>
-  <script src="<?= base_url() ?>/plugins/inputmask/jquery.inputmask.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
   <!-- SweetAlert2 -->
   <script src="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
   <!-- DataTables  & Plugins -->
@@ -181,7 +182,7 @@
   <?= $this->include('master/layout/js/js_003_components_frentes') ?>
   <?= $this->include('master/layout/js/js_004_components_cc') ?>
   <?= $this->include('master/layout/js/js_005_components_usuarios') ?>
-
+  <?= $this->renderSection('admin-js') ?>
   <script>
     $(function() {
       //Initialize Select2 Elements

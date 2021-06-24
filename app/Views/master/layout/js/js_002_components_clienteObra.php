@@ -153,7 +153,7 @@
 
         function todasObrasCadastroFrentes() {
             $.ajax({
-                url: '<?= site_url('/lista-obras') ?>',
+                url: '<?= site_url('/cadastros/lista-obras') ?>',
                 method: 'get',
                 dataType: 'json',
                 headers: {

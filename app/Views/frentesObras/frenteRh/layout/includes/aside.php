@@ -29,7 +29,7 @@
                         </p>
                     </a>
                 </li>
- <li class="nav-item">
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
@@ -55,6 +55,15 @@
                         </p>
                     </a>
                 </li>
+
+                <!-- <li class="nav-item">
+                    <a href="/riscosexames/configuracao-exames" class="nav-link">
+                        <i class="nav-icon fas fa-file-medical-alt"></i>
+                        <p>
+                            Config.: Exames-ASO
+                        </p>
+                    </a>
+                </li> -->
 
                 <li class="nav-item">
                     <a href="/admin_rh/cadastro-colaboradores" class="nav-link">

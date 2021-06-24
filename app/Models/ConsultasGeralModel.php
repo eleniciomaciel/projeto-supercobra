@@ -45,4 +45,14 @@ class ConsultasGeralModel extends Model
 		$query = $builder->get();
 		return $query->getRowArray();
 	}
+
+	public function getExamesRiscos($id)
+	{
+		$builder = $this->db->table('exames');
+		$builder->select('*');
+		$builder->join('examescontratuais', 'examescontratuais.id = exames.ex_fk_tipo_contato');
+		$builder->where('ex_fk_funcao',$id);
+		$query = $builder->get();
+		return $query->getResult();
+	}
 }

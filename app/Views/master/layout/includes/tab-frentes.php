@@ -86,8 +86,8 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="/criar_frentes/" method="POST" id="criar_novas_frentes">
-
+                            <form action="/frentes/criar_frentes" method="POST" id="criar_novas_frentes">
+                            <?= csrf_field() ?>
                                 <div class="card-body">
 
                                     <div class="form-row">

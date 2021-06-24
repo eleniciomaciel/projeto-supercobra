@@ -12,9 +12,9 @@
             <div class="card-tools">
                 <ul class="nav nav-pills ml-auto">
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link active" href="#revenue-chart" data-toggle="tab"><i class="fas fa-file-medical-alt"></i> Tipos</a>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item">
                         <a class="nav-link" href="#sales-chart" data-toggle="tab"><i class="fas fa-notes-medical"></i> Exam.: Riscos</a>
@@ -69,6 +69,7 @@
 
 </section>
 <?= $this->include('frentesObras/frenteRh/layout/components/005_popap_config_exames', $carg) ?>
+<?= $this->include('frentesObras/frenteRh/layout/components/010_popap_exames_e_aso') ?>
 
 <?= $this->endSection() ?>
 
@@ -81,6 +82,7 @@
         SelecionaExamesRiscos();
         SelecionaExamesComboUp();
         SelecionaRiscosDaFuncao();
+        //seleciona_exames_ajax();
 
         $('#list_exames_contratuais_all').DataTable({
             "language": {
@@ -587,19 +589,19 @@
                             timer: 2000
                         });
 
-                        $('#exm_contrato_error').text(data.exm_contrato_error);
+                        //$('#exm_contrato_error').text(data.exm_contrato_error);
                         $('#todas_funcao_para_risco_error').text(data.todas_funcao_para_risco_error);
                         $('#select_carg_func_risco_error').text(data.select_carg_func_risco_error);
                         $('#final_exam_name_error').text(data.final_exam_name_error);
-                        $('#exames_mes_valor_error').text(data.exames_mes_valor_error);
+                        //$('#exames_mes_valor_error').text(data.exames_mes_valor_error);
                         $('#final_exame_desc_error').text(data.final_exame_desc_error);
 
                     } else {
-                        $('#exm_contrato_error').text('');
+                        //$('#exm_contrato_error').text('');
                         $('#todas_funcao_para_risco_error').text('');
                         $('#select_carg_func_risco_error').text('');
                         $('#final_exam_name_error').text('');
-                        $('#exames_mes_valor_error').text('');
+                        //$('#exames_mes_valor_error').text('');
                         $('#final_exame_desc_error').text('');
 
                         $('#message_exames_combo').html(data.message);
@@ -695,19 +697,19 @@
                             timer: 2000
                         });
 
-                        $('#exm_contrato_combo_up_error').text(data.exm_contrato_combo_up_error);
+                        //$('#exm_contrato_combo_up_error').text(data.exm_contrato_combo_up_error);
                         $('#ex_fk_funcao_error').text(data.ex_fk_funcao_error);
                         $('#exm_riscos_funcao_ajax_error').text(data.exm_riscos_funcao_ajax_error);
                         $('#ex_tipo_exame_error').text(data.ex_tipo_exame_error);
-                        $('#ex_validade_meses_error').text(data.ex_validade_meses_error);
+                        //$('#ex_validade_meses_error').text(data.ex_validade_meses_error);
                         $('#ex_description').text(data.ex_description);
 
                     } else {
-                        $('#exm_contrato_combo_up_error').text('');
+                        //$('#exm_contrato_combo_up_error').text('');
                         $('#ex_fk_funcao_error').text('');
                         $('#exm_riscos_funcao_ajax_error').text('');
                         $('#ex_tipo_exame_error').text('');
-                        $('#ex_validade_meses_error').text('');
+                        //$('#ex_validade_meses_error').text('');
                         $('#ex_description').text('');
 
                         $('#message_exames_update_combo').html(data.message);
@@ -781,7 +783,7 @@
                     $('#select_funcao_cargo_all').find('option').not(':first').remove();
                     // Add options
                     $.each(response, function(index, data) {
-                        $('#select_funcao_cargo_all').append('<option value="' + data['cf_fk_funcao'] + '">' + data['cf_nome_cargo_funcao'] + '</option>');
+                        $('#select_funcao_cargo_all').append('<option value="' + data['id'] + '">' + data['cf_nome_cargo_funcao'] + '</option>');
                     });
                 }
             });
@@ -801,15 +803,413 @@
                 success: function(data) {
                     var html = '';
                     var i;
-                    for(i=0; i<data.length; i++){
-                        html += '<li>'+data[i].eor_nome + ' ==> ' + data[i].eor_description_risco +'</li>';
+                    for (i = 0; i < data.length; i++) {
+                        html += '<li>' + data[i].eor_nome + ' ==> ' + data[i].eor_description_risco + '</li>';
                     }
+                    show_lista_exames_dados_por_consulta(id_cargo_risco);
                     $('#show_data').html(html);
 
                 }
             });
         });
 
+      
+
+        // function seleciona_exames_ajax() {
+        //     $.ajax({
+        //         url: '<?= site_url('/riscosexames/lista_exames') ?>',
+        //         method: 'GET',
+        //         dataType: 'json',
+        //         headers: {
+        //             'X-Requested-With': 'XMLHttpRequest'
+        //         },
+        //         success: function(response) {
+        //             $.each(response, function(index, data) {
+        //                 $('#new_exames_select').append('<option value="' + data['id_ex'] + '">' + data['ex_tipo_exame'] + '</option>');
+        //             });
+        //         }
+        //     });
+        // }
+
+        $('#select_cargos_p_aso').change(function(){
+            var id_exames = $(this).val();
+            $.ajax({
+                url: '<?= site_url('/riscosexames/lista_exames') ?>',
+                method: 'GET',
+                dataType: 'json',
+                data:{id_exames:id_exames}, 
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    $('#new_exames_select').find('option').not(':first').remove();
+                    $.each(response, function(index, data) {
+                        $('#new_exames_select').append('<option value="' + data['id_ex'] + '">' + data['ex_tipo_exame'] + '</option>');
+                    });
+                }
+            });
+        });
+
+        /**adiciona exames e cargos 2 */
+        $('#form_exames_cargos_2').on('submit', function(event) {
+            event.preventDefault();
+            let id_cargo = $("select[name='select_cargos_p_aso']").val();
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                dataType: "JSON",
+                beforeSend: function() {
+                    $('#id_add_exam_riscos_two').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde... </button>');
+                    $('.cls_add_exam_riscos_two').attr('disabled', 'disabled');
+                },
+
+                success: function(data) {
+                    $('#id_add_exam_riscos_two').html('<i class="fa fa-plus"></i> Adiciona');
+                    $('.cls_add_exam_riscos_two').attr('disabled', false);
+
+
+                    if (data.error == 'yes') {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'Ops! Você tem alguns erros.',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+
+                        $('#select_cargos_p_aso_error').text(data.select_cargos_p_aso_error);
+                        $('#new_exames_select_error').text(data.new_exames_select_error);
+                        $('#select_cselect_funcao_cargo_all_error').text(data.select_cselect_funcao_cargo_all_error);
+                        $('#primeiro_periodico_demiccional_error').text(data.primeiro_periodico_demiccional_error);
+                        $('#segundo_peridico_demissional_error').text(data.segundo_peridico_demissional_error);
+
+                    } else {
+                        $('#select_cargos_p_aso_error').text('');
+                        $('#new_exames_select_error').text('');
+                        $('#select_cselect_funcao_cargo_all_error').text('');
+                        $('#primeiro_periodico_demiccional_error').text('');
+                        $('#segundo_peridico_demissional_error').text('');
+
+                        $('#form_exames_cargos_2')[0].reset();
+                        $('#message_emx_add_risco_two').html(data.message);
+                        // $('#lista_tipo_risco_trabalho').DataTable().ajax.reload();
+                        show_lista_exames_dados_por_consulta(id_cargo);
+                        setTimeout(function() {
+                            $('#message_emx_add_risco_two').html('');
+                        }, 2500);
+                    }
+                }
+            })
+        });
+
+        /**lista registro do aso */
+        function show_lista_exames_dados_por_consulta(id) {
+
+            $.ajax({
+                type: 'GET',
+                url: '<?php echo site_url('/aso/lista_exames_retorno_aso/') ?>' + id,
+                async: true,
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(data) {
+                    var html = '';
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+
+                        var checked1 = data[i].ef_tipos_ad == null ? "" : "checked";
+                        var checked2 = data[i].ef_tipos_d == null ? "" : "checked";
+                        var checked3 = data[i].ef_tipos_p == null ? "" : "checked";
+                        var checked4 = data[i].ef_tipos_m == null ? "" : "checked";
+                        var checked5 = data[i].ef_tipos_r == null ? "" : "checked";
+                        var checked6 = data[i].ef_tipos_is == null ? "" : "checked";
+
+                        html += '<tr>' +
+                            '<td>' + data[i].ex_tipo_exame + '</td>' +
+                            '<td>' +
+                            '<div class="custom-control custom-checkbox custom-control-inline">' +
+                            '<input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" name="admissional" id="' + data[i].ef_id + '" ' + checked1 + ' value="1">' +
+                            '<label for="' + data[i].ef_id + '" class="custom-control-label">A</label>' +
+                            '</div>' +
+                            '<div class="custom-control custom-checkbox custom-control-inline">' +
+                            '<input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" name="demissional" id="' + data[i].ef_id + '" ' + checked2 + ' value="1">' +
+                            '<label for="' + data[i].ef_id + '" class="custom-control-label">D</label>' +
+                            '</div>' +
+                            '<div class="custom-control custom-checkbox custom-control-inline">' +
+                            '<input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" name="periodico" id="' + data[i].ef_id + '" ' + checked3 + ' value="1">' +
+                            '<label for="' + data[i].ef_id + '" class="custom-control-label">P</label>' +
+                            '</div>' +
+                            '<div class="custom-control custom-checkbox custom-control-inline">' +
+                            '<input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" name="mudanca_funcao" id="' + data[i].ef_id + '" ' + checked4 + ' value="1">' +
+                            '<label for="' + data[i].ef_id + '" class="custom-control-label">M</label>' +
+                            '</div>' +
+                            '<div class="custom-control custom-checkbox custom-control-inline">' +
+                            '<input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" name="retorno_trabalho" id="' + data[i].ef_id + '" ' + checked5 + ' value="1">' +
+                            '<label for="' + data[i].ef_id + '" class="custom-control-label">R</label>' +
+                            '</div>' +
+                            '<div class="custom-control custom-checkbox custom-control-inline">' +
+                            '<input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" name="' + data[i].ef_id + '" id="' + data[i].ef_id + '" ' + checked6 + ' value="1">' +
+                            '<label for="' + data[i].ef_id + '" class="custom-control-label">I/S</label>' +
+                            '</div>' +
+
+
+                            '</td>' +
+                            '<td>' + data[i].ef_dias_1 + '</td>' +
+                            '<td>' + data[i].ef_dias_2 + '</td>' +
+                            '<td style="text-align:right;">' +
+                            '<div class="btn-group dropleft">' +
+                            '<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                            'Opções' +
+                            '</button>' +
+                            '<div class="dropdown-menu">' +
+                            '<a href="#" class="view_risco_funcao dropdown-item" data-id="' + data[i].ef_id + '"><i class="fa fa-eye"></i>&nbsp;Visualizar</a>' +
+                            '<div class="dropdown-divider"></div>' +
+                            '<a href="#" class="delete_view_risco_funcao dropdown-item" data-id="' + data[i].ef_id + '" data-cargo="' + data[i].ef_fk_funcao + '"><i class="fa fa-trash"></i>&nbsp;Deletar</a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>';
+                    }
+                    $('#show_data_exames_posr_funcao').html(html);
+                }
+
+            });
+        }
+
+        /**modal exames riscos */
+        $(document).on('click', '.view_risco_funcao', function(e) {
+            e.preventDefault();
+            let id = $(this).data('id');
+            $.ajax({
+                url: "<?php echo site_url('/riscosexames/get_dados_usuario_exames_riscos/'); ?>" + id,
+                method: "GET",
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                beforeSend: function() {
+                    $(".loader").css('display', 'block');
+                },
+                complete: function() {
+                    $(".loader").css('display', 'none');
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    $('#select_modal_cargoaso_cf').val(data.ef_fk_funcao);
+                    $('#select_modal_cargoa_funcoes_so_cf').val(data.ef_fk_cargos_funcoes);
+                    $('#select_modal_exames_cf').val(data.ef_ek_exame);
+
+                    if (data.ef_tipos_ad != null) {
+                        $('#checked1').prop('checked', true);
+                    } else {
+                        $('#checked1').prop('checked', false);
+                    }
+
+                    if (data.ef_tipos_d != null) {
+                        $('#checked2').prop('checked', true);
+                    } else {
+                        $('#checked2').prop('checked', false);
+                    }
+
+                    if (data.ef_tipos_p != null) {
+                        $('#checked3').prop('checked', true);
+                    } else {
+                        $('#checked3').prop('checked', false);
+                    }
+
+                    if (data.ef_tipos_m != null) {
+                        $('#checked4').prop('checked', true);
+                    } else {
+                        $('#checked4').prop('checked', false);
+                    }
+
+                    if (data.ef_tipos_r != null) {
+                        $('#checked5').prop('checked', true);
+                    } else {
+                        $('#checked5').prop('checked', false);
+                    }
+
+                    if (data.ef_tipos_is != null) {
+                        $('#checked6').prop('checked', true);
+                    } else {
+                        $('#checked6').prop('checked', false);
+                    }
+
+                    // let tipo1 = data['ef_tipos_ad'] == !null ? prop('checked', true) : prop('checked', false);
+
+                    $('#ef_dias_1').val(data.ef_dias_1);
+                    $('#ef_dias_2').val(data.ef_dias_2);
+                    $('#modalComponheExamesEaso').modal('show');
+                    $('#hidden_id_altera_exame_aso_up').val(id);
+                }
+            })
+        });
+
+        lista_cargos_modal_aso();
+        lista_cargos_funcoes_modal_aso();
+        lista_exames_modal_aso();
+
+        function lista_cargos_modal_aso() {
+            $.ajax({
+                url: '<?= site_url('/aso/lista_cargos_modal') ?>',
+                method: 'GET',
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    // Remove options 
+                    $('#select_modal_cargoaso_cf').find('option').not(':first').remove();
+                    // Add options
+                    $.each(response, function(index, data) {
+                        $('#select_modal_cargoaso_cf').append('<option value="' + data['id_cargo'] + '">' + data['cargo_nome'] + '</option>');
+                    });
+                }
+            });
+        }
+
+        function lista_exames_modal_aso() {
+            $.ajax({
+                url: '<?= site_url('/aso/lista_exames_combo_modal') ?>',
+                method: 'GET',
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    // Remove options 
+                    $('#select_modal_exames_cf').find('option').not(':first').remove();
+                    // Add options
+                    $.each(response, function(index, data) {
+                        $('#select_modal_exames_cf').append('<option value="' + data['id_ex'] + '">' + data['ex_tipo_exame'] + '</option>');
+                    });
+                }
+            });
+        }
+        /**lista dos os riscos dos cargos */
+        function lista_cargos_funcoes_modal_aso() {
+
+            $.ajax({
+                url: '<?= site_url('/aso/lista_cargos_funcoes_modal') ?>',
+                method: 'GET',
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    $('#select_modal_cargoa_funcoes_so_cf').find('option').not(':first').remove();
+                    // Add options
+                    $.each(response, function(index, data) {
+                        $('#select_modal_cargoa_funcoes_so_cf').append('<option value="' + data['id'] + '">' + data['cf_nome_cargo_funcao'] + '</option>');
+                    });
+                }
+            });
+        }
+
+
+        /**altera dados exames e cargos 2 */
+        $('#form_altera_dados_exame_riscos_aso').on('submit', function(event) {
+            event.preventDefault();
+            let id_cargo = $("select[name='select_modal_cargoaso_cf']").val();
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                dataType: "JSON",
+                beforeSend: function() {
+                    $('#id_add_exam_riscos_two_up').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde... </button>');
+                    $('.cls_add_exam_riscos_two_up').attr('disabled', 'disabled');
+                },
+
+                success: function(data) {
+                    $('#id_add_exam_riscos_two_up').html('<i class="fa fa-save"></i> Alterar');
+                    $('.cls_add_exam_riscos_two_up').attr('disabled', false);
+
+
+                    if (data.error == 'yes') {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'Ops! Você tem alguns erros.',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+
+                        $('#select_modal_cargoaso_cf_error').text(data.select_modal_cargoaso_cf_error);
+                        $('#select_modal_cargoa_funcoes_so_cf_error').text(data.select_modal_cargoa_funcoes_so_cf_error);
+                        $('#select_modal_exames_cf_error').text(data.select_modal_exames_cf_error);
+                        $('#ef_dias_1_error').text(data.ef_dias_1_error);
+                        $('#ef_dias_2_error').text(data.ef_dias_2_error);
+
+                    } else {
+                        $('#select_modal_cargoaso_cf_error').text('');
+                        $('#select_modal_cargoa_funcoes_so_cf_error').text('');
+                        $('#select_modal_exames_cf_error').text('');
+                        $('#ef_dias_1_error').text('');
+                        $('#ef_dias_2_error').text('');
+
+                        $('#message_emx_add_risco_two_up').html(data.message);
+                        // $('#lista_tipo_risco_trabalho').DataTable().ajax.reload();
+                        show_lista_exames_dados_por_consulta(id_cargo);
+                        setTimeout(function() {
+                            $('#message_emx_add_risco_two_up').html('');
+                        }, 2500);
+                    }
+                }
+            })
+        });
+
+
+        /**delete configurações aso */
+        $(document).on('click', '.delete_view_risco_funcao', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var id_cargo_load = $(this).data("cargo");
+
+            Swal.fire({
+                title: 'Deseja deletar?',
+                text: "Ao confirmar essa ação será permanente!",
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, deletar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        url: "<?php echo site_url('/riscosexames/delete_exames_config_aso'); ?>",
+                        method: "GET",
+                        data: {
+                            id: id
+                        },
+                        success: function(data) {
+
+                            Swal.fire(
+                                'OK!',
+                                data,
+                                'success'
+                            );
+                            show_lista_exames_dados_por_consulta(id_cargo_load);
+                        }
+                    })
+                }
+            });
+        });
+
+
+        /**chama modal exames aso */
+        $(document).on('click', '.viewComponhemExamesAsoModal', function() {
+            var user_id = $(this).attr("id");
+            $('#modalComponheExamesEaso').modal('show');
+        });
 
 
         function forceKeyPressUppercase(e) {

@@ -161,7 +161,7 @@
         /**lista clientes da obra */
         function todosClientes() {
             $.ajax({
-                url: '<?= site_url('/lista-clientes') ?>',
+                url: '<?= site_url('/clientes/lista-clientes') ?>',
                 method: 'get',
                 dataType: 'json',
                 headers: {
@@ -177,10 +177,11 @@
                 }
             });
         }
+
         function todosClientesCadastroFrentes() {
             $.ajax({
-                url: '<?= site_url('/lista-clientes') ?>',
-                method: 'get',
+                url: '<?= site_url('/clientes/lista-clientes') ?>',
+                method: 'GET',
                 dataType: 'json',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'

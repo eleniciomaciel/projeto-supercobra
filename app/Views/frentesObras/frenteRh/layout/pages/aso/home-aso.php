@@ -4,63 +4,81 @@
 
 <section class="content col-md-12">
     <div class="container-fluid">
-        <h5 class="mb-2">Info Box</h5>
+        <h5 class="mb-2"><?= esc($title) ?></h5>
 
-        <div class="row">
-
-            <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
-
-                    <div class="info-box-content">
-                        <span class="info-box-text">Messages</span>
-                        <span class="info-box-number">1,410</span>
-                    </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Cargo: <?= esc($list_cargo['cargo_nome']) ?></h3>
             </div>
-            <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Exames</th>
+                            <th>Tipos:&nbsp;
+                                <?php
+                                foreach ($list_tipos as $tipos) {
+                                ?>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label" for="inlineCheckbox1"><?= $tipos['ect_nome'] ?></label>
+                                    </div>
+                                <?php
+                                }
+                                ?>
 
-                    <div class="info-box-content">
-                        <span class="info-box-text">Bookmarks</span>
-                        <span class="info-box-number">410</span>
-                    </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
+                            </th>
+                            <th>1º P/D</th>
+                            <th>2º P/D</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                    <div class="info-box-content">
-                        <span class="info-box-text">Uploads</span>
-                        <span class="info-box-number">13,648</span>
-                    </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
+                        <?php if (!empty($list_dd) && is_array($list_dd)) : ?>
 
-                    <div class="info-box-content">
-                        <span class="info-box-text">Likes</span>
-                        <span class="info-box-number">93,139</span>
-                    </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
+                            <?php foreach ($list_dd as $news_item) : ?>
+                                <tr>
+                                    <td><?= esc($news_item['ex_tipo_exame']) ?></td>
+                                    <td>
+                                        <?php
+                                        foreach ($list_tipos as $tipos) {
+                                        ?>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="<?= $tipos['id'] ?>" <?php if($tipos['id'] == $news_item['ex_fk_tipo_contato']){echo 'checked';}?>>
+                                                <label class="form-check-label" for="inlineCheckbox1"><?= $tipos['ect_nome'] ?></label>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
+
+                                        <?php
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-danger">55%</span></td>
+                                </tr>
+
+                            <?php endforeach; ?>
+
+                        <?php else : ?>
+
+                            <tr>
+                                <td colspan="4" class="text-center">Sem registro</td>
+                            </tr>
+
+                        <?php endif ?>
+
+
+
+
+                    </tbody>
+                </table>
             </div>
-            <!-- /.col -->
-            
+            <!-- /.card-body -->
         </div>
         <!-- /.row -->
 

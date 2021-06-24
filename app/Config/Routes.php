@@ -191,12 +191,17 @@ $routes->group('exames', ["filter" => "auth"], function($routes)
 	$routes->get('listSelectExamesContrato', 'Rh\Exames\ExamesClinicosController::listaExamesContratuaisSelect');
 	$routes->get('listSelectExamesRiscos', 'Rh\Exames\ExamesClinicosController::listaExamesRiscosSelect');
 	$routes->get('list_funcao_cargos_riscos', 'Rh\Exames\ExamesClinicosController::getfuncoesCargos');
-	$routes->post('adiciona_combo', 'Rh\Exames\ExamesClinicosController::adicinaComboExames');
+	
     $routes->get('get_lista_exames_combo', 'Rh\Exames\ExamesClinicosController::getExamesCombo');
     $routes->get('get_lista_one_exames', 'Rh\Exames\ExamesClinicosController::getListExames');
     $routes->get('get_lista_funcao_select', 'Rh\Exames\ExamesClinicosController::listaRiscosFuncaoSelect');
     $routes->post('altera_exames_combo', 'Rh\Exames\ExamesClinicosController::alteraComboExames');
     $routes->get('get_deleteExames', 'Rh\Exames\ExamesClinicosController::deleteExamesCombo');
+
+    $routes->get('riscos-exames', 'Rh\Clinica\ClinicaController::pageConfiguraRascosExames');
+
+    $routes->post('adiciona_combo', 'Rh\Exames\ExamesClinicosController::adicinaComboExames');
+    $routes->post('adiciona-exames-cargos', 'Rh\Exames\ExamesClinicosController::adicinaComboExamesTwo');
 });
 
 $routes->group('banco', ["filter" => "auth"], function($routes)
@@ -227,6 +232,12 @@ $routes->group('aso', ["filter" => "auth"], function($routes)
     $routes->get('gerar-aso/(:num)', 'Rh\Aso\AsoController::index/$1');
     $routes->get('lista_cargos', 'Rh\Aso\AsoController::getTodasFuncoes');
     $routes->get('seleciona_riscos_cargos', 'Rh\Aso\AsoController::getRiscosCargos');
+    $routes->get('composicao-exames/(:num)', 'Rh\Aso\AsoController::listTiposExamesJaConfigurados/$1');
+    $routes->get('lista_exames_retorno_aso/(:num)', 'Rh\Aso\AsoController::listExamesJoin/$1');
+
+    $routes->get('lista_cargos_modal', 'Rh\Aso\AsoController::getListModalCargos');
+    $routes->get('lista_cargos_funcoes_modal', 'Rh\Aso\AsoController::getListModalCargosFuncoes');
+    $routes->get('lista_exames_combo_modal', 'Rh\Aso\AsoController::getListModalExames');
 });
 
 /**área de acesso */
@@ -235,6 +246,7 @@ $routes->group('dados_pessoais', ["filter" => "auth"], function($routes)
     $routes->get('meus-dados/(:num)', 'Rh\Acesso\AcessoController::index/$1');
     $routes->post('altera-dados-foto/(:num)', 'Rh\Acesso\AcessoController::alteraFoto/$1');
     $routes->post('altera_acesso_senha/(:num)', 'Rh\Acesso\AcessoController::alteraMeuAcesso/$1');
+   
 });
 
 
@@ -264,6 +276,46 @@ $routes->group('transferencia', ["filter" => "auth"], function($routes)
     $routes->post('processa-transferencia/(:num)', 'Rh\Transfer\TransferenciaFuncionarioController::createTransfer/$1');
 });
 
+
+/**controle de frotas */
+$routes->group('frota', ["filter" => "auth"], function($routes)
+{
+    $routes->get('controle', 'Admin\FrotaController::index');
+    $routes->post('adiciona_fornecedor', 'Admin\FrotaController::adicionaFornecedorFrota');
+    $routes->get('page-fornecedor-veiculo', 'Admin\FrotaController::fornecedorVeiculo');
+    $routes->get('page-fornecedor-oficina', 'Admin\FrotaController::fornecedorOficina');
+    $routes->get('page-despesas', 'Admin\FrotaController::lancarDespesas');
+    $routes->get('alterar-fornecedor/(:any)', 'Admin\FrotaController::visuliazaStoreFornecedorCarro/$1');
+    $routes->post('altera-fornecedor/(:num)', 'Admin\FrotaController::alteraStoreFornecedorCarro/$1');
+    $routes->get('deletar-fornecedor/(:num)', 'Admin\FrotaController::deleteFornecedor/$1');
+});
+
+/**controle veiculos */
+$routes->group('veiculos', ["filter" => "auth"], function($routes)
+{
+    $routes->get('visualizar/(:num)', 'Admin\VeiculosController::verDados_veiculo/$1');
+    $routes->get('deletar/(:num)', 'Admin\VeiculosController::deleteVeiculo/$1');
+});
+
+/**controle de oficinas */
+$routes->group('oficina', ["filter" => "auth"], function($routes)
+{
+    $routes->get('visualizar/(:num)', 'Admin\OficinaController::visualizarOficina/$1');
+    $routes->get('deletar/(:num)', 'Admin\OficinaController::deleteOficina/$1');
+});
+
+
+
+/**cliniacas e exames */
+$routes->group('riscosexames', ["filter" => "auth"], function($routes)
+{
+    $routes->get('configuracao-exames', 'Rh\Aso\AsoController::pageConfiguraRascosExames');
+    $routes->get('lista_exames', 'Rh\Aso\AsoController::selecionaExames');
+    $routes->get('cargos_all', 'Rh\Aso\AsoController::selecionaCargo');
+    $routes->get('get_dados_usuario_exames_riscos/(:num)', 'Rh\Aso\AsoController::getDadosExamesCargos/$1');
+    $routes->post('alterar-exame-aso', 'Rh\Aso\AsoController::alteraExameConfAso');
+    $routes->get('delete_exames_config_aso', 'Rh\Aso\AsoController::deleteExameConfAso');
+});
 $routes->get('logout', 'Home::logout');
 /*
  * --------------------------------------------------------------------
