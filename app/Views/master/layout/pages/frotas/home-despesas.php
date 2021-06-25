@@ -18,7 +18,6 @@
     <!-- corpo aplicação -->
     <div class="card">
         <div class="card-header d-flex p-0">
-            <h3 class="card-title p-3">Tabs</h3>
             <ul class="nav nav-pills ml-auto p-2">
                 <li class="nav-item"><a class="nav-link" href="/frota/controle">Veículos</a></li>
                 <li class="nav-item"><a class="nav-link" href="/frota/page-fornecedor-veiculo">Fornecedor/Veículos</a></li>

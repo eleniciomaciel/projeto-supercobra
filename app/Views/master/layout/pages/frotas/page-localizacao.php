@@ -16,7 +16,6 @@
     <!-- corpo aplicação -->
     <div class="card">
         <div class="card-header d-flex p-0">
-            <h3 class="card-title p-3">Oficina</h3>
             <ul class="nav nav-pills ml-auto p-2">
                 <li class="nav-item"><a class="nav-link" href="/frota/controle">Veículos</a></li>
                 <li class="nav-item"><a class="nav-link" href="/frota/page-fornecedor-veiculo">Fornecedor/Veículos</a></li>
@@ -245,16 +244,6 @@
             ]
         }).buttons().container().appendTo('#lista_table_localizacao_veiculos_wrapper .col-md-6:eq(0)');
 
-
-        // $("#lista_table_localizacao_veiculos").DataTable({
-        //      "language": {
-        //         "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
-        //     },
-        //     "responsive": true,
-        //     "lengthChange": false,
-        //     "autoWidth": false,
-        //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        // }).buttons().container().appendTo('#lista_table_localizacao_veiculos_wrapper .col-md-6:eq(0)');
 
         // City change
         $('#loc_cc').change(function() {
