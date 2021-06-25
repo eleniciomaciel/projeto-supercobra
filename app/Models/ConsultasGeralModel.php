@@ -55,4 +55,16 @@ class ConsultasGeralModel extends Model
 		$query = $builder->get();
 		return $query->getResult();
 	}
+
+	public function getFrente($postData) {
+
+		$builder = $this->db->table('cento_custo');
+		$builder->select('*');
+		$builder->join('frentes', 'frentes.id_ft = cento_custo.fk_frente_cc');
+		$builder->join('departamentos', 'departamentos.id = cento_custo.fk_departamento');
+		$builder->join('atividades', 'atividades.id = cento_custo.fk_atividade_cc');
+		$builder->where('id_cc',$postData['id_cc']);
+		$query = $builder->get();
+		return $query->getResult();
+	  } 
 }

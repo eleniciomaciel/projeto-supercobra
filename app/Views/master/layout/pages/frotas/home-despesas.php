@@ -24,6 +24,7 @@
                 <li class="nav-item"><a class="nav-link" href="/frota/page-fornecedor-veiculo">Fornecedor/Veículos</a></li>
                 <li class="nav-item"><a class="nav-link" href="/frota/page-fornecedor-oficina">Fornecedor/Serviços-Oficinas</a></li>
                 <li class="nav-item"><a class="nav-link active" href="#tab_3" data-toggle="tab">Despess/Manutenção</a></li>
+                <li class="nav-item"><a class="nav-link" href="/frota/page-localizacao">Localização/Transferência</a></li>
             </ul>
         </div><!-- /.card-header -->
         <div class="card-body">

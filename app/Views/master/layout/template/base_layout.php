@@ -172,21 +172,33 @@
   <script src="<?= base_url() ?>/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="<?= base_url() ?>/plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="<?= base_url() ?>/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- moment js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/x.y.z/locale/ar.js"></script>
   <!-- Select2 -->
   <script src="<?= base_url() ?>/plugins/select2/js/select2.full.min.js"></script>
   <!-- inclusão componente modal -->
   <?= $this->include('master/layout/components/001_components-supply') ?>
   <!-- inclusão js-->
   <?= $this->include('master/layout/js/js_001_components_supply') ?>
-  <?= $this->include('master/layout/js/js_002_components_clienteObra') ?>
+  <?= $this->include('/master/layout/js/js_002_components_clienteObra') ?>
   <?= $this->include('master/layout/js/js_003_components_frentes') ?>
   <?= $this->include('master/layout/js/js_004_components_cc') ?>
   <?= $this->include('master/layout/js/js_005_components_usuarios') ?>
+
   <?= $this->renderSection('admin-js') ?>
+  <?= $this->renderSection('adm-frota-js') ?>
   <script>
     $(function() {
       //Initialize Select2 Elements
       $('.select2').select2({
+        theme: 'bootstrap4'
+      });
+
+      $('.loc_cc').select2({
+        theme: 'bootstrap4'
+      });
+      
+      $('.loc_veiculo').select2({
         theme: 'bootstrap4'
       });
     });

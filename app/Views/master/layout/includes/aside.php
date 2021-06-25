@@ -30,7 +30,7 @@
                     </a>
                 </li>
 
-                <!-- Almoxarifado -->
+                <!-- Frota -->
                 <li class="nav-item">
                     <a href="/frota/controle" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>

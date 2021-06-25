@@ -1,7 +1,7 @@
 <div class="card-body p-0">
     <br>
     <a href="/centocusto/add-cento-custo" class="btn btn-primary float-left">
-        <i class="fas fa-plus"></i> Cdastrar CC
+        <i class="fas fa-plus"></i> Cadastrar CC
     </a>
 
     <table class="table table-striped" id="todos_cc" style="width: 100%;">

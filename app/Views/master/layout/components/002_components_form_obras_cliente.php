@@ -1,4 +1,4 @@
-<form action="/clientes/cadastrar" method="post" id="form_cadastro_cliente">
+<form action="/clientes/cadastrar" method="POST" id="form_cadastro_cliente">
 <?= csrf_field() ?>
     <div class="form-row">
 

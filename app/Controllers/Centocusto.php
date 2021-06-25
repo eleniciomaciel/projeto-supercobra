@@ -5,6 +5,10 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\ObrasModel;
 use App\Models\CentocustoModel;
+use App\Models\FrentesModel;
+use App\Models\AtividadesModel;
+use App\Models\Departamento;
+use App\Models\DepartamentosModel;
 
 class Centocusto extends BaseController
 {
@@ -22,7 +26,16 @@ class Centocusto extends BaseController
 			throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
 		}
 		$obras = new ObrasModel();
-		$data['list_ob'] = $obras->getObras(); // Capitalize the first letter
+		$frente = new FrentesModel();
+		$atividades = new AtividadesModel();
+		$departamento = new DepartamentosModel();
+
+		$data = [
+			'list_ob' => $obras->getObras(),
+			'frentes' => $frente->findAll(),
+			'atividades' => $atividades->findAll(),
+			'departamentos' => $departamento->findAll(),
+		]; // Capitalize the first letter
 		echo view('master/layout/pages/cento_custo/' . $page, $data);
 	}
 
@@ -35,20 +48,25 @@ class Centocusto extends BaseController
 			'neu_numero_cc' => ['label' => 'Número do cento de custo', 'rules' => 'required|max_length[100]|is_unique[cento_custo.numero_cc]'],
 			'new_descricao_cc' => ['label' => 'Descricao', 'rules' => 'required|max_length[100]'],
 			'new_obra_cc' => ['label' => 'Obra', 'rules' => 'required'],
+			'new_frente_cc' => ['label' => 'Frente', 'rules' => 'required'],
+			'new_department_cc' => ['label' => 'departamento', 'rules' => 'required'],
+			'new_atividade_cc' => ['label' => 'Atividade', 'rules' => 'required'],
 			'new_status_cc' => ['label' => 'status', 'rules' => 'required']
 		])) {
 			$model->save([
 				'numero_cc' => $this->request->getPost('neu_numero_cc'),
 				'descricao_cc'  => $this->request->getPost('new_descricao_cc'),
 				'fk_obra_cc'  => $this->request->getPost('new_obra_cc'),
+				'fk_frente_cc'  => $this->request->getPost('new_frente_cc'),
+				'fk_departamento'  => $this->request->getPost('new_department_cc'),
+				'fk_atividade_cc'  => $this->request->getPost('new_atividade_cc'),
 				'status_cc'  => $this->request->getPost('new_status_cc'),
 			]);
 
-			$obras = new ObrasModel();
-			$data['list_ob'] = $obras->getObras();
+			
 			$session = session();
 			$session->setFlashdata("success_cento_cc", "Cento de custo adicionado com sucesso!");
-			echo view('master/layout/pages/cento_custo/page-centocusto', $data);
+			return redirect()->back();
 		} else {
 			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
 		}
@@ -181,4 +199,6 @@ class Centocusto extends BaseController
 		}
 
 	}
+
+	
 }

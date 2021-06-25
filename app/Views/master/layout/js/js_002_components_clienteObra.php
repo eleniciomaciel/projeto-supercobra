@@ -1,9 +1,11 @@
 <script>
     $(document).ready(function() {
         todasObrasCadastroFrentes();
+        
         $('#cli_o_cep').inputmask('99.999-999', {
             'placeholder': '00.000-000'
         });
+
         $('#cli_o_cnpj').inputmask('99.999.999/9999-99', {
             'placeholder': '00.000.000/0001-00'
         });
@@ -26,67 +28,7 @@
             $("#cli_o_uf").val("");
         }
 
-        //Quando o campo cep perde o foco.
-        $("#cli_o_cep").blur(function() {
 
-            //Nova variável "cep" somente com dígitos.
-            var cep = $(this).val().replace(/\D/g, '');
-
-            //Verifica se campo cep possui valor informado.
-            if (cep != "") {
-
-                //Expressão regular para validar o CEP.
-                var validacep = /^[0-9]{8}$/;
-
-                //Valida o formato do CEP.
-                if (validacep.test(cep)) {
-
-                    //Preenche os campos com "..." enquanto consulta webservice.
-                    $("#cli_o_address").val("...");
-                    $("#cli_o_neighborhood").val("...");
-                    $("#cli_o_city").val("...");
-                    $("#cli_o_uf").val("...");
-
-                    //Consulta o webservice viacep.com.br/
-                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(dados) {
-
-                        if (!("erro" in dados)) {
-                            //Atualiza os campos com os valores da consulta.
-                            $("#cli_o_address").val(dados.logradouro);
-                            $("#cli_o_neighborhood").val(dados.bairro);
-                            $("#cli_o_city").val(dados.localidade);
-                            $("#cli_o_uf").val(dados.uf);
-                        } //end if.
-                        else {
-                            //CEP pesquisado não foi encontrado.
-                            limpa_formulário_cep();
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'error',
-                                title: 'Ops! CEP não encontrado.',
-                                showConfirmButton: false,
-                                timer: 2000
-                            });
-                        }
-                    });
-                } //end if.
-                else {
-                    //cep é inválido.
-                    limpa_formulário_cep();
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Ops! Formato de CEP inválido.',
-                        showConfirmButton: false,
-                        timer: 2000
-                    });
-                }
-            } //end if.
-            else {
-                //cep sem valor, limpa formulário.
-                limpa_formulário_cep();
-            }
-        });
 
         //cadastrando obras
         $('#form_cadastro_cliente').on('submit', function(event) {

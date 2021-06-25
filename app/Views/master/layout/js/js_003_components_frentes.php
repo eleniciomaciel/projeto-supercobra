@@ -12,7 +12,10 @@
             "order": [
                 [0, "desc"]
             ],
-            "ajax": "/frentes/lista-frentes"
+            "ajax": {
+                url: "<?php echo site_url("/frentes/lista-frentes"); ?>",
+                type: "GET",
+            }
         });
 
         function limpa_formulário_cep2() {

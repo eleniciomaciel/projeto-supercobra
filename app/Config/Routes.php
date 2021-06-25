@@ -288,6 +288,9 @@ $routes->group('frota', ["filter" => "auth"], function($routes)
     $routes->get('alterar-fornecedor/(:any)', 'Admin\FrotaController::visuliazaStoreFornecedorCarro/$1');
     $routes->post('altera-fornecedor/(:num)', 'Admin\FrotaController::alteraStoreFornecedorCarro/$1');
     $routes->get('deletar-fornecedor/(:num)', 'Admin\FrotaController::deleteFornecedor/$1');
+
+    $routes->add('page-localizacao', 'Admin\FrotaController::localizacaoTransferencia');
+    $routes->get('lista_localizacao-veiculo-pelo-cc', 'Admin\FrotaController::listaLocalizacaoCarros');
 });
 
 /**controle veiculos */
@@ -316,6 +319,22 @@ $routes->group('riscosexames', ["filter" => "auth"], function($routes)
     $routes->post('alterar-exame-aso', 'Rh\Aso\AsoController::alteraExameConfAso');
     $routes->get('delete_exames_config_aso', 'Rh\Aso\AsoController::deleteExameConfAso');
 });
+
+
+/**controle de oficinas */
+$routes->group('atividades', ["filter" => "auth"], function($routes)
+{
+    $routes->post('atividades_frentes', 'Admin\AtividadesController::index');
+    $routes->get('getLista_atividades_frentes', 'Admin\AtividadesController::listaAtividadesFrentes');
+    $routes->get('one_atividades', 'Admin\AtividadesController::getAtividade');
+    $routes->post('atividades_frentes_alterar', 'Admin\AtividadesController::alteraFrenteAtividade');
+    $routes->get('delete_atividade', 'Admin\AtividadesController::deleteAtividade');
+});
+
+
+
+
+
 $routes->get('logout', 'Home::logout');
 /*
  * --------------------------------------------------------------------
