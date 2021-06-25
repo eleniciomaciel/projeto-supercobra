@@ -290,7 +290,7 @@ $routes->group('frota', ["filter" => "auth"], function($routes)
     $routes->get('deletar-fornecedor/(:num)', 'Admin\FrotaController::deleteFornecedor/$1');
 
     $routes->add('page-localizacao', 'Admin\FrotaController::localizacaoTransferencia');
-    $routes->get('lista_localizacao-veiculo-pelo-cc', 'Admin\FrotaController::listaLocalizacaoCarros');
+    //$routes->get('lista_localizacao-veiculo-pelo-cc', 'Admin\FrotaController::listaLocalizacaoCarros');
 });
 
 /**controle veiculos */

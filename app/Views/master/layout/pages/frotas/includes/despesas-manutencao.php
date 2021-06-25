@@ -6,69 +6,108 @@
                     <i class="fas fa-exclamation-triangle"></i>
                     Cadastrar Despesas
                 </h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-success btn-flat"><i class="fa fa-plus"></i> Tipo de Serviço</button>
+                </div>
+
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-
+            <?php $validation = \Config\Services::validation(); ?>
                 <form>
-
                     <div class="form-group">
-                        <label for="inputAddress">Nome Fantasia:</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                        <label for="inputAddress">Frentes:</label>
+                        <select name="manut_frente" id="manut_frente" class="form-control <?= ($validation->hasError('manut_frente')) ? 'is-invalid' : ''; ?>">
+                            <option selected disabled>Selecione aqui...</option>
+                            <?php if (!empty($frente) && is_array($frente)) : ?>
+                                <?php foreach ($frente as $news_item) : ?>
+                                    <option value="<?= esc($news_item['id_ft']) ?>"><?= esc($news_item['nome_ft']) ?></option>
+                                <?php endforeach; ?>
+
+                            <?php else : ?>
+                                <option selected disabled>Não há frentes cadastradas</option>
+                            <?php endif ?>
+                        </select>
+                        <!-- Error -->
+                        <?php if ($validation->getError('manut_frente')) { ?>
+                            <div class='text-danger mt-2'>
+                                <?= $error = $validation->getError('manut_frente'); ?>
+                            </div>
+                        <?php } ?>
                     </div>
 
                     <div class="form-row">
+
+                        <div class="form-group col-md-6">
+
+                            <label for="inputEmail4">Departamento:</label>
+                            <select class="form-control" id="sel_depart_frente"></select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Veículo/Placa:</label>
+                            <select class="form-control" id="sel_desp_veiculo_placa_select"></select>
+                        </div>
 
                         <div class="form-group col-md-12">
-                            <label for="inputEmail4">Responsável:</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                        </div>
-
-
-                        <div class="form-group col-md-6">
-                            <label for="inputEmail4">Email:</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="inputPassword4">Telefone:</label>
-                            <input type="tel" class="form-control" id="inputPassword4" placeholder="Password">
+                            <label for="inputEmail4">Cento de Custo:</label>
+                            <select class="form-control" id="sel_desp_cc_carro_atividade_frente"></select>
                         </div>
 
                     </div>
 
                     <div class="form-group">
-                        <label for="inputAddress2">CNPJ:</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                        <label for="inputAddress2">Oficina/Estabecimento:</label>
+                        <select name="manut_frente" id="manut_frente" class="form-control <?= ($validation->hasError('manut_frente')) ? 'is-invalid' : ''; ?>">
+                            <option selected disabled>Selecione aqui...</option>
+                            <?php if (!empty($oficinas_list) && is_array($oficinas_list)) : ?>
+                                <?php foreach ($oficinas_list as $news_item) : ?>
+                                    <option value="<?= esc($news_item['ofic_id']) ?>"><?= esc($news_item['ofic_nome_fantasia']) ?></option>
+                                <?php endforeach; ?>
+
+                            <?php else : ?>
+                                <option selected disabled>Não há frentes cadastradas</option>
+                            <?php endif ?>
+                        </select>
+                        <!-- Error -->
+                        <?php if ($validation->getError('manut_frente')) { ?>
+                            <div class='text-danger mt-2'>
+                                <?= $error = $validation->getError('manut_frente'); ?>
+                            </div>
+                        <?php } ?>
                     </div>
                     <div class="form-row">
 
-                        <div class="form-group col-md-4">
-                            <label for="inputZip">CEP:</label>
+                        <div class="form-group col-md-6">
+                            <label for="inputZip">Número da Nota:</label>
                             <input type="text" class="form-control" id="inputZip">
                         </div>
 
-                        <div class="form-group col-md-2">
-                            <label for="inputState">UF:</label>
+                        <div class="form-group col-md-6">
+                            <label for="inputState">Tipo de Serviço:</label>
                             <select id="inputState" class="form-control">
                                 <option selected>Choose...</option>
                                 <option>...</option>
                             </select>
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="inputCity">Cidade</label>
-                            <input type="text" class="form-control" id="inputCity">
-                        </div>
-
                         <div class="form-group col-md-4">
-                            <label for="inputEmail4">Bairro:</label>
+                            <label for="inputEmail4">Valor:</label>
                             <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
                         </div>
 
-                        <div class="form-group col-md-8">
-                            <label for="inputPassword4">Endereço:</label>
+                        <div class="form-group col-md-4">
+                            <label for="inputPassword4">KM:</label>
                             <input type="tel" class="form-control" id="inputPassword4" placeholder="Password">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Status do Serviço:</label>
+                            <select id="inputState" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>...</option>
+                            </select>
                         </div>
 
                         <div class="form-group col-md-12">
