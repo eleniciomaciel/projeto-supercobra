@@ -610,7 +610,10 @@ class ExamesClinicosController extends BaseController
 	
 				$error = $this->validate([
 					'select_cargos_p_aso' => ['label' => 'cargo', 'rules' => 'required'],
-					'new_exames_select' => ['label' => 'exame', 'rules' => 'required'],
+					'new_exames_select' => ['label' => 'exame', 'rules' => 'required|alreadyExists[ef_fk_funcao,ef_ek_exame]',
+					'errors' => [
+						'alreadyExists' => 'Esse {field} já foi cadastro para esse cargo.'
+					]],
 					'select_funcao_cargo_all' => ['label' => 'cargo', 'rules' => 'required'],
 					'primeiro_periodico_demiccional' => ['label' => 'nome do exame', 'rules' => 'required|max_length[50]'],
 					'segundo_peridico_demissional' => ['label' => 'periodicidade', 'rules' => 'required|integer'],

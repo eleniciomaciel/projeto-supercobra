@@ -75,6 +75,8 @@ class Home extends BaseController
                     return redirect()->route('admin_master/gestao_master');
                 }elseif($user['role'] == "RH"){
                     return redirect()->route('admin_rh/gestao_rh');
+                }elseif($user['role'] == "TRANSPORTE"){
+                    return redirect()->route('admin_transporte/home-transporte');
                 }
             }
         }

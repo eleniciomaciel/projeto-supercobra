@@ -1,4 +1,4 @@
-<?= $this->extend('master/layout/template/base_layout') ?>
+<?= $this->extend('frentesObras/frenteTransportes/layout/template/base_layout') ?>
 
 <?= $this->section('content') ?>
 <!-- Left col -->

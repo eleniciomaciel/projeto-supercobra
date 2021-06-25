@@ -333,6 +333,12 @@ $routes->group('atividades', ["filter" => "auth"], function($routes)
 
 
 
+/**controle de oficinas */
+$routes->group('admin_transporte', ["filter" => "auth"], function($routes)
+{
+    $routes->get('home-transporte', 'Transporte\HomeTransporteController::index');
+});
+
 
 
 $routes->get('logout', 'Home::logout');

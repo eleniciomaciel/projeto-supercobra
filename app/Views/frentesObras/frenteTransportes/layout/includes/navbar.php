@@ -110,7 +110,7 @@
                     <span class="float-right text-muted text-sm">2 days</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">
+                <a href="/logout" class="dropdown-item dropdown-footer">
                 <i class="fas fa-power-off mr-2"></i> Sair do sistema</a>
             </div>
         </li>

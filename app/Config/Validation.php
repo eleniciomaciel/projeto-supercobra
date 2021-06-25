@@ -8,6 +8,7 @@ use CodeIgniter\Validation\FormatRules;
 use CodeIgniter\Validation\Rules;
 use App\Validation\Userrules;
 use App\Validation\Userlocal;
+use App\Validation\TwoExamsAlreadyExistrulesValidation;
 
 class Validation
 {
@@ -28,6 +29,7 @@ class Validation
 		CreditCardRules::class,
 		Userrules::class, //aqui nós registramos
 		Userlocal::class,
+		TwoExamsAlreadyExistrulesValidation::class,
 	];
 
 	/**
