@@ -3,13 +3,8 @@
         todosClientes();
         todosClientesCadastroFrentes();
 
-        $('#cep_input').inputmask('99.999-999', {
-            'placeholder': '00.000-000'
-        });
-
-        $('#cnpj_input').inputmask('99.999.999/9991-99', {
-            'placeholder': '00.000.000/0001-00'
-        })
+        //$('#cep_input').mask("00.000-000", {placeholder: "00.000-000"});
+        //$('#cnpj_input').mask("00.000.000/0001-00", {placeholder: "00.000.000/0001-00"});
 
         var datatale_obras = $('#list_todas_obras').DataTable({
             "language": {

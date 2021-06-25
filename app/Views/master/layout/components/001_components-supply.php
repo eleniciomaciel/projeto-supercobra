@@ -18,6 +18,7 @@
                     <span id="message"></span>
                     <!-- form start -->
                     <form method="POST" id="adiciona_obra">
+                    <?= csrf_field() ?>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="local_input">Local</label>

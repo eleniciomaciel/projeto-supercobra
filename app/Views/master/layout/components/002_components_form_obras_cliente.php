@@ -37,13 +37,13 @@
 
         <div class="form-group col-md-3">
             <label for="cli_o_uf">Estado:</label>
-            <input type="text" class="form-control" name="cli_o_uf" id="cli_o_uf" readonly>
+            <input type="text" class="form-control" name="cli_o_uf" id="cli_o_uf">
             <span id="cli_o_uf_error" class="text-danger"></span>
         </div>
 
         <div class="form-group col-md-6">
             <label for="cli_o_city">Cidade:</label>
-            <input type="text" class="form-control" name="cli_o_city" id="cli_o_city" readonly>
+            <input type="text" class="form-control" name="cli_o_city" id="cli_o_city">
             <span id="cli_o_city_error" class="text-danger"></span>
         </div>
     </div>

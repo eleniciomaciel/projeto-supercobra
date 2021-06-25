@@ -2,23 +2,23 @@
     $(document).ready(function() {
         todasObrasCadastroFrentes();
         
-        $('#cli_o_cep').inputmask('99.999-999', {
-            'placeholder': '00.000-000'
-        });
+        // $('#cli_o_cep').inputmask('99.999-999', {
+        //     'placeholder': '00.000-000'
+        // });
 
-        $('#cli_o_cnpj').inputmask('99.999.999/9999-99', {
-            'placeholder': '00.000.000/0001-00'
-        });
+        // $('#cli_o_cnpj').inputmask('99.999.999/9999-99', {
+        //     'placeholder': '00.000.000/0001-00'
+        // });
 
-        var datatale_clientes = $('#todos_clientes').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
-            },
-            "order": [
-                [0, "desc"]
-            ],
-            "ajax": "/clientes/lista_todos_clientes_mt"
-        });
+        // var datatale_clientes = $('#todos_clientes').DataTable({
+        //     "language": {
+        //         "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+        //     },
+        //     "order": [
+        //         [0, "desc"]
+        //     ],
+        //     "ajax": "/clientes/lista_todos_clientes_mt"
+        // });
 
         function limpa_formulário_cep() {
             // Limpa valores do formulário de cep.
@@ -31,67 +31,67 @@
 
 
         //cadastrando obras
-        $('#form_cadastro_cliente').on('submit', function(event) {
-            event.preventDefault();
+        // $('#form_cadastro_cliente').on('submit', function(event) {
+        //     event.preventDefault();
 
-            $.ajax({
-                url: $(this).closest('form').attr('action'),
-                method: $(this).closest('form').attr('method'),
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                data: $(this).serialize(),
-                dataType: "JSON",
+        //     $.ajax({
+        //         url: $(this).closest('form').attr('action'),
+        //         method: $(this).closest('form').attr('method'),
+        //         headers: {
+        //             'X-Requested-With': 'XMLHttpRequest'
+        //         },
+        //         data: $(this).serialize(),
+        //         dataType: "JSON",
 
-                beforeSend: function() {
-                    $('.submit_cli_add_cls').html(
-                        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> aguarde...'
-                    );
-                    $('#submit_id_cli_add').attr('disabled', 'disabled');
-                },
+        //         beforeSend: function() {
+        //             $('.submit_cli_add_cls').html(
+        //                 '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> aguarde...'
+        //             );
+        //             $('#submit_id_cli_add').attr('disabled', 'disabled');
+        //         },
 
-                success: function(data) {
-                    $('.submit_cli_add_cls').html('<i class="fa fa-save"></i> Salvar');
-                    $('#submit_id_cli_add').attr('disabled', false);
+        //         success: function(data) {
+        //             $('.submit_cli_add_cls').html('<i class="fa fa-save"></i> Salvar');
+        //             $('#submit_id_cli_add').attr('disabled', false);
 
-                    if (data.error == 'yes') {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'error',
-                            title: 'Ops! Existem campos com erros, verifique por favor...',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        $('#cli_o_nome_obra_error').text(data.cli_o_nome_obra_error);
-                        $('#cli_o_cnpj_error').text(data.cli_o_cnpj_error);
-                        $('#cli_o_datainicial_error').text(data.cli_o_datainicial_error);
-                        $('#cli_o_datafinal_error').text(data.cli_o_datafinal_error);
-                        $('#cli_o_cep_error').text(data.cli_o_cep_error);
-                        $('#cli_o_uf_error').text(data.cli_o_uf_error);
-                        $('#cli_o_city_error').text(data.cli_o_city_error);
-                        $('#cli_o_address_error').text(data.cli_o_address_error);
-                        $('#cli_o_number_error').text(data.cli_o_number_error);
-                        $('#cli_o_neighborhood_error').text(data.cli_o_neighborhood_error);
-                        $('#objeto_ob_error').text(data.objeto_ob_error);
+        //             if (data.error == 'yes') {
+        //                 Swal.fire({
+        //                     position: 'top-end',
+        //                     icon: 'error',
+        //                     title: 'Ops! Existem campos com erros, verifique por favor...',
+        //                     showConfirmButton: false,
+        //                     timer: 1500
+        //                 });
+        //                 $('#cli_o_nome_obra_error').text(data.cli_o_nome_obra_error);
+        //                 $('#cli_o_cnpj_error').text(data.cli_o_cnpj_error);
+        //                 $('#cli_o_datainicial_error').text(data.cli_o_datainicial_error);
+        //                 $('#cli_o_datafinal_error').text(data.cli_o_datafinal_error);
+        //                 $('#cli_o_cep_error').text(data.cli_o_cep_error);
+        //                 $('#cli_o_uf_error').text(data.cli_o_uf_error);
+        //                 $('#cli_o_city_error').text(data.cli_o_city_error);
+        //                 $('#cli_o_address_error').text(data.cli_o_address_error);
+        //                 $('#cli_o_number_error').text(data.cli_o_number_error);
+        //                 $('#cli_o_neighborhood_error').text(data.cli_o_neighborhood_error);
+        //                 $('#objeto_ob_error').text(data.objeto_ob_error);
 
-                    } else {
-                        $('#message').html(data.message);
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'OK! Registro efetuado com sucesso.',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        datatale_clientes.ajax.reload();
-                        //$('#sample_table').DataTable().ajax.reload();
-                        setTimeout(function() {
-                            $('#message').html('');
-                        }, 5000);
-                    }
-                }
-            })
-        });
+        //             } else {
+        //                 $('#message').html(data.message);
+        //                 Swal.fire({
+        //                     position: 'top-end',
+        //                     icon: 'success',
+        //                     title: 'OK! Registro efetuado com sucesso.',
+        //                     showConfirmButton: false,
+        //                     timer: 1500
+        //                 });
+        //                 datatale_clientes.ajax.reload();
+        //                 //$('#sample_table').DataTable().ajax.reload();
+        //                 setTimeout(function() {
+        //                     $('#message').html('');
+        //                 }, 5000);
+        //             }
+        //         }
+        //     })
+        // });
 
         function todasObrasCadastroFrentes() {
             $.ajax({

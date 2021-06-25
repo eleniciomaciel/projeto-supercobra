@@ -1,9 +1,7 @@
 <script>
     $(document).ready(function() {
        
-        $('#frt_cep').inputmask('99.999-999', {
-            'placeholder': '00.000-000'
-        });
+       // $('#frt_cep').mask("00.000-000", {placeholder: "00.000-000"});
 
         var datatale_frentes = $('#todos_frentes').DataTable({
             "language": {
