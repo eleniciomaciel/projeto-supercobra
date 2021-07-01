@@ -25,13 +25,15 @@
   <link rel="stylesheet" href="<?=base_url()?>/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="<?=base_url()?>/plugins/summernote/summernote-bs4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="<?= base_url() ?>/plugins/toastr/toastr.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="<?=base_url()?>/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="<?=base_url()?>/dist/img/eletricidade.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -135,5 +137,8 @@
 <script src="<?=base_url()?>/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?=base_url()?>/dist/js/pages/dashboard.js"></script>
+<!-- Toastr -->
+<script src="<?= base_url() ?>/plugins/toastr/toastr.min.js"></script>
+<?= $this->renderSection('script_toast_transporte') ?>
 </body>
 </html>

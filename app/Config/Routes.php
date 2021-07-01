@@ -340,6 +340,33 @@ $routes->group('admin_transporte', ["filter" => "auth"], function($routes)
 });
 
 
+/**controle de oficinas */
+$routes->group('transposte', ["filter" => "auth"], function($routes)
+{
+    $routes->add('efetivo-transporte', 'Transporte\HomeTransporteController::pageEfetivo');
+});
+
+/**controle qualidade */
+$routes->group('admin_qualidade', ["filter" => "auth"], function($routes)
+{
+    $routes->add('home-qualidade', 'Qualidade\HomeQualidadeController::index');
+    $routes->add('categoria-de-documentos', 'Qualidade\HomeQualidadeController::categoriaDocuemnto');
+    $routes->post('adiciona-categoria', 'Qualidade\HomeQualidadeController::adicionacategoriaDocuemnto');
+    $routes->get('visualizar-categoria/(:num)', 'Qualidade\HomeQualidadeController::vertegoriaDocuemnto/$1');
+    $routes->post('alterar-categoria/(:num)', 'Qualidade\HomeQualidadeController::alterarCategoriaDocuemnto/$1');
+    $routes->get('deletar-categoria/(:num)', 'Qualidade\HomeQualidadeController::deleteCategoria/$1');
+    $routes->get('cadastrar-documentos', 'Qualidade\HomeQualidadeController::cadastroDocumento');
+    $routes->post('adiciona-documento-qualidade', 'Qualidade\HomeQualidadeController::adicionaDocuemnto');
+    $routes->get('visualizar-documento/(:num)', 'Qualidade\HomeQualidadeController::verDocumento/$1');
+    $routes->get('revisar-documento/(:num)', 'Qualidade\HomeQualidadeController::alteraPageDocumento/$1');
+    $routes->post('alterar-documento-qualidade/(:num)', 'Qualidade\HomeQualidadeController::alteraDocuemnto/$1');
+    $routes->get('deletar-documento/(:num)', 'Qualidade\HomeQualidadeController::deletaDocumento/$1');
+    $routes->get('perfil-de-acesso', 'Qualidade\HomeQualidadeController::meuPerfil');
+    $routes->post('atualiza-foto-acesso/(:num)', 'Qualidade\HomeQualidadeController::alteraFoto/$1');
+    $routes->post('dados-acesso_atulizar', 'Qualidade\HomeQualidadeController::atualizaLoginESenha');
+});
+
+
 
 $routes->get('logout', 'Home::logout');
 /*

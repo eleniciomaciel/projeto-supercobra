@@ -98,12 +98,23 @@ class ConsultasGeralModel extends Model
 
 	public function getVeiculoCcLocalDaAtividade($postData)
 	{
-
 		$builder = $this->db->table('transferencialocalizacao');
 		$builder->select('*');
 		$builder->join('cento_custo', 'cento_custo.id_cc = transferencialocalizacao.trf_fk_cc');
 		$builder->where('trf_id', $postData['id_veiculo_transferencia_local_cc']);
 		$query = $builder->get();
 		return $query->getResult();
+	}
+
+	public function listaDadosUsuario($id)
+	{
+		$builder = $this->db->table('funcionarios');
+		$builder->select('*');
+		$builder->join('cargos', 'cargos.id_cargo = funcionarios.f_cargo');
+		$builder->join('obras', 'obras.id = funcionarios.f_fk_obra');
+		$builder->join('frentes', 'frentes.id_ft = funcionarios.f_Fk_frente');
+		$builder->where('f_id', $id);
+		$query = $builder->get();
+		return $query->getRowArray();
 	}
 }

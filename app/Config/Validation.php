@@ -9,6 +9,7 @@ use CodeIgniter\Validation\Rules;
 use App\Validation\Userrules;
 use App\Validation\Userlocal;
 use App\Validation\TwoExamsAlreadyExistrulesValidation;
+use App\Validation\QualidadeQuantidade;
 
 class Validation
 {
@@ -30,6 +31,7 @@ class Validation
 		Userrules::class, //aqui nós registramos
 		Userlocal::class,
 		TwoExamsAlreadyExistrulesValidation::class,
+		QualidadeQuantidade::class,
 	];
 
 	/**
