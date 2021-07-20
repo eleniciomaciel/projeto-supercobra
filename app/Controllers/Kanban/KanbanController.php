@@ -17,6 +17,7 @@ class KanbanController extends BaseController
 {
 	public function __construct()
     {
+		
         if (session()->get('role') != "KANBAN") {
             echo 'Accesso negado!';
             exit;
@@ -176,6 +177,7 @@ class KanbanController extends BaseController
 	{
 		
 		$m_projeto = new KanbanProjetoModel();
+		$m_projeto->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$data['news'] = $m_projeto->getProject($id);
 		if (empty($data['news']))
 		{

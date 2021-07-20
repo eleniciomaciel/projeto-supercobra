@@ -27,6 +27,7 @@ class HomologacaoController extends BaseController
 
 		$model_user = new ConsultasGeralModel();
 		$model_to_homologando = new KanbanHomologacaoModel();
+		$model_to_homologando->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$id_c = session()->get('id');
 		$data = [
 			'dd_projeto' => $model_to_homologando->where('hml_fk_backlog',$id_backlog)->groupBy("hml_fk_backlog")->first(),
