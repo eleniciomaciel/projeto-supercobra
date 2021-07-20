@@ -46,7 +46,7 @@ class KanbanToFazendoModel extends Model
 	{
 		$builder = $this->db->table('kanban_tofazendo');
 		$builder->select('*');
-		$builder->groupBy("to_faz_nome_backlog");
+		 $builder->groupBy("to_faz_nome_backlog");
 		$builder->where('to_faz_fk_projeto', $id);
 		$query =  $builder->get();
 		return $query->getResultArray();
