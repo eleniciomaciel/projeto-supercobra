@@ -40,7 +40,7 @@
                     </a>
                     <ul class="nav nav-treeview" style="display: none;">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/transposte-solicitacao-material-equipamentos-servicos/solicitacao-mes" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Solicitações</p>
                             </a>

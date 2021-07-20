@@ -63,11 +63,11 @@ class UsuarioscargosMigration extends Migration
 			],
 		]);
 		$this->forge->addKey('uc_id', true);
-		$this->forge->addForeignKey('uc_fk_id_rh_que_cadastratou','funcionarios','f_id');
-		$this->forge->addForeignKey('uc_fk_id_funcionario','funcionarios','f_id');
-		$this->forge->addForeignKey('uc_fk_id_cargo','cargofuncoes','id');
-		$this->forge->addForeignKey('uc_fk_id_departamento','departamentos','id');
-		$this->forge->addForeignKey('uc_fk_id_atividade','atividades','id');
+		// $this->forge->addForeignKey('uc_fk_id_rh_que_cadastratou','funcionarios','f_id');
+		// $this->forge->addForeignKey('uc_fk_id_funcionario','funcionarios','f_id');
+		// $this->forge->addForeignKey('uc_fk_id_cargo','cargofuncoes','id');
+		// $this->forge->addForeignKey('uc_fk_id_departamento','departamentos','id');
+		// $this->forge->addForeignKey('uc_fk_id_atividade','atividades','id');
 		$this->forge->createTable('usuarioscargos');
 	}
 

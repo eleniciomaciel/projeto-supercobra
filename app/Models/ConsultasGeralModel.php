@@ -63,7 +63,6 @@ class ConsultasGeralModel extends Model
 
 	public function getFrente($postData)
 	{
-
 		$builder = $this->db->table('cento_custo');
 		$builder->select('*');
 		$builder->join('frentes', 'frentes.id_ft = cento_custo.fk_frente_cc');

@@ -332,20 +332,6 @@ $routes->group('atividades', ["filter" => "auth"], function($routes)
 });
 
 
-
-/**controle de oficinas */
-$routes->group('admin_transporte', ["filter" => "auth"], function($routes)
-{
-    $routes->get('home-transporte', 'Transporte\HomeTransporteController::index');
-});
-
-
-/**controle de oficinas */
-$routes->group('transposte', ["filter" => "auth"], function($routes)
-{
-    $routes->add('efetivo-transporte', 'Transporte\HomeTransporteController::pageEfetivo');
-});
-
 /**controle qualidade */
 $routes->group('admin_qualidade', ["filter" => "auth"], function($routes)
 {
@@ -366,7 +352,58 @@ $routes->group('admin_qualidade', ["filter" => "auth"], function($routes)
     $routes->post('dados-acesso_atulizar', 'Qualidade\HomeQualidadeController::atualizaLoginESenha');
 });
 
+/**controle de oficinas */
+$routes->group('admin_transporte', ["filter" => "auth"], function($routes)
+{
+    $routes->get('home-transporte', 'Transporte\HomeTransporteController::index');
+});
 
+/**controle de oficinas */
+$routes->group('transposte-solicitacao-material-equipamentos-servicos', ["filter" => "auth"], function($routes)
+{
+    $routes->add('solicitacao-mes', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::index');
+});
+
+/**controle de oficinas */
+$routes->group('transposte', ["filter" => "auth"], function($routes)
+{
+    $routes->add('efetivo-transporte', 'Transporte\HomeTransporteController::pageEfetivo');
+});
+
+
+/**controle de kanban */
+$routes->group('kanban', ["filter" => "auth"], function($routes)
+{
+    $routes->add('projeto-kanban', 'Kanban\KanbanController::index');
+    $routes->add('cadastrar-projeto', 'Kanban\KanbanController::pageProjeto');
+    $routes->post('salvar-projeto', 'Kanban\KanbanController::salvaProjeto');
+    $routes->get('projetos-list-one/(:num)', 'Kanban\KanbanController::verProjeto/$1');
+    $routes->get('gerar-processo-kanban/(:num)', 'Kanban\KanbanController::verKanbanProjeto/$1');
+    $routes->get('adiciona-atividades-do-backlog/(:num)', 'Kanban\KanbanController::paginaBackLog/$1');
+    $routes->post('savaBacklog', 'Kanban\KanbanController::salvaBacklogProjeto');
+    $routes->get('iniciar-tarefa/(:num)', 'Kanban\KanbanController::iniciaTarefaParaToFazendo/$1');
+});
+
+/**controle de kanban */
+$routes->group('kanban_to_fazendo', ["filter" => "auth"], function($routes)
+{
+    $routes->get('adiciona-atividades-to-fazendo/(:num)/(:num)', 'Kanban\ToFazendoController::index/$1/$2');
+    $routes->get('muda-estado-da-tarefa', 'Kanban\ToFazendoController::alteraTarefaOne');
+    $routes->get('iniciar-processo-de-homolocacao/(:num)/(:num)', 'Kanban\ToFazendoController::painelDeHomologacao/$1/$2');
+});
+
+/**hologação de kanban */
+$routes->group('kanban-homologacao', ["filter" => "auth"], function($routes)
+{
+    $routes->get('painel-de-homologacao-status/(:num)/(:num)', 'Kanban\HomologacaoController::index/$1/$2');
+    $routes->get('atualizar-etapa-homologacao/(:num)', 'Kanban\HomologacaoController::atualizaEtapa/$1');
+});
+
+/**hologação de kanban */
+$routes->group('kanban-agenda', ["filter" => "auth"], function($routes)
+{
+    $routes->get('agenda-de-trabalho', 'Kanban\AgendaController::index');
+});
 
 $routes->get('logout', 'Home::logout');
 /*
