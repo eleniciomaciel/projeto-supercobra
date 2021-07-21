@@ -98,9 +98,29 @@ class HomologacaoController extends BaseController
 				$model->save($data);
 			}
 			$model->deleteFaseHomologacao($id_bl_delete);
+			$this->emailCrarProjeFaseHomologacao();
 			session()->setFlashdata('success_new_nomologa_concluido', 'Etapa para faze de cpmclusão realizado com sucesso!');
 			return redirect()->to(site_url('kanban/gerar-processo-kanban/'.$id));
 			//return redirect()->back();
+		}
+	}
+
+	public function emailCrarProjeFaseHomologacao()
+	{
+		$email = \Config\Services::email();
+
+		$templateMessage =  view('email-public/email-aviso1-kanban.php');
+		$email->setFrom('obraseletricidade@outlook.com', 'Projeto Obras Elétrica');
+		$email->setTo('wsoares@grupocobra.com.br');
+		//$email->setTo('eleniciosouza7@gmail.com');
+
+		$email->setSubject('Etapa de projeto');
+		$email->setMessage($templateMessage);
+
+		if ($email->send()) {
+			return true;
+		}else {
+			return false;
 		}
 	}
 }

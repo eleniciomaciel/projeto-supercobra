@@ -127,8 +127,28 @@ class ToFazendoController extends BaseController
 				$model_hml->save($data);
 			}
 			$model_hml->deleteFaseTofazendo($id_bl_delete);
+			$this->emailCrarProjetoToFazendo();
 			session()->setFlashdata('success_new_add_hml', 'Fase de homologação iniciada com sucesso.');
 			return redirect()->to(site_url('kanban/gerar-processo-kanban/'.$id));
+		}
+	}
+
+	public function emailCrarProjetoToFazendo()
+	{
+		$email = \Config\Services::email();
+
+		$templateMessage =  view('email-public/email-aviso1-kanban.php');
+		$email->setFrom('obraseletricidade@outlook.com', 'Projeto Obras Elétrica');
+		$email->setTo('wsoares@grupocobra.com.br');
+		//$email->setTo('eleniciosouza7@gmail.com');
+
+		$email->setSubject('Etapa de projeto');
+		$email->setMessage($templateMessage);
+
+		if ($email->send()) {
+			return true;
+		}else {
+			return false;
 		}
 	}
 }

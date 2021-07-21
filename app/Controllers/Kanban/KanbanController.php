@@ -74,6 +74,7 @@ class KanbanController extends BaseController
 				'kbp_data_final'  		=> $this->request->getPost('kan_pro_data_final'),
 				'kbp_detalhes_projeto'  => $this->request->getPost('kan_pro_descricao'),
 			]);
+			$this->emailCrarProjeto();
 			session()->setFlashdata('success_proj', 'Projeto cadastrado com sucesso.');
 			return redirect()->back();
 		}
@@ -83,6 +84,8 @@ class KanbanController extends BaseController
 			return redirect()->back()->withInput();
 		}
 	}
+
+	
 
 	public function verProjeto(int $id)
 	{
@@ -343,9 +346,27 @@ class KanbanController extends BaseController
 			$model_backlog_atividades->deleteFaseBacklog($id_bl_delete);
 			$model_backlog_atividades->deleteBacklog($id_bl_delete);
 			session()->setFlashdata('success_new_task', 'A nova tarefa foi iniciada com sucesso.');
+			$this->emailCrarProjeto();
 			return redirect()->to(site_url('kanban/gerar-processo-kanban/'.$id));
 		}
 	}
+	public function emailCrarProjeto()
+	{
+		$email = \Config\Services::email();
 
+		$templateMessage =  view('email-public/email-aviso1-kanban.php');
+		$email->setFrom('obraseletricidade@outlook.com', 'Projeto Obras Elétrica');
+		$email->setTo('wsoares@grupocobra.com.br');
+		//$email->setTo('eleniciosouza7@gmail.com');
+
+		$email->setSubject('Etapa de projeto');
+		$email->setMessage($templateMessage);
+
+		if ($email->send()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 }
