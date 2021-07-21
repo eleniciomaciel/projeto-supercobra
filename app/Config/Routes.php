@@ -403,6 +403,8 @@ $routes->group('kanban-homologacao', ["filter" => "auth"], function($routes)
 $routes->group('kanban-agenda', ["filter" => "auth"], function($routes)
 {
     $routes->get('agenda-de-trabalho', 'Kanban\AgendaController::index');
+    $routes->get('event', 'Kanban\AgendaController::lerDadosDaAgenda');
+    $routes->match(['get', 'post'], 'eventAjax', 'Kanban\AgendaController::ajax');
 });
 
 $routes->get('logout', 'Home::logout');

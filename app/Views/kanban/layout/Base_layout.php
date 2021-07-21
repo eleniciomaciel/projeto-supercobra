@@ -20,6 +20,27 @@
     <link rel="stylesheet" href="<?= base_url() ?>/plugins/summernote/summernote-bs4.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="<?= base_url() ?>/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- fullCalendar -->
+    <link rel="stylesheet" href="<?= base_url() ?>/plugins/fullcalendar/main.css">
+    <!-- for plugin notification -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+    <!-- fullCalendar -->
+    <link rel="stylesheet" href="<?= base_url() ?>/plugins/fullcalendar/main.css">
+    <style>
+        #calendar {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 12px;
+        }
+        .fc .fc-col-header-cell-cushion {
+            display: inline-block;
+            padding: 2px 4px;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -55,7 +76,6 @@
                         </a>
                     </div>
                 </li>
-
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -102,12 +122,12 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="fas fa-tasks nav-icon"></i>
                                         <p>Cadastrar Etapas</p>
                                     </a>
-                                </li>
+                                </li> -->
 
                                 <p class="text-center" style="color: snow;">Listagem dos Projetos</p>
                                 <?php if (!empty($listProjetos) && is_array($listProjetos)) : ?>
@@ -130,7 +150,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/kanban-agenda/agenda-de-trabalho" class="nav-link">
                                 <i class="nav-icon fas fa-calendar-check"></i>
                                 <p>
                                     Agenda de trabalho
@@ -214,6 +234,16 @@
     <script src="<?= base_url() ?>/plugins/summernote/summernote-bs4.min.js"></script>
     <!-- Page specific script -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--fullcalendar plugin files -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/pt-br.min.js" integrity="sha512-2xTU+fGOWbZBOT86N4XrjQk3WtgwfDAfO6sXdopbufOCvbTHZMnkzCFuptfhgi98iZZxB7Nk5QJIxdm/MgJJgw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
     <?= $this->renderSection('script_geral') ?>
 </body>
 

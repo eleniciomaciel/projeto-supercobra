@@ -7,14 +7,14 @@ use CodeIgniter\Model;
 class KanbanagendaModel extends Model
 {
 	protected $DBGroup              = 'default';
-	protected $table                = 'kanban_agendas';
-	protected $primaryKey           = 'kag_id';
+	protected $table                = 'kanban_agenda';
+	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['kag_title','start','end'];
+	protected $allowedFields        = ['title','start','end'];
 
 	// Dates
 	protected $useTimestamps        = true;
