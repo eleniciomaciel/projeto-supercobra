@@ -154,10 +154,10 @@
                             <?= csrf_field() ?>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <!-- text input -->
                                         <div class="form-group">
-                                            <label>Unididade:</label>
+                                            <label>Unidade:</label>
                                             <input type="text" class="form-control" id="iten_unidade" name="iten_unidade" onkeyup="this.value = this.value.toUpperCase();" placeholder="Enter ..." maxlength="2" value="<?= old('iten_unidade') ?>">
                                             <!-- Error -->
                                             <?php if ($validation->getError('iten_unidade')) { ?>
@@ -167,7 +167,7 @@
                                             <?php } ?>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <label>Quantidade:</label>
                                             <input type="number" min="1" class="form-control" name="iten_quantidade" id="iten_quantidade" placeholder="Enter ..." value="<?= old('iten_quantidade') ?>">
@@ -179,33 +179,44 @@
                                             <?php } ?>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label for="iten_descricao_material_equipamento">Descrição do Material/Equipamento:</label>
-                                    <textarea class="form-control" name="itens_descricao" id="itens_descricao" rows="3"><?= old('itens_descricao') ?></textarea>
-                                    <!-- Error -->
-                                    <?php if ($validation->getError('itens_descricao')) { ?>
-                                        <div class='text-danger mt-2'>
-                                            <?= $error = $validation->getError('itens_descricao'); ?>
-                                        </div>
-                                    <?php } ?>
-                                </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="iten_data">Data da necessidade:</label>
+                                        <input type="date" class="form-control" name="iten_data" value="<?= old('iten_data') ?>">
+                                        <!-- Error -->
+                                        <?php if ($validation->getError('iten_data')) { ?>
+                                            <div class='text-danger mt-2'>
+                                                <?= $error = $validation->getError('iten_data'); ?>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
 
-                                <div class="form-group">
+                                    <div class="form-group col-6">
+                                        <label for="iten_descricao_material_equipamento">Descrição do Material/Equipamento:</label>
+                                        <textarea class="form-control" name="itens_descricao" id="itens_descricao" rows="3"><?= old('itens_descricao') ?></textarea>
+                                        <!-- Error -->
+                                        <?php if ($validation->getError('itens_descricao')) { ?>
+                                            <div class='text-danger mt-2'>
+                                                <?= $error = $validation->getError('itens_descricao'); ?>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
 
-                                    <button type="button" class="btn bg-info btn-sm" data-toggle="modal" data-target="#addRequisicoesModalItens">
-                                        <i class="fas fa-plus"></i> Add requisitos
-                                    </button>
+                                    <div class="form-group col-6">
 
-                                    <label>Requisito de Segurança e Meio Ambiente:</label>
-                                    <select class="form-control" name="itens_mas[]" id="lstBox2" multiple> </select>
-                                    <!-- Error -->
-                                    <?php if ($validation->getError('itens_mas')) { ?>
-                                        <div class='text-danger mt-2'>
-                                            <?= $error = $validation->getError('itens_mas'); ?>
-                                        </div>
-                                    <?php } ?>
+                                        <button type="button" class="btn bg-info btn-sm" data-toggle="modal" data-target="#addRequisicoesModalItens">
+                                            <i class="fas fa-plus"></i> Add requisitos
+                                        </button>
+
+                                        <label>Requisito de Segurança e Meio Ambiente:</label>
+                                        <select class="form-control" name="itens_mas[]" id="lstBox2" multiple> </select>
+                                        <!-- Error -->
+                                        <?php if ($validation->getError('itens_mas')) { ?>
+                                            <div class='text-danger mt-2'>
+                                                <?= $error = $validation->getError('itens_mas'); ?>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -224,17 +235,6 @@
                                     <?php if ($validation->getError('itens_cc')) { ?>
                                         <div class='text-danger mt-2'>
                                             <?= $error = $validation->getError('itens_cc'); ?>
-                                        </div>
-                                    <?php } ?>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="iten_data">Data da necessidade:</label>
-                                    <input type="date" class="form-control" name="iten_data" value="<?= old('iten_data') ?>">
-                                    <!-- Error -->
-                                    <?php if ($validation->getError('iten_data')) { ?>
-                                        <div class='text-danger mt-2'>
-                                            <?= $error = $validation->getError('iten_data'); ?>
                                         </div>
                                     <?php } ?>
                                 </div>
@@ -644,7 +644,7 @@
                                 data,
                                 'success'
                             );
-                           // $('#message').html(data);
+                            // $('#message').html(data);
                             setTimeout(function() {
                                 $('#refresh_table');
                             }, 1000);

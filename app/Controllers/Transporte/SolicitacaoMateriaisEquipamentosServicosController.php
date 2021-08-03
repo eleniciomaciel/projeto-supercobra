@@ -91,7 +91,7 @@ class SolicitacaoMateriaisEquipamentosServicosController extends BaseController
 			'list_join' => $model_servicos->getDadosSolictanteMES($id_solicitacao),
 			'lista_doc_servicos' => $model_servicos->where('smes_id', $id_solicitacao)->first(),
 			'lista_categoria_qualidade' => $model_qualidade->findAll(),
-			'lista_cc' => $model_cc->where('fk_departamento', $id_departamento)->findAll(),
+			'lista_cc' => $model_cc->where('fk_departamento', $id_departamento)->where('status_cc','active')->findAll(),
 			'list_itens_solicitacao' => $model_itens_solicitacao->where('isc_id_fk_solicitacao_compra', $id_solicitacao)->findAll()
 		];
 

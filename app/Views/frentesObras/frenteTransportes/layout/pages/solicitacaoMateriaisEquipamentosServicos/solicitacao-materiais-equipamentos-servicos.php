@@ -80,9 +80,9 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="">Rev:</span>
                                                 </div>
-                                                <input type="number" name="s_rev_numero" min="1" class="form-control" placeholder="Ex.: 4" value="<?= old('s_rev_numero') ?>">
+                                                <input type="number" name="s_rev_numero" min="1" class="form-control" placeholder="Ex.: 4" value="<?= old('s_rev_numero', '04') ?>">
 
-                                                <input type="text" class="form-control" name="s_codigo_revisao" placeholder="Ex.: IGE-5000-003-1-2" value="<?= old('s_codigo_revisao') ?>">
+                                                <input type="text" class="form-control" name="s_codigo_revisao" placeholder="Ex.: IGE-5000-003-1-2" value="<?= old('s_codigo_revisao','IGE-5000-003-1-2') ?>">
 
                                             </div>
                                             <!-- Error -->
@@ -154,7 +154,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroupPrepend2"><i class="fas fa-user"></i></span>
                                                 </div>
-                                                <input type="text" class="form-control" name="s_solicitado_por" placeholder="Ex.: Ana Silva" value="<?= old('s_solicitado_por') ?>">
+                                                <input type="text" class="form-control" name="s_solicitado_por" placeholder="Ex.: Ana Silva" value="<?= old('s_solicitado_por',$user_dd['f_nome']) ?>">
                                             </div>
                                             <!-- Error -->
                                             <?php if ($validation->getError('s_solicitado_por')) { ?>
