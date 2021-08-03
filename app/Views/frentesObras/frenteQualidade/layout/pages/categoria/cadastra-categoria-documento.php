@@ -26,11 +26,14 @@
             <?php
             if (session()->getFlashdata('success_cat')) {
             ?>
-                <div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h5><i class="icon fas fa-check"></i> OK!</h5>
-                    <?php echo session()->getFlashdata('success_cat') ?>
+                <div class="hide_categoria">
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-check"></i> OK!</h5>
+                        <?php echo session()->getFlashdata('success_cat') ?>
+                    </div>
                 </div>
+
             <?php
             }
             ?>
@@ -75,6 +78,9 @@
                 ['height', ['height']]
             ]
         })
-    })
+    });
+    setTimeout(function() {
+        $('.hide_categoria').html('');
+    }, 2000);
 </script>
 <?= $this->endSection() ?>

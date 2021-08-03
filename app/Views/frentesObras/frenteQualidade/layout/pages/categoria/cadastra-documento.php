@@ -18,11 +18,14 @@
             <?php
             if (session()->getFlashdata('success_doc_cadastro')) {
             ?>
-                <div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h5><i class="icon fas fa-check"></i> OK!</h5>
-                    <?php echo session()->getFlashdata('success_doc_cadastro') ?>
+                <div class="hide_documentos">
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-check"></i> OK!</h5>
+                        <?php echo session()->getFlashdata('success_doc_cadastro') ?>
+                    </div>
                 </div>
+
             <?php
             }
             ?>
@@ -50,12 +53,12 @@
 
                     <div class="col-9">
                         <label for="">Categoria:</label>
-                        <select class="form-control" name="doc_categoria" id="doc_categoria">
+                        <select class="form-control select2bs4" name="doc_categoria" id="doc_categoria">
                             <option selected disabled>Selecione aqui...</option>
 
                             <?php if (!empty($list_categoria) && is_array($list_categoria)) : ?>
                                 <?php foreach ($list_categoria as $news_select_cat) : ?>
-                                    <option value="<?= esc($news_select_cat['ql_id'])?>" ><?= esc(strip_tags($news_select_cat['ql_description'])) ?></option>
+                                    <option value="<?= esc($news_select_cat['ql_id']) ?>"><?= esc(strip_tags($news_select_cat['ql_description'])) ?></option>
                                 <?php endforeach; ?>
                             <?php else : ?>
                                 <option selected disabled>Sem categoria registradas</option>
@@ -133,6 +136,17 @@
                 ['height', ['height']]
             ]
         })
-    })
+    });
+
+    setTimeout(function() {
+        $('.hide_documentos').html('');
+    }, 2000);
+
+    $(function() {
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        });
+    });
 </script>
 <?= $this->endSection() ?>

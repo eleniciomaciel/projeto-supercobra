@@ -34,20 +34,25 @@
                 <div class="form-row">
 
                     <div class="form-group col-md-8">
-                        <label for="new_nome_cleinete">Local:</label>
+                        <label for="new_nome_cleinete">Obra:</label>
                         <input type="text" class="form-control" name="new_nome_cleinete" value="<?= esc($info['obras_local']) ?>">
                     </div>
 
                     <div class="form-group col-md-4">
-                        <label for="new_cnpj">CNPJ:</label>
-                        <input type="text" class="form-control" name="new_cnpj" value="<?= esc($info['data_inicio']) ?>">
+                        <label for="new_cnpj">Obra/Abreviação:</label>
+                        <input type="text" class="form-control" name="new_cnpj" value="<?= esc($info['obras_abreviacao']) ?>">
                     </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="new_data_inicial">Data Inicial</label>
-                        <input type="date" class="form-control" name="new_data_inicial" value="<?= esc($info['data_inicio']) ?>">
+                    <div class="form-group col-md-4">
+                        <label for="new_cnpj">CNPJ:</label>
+                        <input type="text" class="form-control" name="new_cnpj" value="<?= esc($info['obras_cnpj']) ?>">
                     </div>
-                    <div class="form-group col-md-6">
+
+                    <div class="form-group col-md-4">
+                        <label for="new_data_inicial">Data Inicial</label>
+                        <input type="date" class="form-control" name="new_data_inicial" value="<?php echo date('Y/m/d', strtotime($info['data_inicio'])) ?>">
+                    </div>
+                    <div class="form-group col-md-4">
                         <label for="new_data_final">Data Final</label>
                         <input type="date" class="form-control" name="new_data_final" value="<?= esc($info['data_fim']) ?>">
                     </div>

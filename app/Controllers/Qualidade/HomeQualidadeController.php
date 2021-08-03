@@ -144,7 +144,7 @@ class HomeQualidadeController extends BaseController
 		$model = new QualidadeDocumentosModel();
 
 		if ($this->request->getMethod() === 'post' && $this->validate([
-			'doc_descricao' => ['label' => 'descrição do documento', 'rules' => 'required|is_unique[qualidadedocumentos.qld_description]'],
+			'doc_descricao' => ['label' => 'descrição do documento', 'rules' => 'required'],
 			'doc_categoria' => ['label' => 'categoria do documento', 'rules' => 'required'],
 			'doc_revisao' => ['label' => 'nº da revisão', 'rules' => 'required|integer|max_length[5]'],
 			'doc_nacontratacao' => ['label' => 'na contratação', 'rules' => 'required|max_length[5]'],

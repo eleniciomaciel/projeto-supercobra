@@ -46,7 +46,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="title">Descrição</label>
-                                <input type="text" class="form-control"  name="title" placeholder="Ex.: Fazer...">
+                                <input type="text" class="form-control"  name="title" placeholder="Ex.: Fazer..." maxlength="50">
                                 <span id="title_error" class="text-danger"></span>
                             </div>
 

@@ -358,10 +358,14 @@ $routes->group('admin_transporte', ["filter" => "auth"], function($routes)
     $routes->get('home-transporte', 'Transporte\HomeTransporteController::index');
 });
 
-/**controle de oficinas */
+/**controle de compras carro */
 $routes->group('transposte-solicitacao-material-equipamentos-servicos', ["filter" => "auth"], function($routes)
 {
     $routes->add('solicitacao-mes', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::index');
+    $routes->add('visualizar-solicitacao/(:num)', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::verSolicitacao/$1');
+    $routes->add('adicionar-itens/(:num)', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::addItens/$1');
+    $routes->add('adicionar-arquivos/(:num)', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::paginaArquivos/$1');
+    $routes->add('visualizar-arquivo/(:num)', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::paginaArquivosPdf/$1');
 });
 
 /**controle de oficinas */

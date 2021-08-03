@@ -56,4 +56,6 @@ class AcessousuariosModel extends Model
 			->where(['au_fk_usuario_corp' => $id])
 			->first();
 	}
+
+	
 }

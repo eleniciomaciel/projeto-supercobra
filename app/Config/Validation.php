@@ -10,6 +10,7 @@ use App\Validation\Userrules;
 use App\Validation\Userlocal;
 use App\Validation\TwoExamsAlreadyExistrulesValidation;
 use App\Validation\QualidadeQuantidade;
+use App\Validation\SolicitacaoUsuarioJaExiste;
 
 class Validation
 {
@@ -32,6 +33,7 @@ class Validation
 		Userlocal::class,
 		TwoExamsAlreadyExistrulesValidation::class,
 		QualidadeQuantidade::class,
+		SolicitacaoUsuarioJaExiste::class,
 	];
 
 	/**

@@ -116,4 +116,14 @@ class ConsultasGeralModel extends Model
 		$query = $builder->get();
 		return $query->getRowArray();
 	}
+
+	public function getFuncionarioObra($id)
+	{
+
+		$builder = $this->db->table('obras');
+		$builder->select('*');
+		$builder->where('id', $id);
+		$query = $builder->get();
+		return $query->getRowArray();
+	}
 }
