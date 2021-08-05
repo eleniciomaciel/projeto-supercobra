@@ -353,22 +353,6 @@ $routes->group('admin_qualidade', ["filter" => "auth"], function($routes)
 });
 
 /**controle de oficinas */
-$routes->group('admin_transporte', ["filter" => "auth"], function($routes)
-{
-    $routes->get('home-transporte', 'Transporte\HomeTransporteController::index');
-});
-
-/**controle de compras carro */
-$routes->group('transposte-solicitacao-material-equipamentos-servicos', ["filter" => "auth"], function($routes)
-{
-    $routes->add('solicitacao-mes', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::index');
-    $routes->add('visualizar-solicitacao/(:num)', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::verSolicitacao/$1');
-    $routes->add('adicionar-itens/(:num)', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::addItens/$1');
-    $routes->add('adicionar-arquivos/(:num)', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::paginaArquivos/$1');
-    $routes->add('visualizar-arquivo/(:num)', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::paginaArquivosPdf/$1');
-});
-
-/**controle de oficinas */
 $routes->group('transposte', ["filter" => "auth"], function($routes)
 {
     $routes->add('efetivo-transporte', 'Transporte\HomeTransporteController::pageEfetivo');
@@ -409,6 +393,33 @@ $routes->group('kanban-agenda', ["filter" => "auth"], function($routes)
     $routes->get('agenda-de-trabalho', 'Kanban\AgendaController::index');
     $routes->get('event', 'Kanban\AgendaController::lerDadosDaAgenda');
     $routes->match(['get', 'post'], 'eventAjax', 'Kanban\AgendaController::ajax');
+});
+
+/**controle de oficinas */
+$routes->group('admin_transporte', ["filter" => "auth"], function($routes)
+{
+    $routes->get('home-transporte', 'Transporte\HomeTransporteController::index');
+});
+
+/**controle de compras carro */
+$routes->group('transposte-solicitacao-material-equipamentos-servicos', ["filter" => "auth"], function($routes)
+{
+    $routes->add('solicitacao-mes', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::index');
+    $routes->add('visualizar-solicitacao/(:num)', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::verSolicitacao/$1');
+    $routes->add('adicionar-itens/(:num)', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::addItens/$1');
+    $routes->add('adicionar-arquivos/(:num)', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::paginaArquivos/$1');
+    $routes->add('visualizar-arquivo/(:num)', 'Transporte\SolicitacaoMateriaisEquipamentosServicosController::paginaArquivosPdf/$1');
+});
+
+/**controle de oficinas */
+$routes->group('transporte-fornecedor', ["filter" => "auth"], function($routes)
+{
+    $routes->add('fornecedor', 'Transporte\FornecedorController::index');
+    $routes->get('dados-fornecedor/(:num)', 'Transporte\FornecedorController::dadosFornecedor/$1');
+    $routes->get('contas-fornecedor/(:num)', 'Transporte\FornecedorController::contasFornecedor/$1');
+    $routes->get('documentos-fornecedor/(:num)', 'Transporte\FornecedorController::documentosFornecedor/$1');
+    $routes->get('empresas-fornecedor/(:num)', 'Transporte\FornecedorController::empresasFornecedor/$1');
+    $routes->get('contratos-fornecedor/(:num)', 'Transporte\FornecedorController::contratosFornecedor/$1');
 });
 
 $routes->get('logout', 'Home::logout');

@@ -71,8 +71,6 @@
                                         <tbody>
 
                                             <?php if (!empty($list_docs) && is_array($list_docs)) : ?>
-
-
                                                 <?php foreach ($list_docs as $news_doc) : ?>
                                                     <tr>
                                                         <td><?= date('d/m/Y', strtotime($news_doc['created_em'])) ?></td>

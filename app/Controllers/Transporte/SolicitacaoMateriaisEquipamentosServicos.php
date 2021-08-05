@@ -6,7 +6,6 @@ use App\Controllers\BaseController;
 use App\Models\SolicitacaoMaterialEquipamentosServicosModel;
 use App\Models\SolicitaitenscompraModel;
 use App\Models\SolicitacaoarquivoModel;
-use PhpParser\Node\Expr\Throw_;
 
 class SolicitacaoMateriaisEquipamentosServicos extends BaseController
 {

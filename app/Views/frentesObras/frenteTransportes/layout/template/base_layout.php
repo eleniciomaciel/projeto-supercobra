@@ -31,8 +31,14 @@
   <!-- Select2 -->
   <link rel="stylesheet" href="<?= base_url() ?>/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?= base_url() ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <style>
-   .custom-file-input.selected:lang(pt-br)::after {
+    .custom-file-input.selected:lang(pt-br)::after {
       content: "" !important;
     }
 
@@ -42,6 +48,19 @@
 
     .custom-file-input {
       white-space: nowrap;
+    }
+
+    .custom-file-label::after {
+      content: 'Upload' !important;
+    }
+
+    fieldset.scheduler-border {
+      border: 1px groove #ddd !important;
+      padding: 0 1.4em 1.4em 1.4em !important;
+      margin: 0 0 1.5em 0 !important;
+      -webkit-box-shadow: 0px 0px 0px 0px #000;
+      box-shadow: 0px 0px 0px 0px #000;
+      width: 100%;
     }
   </style>
 </head>
@@ -123,8 +142,7 @@
 
   <!-- jQuery -->
   <script src="<?= base_url() ?>/plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="<?= base_url() ?>/plugins/jquery-ui/jquery-ui.min.js"></script>
+
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <script>
     $.widget.bridge('uibutton', $.ui.button)
@@ -159,7 +177,24 @@
   <script src="<?= base_url() ?>/plugins/toastr/toastr.min.js"></script>
   <!-- Select2 -->
   <script src="<?= base_url() ?>/plugins/select2/js/select2.full.min.js"></script>
+  <!-- DataTables  & Plugins -->
+  <script src="<?= base_url() ?>/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?= base_url() ?>/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?= base_url() ?>/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="<?= base_url() ?>/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="<?= base_url() ?>/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="<?= base_url() ?>/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="<?= base_url() ?>/plugins/jszip/jszip.min.js"></script>
+  <script src="<?= base_url() ?>/plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="<?= base_url() ?>/plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="<?= base_url() ?>/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="<?= base_url() ?>/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="<?= base_url() ?>/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- moment js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/x.y.z/locale/ar.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <?= $this->renderSection('script_toast_transporte') ?>
   <?= $this->renderSection('script_geral_transporte') ?>
 
