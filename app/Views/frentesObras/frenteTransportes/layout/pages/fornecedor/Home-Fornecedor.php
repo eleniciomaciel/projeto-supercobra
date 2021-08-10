@@ -59,15 +59,16 @@
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fas fa-hospital-user mr-1"></i>
-                    Painel dos forncedores
+                    Responsáveis (forncedores)
                 </h3>
                 <div class="card-tools">
                     <ul class="nav nav-pills ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#revenue-chart" data-toggle="tab"><i class="fas fa-paste"></i> Cadastro</a>
+                            <a class="nav-link active" href="#revenue-chart" data-toggle="tab"><i class="fas fa-paste"></i> Cadastro Renponsável</a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link" href="#sales-chart" data-toggle="tab"><i class="fas fa-user-cog"></i> Fornecedores</a>
+                            <a class="nav-link" href="#sales-chart" data-toggle="tab"><i class="fas fa-user-cog"></i> Cadastrados</a>
                         </li>
                     </ul>
                 </div>

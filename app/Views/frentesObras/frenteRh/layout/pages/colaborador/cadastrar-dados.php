@@ -680,7 +680,7 @@
                     <legend class="scheduler-border">Outros</legend>
                     <div class="form-row">
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-5">
                             <label for="add_colab_outros_local_trabalho">Local de Trabalho:</label>
                             <select name="add_colab_outros_local_trabalho" class="form-control">
                                 <option selected disabled>Selecione aqui...</option>
@@ -695,7 +695,7 @@
                             <span id="add_colab_outros_local_trabalho_error" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="add_colab_outros_tipo_moradia">Tipo de moradia:</label>
                             <select name="add_colab_outros_tipo_moradia" class="form-control">
                                 <option selected disabled>Selecione aqui...</option>
@@ -706,6 +706,16 @@
                                 <option value="Pousada">Pousada</option>
                             </select>
                             <span id="add_colab_outros_tipo_moradia_error" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="add_colab_status">Status do Cadastro:</label>
+                            <select name="add_colab_status" id="add_colab_status" class="form-control">
+                                <option selected disabled>Selecione aqui...</option>
+                                <option value="Ativo">Concuído</option>
+                                <option value="Desativado">Com pendência para revisão</option>
+                            </select>
+                            <span id="add_colab_status_error" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-12">

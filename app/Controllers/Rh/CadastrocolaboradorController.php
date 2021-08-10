@@ -152,6 +152,7 @@ class CadastrocolaboradorController extends BaseController
 			$add_colab_outros_local_trabalho_error = '';
 			$add_colab_outros_tipo_moradia_error = '';
 			$add_colab_outros_observacao_error = '';
+			$add_colab_status_error = '';
 
             $error = 'no';
             $success = 'no';
@@ -246,6 +247,7 @@ class CadastrocolaboradorController extends BaseController
 				'add_colab_outros_local_trabalho' 	=> ['label' => 'LOCAL', 'rules' => 'required'],
 				'add_colab_outros_tipo_moradia' 	=> ['label' => 'MORADIA', 'rules' => 'required'],
 				'add_colab_outros_observacao' 	=> ['label' => 'OBSERVAÇÃO', 'rules' => 'required'],
+				'add_colab_status' 	=> ['label' => 'STATUS DO CADASTRO', 'rules' => 'required'],
 
 				//foreing key
 				
@@ -555,6 +557,10 @@ class CadastrocolaboradorController extends BaseController
             		$add_colab_outros_observacao_error = $validation->getError('add_colab_outros_observacao');
             	}
 
+				if($validation->getError('add_colab_status'))
+            	{
+            		$add_colab_status_error = $validation->getError('add_colab_status');
+            	}
             }
             else
             {
@@ -645,7 +651,7 @@ class CadastrocolaboradorController extends BaseController
             			// 'f_cnh_uf'				=>	$this->request->getVar('gender'),
             			// 'f_cnh_data_emissao'	=>	$this->request->getVar('gender'),
             			// 'f_cnh_data_vencimento'	=>	$this->request->getVar('gender'),
-            			// 'f_cnh_data_primeira'	=>	$this->request->getVar('gender'),
+            			 'f_status'	=>	$this->request->getVar('add_colab_status'),
 
 
             			'f_fk_local_trabalho'	=>	$this->request->getVar('add_colab_outros_local_trabalho'),
@@ -733,24 +739,25 @@ class CadastrocolaboradorController extends BaseController
 				'add_colab_funcao_tipo_salario_error'		=>	$add_colab_funcao_tipo_salario_error,
             	'add_colab_funcao_departamento_error'		=>	$add_colab_funcao_departamento_error,
 
-				'add_colab_cento_de_custo_error'		=>	$add_colab_cento_de_custo_error,
+				'add_colab_cento_de_custo_error'			=>	$add_colab_cento_de_custo_error,
 				'add_colab_funcao_hora_extras_error'		=>	$add_colab_funcao_hora_extras_error,
             	//'add_colab_funcao_encarregado_error'			=>	$add_colab_funcao_encarregado_error,
 
 				'add_colab_funcao_periculosidade_error'		=>	$add_colab_funcao_periculosidade_error,
 				'add_colab_funcao_insalubridade_error'		=>	$add_colab_funcao_insalubridade_error,
-            	'add_colab_funcao_desconto_sindical_error'			=>	$add_colab_funcao_desconto_sindical_error,
-				'add_colab_funcao_ps_error'		=>	$add_colab_funcao_ps_error,
+            	'add_colab_funcao_desconto_sindical_error'	=>	$add_colab_funcao_desconto_sindical_error,
+				'add_colab_funcao_ps_error'					=>	$add_colab_funcao_ps_error,
 
 				//Aeroporto
-				'add_colab_cep_aeroporto_error'		=>	$add_colab_cep_aeroporto_error,
-				'add_colab_uf_eroporto_error'		=>	$add_colab_uf_eroporto_error,
-				'add_colab_cidade_aeroporto_error'	=>	$add_colab_cidade_aeroporto_error,
+				'add_colab_cep_aeroporto_error'				=>	$add_colab_cep_aeroporto_error,
+				'add_colab_uf_eroporto_error'				=>	$add_colab_uf_eroporto_error,
+				'add_colab_cidade_aeroporto_error'			=>	$add_colab_cidade_aeroporto_error,
 
 				//Outros
 				'add_colab_outros_local_trabalho_error'		=>	$add_colab_outros_local_trabalho_error,
 				'add_colab_outros_tipo_moradia_error'		=>	$add_colab_outros_tipo_moradia_error,
-				'add_colab_outros_observacao_error'	=>	$add_colab_outros_observacao_error,
+				'add_colab_outros_observacao_error'			=>	$add_colab_outros_observacao_error,
+				'add_colab_status_error'					=>	$add_colab_status_error,
 
 
             	'error'			=>	$error,
@@ -776,6 +783,48 @@ class CadastrocolaboradorController extends BaseController
 	
 	}
 
+		/**lista todos os colaboradores */
+		public function listFuncionariosNaoAtivos()
+		{
+			$model = new FuncionarioModel();
+			$data_table = new TablesIgniter();
+			$data_table->setTable($model->noticeTableDesativados())
+					   ->setDefaultOrder("f_id", "DESC")
+					   ->setSearch(["f_nome","f_telefone_pessoal","f_email_pessoal", "f_codigo"])
+					   ->setOrder(["f_status", "f_nome","f_telefone_pessoal","f_email_pessoal", "f_codigo", "f_matricula"])
+					   ->setOutput(["f_status", "f_nome","f_telefone_pessoal","f_email_pessoal", "f_codigo", "f_matricula", $model->button_desativado()]);
+			return $data_table->getDatatable();
+		
+		}
+
+		/**
+		 * ativa colaborador
+		 *
+		 * @param [type] $id
+		 * @return void
+		 */
+
+		 public function ativaColaborador(int $id)
+		 {
+			$model = new FuncionarioModel();
+			$data['news'] = $model->getFuncionariosId($id);
+
+			if (empty($data['news']))
+			{
+				throw new \CodeIgniter\Exceptions\PageNotFoundException('Esse Colaborador não foi encontrado: '. $id);
+			}
+
+			
+            $model->save([
+                'f_id'   => $id,
+				'f_admissao' => date('Y-m-d'),
+                'f_status'  => 'Ativo',
+            ]);          
+            
+            $session = \Config\Services::session();
+            $session->setFlashdata('success_active_colaborador', 'Colaborador ativado com sucesso!');
+			return redirect()->back();
+		 }
 	/**dados do colaborador */
 	public function visualizaDadosCadastrado($id)
 	{
@@ -901,6 +950,7 @@ class CadastrocolaboradorController extends BaseController
 			$add_colab_outros_local_trabalho_error_up = '';
 			$add_colab_outros_tipo_moradia_error_up = '';
 			$add_colab_outros_observacao_error_up = '';
+			$add_colab_up_status_error = '';
 
             $error = 'no';
             $success = 'no';
@@ -987,16 +1037,17 @@ class CadastrocolaboradorController extends BaseController
 				'add_colab_funcao_ps' 	=> ['label' => 'PS', 'rules' => 'required'],
 
 				//Aeroporto
-				'add_colab_cep_aeroporto' 	=> ['label' => 'CEP', 'rules' => 'required|exact_length[10]'],
-				'add_colab_uf_eroporto' 	=> ['label' => 'UF', 'rules' => 'required|exact_length[2]'],
+				'add_colab_cep_aeroporto' 		=> ['label' => 'CEP', 'rules' => 'required|exact_length[10]'],
+				'add_colab_uf_eroporto' 		=> ['label' => 'UF', 'rules' => 'required|exact_length[2]'],
 				'add_colab_cidade_aeroporto' 	=> ['label' => 'CIDADE', 'rules' => 'required'],
 
 				//Outros
 				'add_colab_outros_local_trabalho' 	=> ['label' => 'LOCAL', 'rules' => 'required'],
 				'add_colab_outros_tipo_moradia' 	=> ['label' => 'MORADIA', 'rules' => 'required'],
-				'add_colab_outros_observacao' 	=> ['label' => 'OBSERVAÇÃO', 'rules' => 'required'],
+				'add_colab_outros_observacao' 		=> ['label' => 'OBSERVAÇÃO', 'rules' => 'required'],
+				'add_colab_up_status' 				=> ['label' => 'Status', 'rules' => 'required'],
 
-				//foreing key
+				//foreing key   
 				
 
             ]);
@@ -1299,11 +1350,15 @@ class CadastrocolaboradorController extends BaseController
             		$add_colab_outros_tipo_moradia_error_up = $validation->getError('add_colab_outros_tipo_moradia');
             	}
 
-				if($validation->getError('add_colab_outros_observacao'))
+				if($validation->getError('add_colab_up_status'))
             	{
-            		$add_colab_outros_observacao_error_up = $validation->getError('add_colab_outros_observacao');
+            		$add_colab_outros_observacao_error_up = $validation->getError('add_colab_up_status');
             	}
 
+				if($validation->getError('add_colab_up_status'))
+            	{
+            		$add_colab_up_status_error = $validation->getError('add_colab_up_status');
+            	}
             }
             else
             {
@@ -1396,7 +1451,7 @@ class CadastrocolaboradorController extends BaseController
             			// 'f_cnh_data_emissao'	=>	$this->request->getVar('gender'),
             			// 'f_cnh_data_vencimento'	=>	$this->request->getVar('gender'),
             			// 'f_cnh_data_primeira'	=>	$this->request->getVar('gender'),
-
+						'f_status'				=>	$this->request->getVar('add_colab_up_status'),
 
             			'f_fk_local_trabalho'	=>	$this->request->getVar('add_colab_outros_local_trabalho'),
             			'f_tipo_moradia'		=>	$this->request->getVar('add_colab_outros_tipo_moradia'),
@@ -1501,6 +1556,7 @@ class CadastrocolaboradorController extends BaseController
 				'add_colab_outros_local_trabalho_error_up'		=>	$add_colab_outros_local_trabalho_error_up,
 				'add_colab_outros_tipo_moradia_error_up'		=>	$add_colab_outros_tipo_moradia_error_up,
 				'add_colab_outros_observacao_error_up'			=>	$add_colab_outros_observacao_error_up,
+				'add_colab_up_status_error'						=>	$add_colab_up_status_error,
 
 
             	'error'			=>	$error,

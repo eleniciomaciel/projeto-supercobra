@@ -3,13 +3,13 @@
 namespace App\Controllers\Transporte;
 
 use App\Controllers\BaseController;
-use App\Database\Migrations\FornecedorDocumentosEmpresarial;
 use App\Models\FornecedorveiculosModel;
 use monken\TablesIgniter;
 use App\Models\FornecedorContaModel;
 use App\Models\FornecedorDocumentosModel;
 use App\Models\FornecedorempresaModel;
-use CodeIgniter\HTTP\RequestInterface;
+use App\Models\FrentesModel;
+
 
 class FornecedorController extends BaseController
 {
@@ -110,9 +110,11 @@ class FornecedorController extends BaseController
 
 		$model_fornecedor = new FornecedorveiculosModel();
 		$model_docs_fornecedor = new FornecedorDocumentosModel();
+		$model_empresa = new FornecedorempresaModel();
 		$data = [
 			'dd_fornecedor' => $model_fornecedor->where('for_id', $id)->first(),
 			'list_docs' => $model_docs_fornecedor->where('fk_id_fornecedor', $id)->findAll(),
+			'list_empresa' => $model_empresa->where('ef_fk_fornecedor', $id)->findAll()
 		]; 
 
 		return view('frentesObras/frenteTransportes/layout/pages/fornecedor/includes/' . $page, $data);
@@ -398,7 +400,7 @@ class FornecedorController extends BaseController
 		$this->validate([
 			'empr_nome' => ['label' => 'nome', 'rules' => 'required|max_length[255]'],
 			'empr_topo_de_dono' => ['label' => 'classificação de propriédade', 'rules' => 'required'],
-			'empr_socio_dono' => ['label' => 'nome do propriétário/dono', 'rules' => 'required|min_length[2]|max_length[20]'],
+			'empr_socio_dono' => ['label' => 'nome do propriétário/dono', 'rules' => 'required|min_length[2]|max_length[100]'],
 			'enpr_cnae' => ['label' => 'cnae', 'rules' => 'required|min_length[2]|max_length[14]'],
 			'enpr_classificacao_empresa' => ['label' => 'classificação da empresa', 'rules' => 'required'],
 			'empre_cnpj' => ['label' => 'cnpj', 'rules' => 'required|exact_length[18]|is_unique[fornecedor_conta_bancaria.cbf_numero_conta]'],
@@ -565,4 +567,27 @@ class FornecedorController extends BaseController
 		}
 		return $this->response->setJSON($retorno);
     }
+
+	/**consulta as empresas do contratante lista em select */
+	public function getEMpresasSelectFornecedor($id_fornecedor)
+	{
+		if (!$this->request->isAJAX()) {
+			exit('Pagina não encontrada');
+		}
+
+		$model = new FornecedorempresaModel();
+		$data = $model->where('ef_fk_fornecedor', $id_fornecedor)->findAll();
+		echo json_encode($data);
+	}
+
+	/**consulta as empresas do contratante lista em select */
+	public function getFrentes()
+	{
+		if (!$this->request->isAJAX()) {
+			exit('Pagina não encontrada');
+		}
+		$model = new FrentesModel();
+		$data = $model->findAll();
+		echo json_encode($data);
+	}
 }

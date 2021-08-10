@@ -122,9 +122,9 @@
                             <?= $this->include('frentesObras/frenteTransportes/layout/pages/fornecedor/includes/contratos-lista') ?>
                         </div>
                         <div class="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
-                            <?= $this->include('frentesObras/frenteTransportes/layout/pages/fornecedor/includes/contrato-cadastro', $dd_fornecedor) ?>
+                            <?= $this->include('frentesObras/frenteTransportes/layout/pages/fornecedor/includes/contrato-cadastro', $list_empresa) ?>
                         </div>
-                       
+
                     </div>
                 </div>
                 <!-- /.card -->
@@ -153,14 +153,9 @@
 
 <script>
     $(document).ready(function() {
-        $('#empr_cep').mask("00.000-000", {
-            placeholder: "00.000-000"
-        });
-        $('#empre_cnpj').mask("00.000.000/0001-00", {
-            placeholder: "00.000.000/0001-00"
-        });
 
         var id_fornecedor = "<?= esc($dd_fornecedor['for_id']) ?>";
+
         $('#list_empresas_fornacedores').DataTable({
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
@@ -182,66 +177,55 @@
             }
         });
 
-        function limpa_formulário_cep() {
-            // Limpa valores do formulário de cep.
-            $("#empr_endereco").val("");
-            $("#empr_bairro").val("");
-            $("#empr_cidade").val("");
-            $("#empr_uf").val("");
-            $("#ibge").val("");
+        /**
+         * seleciona os dados do fornecedor via select
+         */
+        getSlectAjaxEmpresas(id_fornecedor);
+
+        function getSlectAjaxEmpresas(id_fornecedor) {
+
+            if (id_fornecedor != '') {
+                $.ajax({
+                    url: "<?php echo base_url('Transporte/FornecedorController/getEMpresasSelectFornecedor'); ?>" + '/' + id_fornecedor,
+                    method: "GET",
+                    data: {
+                        id_fornecedor: id_fornecedor
+                    },
+                    dataType: "JSON",
+                    success: function(data) {
+                        if (data == '') {
+                            $('#select_empresas').html('<option value="">Não há empresas cadastradas</option>');
+                        } else {
+                            var html = '<option value="">Selecione aqui...</option>';
+                            for (var count = 0; count < data.length; count++) {
+                                html += '<option value="' + data[count].ef_id + '">' + data[count].ef_razao_social + '</option>';
+                            }
+
+                            $('#select_empresas').html(html);
+                        }
+
+                    }
+                });
+            } else {
+                $('#select_empresas').html('<option value="">Não há empresas cadastradas</option>');
+            }
+
         }
 
-        //Quando o campo cep perde o foco.
-        $("#empr_cep").blur(function() {
-
-            //Nova variável "cep" somente com dígitos.
-            var cep = $(this).val().replace(/\D/g, '');
-
-            //Verifica se campo cep possui valor informado.
-            if (cep != "") {
-
-                //Expressão regular para validar o CEP.
-                var validacep = /^[0-9]{8}$/;
-
-                //Valida o formato do CEP.
-                if (validacep.test(cep)) {
-
-                    //Preenche os campos com "..." enquanto consulta webservice.
-                    $("#empr_endereco").val("...");
-                    $("#empr_bairro").val("...");
-                    $("#empr_cidade").val("...");
-                    $("#empr_uf").val("...");
-                    $("#ibge").val("...");
-
-                    //Consulta o webservice viacep.com.br/
-                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(dados) {
-
-                        if (!("erro" in dados)) {
-                            //Atualiza os campos com os valores da consulta.
-                            $("#empr_endereco").val(dados.logradouro);
-                            $("#empr_bairro").val(dados.bairro);
-                            $("#empr_cidade").val(dados.localidade);
-                            $("#empr_uf").val(dados.uf);
-                            $("#ibge").val(dados.ibge);
-                        } //end if.
-                        else {
-                            //CEP pesquisado não foi encontrado.
-                            limpa_formulário_cep();
-                            alert("CEP não encontrado.");
-                        }
-                    });
-                } //end if.
-                else {
-                    //cep é inválido.
-                    limpa_formulário_cep();
-                    alert("Formato de CEP inválido.");
+        /**
+         * lista frentes
+         */
+        frentes();
+        function frentes() {
+            $.getJSON("<?=base_url('Transporte/FornecedorController/getFrentes')?>", function(data) {
+                var html = '<option value="">Selecione a frente do contrato...</option>';
+                for (var count = 0; count < data.length; count++) {
+                    html += '<option value="' + data[count].id_ft + '">' + data[count].nome_ft + '</option>';
                 }
-            } //end if.
-            else {
-                //cep sem valor, limpa formulário.
-                limpa_formulário_cep();
-            }
-        });
+                $('#select_frentes').html(html);
+            });
+        }
+
 
         /**
          * cadastro da empresa do fornecedor
@@ -293,133 +277,6 @@
             });
         });
 
-        /**
-         * lista dados em moddal popap da empresa do fornecedor
-         */
-        $(document).on('click', '.verEmpresaFornecedor', function(e) {
-            e.preventDefault();
-            var id_emp_forn = $(this).data('id');
-
-            $.ajax({
-                url: "<?php echo base_url('Transporte/FornecedorController/getDadosEmpresaFornecedor'); ?>",
-                method: "GET",
-                data: {
-                    id_emp_forn: id_emp_forn
-                },
-                dataType: 'JSON',
-
-                success: function(data) {
-                    $('#ef_razao_social').val(data.ef_razao_social);
-                    $('#ef_nome_dono').val(data.ef_nome_dono);
-                    $('#ef_tipo_dono').val(data.ef_tipo_dono);
-                    $('#ef_cnae').val(data.ef_cnae);
-                    $('#ef_classificacao_empresa').val(data.ef_classificacao_empresa);
-                    $('#ef_cnpj').val(data.ef_cnpj);
-                    $('#ef_incricao_estadual').val(data.ef_incricao_estadual);
-                    $('#ef_incricao_municial').val(data.ef_incricao_municial);
-                    $('#ef_cep').val(data.ef_cep);
-                    $('#ef_uf').val(data.ef_uf);
-                    $('#ef_cidade').val(data.ef_cidade);
-                    $('#ef_bairro').val(data.ef_bairro);
-                    $('#ef_endereco').val(data.ef_endereco);
-                    $('#ef_description').val(data.ef_description);
-
-                    $('#empresaDadosDoFornecedorModal').modal('show');
-                    $('#hidden_id_empresa_up_fornecedor').val(id_emp_forn);
-                }
-            })
-        });
-
-        /**
-         * cadastro da empresa do fornecedor
-         */
-        $("#form_altera_empresa_fornecedor").submit(function(e) {
-            e.preventDefault();
-            var form = this;
-            $.ajax({
-                url: $(form).attr('action'),
-                method: $(form).attr('method'),
-                data: new FormData(form),
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                beforeSend: function() {
-                    $(form).find('span.error-text').text('');
-                    $('#id_btn_update_empresa').html('<div class="spinner-border" role="status"> <span class="sr-only">Loading...</span> </div> Salvando, aguarde...');
-                    $('.cls_update_empresa').attr('disabled', 'disabled');
-                },
-                success: function(data) {
-                    $('#id_btn_update_empresa').html('<i class="fa fa-save"></i> Alterar');
-                    $('.cls_update_empresa').attr('disabled', false);
-                    if ($.isEmptyObject(data.error)) {
-                        if (data.code == 1) {
-                            $(form)[0].reset();
-                            Swal.fire(
-                                'OK!',
-                                data.msg,
-                                'success'
-                            );
-                            $('#list_empresas_fornacedores').DataTable().ajax.reload();
-                        } else {
-                            Swal.fire(
-                                'OK!',
-                                data.msg,
-                                'error'
-                            );
-                        }
-                    } else {
-                        $.each(data.error, function(prefix, val) {
-                            Swal.fire(
-                                'Ops!',
-                                'Existem alguns erros, corrija por favor.',
-                                'error'
-                            );
-                            $(form).find('span.' + prefix + '_error').text(val);
-                        });
-                    }
-                }
-            });
-        });
-
-
-        /**
-         * deleta empresa fake
-         */
-        $(document).on('click', '.delEmpresaFornecedor', function() {
-            var id_emp_for = $(this).data('id');
-
-            Swal.fire({
-                title: 'Deseja deletar?',
-                text: "Essa ação será permanente no sistema!",
-                icon: 'error',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sim, deletar',
-                cancelButtonText: 'Não, cancelar',
-            }).then((result) => {
-                if (result.isConfirmed) {
-
-                    $.ajax({
-                        url: "<?php echo base_url('Transporte/FornecedorController/deleteEmpresaFornecedor'); ?>",
-                        method: "GET",
-                        data: {
-                            id_emp_for: id_emp_for
-                        },
-                        success: function(data) {
-                            Swal.fire(
-                                'OK!',
-                                data,
-                                'success'
-                            );
-                            $('#list_empresas_fornacedores').DataTable().ajax.reload();
-                        }
-                    })
-                }
-            });
-        });
-
-
     });
 </script>
 
@@ -453,9 +310,3 @@
     document.getElementById("fort_observacao").addEventListener("keyup", forceInputUppercase, false);
 </script>
 <?= $this->endSection() ?>
-
-
-
-
-
-

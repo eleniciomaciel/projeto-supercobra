@@ -143,6 +143,7 @@
                         $('#add_colab_outros_local_trabalho_error').text(data.add_colab_outros_local_trabalho_error);
                         $('#add_colab_outros_tipo_moradia_error').text(data.add_colab_outros_tipo_moradia_error);
                         $('#add_colab_outros_observacao_error').text(data.add_colab_outros_observacao_error);
+                        $('#add_colab_status_error').text(data.add_colab_status_error);
 
                     } else {
 
@@ -238,6 +239,7 @@
                         $('#add_colab_outros_local_trabalho_error').text('');
                         $('#add_colab_outros_tipo_moradia_error').text('');
                         $('#add_colab_outros_observacao_error').text('');
+                        $('#add_colab_status_error').text('');
 
 
 
@@ -370,6 +372,7 @@
                         $('#add_colab_outros_local_trabalho_error_up').text(data.add_colab_outros_local_trabalho_error_up);
                         $('#add_colab_outros_tipo_moradia_error_up').text(data.add_colab_outros_tipo_moradia_error_up);
                         $('#add_colab_outros_observacao_error_up').text(data.add_colab_outros_observacao_error_up);
+                        $('#add_colab_up_status_error').text(data.add_colab_up_status_error);
 
                     } else {
 
@@ -465,6 +468,7 @@
                         $('#add_colab_outros_local_trabalho_error_up').text('');
                         $('#add_colab_outros_tipo_moradia_error_up').text('');
                         $('#add_colab_outros_observacao_error_up').text('');
+                        $('#add_colab_up_status_error').text('');
 
 
 

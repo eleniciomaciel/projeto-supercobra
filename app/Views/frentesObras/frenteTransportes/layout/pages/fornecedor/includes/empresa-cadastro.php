@@ -37,7 +37,7 @@
                 <label for="enpr_classificacao_empresa">Classificação Empresarial</label>
                 <select class="form-control" name="enpr_classificacao_empresa" id="enpr_classificacao_empresa">
                     <option selected disabled>Selecione aqui...</option>
-                    <option value="">Empresa de Pequeno Porte (EPP)</option>
+                    <option value="Empresa de Pequeno Porte (EPP)">Empresa de Pequeno Porte (EPP)</option>
                     <option value="Empresário Individual">Empresário Individual</option>
                     <option value="EIRELI">EIRELI</option>
                     <option value="Microempresa (ME)">Microempresa (ME)</option>

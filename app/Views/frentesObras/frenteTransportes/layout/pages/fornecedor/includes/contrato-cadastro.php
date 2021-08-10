@@ -1,13 +1,13 @@
 <!-- /.card-header -->
 <?php $validation = \Config\Services::validation(); ?>
 
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <h2 class="text-center display-5">Buscar empresa</h2>
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <form action="#">
                 <div class="input-group">
-                    <input type="search" class="form-control form-control-lg" name="search" id="search" placeholder="Buscar aqui...">
+                    <select class="form-control" name="select_empresas" id="select_empresas"></select>
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <i class="fa fa-search"></i>
@@ -17,18 +17,29 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->
+
+
 <!-- form start -->
 <?= form_open('Transporte/FornecedorController/cadstroFornecedor') ?>
+
 <br>
 <div class="form-row">
     <div class="input-group">
         <div class="input-group-prepend">
-            <span class="input-group-text bg-danger">MTQ</span>
+            <span class="input-group-text bg-danger">Contrato</span>
         </div>
-        <input type="text" aria-label="First name" class="form-control" value="LOOC">
-        <input type="text" aria-label="Last name" class="form-control" value="COB">
-        <input type="text" aria-label="Last name" class="form-control" value="0010">
+        <select class="form-control" aria-label="First name" name="select_frentes" id="select_frentes">
+            <option>Selecione a frente do contrato aqui...</option>
+        </select>
+        <select class="form-control" aria-label="First name" id="exampleFormControlSelect1">
+            <option>Selecione o tipo de contrato aqui...</option>
+            <option value="LOO">LOO</option>
+            <option value="COO">COO</option>
+            <option value="OCO">OCO</option>
+        </select>
+        <input type="text" aria-label="Last name" class="form-control" value="COB" readonly>
+        <input type="number" aria-label="Last name" class="form-control" value="0010" min="1">
     </div>
 </div>
 
@@ -40,47 +51,17 @@
     <div class="form-row">
         <div class="form-group col-md-12">
             <label for="fort_name">Razão Social/Nome:</label>
-            <input type="text" class="form-control" name="fort_name" id="fort_name" placeholder="Ex.: Ana Silva" value="<?= old('fort_name') ?>">
-            <!-- Error -->
-            <?php if ($validation->getError('fort_name')) { ?>
-                <div class='text-danger mt-2'>
-                    <?= $error = $validation->getError('fort_name'); ?>
-                </div>
-            <?php } ?>
-        </div>
+            <?php if (!empty($list_empresa) && is_array($list_empresa)) : ?>
+                <?php foreach ($list_empresa as $news_item) : ?>
 
-        <div class="form-group col-md-4">
-            <label for="fort_email">CNPJ/CPF:</label>
-            <input type="email" class="form-control" name="fort_email" id="fort_email" placeholder="Ex.: ana@email.com" value="<?= old('fort_email') ?>">
-            <!-- Error -->
-            <?php if ($validation->getError('fort_email')) { ?>
-                <div class='text-danger mt-2'>
-                    <?= $error = $validation->getError('fort_email'); ?>
-                </div>
-            <?php } ?>
-        </div>
-
-
-        <div class="form-group col-md-4">
-            <label for="fort_telefone">Inscrição Estadual:</label>
-            <input type="tel" class="form-control" name="fort_telefone" id="fort_telefone" placeholder="Ex.: (00) 3632-9877" value="<?= old('fort_telefone') ?>">
-            <!-- Error -->
-            <?php if ($validation->getError('fort_telefone')) { ?>
-                <div class='text-danger mt-2'>
-                    <?= $error = $validation->getError('fort_telefone'); ?>
-                </div>
-            <?php } ?>
-        </div>
-
-        <div class="form-group col-md-4">
-            <label for="fort_cpf">Inscrição Estadual::</label>
-            <input type="text" class="form-control" name="fort_cpf" id="fort_cpf" value="<?= old('fort_cpf') ?>">
-            <!-- Error -->
-            <?php if ($validation->getError('fort_cpf')) { ?>
-                <div class='text-danger mt-2'>
-                    <?= $error = $validation->getError('fort_cpf'); ?>
-                </div>
-            <?php } ?>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="customCheckbox<?= esc($news_item['ef_id']) ?>" value="option1">
+                        <label for="customCheckbox<?= esc($news_item['ef_id']) ?>" class="custom-control-label">Empresa: <?= esc($news_item['ef_razao_social']) ?></label>
+                    </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <p>Não há empresas cadastradas.</p>
+            <?php endif ?>
         </div>
     </div>
 
@@ -91,7 +72,14 @@
 
     <div class="form-group">
         <label for="obj_descricao">Descrição do contrato:</label>
-        <textarea class="form-control" id="obj_descricao" placeholder="Digite aqui..." rows="3"></textarea>
+        <textarea class="form-control" id="summernote" placeholder="Digite aqui..." rows="3" style="text-align: justify;">
+
+        Inicia-se a vigência deste instrumento a partir da data de sua assinatura pelas partes, respeitando-se o 
+        estabelecido na Cláusula Nona do Contrato. No caso de haver mais de um equipamento locado, o início 
+        efetivo da locação poderá ser diferente para cada equipamento. O prazo de locação será de 05 (cinco) meses 
+        podendo ser prorrogado de comum acordo entre as partes, mediante a celebração de Termo Aditivo ao 
+        presente Contrato.
+        </textarea>
     </div>
 </fieldset>
 
@@ -100,7 +88,16 @@
 
     <div class="form-group">
         <label for="obj_descricao">Descrição da vigência:</label>
-        <textarea class="form-control" id="obj_descricao" placeholder="Digite aqui..." rows="3"></textarea>
+        <textarea class="form-control vigencia" id="summernote1" placeholder="Digite aqui..." rows="3" style="text-align: justify;">
+
+        O valor mensal da locação do objeto deste Contrato é de R$ 70.000,00 (Setenta mil reais), sendo:
+         R$ R$ 63.000,00 (sessenta e três mil reais) referente à locação do veículo e devem ser pagos à 
+        Contratada 1 pela Contratante, conforme estabelecido no Contrato.
+         R$ 7.000,00 (sete mil reais) referente ao serviço do operador e devem ser pagos à Contratada 2 pela 
+        Contratante, conforme estabelecido no Contrato.
+        E devem ser pagos à Contratada pela Contratante, conforme estabelecido no Contrato.
+
+    </textarea>
     </div>
 </fieldset>
 
@@ -109,7 +106,11 @@
 
     <div class="form-group">
         <label for="obj_descricao">Descrição das condições e preços:</label>
-        <textarea class="form-control" id="obj_descricao" placeholder="Digite aqui..." rows="3"></textarea>
+        <textarea class="form-control" id="summernote2" placeholder="Digite aqui..." rows="3">
+        COBRA BRASIL SERVICOS, COMUNICACOES E ENERGIA S/A
+        CNPJ: 08.928.273/0008-89 Inscrição Estadual: 002899645.00-49 
+        Endereço: R RUA ARTHUR BERNARDES Nº 11, 5º ANDAR, CENTRO, ITABIRITO–MG, CEP 35.450-000
+        </textarea>
     </div>
 </fieldset>
 
@@ -118,7 +119,12 @@
 
     <div class="form-group">
         <label for="obj_descricao" class="widget-user-username">Descrição da emissão:</label>
-        <textarea class="form-control" id="obj_descricao" placeholder="Digite aqui..." rows="3"></textarea>
+        <textarea class="form-control" id="summernote3" placeholder="Digite aqui..." rows="3">
+        COBRA BRASIL SERVICOS, COMUNICACOES E ENERGIA S/A
+        CNPJ: 08.928.273/0008-89 Inscrição Estadual: 002899645.00-49 
+        Endereço: R RUA ARTHUR BERNARDES Nº 11, 5º ANDAR, CENTRO, ITABIRITO–MG, CEP 35.450-000 -
+        51.242.43702/75
+        </textarea>
     </div>
 </fieldset>
 
@@ -127,7 +133,9 @@
 
     <div class="form-group">
         <label for="obj_descricao" class="widget-user-username">Descrição da nota:</label>
-        <textarea class="form-control" id="obj_descricao" placeholder="Digite aqui..." rows="3"></textarea>
+        <textarea class="form-control" id="summernote4" placeholder="Digite aqui..." rows="3">
+
+        </textarea>
     </div>
 </fieldset>
 
@@ -136,7 +144,7 @@
 
     <div class="form-group">
         <label for="obj_descricao" class="widget-user-username">Descrição da conta:</label>
-        <textarea class="form-control" id="obj_descricao" placeholder="Digite aqui..." rows="3"></textarea>
+        <textarea class="form-control" id="summernote5" placeholder="Digite aqui..." rows="3"></textarea>
     </div>
 </fieldset>
 
@@ -145,7 +153,7 @@
 
     <div class="form-group">
         <label for="obj_descricao" class="widget-user-username">Descrição da do responsável:</label>
-        <textarea class="form-control" id="obj_descricao" placeholder="Digite aqui..." rows="3"></textarea>
+        <textarea class="form-control" id="summernote6" placeholder="Digite aqui..." rows="3"></textarea>
     </div>
 </fieldset>
 
@@ -154,7 +162,7 @@
 
     <div class="form-group">
         <label for="obj_descricao" class="widget-user-username">Descrição da das condições:</label>
-        <textarea class="form-control" id="obj_descricao" placeholder="Digite aqui..." rows="3"></textarea>
+        <textarea class="form-control" id="summernote7" placeholder="Digite aqui..." rows="3"></textarea>
         <!-- Error -->
         <?php if ($validation->getError('fort_cep')) { ?>
             <div class='text-danger mt-2'>

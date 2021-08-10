@@ -197,7 +197,23 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <?= $this->renderSection('script_toast_transporte') ?>
   <?= $this->renderSection('script_geral_transporte') ?>
-
+  <script>
+    $(function() {
+      // Summernote
+     // alert(sumere);
+      $('#summernote, #summernote1, #summernote2, #summernote3, #summernote4, #summernote5, #summernote6, #summernote7').summernote({
+        toolbar: [
+          // [groupName, [list of button]]
+          ['style', ['bold', 'italic', 'underline', 'clear']],
+          ['font', ['strikethrough', 'superscript', 'subscript']],
+          ['fontsize', ['fontsize']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['height', ['height']]
+        ]
+      })
+    })
+  </script>
 </body>
 
 </html>
