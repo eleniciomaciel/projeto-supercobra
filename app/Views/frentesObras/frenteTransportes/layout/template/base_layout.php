@@ -194,9 +194,13 @@
   <!-- moment js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/x.y.z/locale/ar.js"></script>
   <!-- jQuery UI 1.11.4 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.11.2/jquery.mask.min.js" integrity="sha512-Y/GIYsd+LaQm6bGysIClyez2HGCIN1yrs94wUrHoRAD5RSURkqqVQEU6mM51O90hqS80ABFTGtiDpSXd2O05nw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <?= $this->renderSection('script_toast_transporte') ?>
-  <?= $this->renderSection('script_geral_transporte') ?>
+  <?= $this->renderSection('script_dados_empresa') ?>
+  <?= $this->renderSection('script_dados_representante') ?>
+   
+  <?= $this->include('frentesObras/frenteTransportes/layout/pages/fornecedor-novo/js/script-novo-fornecedor') ?>
   <script>
     $(function() {
       // Summernote

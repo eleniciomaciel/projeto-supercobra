@@ -415,11 +415,20 @@ $routes->group('transposte-solicitacao-material-equipamentos-servicos', ["filter
 $routes->group('transporte-fornecedor', ["filter" => "auth"], function($routes)
 {
     $routes->add('fornecedor', 'Transporte\FornecedorController::index');
+    $routes->add('novo_fornecedor', 'Transporte\FornecedorNovoController::index');
     $routes->get('dados-fornecedor/(:num)', 'Transporte\FornecedorController::dadosFornecedor/$1');
     $routes->get('contas-fornecedor/(:num)', 'Transporte\FornecedorController::contasFornecedor/$1');
     $routes->get('documentos-fornecedor/(:num)', 'Transporte\FornecedorController::documentosFornecedor/$1');
     $routes->get('empresas-fornecedor/(:num)', 'Transporte\FornecedorController::empresasFornecedor/$1');
     $routes->get('contratos-fornecedor/(:num)', 'Transporte\FornecedorController::contratosFornecedor/$1');
+});
+
+
+/**controle de oficinas */
+$routes->group('transporte-novo-fornecedor', ["filter" => "auth"], function($routes)
+{
+    $routes->get('dados-da-empresa/(:num)', 'Transporte\FornecedorNovoController::consultarEmpresa/$1');
+    $routes->get('dados-do-representante/(:num)', 'Transporte\FornecedorNovoController::consultarRepresentante/$1');
 });
 
 $routes->get('logout', 'Home::logout');

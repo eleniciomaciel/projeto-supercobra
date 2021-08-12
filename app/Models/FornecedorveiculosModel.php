@@ -13,7 +13,24 @@ class FornecedorveiculosModel extends Model
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = true;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['for_fk_obra','for_fk_frente','for_fk_usuario','for_nome_fantasia','for_responsavel','for_email','for_telefone','for_cnpj','for_cep','for_uf','for_cidade','for_bairro','for_endereco','for_description','for_status',];
+	protected $allowedFields        = [
+		'for_fk_obra',
+		'for_fk_frente',
+		'for_fk_usuario',
+		'for_nome_fantasia',
+		'for_responsavel',
+		'for_email',
+		'for_telefone',
+		'for_telefone2',
+		'for_cnpj',
+		'for_cep',
+		'for_uf',
+		'for_cidade',
+		'for_bairro',
+		'for_endereco',
+		'for_description',
+		'for_status'
+	];
 
 	// Dates
 	protected $useTimestamps        = true;
@@ -50,5 +67,18 @@ class FornecedorveiculosModel extends Model
 		};
 
 		return $action_button;
+	}
+
+	public function pesquisarCpfRepresentante($term)
+	{
+		if ($term === null) {
+			return [];
+		} 
+
+		return $this->select('for_id, for_responsavel, for_cnpj')
+		->like('for_cnpj', $term)
+		->where('deleted_at', NULL)
+		->get()
+		->getResult();
 	}
 }

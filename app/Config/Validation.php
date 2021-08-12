@@ -11,6 +11,8 @@ use App\Validation\Userlocal;
 use App\Validation\TwoExamsAlreadyExistrulesValidation;
 use App\Validation\QualidadeQuantidade;
 use App\Validation\SolicitacaoUsuarioJaExiste;
+use App\Validation\ValidaCpfValidation;
+use App\Validation\ValidaEmpresaRepresentanteOneValidation;
 
 class Validation
 {
@@ -34,6 +36,8 @@ class Validation
 		TwoExamsAlreadyExistrulesValidation::class,
 		QualidadeQuantidade::class,
 		SolicitacaoUsuarioJaExiste::class,
+		ValidaCpfValidation::class,
+		ValidaEmpresaRepresentanteOneValidation::class,
 	];
 
 	/**

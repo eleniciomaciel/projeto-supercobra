@@ -15,9 +15,8 @@ class FornecedorContaModel extends Model
 	protected $useSoftDeletes       = true;
 	protected $protectFields        = true;
 	protected $allowedFields        = [
-		'cbf_fornecedor_fk',
+		'cbf_empresa_fk',
 		'cbf_obra_fk',
-		'cbf_frente_fk',
 		'cbf_banco',
 		'cbf_tipo_conta',
 		'cbf_agencia',
@@ -32,14 +31,30 @@ class FornecedorContaModel extends Model
 	protected $updatedField         = 'updated_em';
 	protected $deletedField         = 'deleted_em';
 
-	// Callbacks
-	protected $allowCallbacks       = true;
-	protected $beforeInsert         = [];
-	protected $afterInsert          = [];
-	protected $beforeUpdate         = [];
-	protected $afterUpdate          = [];
-	protected $beforeFind           = [];
-	protected $afterFind            = [];
-	protected $beforeDelete         = [];
-	protected $afterDelete          = [];
+	public function noticeTable($id)
+	{
+		$builder = $this->db->table('fornecedor_conta_bancaria');
+		$builder->where('cbf_empresa_fk', $id);
+		return $builder;
+	}
+
+	public function button()
+	{
+		$action_button = function($row){
+			return '
+			<div class="btn-group dropleft">
+  				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Opções
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item active" href="#"><i class="fas fa-eye"></i> Visualizar</a>
+				<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Deletar</a>
+				</div>
+		  	</div>
+				';
+		};
+
+		return $action_button;
+	}
 }

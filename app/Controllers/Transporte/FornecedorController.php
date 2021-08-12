@@ -399,8 +399,6 @@ class FornecedorController extends BaseController
 		$validation =  \Config\Services::validation();
 		$this->validate([
 			'empr_nome' => ['label' => 'nome', 'rules' => 'required|max_length[255]'],
-			'empr_topo_de_dono' => ['label' => 'classificação de propriédade', 'rules' => 'required'],
-			'empr_socio_dono' => ['label' => 'nome do propriétário/dono', 'rules' => 'required|min_length[2]|max_length[100]'],
 			'enpr_cnae' => ['label' => 'cnae', 'rules' => 'required|min_length[2]|max_length[14]'],
 			'enpr_classificacao_empresa' => ['label' => 'classificação da empresa', 'rules' => 'required'],
 			'empre_cnpj' => ['label' => 'cnpj', 'rules' => 'required|exact_length[18]|is_unique[fornecedor_conta_bancaria.cbf_numero_conta]'],
@@ -421,10 +419,7 @@ class FornecedorController extends BaseController
 			$model = new FornecedorempresaModel();
 			$query = $model->save([
 				'ef_fk_quem_cadastrou' 		=> $this->request->getPost('id_de_quen_cadastrou'),
-				'ef_fk_fornecedor'  		=> $this->request->getPost('id_fornecedor'),
 				'ef_razao_social'  			=> $this->request->getPost('empr_nome'),
-				'ef_tipo_dono'  			=> $this->request->getPost('empr_topo_de_dono'),
-				'ef_nome_dono'  			=> $this->request->getPost('empr_socio_dono'),
 				'ef_cnae'  					=> $this->request->getPost('enpr_cnae'),
 				'ef_classificacao_empresa'  => $this->request->getPost('enpr_classificacao_empresa'),
 				'ef_cnpj' 					=> $this->request->getPost('empre_cnpj'),
@@ -590,4 +585,6 @@ class FornecedorController extends BaseController
 		$data = $model->findAll();
 		echo json_encode($data);
 	}
+
+
 }

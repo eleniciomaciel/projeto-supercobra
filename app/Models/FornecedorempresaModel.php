@@ -80,4 +80,18 @@ class FornecedorempresaModel extends Model
 		->get()
 		->getResult();
 	}
+
+
+	public function pesquisarCnpjEmpresa($term)
+	{
+		if ($term === null) {
+			return [];
+		} 
+
+		return $this->select('ef_id, ef_fk_fornecedor, ef_razao_social, ef_cnpj')
+		->like('ef_cnpj', $term)
+		->where('deleted_at', NULL)
+		->get()
+		->getResult();
+	}
 }

@@ -59,11 +59,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="/transporte-fornecedor/novo_fornecedor" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Novo Fornecedor</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="/transporte-fornecedor/fornecedor" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Fornecedor</p>
                             </a>
                         </li>
+                        
                     </ul>
                 </li>
 
