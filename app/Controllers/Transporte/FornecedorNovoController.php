@@ -671,4 +671,18 @@ class FornecedorNovoController extends BaseController
 		}
 	}
 
+	public function consultaEmpresas()
+	{
+		$model = new FornecedorAuxiliarEmpresaRepresentanteModel();
+
+		$data_table = new TablesIgniter();
+
+		$data_table->setTable($model->noticeTableConsulta())
+				   ->setDefaultOrder("ef_id", "DESC")
+				   ->setSearch(["ef_razao_social", "ef_cnpj"])
+				   ->setOrder(["ef_id", "ef_razao_social", "ef_cnpj"])
+				   ->setOutput(["ef_razao_social","ef_cnpj", $model->buttonConsulta()]);
+		return $data_table->getDatatable();
+	}
+
 }

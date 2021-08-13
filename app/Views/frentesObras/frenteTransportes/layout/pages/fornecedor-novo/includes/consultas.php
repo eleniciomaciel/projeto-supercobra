@@ -1,31 +1,21 @@
-<div class="card card-danger">
+<div class="card">
     <div class="card-header">
-        <h3 class="card-title">Consultas cadastros individuais</h3>
+        <h3 class="card-title">Consultar Empresas</h3>
     </div>
-    <div class="card-body">
-        <div class="row">
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+        <table class="table table-striped" id="lista_empresas_em_search" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Nome da Empresa</th>
+                    <th>CNPJ</th>
+                    <th style="width: 40px">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
 
-            <div class="col-6">
-                <label for="">Consultar Empresas:</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-search-plus"></i></span>
-                    </div>
-                    <input type="search" name="query_company" id="query_company" class="form-control" placeholder="Digite o CNPF aqui...">
-                </div>
-            </div>
-
-            <div class="col-6">
-                <label for="">Consultar Representantes:</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-search-plus"></i></span>
-                    </div>
-                    <input type="search" class="form-control" id="consult_representative" placeholder="Digite o CPF aqui...">
-                </div>
-            </div>
-
-        </div>
+            </tbody>
+        </table>
     </div>
     <!-- /.card-body -->
 </div>

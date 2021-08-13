@@ -55,4 +55,35 @@ class FornecedorAuxiliarEmpresaRepresentanteModel extends Model
 
 		return $action_button;
 	}
+
+	/**
+	 * cadastra auxiliar empresa
+	 */
+	public function noticeTableConsulta()
+	{
+		$builder = $this->db->table('fornecedor_empresas');
+		$builder->where('deleted_at', NULL);
+		return $builder;
+	}
+
+	public function buttonConsulta()
+	{
+		$action_button = function($row){
+			return '
+					<div class="btn-group dropleft">
+						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Opções
+						</button>
+						<div class="dropdown-menu">
+							<a class="empresaConsultaVer dropdown-item" href="javascript:void(0)" data-id="'.$row['ef_id'].'"><i class="fas fa-eye"></i> Visualizar</a>
+							<a class="empreaConsultaEditar dropdown-item" href="javascript:void(0)" data-id="'.$row['ef_id'].'"><i class="fas fa-edit"></i> Editar</a>
+							<div class="dropdown-divider"></div>
+							<a class="empresaConsultaDelete dropdown-item" href="javascript:void(0)" data-id="'.$row['ef_id'].'"><i class="fas fa-trash"></i> Deletar</a>
+						</div>
+					</div>
+				';
+		};
+
+		return $action_button;
+	}
 }

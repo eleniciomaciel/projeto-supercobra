@@ -1,5 +1,5 @@
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
         $('#empr_cep').mask("00.000-000", {
             placeholder: "00.000-000"
         });
@@ -68,7 +68,22 @@ $(document).ready(function() {
             }
         });
 
-                /**
+        /**
+         * lista ajax empresa
+         */
+        $('#lista_empresas_em_search').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+            },
+            "order": [],
+            "serverSide": true,
+            "ajax": {
+                url: "<?php echo base_url("Transporte/FornecedorNovoController/consultaEmpresas"); ?>",
+                type: "GET",
+            }
+        });
+
+        /**
          * cadastro da empresa do fornecedor
          */
         $("#form_empresa_fornecedor").submit(function(e) {
@@ -97,6 +112,7 @@ $(document).ready(function() {
                                 data.msg,
                                 'success'
                             );
+                            $('#lista_empresas_em_search').DataTable().ajax.reload();
                         } else {
                             Swal.fire(
                                 'OK!',
@@ -816,5 +832,4 @@ $(document).ready(function() {
             }
         });
     });
-
 </script>
