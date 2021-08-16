@@ -84,6 +84,15 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="/medicos/pcmso" class="nav-link">
+                        <i class="nav-icon fas fa-user-md"></i>
+                        <p>
+                            Médico PCMCO
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="/admin_rh/cadastrar-cargo" class="nav-link">
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>

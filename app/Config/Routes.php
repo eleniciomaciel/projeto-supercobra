@@ -431,6 +431,13 @@ $routes->group('transporte-novo-fornecedor', ["filter" => "auth"], function($rou
     $routes->get('dados-do-representante/(:num)', 'Transporte\FornecedorNovoController::consultarRepresentante/$1');
 });
 
+
+/**medicos pcmso */
+$routes->group('medicos', ["filter" => "auth"], function($routes)
+{
+    $routes->get('pcmso', 'Rh\Medicos\PcmsoController::index');
+});
+
 $routes->get('logout', 'Home::logout');
 /*
  * --------------------------------------------------------------------
