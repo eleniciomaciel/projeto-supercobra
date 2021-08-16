@@ -17,7 +17,7 @@
             <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
 
                 <li class="nav-item">
-                    <a class="nav-link active" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#custom-tabs-four-settings" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="false"><i class="fas fa-search"></i> Consultar </a>
+                    <a class="nav-link active" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#custom-tabs-four-settings" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="false"><i class="fas fa-search"></i> Gerenciar </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true"><i class="fas fa-laptop-house"></i> Cadastrar Empresa</a>
@@ -51,5 +51,5 @@
     </div>
 
 </section>
-
+<?= $this->include('frentesObras/frenteTransportes/layout/pages/fornecedor-novo/component/003-dados_empresa') ?>
 <?= $this->endSection() ?>

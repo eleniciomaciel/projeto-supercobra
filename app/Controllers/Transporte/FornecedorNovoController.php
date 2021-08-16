@@ -685,4 +685,153 @@ class FornecedorNovoController extends BaseController
 		return $data_table->getDatatable();
 	}
 
+	/**
+	 * lista dados da empresa
+	 */
+	public function getOneEmpresa()
+	{
+		if($this->request->getVar('id'))
+        {
+            $modal = new FornecedorempresaModel();
+            $user_data = $modal->where('ef_id', $this->request->getVar('id'))->first();
+            echo json_encode($user_data);
+        }
+	}
+
+	/**
+	 * lista dados dos donos da empresa
+	 */
+	public function getDonosEmpresa()
+	{
+		if (!$this->request->isAJAX()) {
+			exit('Pagina não encontrada');
+		}
+
+		$model = new FornecedorAuxiliarEmpresaRepresentanteModel();
+		$id = $this->request->getGet('param');
+
+		$data = $model->join('fornecedorveiculos', 'fornecedorveiculos.for_id = fornecedor_auxiliar_e_r.faer_fk_representante')->where('faer_fk_empresa', $id)->findAll();
+
+		if ($data) :
+			foreach ($data as $post) :
+			echo    '<tr>
+						<td>' . $post["for_responsavel"] . '</td>
+						<td>' . $post["for_email"] . '</td>
+						<td>' . $post["for_telefone"] . '</td>
+						<td>' . $post["for_telefone2"] . '</td>
+						<td>' . $post["for_description"] . '</td>
+					</tr>';
+			endforeach;
+		endif;
+	}
+
+	/**
+	 * altera cadastro da empresa
+	 */
+	public function alteraCadastroDaEmpresaRadioButton()
+	{
+		$validation =  \Config\Services::validation();
+		$this->validate([
+			'new_responsavel' => ['label' => 'nome', 'rules' => 'required|max_length[255]'],
+			'new_ef_cnae' => ['label' => 'cnae', 'rules' => 'min_length[2]|max_length[14]'],
+			'new_ef_classificacao_empresa' => ['label' => 'classificação da empresa', 'rules' => 'required'],
+			'new_ef_cnpj' => ['label' => 'cnpj', 'rules' => 'required|exact_length[18]'],
+			'new_ef_incricao_estadual' => ['label' => 'incriççao estadual', 'rules' => 'max_length[50]'],
+			'new_ef_incricao_municial' => ['label' => 'incrição municipal', 'rules' => 'max_length[50]'],
+			'new_ef_cep' => ['label' => 'cep', 'rules' => 'required'],
+			'new_ef_uf' => ['label' => 'uf', 'rules' => 'required|exact_length[2]'],
+			'new_ef_cidade' => ['label' => 'cidade', 'rules' => 'required|max_length[50]'],
+			'new_ef_bairro' => ['label' => 'bairro', 'rules' => 'required|max_length[80]'],
+			'new_ef_endereco' => ['label' => 'endereço', 'rules' => 'required|max_length[100]'],
+			'new_ef_description' => ['label' => 'observações', 'rules' => 'required|max_length[500]'],
+		]);
+
+		if ($validation->run() == FALSE) {
+			$errors = $validation->getErrors();
+			echo json_encode(['code' => 0, 'error' => $errors]);
+		} else {
+			$model = new FornecedorempresaModel();
+			$query = $model->save([
+				'ef_id' 					=> $this->request->getPost('hidden_id_empresa_onde'),
+				'ef_razao_social'  			=> $this->request->getPost('new_responsavel'),
+				'ef_cnae'  					=> $this->request->getPost('new_ef_cnae'),
+				'ef_classificacao_empresa'  => $this->request->getPost('new_ef_classificacao_empresa'),
+				'ef_cnpj' 					=> $this->request->getPost('new_ef_cnpj'),
+				'ef_incricao_estadual' 		=> $this->request->getPost('new_ef_incricao_estadual'),
+				'ef_incricao_municial' 		=> $this->request->getPost('new_ef_incricao_municial'),
+				'ef_cep' 					=> $this->request->getPost('new_ef_cep'),
+				'ef_uf' 					=> $this->request->getPost('new_ef_uf'),
+				'ef_cidade' 				=> $this->request->getPost('new_ef_cidade'),
+				'ef_bairro' 				=> $this->request->getPost('new_ef_bairro'),
+				'ef_endereco' 				=> $this->request->getPost('new_ef_endereco'),
+				'ef_description' 			=> $this->request->getPost('new_ef_description'),
+			]);
+
+			if ($query) {
+				echo json_encode(['code' => 1, 'msg' => 'Empresa alterada com sucesso!']);
+			} else {
+				echo json_encode(['code' => 0, 'msg' => 'A empresa não pode ser alterada, desculpe!']);
+			}
+		}
+	}
+
+	/**
+	 * seleciona representantes da emprese via select
+	 */
+	public function getSelectRepresentantes($id = null)
+	{
+		$model = new FornecedorAuxiliarEmpresaRepresentanteModel();
+		$states = $model->join('fornecedorveiculos', 'fornecedorveiculos.for_id = fornecedor_auxiliar_e_r.faer_fk_representante')->where('faer_fk_empresa', $id)->findAll();
+		echo json_encode($states);
+	}
+
+	public function getRepresentsOneList(int $id)
+	{
+		$modal = new FornecedorveiculosModel();
+		$user_data = $modal->where('for_id', $id)->first();
+		echo json_encode($user_data);
+	}
+
+	/**
+	 * altera dados do representante
+	 */
+	public function cadastraAlteraDDRepresentante()
+	{
+		$validation =  \Config\Services::validation();
+		$this->validate([
+			'new_resp' => ['label' => 'nome do fornecedor', 'rules' => 'required|max_length[100]'],
+			'new_resp_email' => ['label' => 'email', 'rules' => 'required|min_length[10]|valid_email'],
+			'new_resp_telefone1' => ['label' => 'telefone', 'rules' => 'required|max_length[20]'],
+			'new_resp_relefone2' => ['label' => 'telefone', 'rules' => 'required|max_length[20]'],
+			'new_resp_cpf' => [
+				'label' => 'cpf', 'rules' => 'required|validaCpf|exact_length[14]',
+				'errors' => [
+					'validaCpf' => 'O cpf está com formato incorreto.'
+				]
+			],
+			'new_resp_descricao' => ['label' => 'observação', 'rules' => 'required|max_length[500]'],
+		]);
+
+		if ($validation->run() == FALSE) {
+			$errors = $validation->getErrors();
+			echo json_encode(['code' => 0, 'error' => $errors]);
+		} else {
+			$model = new FornecedorveiculosModel();
+			$query = $model->save([
+				'for_id'  			=> $this->request->getPost('new_up_resp_id_represents'),
+				'for_responsavel'  	=> $this->request->getPost('new_resp'),
+				'for_email'  		=> strtolower($this->request->getPost('new_resp_email')),
+				'for_telefone'  	=> $this->request->getPost('new_resp_telefone1'),
+				'for_telefone2'  	=> $this->request->getPost('new_resp_relefone2'),
+				'for_cnpj'  		=> $this->request->getPost('new_resp_cpf'),
+				'for_description'  	=> $this->request->getPost('new_resp_descricao'),
+			]);
+
+			if ($query) {
+				echo json_encode(['code' => 1, 'msg' => 'Representante alterado com sucesso!']);
+			} else {
+				echo json_encode(['code' => 0, 'msg' => 'A cadastro não pode ser alterado, desculpe!']);
+			}
+		}
+	}
 }

@@ -215,7 +215,7 @@
         });
 
         /**
-         * 
+         *
          * lista registro das empresas
          */
 
@@ -260,7 +260,7 @@
                             }
                             response(data)
                         },
-                    }); //fim do ajax 
+                    }); //fim do ajax
                 },
                 minLenght: 1,
                 select: function(event, ui) {
@@ -300,7 +300,7 @@
                             }
                             response(data)
                         },
-                    }); //fim do ajax 
+                    }); //fim do ajax
                 },
                 minLenght: 1,
                 select: function(event, ui) {
@@ -704,7 +704,7 @@
         });
 
         /**
-         * delete auxiliar 
+         * delete auxiliar
          */
         $(document).on('click', '.empresaDelete', function() {
             let id = $(this).data('id');
@@ -780,7 +780,7 @@
                         }
                         response(data)
                     },
-                }); //fim do ajax 
+                }); //fim do ajax
             },
             minLenght: 1,
             select: function(event, ui) {
@@ -818,7 +818,7 @@
                         }
                         response(data)
                     },
-                }); //fim do ajax 
+                }); //fim do ajax
             },
             minLenght: 1,
             select: function(event, ui) {
@@ -831,5 +831,333 @@
                 }
             }
         });
+
+        /**
+         * lista daado da empresa visualizar
+         */
+        $(document).on('click', '.empresaConsultaVer', function() {
+
+            let id = $(this).data('id');
+            $.ajax({
+                url: "<?php echo base_url('Transporte/FornecedorNovoController/getOneEmpresa'); ?>",
+                method: "GET",
+                data: {
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    let razao_nome = data['ef_razao_social'];
+                    $('#ef_razao_social_x').html(razao_nome);
+
+                    let clasifficacao = data['ef_classificacao_empresa'];
+                    $('#classificacao_empresa').html(clasifficacao);
+
+                    let cnpj = data['ef_cnpj'];
+                    $('#cnpj').html(cnpj);
+
+                    let insc_estudual = data['ef_incricao_estadual'];
+                    $('#incricao_estadual').html(insc_estudual);
+
+                    let insc_municipal = data['ef_incricao_municial']
+                    $('#incricao_municial').html(insc_municipal);
+
+                    let cep = data['ef_cep'];
+                    $('#cep').html(cep);
+
+                    let ef_uf = data['ef_uf'];
+                    $('#uf').html(ef_uf);
+
+                    let ef_cidade = data['ef_cidade'];
+                    $('#ef_cidade').html(ef_cidade);
+
+                    let ef_bairro = data['ef_bairro'];
+                    $('#ef_bairro').html(ef_bairro);
+
+                    let ef_endereco = data['ef_endereco'];
+                    $('#endereco').html(ef_endereco);
+
+
+                    $('#ef_description').val(data.ef_description);
+
+                    $('#empresaEyeModal').modal('show');
+                    $('#hidden_id_banco_alterar').val(id);
+
+                    lerDonosEmpresa(id);
+                }
+
+            })
+        });
+
+        /**
+         * lista dados dos donos da empresa
+         */
+        function lerDonosEmpresa(param) {
+
+            $.ajax({
+                url: "<?php echo base_url("Transporte/FornecedorNovoController/getDonosEmpresa"); ?>",
+                type: "GET",
+                cache: false,
+                data: {
+                    param: param
+                },
+                success: function(dataResult) {
+
+                    $("#table_data_donos_empresa").html(dataResult);
+                }
+            });
+        };
+
+        /**
+         * opções de alterações dados empresa radio button
+         */
+        $(document).on('click', '.empreaConsultaEditar', function() {
+
+            let id = $(this).data('id');
+            $.ajax({
+                url: "<?php echo base_url('Transporte/FornecedorNovoController/getOneEmpresa'); ?>",
+                method: "GET",
+                data: {
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    $('#form_button_radio')[0].reset();
+                    $('#hidden_id_alteraEmpresa').val(id);
+                    $('#hidden_id_altera_representante').val(id);
+                    $('#editarAlteracoesCrudModal').modal('show');
+                }
+
+            })
+        });
+
+
+        /**
+         * seleciona dados da empresa para alterar
+         */
+
+        $(document).on('click', '.editEmployerOne', function() {
+
+            let id = $(this).attr("value");
+
+            $.ajax({
+                url: "<?php echo base_url('Transporte/FornecedorNovoController/getOneEmpresa'); ?>",
+                method: "GET",
+                data: {
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function(data) {
+
+                    $('#new_responsavel').val(data.ef_razao_social);
+                    $('#new_ef_cnae').val(data.ef_cnae);
+                    $('#new_ef_classificacao_empresa').val(data.ef_classificacao_empresa);
+                    $('#new_ef_cnpj').val(data.ef_cnpj);
+                    $('#new_ef_incricao_estadual').val(data.ef_incricao_estadual);
+                    $('#new_ef_incricao_municial').val(data.ef_incricao_municial);
+                    $('#new_ef_cep').val(data.ef_cep);
+                    $('#new_ef_uf').val(data.ef_uf);
+                    $('#new_ef_cidade').val(data.ef_cidade);
+                    $('#new_ef_bairro').val(data.ef_bairro);
+                    $('#new_ef_endereco').val(data.ef_endereco);
+                    $('#new_ef_description').val(data.ef_description);
+                    $('#hidden_id_empresa_onde').val(id);
+                    $('#dadosEMpresaEditOptionModal').modal('show');
+                    $('#form_button_radio')[0].reset();
+                }
+
+            })
+        });
+
+        /**
+         * altera dados da empresa
+         */
+        $("#form_update_new_empresa_100").submit(function(e) {
+            e.preventDefault();
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                beforeSend: function() {
+                    $(form).find('span.error-text').text('');
+                    $('#btn_new_empresa_100').html('<div class="spinner-border" role="status"> <span class="sr-only">Loading...</span> </div> Salvando, aguarde...');
+                    $('.cls_new_empresa_100').attr('disabled', 'disabled');
+                },
+                success: function(data) {
+                    $('#btn_new_empresa_100').html('<i class="fa fa-save"></i> Salvar');
+                    $('.cls_new_empresa_100').attr('disabled', false);
+                    if ($.isEmptyObject(data.error)) {
+                        if (data.code == 1) {
+                            //$(form)[0].reset();
+                            Swal.fire(
+                                'OK!',
+                                data.msg,
+                                'success'
+                            );
+                            $('#list_empresas_fornacedores_findAll').DataTable().ajax.reload();
+
+                            $('#bancoVerAlterarModal').modal('hide');
+                        } else {
+                            Swal.fire(
+                                'OK!',
+                                data.msg,
+                                'error'
+                            );
+                        }
+                    } else {
+                        $.each(data.error, function(prefix, val) {
+                            Swal.fire(
+                                'Ops!',
+                                'Existem alguns erros, corrija por favor.',
+                                'error'
+                            );
+                            $(form).find('span.' + prefix + '_error').text(val);
+                        });
+                    }
+                }
+            });
+        });
+
+        /**
+         * opções de alterações dados empresa radio button
+         */
+        $(document).on('click', '.editMultipleOneRepresentanteOne', function() {
+
+            let id = $(this).attr("value");
+
+            $.ajax({
+                url: "<?php echo base_url('Transporte/FornecedorNovoController/getOneEmpresa'); ?>",
+                method: "GET",
+                data: {
+                    id: id
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    $('#form_button_radio')[0].reset();
+
+                    let myEmpresa = data['ef_razao_social'];
+                    $('#minha_empresa').html(myEmpresa);
+
+                    $('#hidden_id_alteraEmpresa').val(id);
+                    $('#hidden_id_altera_representante').val(id);
+                    listRepresentatividade(id)
+                    $('#selecionaDadosRepresentanteSelect').modal('show');
+                }
+            })
+        });
+
+        /**
+         * função que lista no select os representantes das empresas
+         */
+        function listRepresentatividade(param) {
+            $.ajax({
+                type: "GET",
+                url: "<?php echo base_url('Transporte/FornecedorNovoController/getSelectRepresentantes'); ?>" + '/' + param,
+                success: function(res) {
+                    if (res) {
+                        $("#selectDinamycRepresents").empty();
+                        $("#selectDinamycRepresents").append('<option>Selecione aqui...</option>');
+                        var dataObj = jQuery.parseJSON(res);
+                        if (dataObj) {
+                            $(dataObj).each(function() {
+                                $("#selectDinamycRepresents").append('<option value="' + this.for_id + '">' + this.for_responsavel + '</option>');
+                            });
+                        } else {
+                            $("#selectDinamycRepresents").empty();
+                        }
+                    } else {
+                        $("#selectDinamycRepresents").empty();
+                    }
+                }
+            });
+        }
+
+
+        /**
+         * lista dados dos representantes quando alterado no cotão de select
+         */
+
+        $('#selectDinamycRepresents').change(function() {
+            var countryID = $(this).val();
+
+            $.ajax({
+                url: "<?php echo base_url('Transporte/FornecedorNovoController/getRepresentsOneList'); ?>" + '/' + countryID,
+                method: "GET",
+                data: {
+                    countryID: countryID
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    $('#new_resp').val(data.for_responsavel);
+                    $('#new_resp_email').val(data.for_email);
+                    $('#new_resp_cpf').val(data.for_cnpj);
+                    $('#new_resp_telefone1').val(data.for_telefone);
+                    $('#new_resp_relefone2').val(data.for_telefone2);
+                    $('#new_resp_descricao').val(data.for_description);
+                    $('#new_up_resp_id_represents').val(data.for_id);
+                }
+            });
+        });
+
+        /**
+         * altera dados do representasnte
+         */
+        $("#form_new_represets_altera1001").submit(function(e) {
+            e.preventDefault();
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                beforeSend: function() {
+                    $(form).find('span.error-text').text('');
+                    $('#btn_new_represets_1001').html('<div class="spinner-border" role="status"> <span class="sr-only">Loading...</span> </div> Alterando, aguarde...');
+                    $('.cls_new_represents_100').attr('disabled', 'disabled');
+                },
+                success: function(data) {
+                    $('#btn_new_represets_1001').html('<i class="fa fa-save"></i> Salvar');
+                    $('.cls_new_represents_100').attr('disabled', false);
+                    if ($.isEmptyObject(data.error)) {
+                        if (data.code == 1) {
+                            //$(form)[0].reset();
+                            Swal.fire(
+                                'OK!',
+                                data.msg,
+                                'success'
+                            );
+                            $('#list_empresas_fornacedores_findAll').DataTable().ajax.reload();
+
+                            $('#bancoVerAlterarModal').modal('hide');
+                        } else {
+                            Swal.fire(
+                                'OK!',
+                                data.msg,
+                                'error'
+                            );
+                        }
+                    } else {
+                        $.each(data.error, function(prefix, val) {
+                            Swal.fire(
+                                'Ops!',
+                                'Existem alguns erros, corrija por favor.',
+                                'error'
+                            );
+                            $(form).find('span.' + prefix + '_error').text(val);
+                        });
+                    }
+                }
+            });
+        });
+
+
+        // <div class="overlay">
+        //     <i class="fas fa-2x fa-sync fa-spin"></i>
+        // </div>
     });
 </script>

@@ -71,3 +71,4 @@
 </div>
 <?= $this->include('frentesObras/frenteTransportes/layout/pages/fornecedor-novo/component/001-bancos') ?>
 <?= $this->include('frentesObras/frenteTransportes/layout/pages/fornecedor-novo/component/002-documentos') ?>
+
